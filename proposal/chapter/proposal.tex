@@ -17,18 +17,18 @@ The list of smart devices includes personal automatic and semi-automatic robots 
 
 Tremendous progress had been made in speech recognition, and several commercially successful speech interfaces have been deployed. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an alternative mode of communication for Human-robot interaction (HRI) than the conventional interfaced devices.
 
-\section{Background}
-\subsection{Hand gesture}
+\chapter{Background}
+\section{Hand gesture}
 Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI it is necessary to provide the means by which they can be interpreted by robots. The HCI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm, and even other parts of the human body, be measurable by the machine. 
 
-\subsection{Hand gesture recognition and Computer Vision}
+\section{Recognition and Computer Vision}
 Initial attempts to recognize hand gestures, resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
 
 Even though such hand gloves are used in highly specialized domain such as simulation of medical surgery or even the real surgery, the everyday user will be certainly deterred by such a sophisticated interfacing devices. As an active result of the motivated research in HCI, computer vision based techniques were innovated to augment the naturalness of interaction.
 
 Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions.
 
-\subsection{Robot and Artificial intelligence}
+\section{Robot and Artificial intelligence}
 Proper vision is of the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotical systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. Information about the environment could be provided by a computer vision system, acting as a vision sensor and providing high-level information about the environment and the robot.
 
 In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot name as NAO.
@@ -74,20 +74,26 @@ Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotic
 \subsection{NAO Vision}
 Two identical video cameras are located in the forehead. They provide a up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the visual field such as goals and balls, and bottom camera can ease NAO?s dribbles. NAO contains a set of algorithms for detecting and recognizing faces and shapes. NAO can recognize who is talking to it or find a ball or, eventually, more complex objects.
 
-
 \includegraphics[height=5cm]{figures/nao_camera_lateral.png} \includegraphics[height=5cm]{figures/nao_camera_top.png} 
 
-	
-
-
-
-
-
-\chapter{Zielsetzung}
+\chapter{Goal}
 Im Rahmen ... (Was will ich ueberhaupt mit meiner Abreit erreichen? Etwas verbessern, entwickeln, vergleichen...)
+As described earlier, HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
+
+In this thesis, we attempt to implement a feature for NAO to recognize hand gestures and execute a predefined action based on the gesture. 
+
+In order to achieve this, NAO will be extended with an external Depth Camera, that will enable NAO to recognize static as well as dynamic gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. 
+
+With the hand gesture recognizing feature, NAO will be available to the users in two modes a) Command mode b) Translation mode.
+
+In command mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based Interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, part of NAO intelligence such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
+
+In translation mode, NAO will be directly translating the meaning of the trained gestures. To achieve this, text-to-speech SDK of NAO will be used and translated gesture can be said out loud using the integrated speaker. This feature of NAO will be allowing it to translate a sign language to assist people with hearing and speech disabilities.
+
+In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
 
 
-\chapter{Aufgabenpakete}
+\chapter{Taskset}
 Ausgehend von der Zielbeschreibung werden folgende Arbeitspakete definiert:
 
 \begin{itemize}
