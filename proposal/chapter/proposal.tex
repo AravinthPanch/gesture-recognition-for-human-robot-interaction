@@ -119,13 +119,16 @@ In translation mode, NAO will be directly translating the meaning of the trained
 
 In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
 
-\chapter{Task} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition. Each block contains submodules which are processed by different software components.
+\chapter{Task} The figure \ref{fig:flow} shows the flow diagram that proposes the functionality of hand gesture recognition that is going to implemented in this project work. Each block contains different software components that are executed sequentially. However, these components will be finally integrated into NAO.
+
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=10cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
+	\includegraphics[width=10cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
 \end{figure}
 
-\section{Sense} Sensor data from the 3D camera as images as shown in the figure 1, will be sent to Feature Detection module that will track the anatomical landmarks of the human body to extract the features as shown in the figure 2
+\section{Sense} 
+3D camera records 30 frames of color image as well as depth image per second and outputs as a data package. Figure shows the single frame of depth image taken from Microsoft Kinect where darker gray values represent the farther distance and lighter gray values represent the closer distance from the camera.
+
 \begin{table}
 	[h] \centering 
 	\begin{tabular}
@@ -137,8 +140,12 @@ In this thesis, we planned to train NAO with few very simple gestures due to the
 \end{table}
 
 \section{Feature Extraction}
+Output package from sensor data will be inputed to feature detection and extraction unit. OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment lengths and present them three dimensionally as shown in the figure. Finally only joints of both the arms will be picked out from the array of features, since it will be the significant joints need for hand gesture recognition.
 
-\section{Classification}
+\section{Modeling and Classification}
+In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained. Therefore, a set of simple gestures will be choreographed. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second. Figure shows ideal form of gesture that is formed by simply drawing a circle in the air.
+
+
 \begin{table}
 	[h] \centering 
 	\begin{tabular}
