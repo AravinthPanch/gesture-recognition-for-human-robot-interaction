@@ -45,7 +45,11 @@ Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotic
 
 \subsection{NAO Vision} Two identical video cameras are located in the forehead. They provide a up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the visual field such as goals and balls, and bottom camera can ease NAO?s dribbles. NAO contains a set of algorithms for detecting and recognizing faces and shapes. NAO can recognize who is talking to it or find a ball or, eventually, more complex objects.
 
-\subsection{Extending NAO with Depth Camera} The computational limitations of the NAO robot make it impossible to process the entire image in real time. Therefore, different methods of capturing the real time gesture must be used. Hence, it is been proposed to use a separate 3D camera such as Microsoft Kinect or Asus Xtion. Microsoft?s Kinect sensor is the first large-scale, commercial release of a depth camera device. Microsoft?s novel use of the device as a game controller is driven by the company?s own software for analyzing its 3D data, including proprietary algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition. 
+\subsection{Extending NAO with Depth Camera} 
+3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition. 
+
+In this thesis, we focus on using Asus Xtion as an external hardware to be used with NAO due to the computational limitations of the NAO to process the images from two inbuilt hd stereo cameras, that ultimately makes NAO incapable of doing an efficient gesture recognition in real time.
+
 \begin{table}
 	[h] \centering 
 	\begin{tabular}
@@ -58,7 +62,7 @@ Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotic
 
 \section{Hand Gesture} Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI it is necessary to provide the means by which they can be interpreted by robots. The HCI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm, and even other parts of the human body, be measurable by the machine. 
 
-\section{Gesture Recognition} Initial attempts to recognize hand gestures, resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
+\section{Hand Gesture Recognition} Initial attempts to recognize hand gestures, resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
 
 Even though such hand gloves are used in highly specialized domain such as simulation of medical surgery or even the real surgery, the everyday user will be certainly deterred by such a sophisticated interfacing devices. As an active result of the motivated research in HCI, computer vision based techniques were innovated to augment the naturalness of interaction.
 
@@ -66,7 +70,7 @@ Even though such hand gloves are used in highly specialized domain such as simul
 
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=5cm]{figures/ges-model.png} 
+	\includegraphics[height=6cm]{figures/ges-model.png} 
 	\caption{Different gesture modeling} 
 	\label{fig:ges:model} 
 \end{figure}
@@ -77,12 +81,29 @@ Appearance based models don't use a spatial representation of the body anymore, 
 
 Instead of using intensive processing of the 3D models and dealing with a lot of parameters, one can just use a simplified version of joint angle parameters along with segment lengths. This is known as a skeletal representation of the body, where a virtual skeleton of the person is computed and parts of the body are mapped to certain segments. The analysis here is done using the position and orientation of these segments and the relation between each one of them.
 
-Skeletal based modeling algorithms are faster because key parameters allows the detection program to focus on the significant parts of the body. Moreover, it allows to do pattern matching against a template database. Therefore, Skeletal based modeling will be the focus in this thesis.
+In this thesis, we focus on Skeletal based modeling algorithms which are faster because the detection program to focus on the significant parts of the body. Moreover, it allows to do pattern matching against a template database. 
 
 
-\subsection{Gestural Taxonomy } 1.Manipulative 2.Communicative
+\subsection{Gestural Taxonomy }
+Several alternative taxonomies have been suggested that deal with psychological aspects of gestures. All hand/arm movements are first classified into two major classes as shown in the figure \ref{fig:ges:tax}.
 
-\subsection{Gesture Analysis and Recognition - HMM}
+\begin{figure}
+	[h] \centering 
+	\includegraphics[height=7cm]{figures/ges-tax.png} 
+	\caption{Different gesture modeling} 
+	\label{fig:ges:tax} 
+\end{figure}
+
+Manipulative gestures are the ones used to act on objects. For example moving a chair from one location to another. Manipulative gestures in the context of HRI are mainly developed for medical surgery. Communicative gestures, on the other hand, have purely communicational purpose. In a natural environment they are usually accompanied by speech or spoken as a sign language. In HRI context these gesture are one of the commonly used gestures, since they can often be represented by static as well as dynamic hand postures.
+
+In this thesis, we focus on communicative gestures in the form of symbols. They symbolize some referential action. For instance, circular motion of index finger may be a referred as an alphabet "O" or as an object such as wheel or as a command to turn in a circular motion .
+
+
+\subsection{Gesture Recognition}
+The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as  DP-matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models. 
+
+In this thesis, we focus on the recognition technique based on hidden Markov model (HMM) that is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer, and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output, dependent on the state, is visible.
+
 
 \chapter{Goal} As described earlier, HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
 
@@ -98,7 +119,7 @@ In translation mode, NAO will be directly translating the meaning of the trained
 
 In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
 
-\chapter{Approach} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition. Each block contains submodules which are processed by different software components.
+\chapter{Task} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition. Each block contains submodules which are processed by different software components.
 \begin{figure}
 	[h] \centering 
 	\includegraphics[height=10cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
