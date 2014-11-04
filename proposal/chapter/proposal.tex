@@ -13,7 +13,7 @@ The list of smart devices includes personal automatic and semi-automatic robots 
 Tremendous progress had been made in speech recognition, and several commercially successful speech interfaces have been deployed. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an alternative mode of communication for Human-robot interaction (HRI) than the conventional interfaced devices.
 
 \chapter{Background} 
-\section{Robot and Artificial intelligence} Proper vision is of the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotical systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. Information about the environment could be provided by a computer vision system, acting as a vision sensor and providing high-level information about the environment and the robot.
+\section{Robot and Artificial intelligence} Proper vision is of the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. Information about the environment could be provided by a computer vision system, acting as a vision sensor and providing high-level information about the environment and the robot.
 
 Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions.
 
@@ -50,15 +50,22 @@ Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotic
 
 In this thesis, we focus on using Asus Xtion as an external hardware to be used with NAO due to the computational limitations of the NAO to process the images from two inbuilt hd stereo cameras, that ultimately makes NAO incapable of doing an efficient gesture recognition in real time.
 
-\begin{table}
-	[h] \centering 
-	\begin{tabular}
-		{ll} 
-		\includegraphics[height=7cm]{figures/nao.png} & 
-		\includegraphics[height=7cm]{figures/nao-xtion.png} \\
-		NAO & Asus Xtion on NAO 
-	\end{tabular}
-\end{table}
+\begin{figure}
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+\includegraphics[height=7cm]{figures/nao.png} 
+		\captionof{figure}{NAO}
+		\label{fig:nao}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+\includegraphics[height=7cm]{figures/nao-xtion.png} 
+		\captionof{figure}{Asus Xtion mounted on NAO }
+		\label{fig:xtion}
+	\end{minipage}
+\end{figure}
+
 
 \section{Hand Gesture} Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI it is necessary to provide the means by which they can be interpreted by robots. The HCI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm, and even other parts of the human body, be measurable by the machine. 
 
@@ -119,45 +126,88 @@ In translation mode, NAO will be directly translating the meaning of the trained
 
 In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
 
-\chapter{Task} The figure \ref{fig:flow} shows the flow diagram that proposes the functionality of hand gesture recognition that is going to implemented in this project work. Each block contains different software components that are executed sequentially. However, these components will be finally integrated into NAO.
+\chapter{Task} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition system that is going to implemented in this project work. Each block contains different software components that are executed sequentially. However, training phase must be carried out before this system is available for recognition. Finally, these components will be integrated into NAO.
 
 \begin{figure}
-	[h] \centering 
-	\includegraphics[width=10cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
+	[!h] \centering 
+	\includegraphics[width=9cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
 \end{figure}
 
 \section{Sense} 
 3D camera records 30 frames of color image as well as depth image per second and outputs as a data package. Figure shows the single frame of depth image taken from Microsoft Kinect where darker gray values represent the farther distance and lighter gray values represent the closer distance from the camera.
 
-\begin{table}
-	[h] \centering 
-	\begin{tabular}
-		{ll} 
-		\includegraphics[height=7cm]{figures/depth.png} & 
-		\includegraphics[height=7cm]{figures/depth-skeleton.png} \\
-		Depth image of 3D Camera & Skeleton tracking 
-	\end{tabular}
-\end{table}
+\begin{figure}
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+\includegraphics[height=7cm]{figures/depth.png} 
+		\captionof{figure}{Depth image of 3D Camera}
+		\label{fig:depth}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[height=7cm]{figures/depth-skeleton.png}
+		\captionof{figure}{Skeleton tracking }
+		\label{fig:skeleton}
+	\end{minipage}
+\end{figure}
 
 \section{Feature Extraction}
-Output package from sensor data will be inputed to feature detection and extraction unit. OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment lengths and present them three dimensionally as shown in the figure. Finally only joints of both the arms will be picked out from the array of features, since it will be the significant joints need for hand gesture recognition.
+Output package from sensor data will be inputted to feature detection and extraction unit. OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment length and present them three dimensionally as shown in the figure. Finally, only joints of both the arms will be picked out from the array of features, since it will be the significant joints need for hand gesture recognition.
 
 \section{Modeling and Classification}
-In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained. Therefore, a set of simple gestures will be choreographed. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second. Figure shows ideal form of gesture that is formed by simply drawing a circle in the air.
+In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained. Therefore, a set of simple gestures will be chosen and observed for training. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second. 
 
+For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure. It will be modeled as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data.  This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels. Each trained model can then be used to determine with what probability a given gesture appears in test data. Therefore, the trained Hidden Markov models will be used to recognize gestures. 
 
-\begin{table}
-	[h] \centering 
-	\begin{tabular}
-		{ll} 
-		\includegraphics[width=6cm]{figures/ges-states.png} & 
-		\includegraphics[width=10cm]{figures/ges-train.png} \\
-		States & Training 
-	\end{tabular}
-\end{table}
+\begin{figure}
+	\centering
+	\begin{minipage}{.3\textwidth}
+		\centering
+		\includegraphics[width=6cm]{figures/ges-states.png}
+		\captionof{figure}{HMM States of circular gesture}
+		\label{fig:ges:state}
+	\end{minipage}%
+	\begin{minipage}{.7\textwidth}
+		\centering
+		\includegraphics[width=10cm]{figures/ges-train.png}
+		\captionof{figure}{Observations of circular gestures}
+		\label{fig:ges:train}
+	\end{minipage}
+\end{figure}
 
 \section{Gesture Analysis and Recognition}
+This step contains the analysis of gesticulated gesture and finding out the likely hood of that gesture with trained data, know as gesture recognition. Figure contains colored rings of noisy data of gestures that represent instances of a real circle gesture. Sensing and feature detection module will produce 60 observations of the circle gesture for 2 seconds, since the depth camera records at 30 frame per second. To decide whether a given set of 60 observations contains a circle gesture, we need to first determine the likelihood that the hand passed through the eight states of the gesture in the expected sequence.
+
+Discrete HMM is a finite set of M possible output symbols and a sequence of N hidden states which reveal some probability. To reduce our real gesture data to a workable number of discrete output symbols and states, we can use any clustering algorithm to cluster the 3D points of all our training data for circle gesture sequences into N clusters and label them. That is to say, every point in the training data represents an output symbol that is closely tied to one of the 8 true states of the model.
+
+Looking at the labeled data, we can estimate how likely it is that a hand passed through the 8 clusters in the same sequence as a circle gesture, and if the likelihood is high enough, then the gesture is considered to be recognized.
+
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{ hand gesture recognition} \label{fig:ges:reg} 
+	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{ shows the states of arabic sign language to convey "Hello". It is consisted of 11 states of Markov models and if there is higher likelihood of the hand position passed through states sequentially from initial to final, then it is recognized as "Hello".} \label{fig:ges:reg} 
 \end{figure}
+
+\section{Human-Robot Interaction}
+
+
+\chapter{Timeline}
+\begin{itemize}
+	\item \textbf{October - Preparation:} This includes the analysis of relevant papers as well as the consideration of the already available components.
+	\item \textbf{November - Setup:} Software and Hardware environment setup. Getting to know the tools that will be used.
+	\item \textbf{December / January - Implementation:} Proposed functionalities will be implemented.
+	\item \textbf{January / February - Testing:} This includes testing, bug fixing and improving the implementation.
+	\item \textbf{February / March - Documentation:} This includes the documentation of the code and writing up the thesis.
+\end{itemize}
+
+\chapter{Organizational Details}
+\begin{itemize}
+	\item Language of the Master Thesis: English
+	\item Document processing system: LaTex  with TexStudio in Mac OSX
+	\item Operating system: Linux Ubuntu, Mac OS X
+	\item Software components: OpenNI, OpenCV
+	\item Hardware components: NAO, Asus Xtion
+	\item Programming Language: C++, Python
+	\item Advisor: Dr. Yuan Xu
+	\item Professor: Prof. Dr. Sahin Albayrak
+\end{itemize}
