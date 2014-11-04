@@ -1,8 +1,11 @@
-\chapter{Abstract} Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed. HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research area concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether static model of the gesture or non-static model of the gesture is used. 
+\chapter{Abstract}
+Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed. HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research area concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether static model of the gesture or non-static model of the gesture is used. 
 
 In this thesis, we attempt to do the method of modeling, analyzing, and recognizing gestures by using Computer Vision and Machine Learning techniques. Furthermore, Static (Gesture is formed by non-moving appearance of body parts) and non-static gestures (Gesture is formed by moving appearance of body parts), will be used to interact with robot and command the robot to execute certain actions.
 
 We further hope to provide a platform to integrate Sign Language Translation to assist people with hearing and speech disabilities. However, further implementations and training data are needed to use this platform as a full fledged Sign Language Translator.
+
+\subsection*{Keywords} Human-Robot Interaction, HRI, Computer Vision, Depth Camera, Hand Gesture, Gesture Recognition, Hidden Markov Model, NAO
 
 \chapter{Motivation} Huge influence of computers in society has made smart devices, an important part of our lives. Availability and affordability of such devices motivated us to use them in our day-to-day living. 
 
@@ -12,16 +15,24 @@ The list of smart devices includes personal automatic and semi-automatic robots 
 
 Tremendous progress had been made in speech recognition, and several commercially successful speech interfaces have been deployed. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an alternative mode of communication for Human-robot interaction (HRI) than the conventional interfaced devices.
 
+\begin{figure}
+	[h!] \centering 
+	\includegraphics[width=5.5cm]{figures/nao-interaction.png} 
+	\caption{Human Robot Interaction by Aldebaran Robotics} 
+	\label{fig:nao:interaction} 
+\end{figure}
+
+
 \chapter{Background} 
 \section{Robot and Artificial intelligence} Proper vision is of the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. Information about the environment could be provided by a computer vision system, acting as a vision sensor and providing high-level information about the environment and the robot.
 
 Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions.
 
-In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot name as NAO.
+In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot named as NAO as shown in the figure \ref{fig:nao}.
 
-Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotics. The Nao Academics Edition was developed for universities and laboratories for research and education purposes.
+Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotics. The Nao Academics Edition was developed for universities and laboratories for research and education purposes. Table \ref{tb:nao} shows the specification of NAO according to Aldebaran Robotics.
 \begin{table}
-	[h] \centering \caption{Nao's hardware specification } \label{tb:interf:1} 
+	[h] \centering \caption{Nao's hardware specification } \label{tb:nao} 
 	\begin{tabular}
 		{|l|l|} \hline Height & 58 centimetres (23 in) \\
 		\hline Weight & 4.3 kilograms (9.5 lb) \\
@@ -43,12 +54,12 @@ Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotic
 	\end{tabular}
 \end{table}
 
-\subsection{NAO Vision} Two identical video cameras are located in the forehead. They provide a up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the visual field such as goals and balls, and bottom camera can ease NAO?s dribbles. NAO contains a set of algorithms for detecting and recognizing faces and shapes. NAO can recognize who is talking to it or find a ball or, eventually, more complex objects.
+\subsection{NAO Vision} Two identical video cameras are located in the forehead. They provide a up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the visual field such as goals and balls, and bottom camera can ease NAO's dribbles. NAO contains a set of algorithms for detecting and recognizing faces and shapes. NAO can recognize who is talking to it or find a ball or, eventually, more complex objects.
 
 \subsection{Extending NAO with Depth Camera} 
 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition. 
 
-In this thesis, we focus on using Asus Xtion as an external hardware to be used with NAO due to the computational limitations of the NAO to process the images from two inbuilt hd stereo cameras, that ultimately makes NAO incapable of doing an efficient gesture recognition in real time.
+In this thesis, we focus on using Asus Xtion as an external hardware as shown in the figure \ref{fig:xtion} to be used with NAO due to the computational limitations of the NAO to process the images from two inbuilt hd stereo cameras, that ultimately makes NAO incapable of doing an efficient gesture recognition in real time.
 
 \begin{figure}
 	\centering
@@ -73,11 +84,11 @@ In this thesis, we focus on using Asus Xtion as an external hardware to be used 
 
 Even though such hand gloves are used in highly specialized domain such as simulation of medical surgery or even the real surgery, the everyday user will be certainly deterred by such a sophisticated interfacing devices. As an active result of the motivated research in HCI, computer vision based techniques were innovated to augment the naturalness of interaction.
 
-\subsection{Gesture Modeling} Gesture modeling depends primarily on the intended application. For an application that needs just hand gesture to go up and down or left and light, a very simple model may be sufficient. However, if the purpose is a natural-like interaction, a model has to be sophisticated enough to interpret all the possible gesture. The following section discusses various gesture modeling techniques which are being used by the existing hand gesture recognition applications. 
+\subsection{Gesture Modeling} Figure \ref{fig:ges:model} shows various types of modeling techniques used for Gesture modeling. It depends primarily on the intended application. For an application that needs just hand gesture to go up and down or left and light, a very simple model may be sufficient. However, if the purpose is a natural-like interaction, a model has to be sophisticated enough to interpret all the possible gesture. The following section discusses various gesture modeling techniques which are being used by the existing hand gesture recognition applications. 
 
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=6cm]{figures/ges-model.png} 
+	\includegraphics[height=5cm]{figures/ges-model.png} 
 	\caption{Different gesture modeling} 
 	\label{fig:ges:model} 
 \end{figure}
@@ -96,7 +107,7 @@ Several alternative taxonomies have been suggested that deal with psychological 
 
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=7cm]{figures/ges-tax.png} 
+	\includegraphics[width=13cm]{figures/ges-tax.png} 
 	\caption{Different gesture modeling} 
 	\label{fig:ges:tax} 
 \end{figure}
@@ -107,34 +118,31 @@ In this thesis, we focus on communicative gestures in the form of symbols. They 
 
 
 \subsection{Gesture Recognition}
-The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as  DP-matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models. 
+The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as DP-matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models. 
 
 In this thesis, we focus on the recognition technique based on hidden Markov model (HMM) that is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer, and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output, dependent on the state, is visible.
 
 
 \chapter{Goal} As described earlier, HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
 
-In this thesis, we attempt to implement a feature for NAO to recognize hand gestures and execute a predefined action based on the gesture. 
+In this thesis, we attempt to implement a feature for NAO to recognize hand gestures and execute a predefined action based on the gesture. In order to achieve this, NAO will be extended with an external depth camera, that will enable NAO to recognize static as well as dynamic gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
 
-In order to achieve this, NAO will be extended with an external Depth Camera, that will enable NAO to recognize static as well as dynamic gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. 
-
-With the hand gesture recognizing feature, NAO will be available to the users in two modes a) Command mode b) Translation mode.
-
-In command mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based Interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, part of NAO intelligence such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
-
-In translation mode, NAO will be directly translating the meaning of the trained gestures. To achieve this, text-to-speech SDK of NAO will be used and translated gesture can be said out loud using the integrated speaker. This feature of NAO will be allowing it to translate a sign language to assist people with hearing and speech disabilities.
+\begin{itemize}
+	\item \textbf{Command mode:} In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based Interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, part of NAO intelligence such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
+	\item \textbf{Translation mode:} In this mode, NAO will be directly translating the meaning of the trained gestures. To achieve this, text-to-speech SDK of NAO will be used and translated gesture can be said out loud using the integrated speaker. This feature of NAO will be allowing it to translate a sign language to assist people with hearing and speech disabilities.
+\end{itemize}
 
 In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
 
-\chapter{Task} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition system that is going to implemented in this project work. Each block contains different software components that are executed sequentially. However, training phase must be carried out before this system is available for recognition. Finally, these components will be integrated into NAO.
+\chapter{Approach} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition system that is going to implemented in this project work. Each block contains different software components that are executed sequentially. However, training phase must be carried out before this system is available for recognition. Finally, these components will be integrated into NAO.
 
 \begin{figure}
 	[!h] \centering 
 	\includegraphics[width=9cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
 \end{figure}
 
-\section{Sense} 
-3D camera records 30 frames of color image as well as depth image per second and outputs as a data package. Figure shows the single frame of depth image taken from Microsoft Kinect where darker gray values represent the farther distance and lighter gray values represent the closer distance from the camera.
+\section{Sensing} 
+3D camera records 30 frames of color image as well as depth image per second and outputs as a data package. Figure \ref{fig:depth} shows the single frame of depth image taken from Microsoft Kinect where darker gray values represent the farther distance and lighter gray values represent the closer distance from the camera.
 
 \begin{figure}
 	\centering
@@ -153,12 +161,12 @@ In this thesis, we planned to train NAO with few very simple gestures due to the
 \end{figure}
 
 \section{Feature Extraction}
-Output package from sensor data will be inputted to feature detection and extraction unit. OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment length and present them three dimensionally as shown in the figure. Finally, only joints of both the arms will be picked out from the array of features, since it will be the significant joints need for hand gesture recognition.
+Output package from sensor data will be inputted to feature detection and extraction unit. OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment length and present them three dimensionally as shown in the figure \ref{fig:skeleton}. Finally, only joints of both the arms will be picked out from the array of features, since it will be the significant joints need for hand gesture recognition.
 
 \section{Modeling and Classification}
 In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained. Therefore, a set of simple gestures will be chosen and observed for training. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second. 
 
-For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure. It will be modeled as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data.  This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels. Each trained model can then be used to determine with what probability a given gesture appears in test data. Therefore, the trained Hidden Markov models will be used to recognize gestures. 
+For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure \ref{fig:ges:state}. It will be modeled as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data. This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels. Each trained model can then be used to determine with what probability a given gesture appears in test data. Therefore, the trained Hidden Markov models will be used to recognize gestures. 
 
 \begin{figure}
 	\centering
@@ -177,7 +185,7 @@ For example, a gesture is gesticulated by simply drawing a circle in the air and
 \end{figure}
 
 \section{Gesture Analysis and Recognition}
-This step contains the analysis of gesticulated gesture and finding out the likely hood of that gesture with trained data, know as gesture recognition. Figure contains colored rings of noisy data of gestures that represent instances of a real circle gesture. Sensing and feature detection module will produce 60 observations of the circle gesture for 2 seconds, since the depth camera records at 30 frame per second. To decide whether a given set of 60 observations contains a circle gesture, we need to first determine the likelihood that the hand passed through the eight states of the gesture in the expected sequence.
+This step contains the analysis of gesticulated gesture and finding out the likelihood of that gesture with trained data, known as gesture recognition. Figure \ref{fig:ges:train}  contains colored rings of noisy data of gestures that represent instances of a real circle gesture. Sensing and feature detection module will produce 60 observations of the circle gesture for 2 seconds, since the depth camera records at 30 frame per second. To decide whether a given set of 60 observations contains a circle gesture, we need to first determine the likelihood that the hand passed through the eight states of the gesture in the expected sequence.
 
 Discrete HMM is a finite set of M possible output symbols and a sequence of N hidden states which reveal some probability. To reduce our real gesture data to a workable number of discrete output symbols and states, we can use any clustering algorithm to cluster the 3D points of all our training data for circle gesture sequences into N clusters and label them. That is to say, every point in the training data represents an output symbol that is closely tied to one of the 8 true states of the model.
 
@@ -185,13 +193,13 @@ Looking at the labeled data, we can estimate how likely it is that a hand passed
 
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{ shows the states of arabic sign language to convey "Hello". It is consisted of 11 states of Markov models and if there is higher likelihood of the hand position passed through states sequentially from initial to final, then it is recognized as "Hello".} \label{fig:ges:reg} 
+	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{shows the states of Arabic sign language to convey "Hello". It is consisted of 11 states of Markov models and if there is higher likelihood of the hand position passed through states sequentially from initial to final, then it is recognized as "Hello".} \label{fig:ges:reg} 
 \end{figure}
 
 \section{Human-Robot Interaction}
 
 
-\chapter{Timeline}
+\chapter{Schedule}
 \begin{itemize}
 	\item \textbf{October - Preparation:} This includes the analysis of relevant papers as well as the consideration of the already available components.
 	\item \textbf{November - Setup:} Software and Hardware environment setup. Getting to know the tools that will be used.
@@ -200,10 +208,10 @@ Looking at the labeled data, we can estimate how likely it is that a hand passed
 	\item \textbf{February / March - Documentation:} This includes the documentation of the code and writing up the thesis.
 \end{itemize}
 
-\chapter{Organizational Details}
+\chapter{Details}
 \begin{itemize}
 	\item Language of the Master Thesis: English
-	\item Document processing system: LaTex  with TexStudio in Mac OSX
+	\item Document processing system: LaTex with TexStudio in Mac OSX
 	\item Operating system: Linux Ubuntu, Mac OS X
 	\item Software components: OpenNI, OpenCV
 	\item Hardware components: NAO, Asus Xtion
