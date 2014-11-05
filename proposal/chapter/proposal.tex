@@ -1,11 +1,11 @@
 \chapter{Abstract}
-Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed. HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research area concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether static model of the gesture or non-static model of the gesture is used. 
+Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed\cite{7}. HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether 3D based model or appearance based model of the gesture is used. 
 
-In this thesis, we attempt to do the method of modeling, analyzing, and recognizing gestures by using Computer Vision and Machine Learning techniques. Furthermore, Static (Gesture is formed by non-moving appearance of body parts) and non-static gestures (Gesture is formed by moving appearance of body parts), will be used to interact with robot and command the robot to execute certain actions.
+In this thesis, we attempt to implement the hand gesture recognition for robots by modeling, training, analyzing, and recognizing gestures by using Computer Vision and Machine Learning techniques. Additionally, 3D based gesture modeling with skeletal points tracking will be used. On the one side, gestures will be used command the robot to execute certain actions and on the other side gestures will be translated and spoken out by the robot.
 
 We further hope to provide a platform to integrate Sign Language Translation to assist people with hearing and speech disabilities. However, further implementations and training data are needed to use this platform as a full fledged Sign Language Translator.
 
-\subsection*{Keywords} Human-Robot Interaction, HRI, Computer Vision, Depth Camera, Hand Gesture, Gesture Recognition, Hidden Markov Model, NAO
+\subsection*{Keywords} Human-Robot Interaction, HRI, Computer Vision, Depth Camera, Hand Gesture, Gesture Recognition, Sign Language Translation, Hidden Markov Model, NAO
 
 \chapter{Motivation} Huge influence of computers in society has made smart devices, an important part of our lives. Availability and affordability of such devices motivated us to use them in our day-to-day living. 
 
@@ -197,7 +197,7 @@ Looking at the labeled data, we can estimate how likely it is that a hand passed
 \end{figure}
 
 \section{Human-Robot Interaction}
-Finally, the recognized gesture will be interpreted by NAO to execute an specified task. The motion of NAO will be defined by the application Choregraphe in Command Mode. For example. circle gesture would ask NAO to turn around. However, NAO will also be available in Translator Mode by using ALTextToSpeech Library to translate the recognized gesture.
+Finally, the recognized gesture will be interpreted by NAO to execute an specified task. The motion of NAO will be defined by the application Choregraphe in Command Mode. For example. circle gesture would ask NAO to turn around. However, NAO will also be available in Translation Mode by using ALTextToSpeech Library to translate the recognized gesture.
 
 
 \chapter{Schedule}
