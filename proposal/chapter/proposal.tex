@@ -125,7 +125,7 @@ In this thesis, we focus on the recognition technique based on hidden Markov mod
 
 \chapter{Goal} As described earlier, HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
 
-In this thesis, we attempt to implement a feature for NAO to recognize hand gestures and execute a predefined action based on the gesture. In order to achieve this, NAO will be extended with an external depth camera, that will enable NAO to recognize static as well as dynamic gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
+In this thesis, we attempt to implement the feature for NAO to recognize hand gestures and execute a predefined action based on the gesture. In order to achieve this, NAO will be extended with an external depth camera, that will enable NAO to recognize 3d model based gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
 
 \begin{itemize}
 	\item \textbf{Command mode:} In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based Interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, part of NAO intelligence such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
@@ -197,6 +197,7 @@ Looking at the labeled data, we can estimate how likely it is that a hand passed
 \end{figure}
 
 \section{Human-Robot Interaction}
+Finally, the recognized gesture will be interpreted by NAO to execute an specified task. The motion of NAO will be defined by the application Choregraphe in Command Mode. For example. circle gesture would ask NAO to turn around. However, NAO will also be available in Translator Mode by using ALTextToSpeech Library to translate the recognized gesture.
 
 
 \chapter{Schedule}
@@ -213,7 +214,7 @@ Looking at the labeled data, we can estimate how likely it is that a hand passed
 	\item Language of the Master Thesis: English
 	\item Document processing system: LaTex with TexStudio in Mac OSX
 	\item Operating system: Linux Ubuntu, Mac OS X
-	\item Software components: OpenNI, OpenCV
+	\item Software components: OpenNI, OpenCV, NAO Choregraphe
 	\item Hardware components: NAO, Asus Xtion
 	\item Programming Language: C++, Python
 	\item Advisor: Dr. Yuan Xu
