@@ -1,17 +1,17 @@
 \chapter{Abstract}
-Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed \cite{7}. HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether 3D based model or appearance based model of the gesture is used. 
+Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed \cite{7}. HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether 3D based model or appearance based model of the gesture is used \cite{3}. 
 
-In this thesis, we attempt to implement the hand gesture recognition for robots by modeling, training, analyzing, and recognizing gestures by using computer vision and machine learning techniques. Additionally, 3D based gesture modeling with skeletal points tracking will be used. On the one side, gestures will be used command the robot to execute certain actions and on the other side gestures will be translated and spoken out by the robot.
+In this thesis, we attempt to implement the hand gesture recognition for robots with modeling, training, analyzing and recognizing gestures based on computer vision and machine learning techniques. Additionally, 3D based gesture modeling with skeletal points tracking will be used. As a result, on the one side, gestures will be used command the robot to execute certain actions and on the other side, gestures will be translated and spoken out by the robot.
 
 We further hope to provide a platform to integrate Sign Language Translation to assist people with hearing and speech disabilities. However, further implementations and training data are needed to use this platform as a full fledged Sign Language Translator.
 
-\subsection*{Keywords} Human-Robot Interaction, HRI, Computer Vision, Depth Camera, Hand Gesture, 3D hand based model, Skeleton tracking, Gesture Recognition, Sign Language Translation, Hidden Markov Model, NAO
+\subsection*{Keywords} Human-Robot Interaction (HRI), Computer Vision, Depth Camera, Hand Gesture, 3D hand based model, Skeleton tracking, Gesture Recognition, Sign Language Translation, Hidden Markov Model, NAO
 
-\chapter{Motivation} Huge influence of computers in society has made smart devices, an important part of our lives. Availability and affordability of such devices motivated us to use them in our day-to-day living. The list of smart devices includes personal automatic and semi-automatic robots which are also playing a major role in our household. For an instance, Smart Vacuum Cleaner is a robot that automatically cleans the floor and goes to its charging station without human interaction.
+\chapter{Motivation} Huge influence of computers in society has made smart devices, an important part of our lives. Availability and affordability of such devices motivated us to use them in our day-to-day living. The list of smart devices includes personal automatic and semi-automatic robots which are also playing a major role in our household. For an instance, Roomba \cite{8} is an autonomous robotic vacuum cleaners that automatically cleans the floor and goes to its charging station without human interaction.
 
-Interaction with smart devices has still been mostly through displays, keyboards, mouse and touch interfaces. These devices have grown to be familiar but inherently limit the speed and naturalness with which we can interact with the computer.  Usage of robots for domestic and industrial purposes has been continuously increasing. Thus in recent years, there has been a tremendous push in research toward an intuitive and easy communication with the robot through speech, gestures, and facial expressions.
+Interaction with smart devices has still been mostly through displays, keyboards, mouse and touch interfaces. These devices have grown to be familiar but inherently limit the speed and naturalness with which we can interact with the computer.  Usage of robots for domestic and industrial purposes has been continuously increasing. Thus in recent years, there has been a tremendous push in research toward an intuitive and easy communication with the robot through speech, gestures and facial expressions.
 
-Tremendous progress had been made in speech recognition and several commercially successful speech interfaces are available. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an alternative mode of communication for Human-robot interaction than the conventional cumbersome devices.
+Tremendous progress had been made in speech recognition and several commercially successful speech interfaces are available. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures \ref{fig:nao:interaction}. The use of hand gestures provides an alternative mode of communication for Human-robot interaction than the conventional cumbersome devices.
 
 \begin{figure}
 	[h] \centering 
@@ -23,7 +23,7 @@ Tremendous progress had been made in speech recognition and several commercially
 \chapter{Background} 
 \section{Robot and Artificial intelligence} Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. High-level information about the environment could be provided by a computer vision system that is acting as a vision sensor.
 
-Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions \cite{1}.
+Computer vision is a field that includes methods for acquiring, processing, analyzing and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions \cite{1}.
 
 In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot named as NAO, as shown in the figure \ref{fig:nao}. NAO is an autonomous, programmable humanoid robot developed by Aldebaran Robotics. The NAO Academics Edition was developed for universities and laboratories for research and education purposes. Table \ref{tb:nao} shows the specification of NAO according to Aldebaran Robotics.
 \begin{table}
@@ -31,11 +31,11 @@ In this thesis, we will focus on the hand gesture recognition using computer vis
 	\begin{tabular}
 		{|l|l|} \hline Height & 58 centimetres (23 in) \\
 		\hline Weight & 4.3 kilograms (9.5 lb) \\
-		\hline Autonomy & 60 minutes (active use), 90 minutes (normal use) \\
+		\hline Battery autonomy & 60 minutes (active use), 90 minutes (normal use) \\
 		\hline Degrees of freedom & 21 to 25 \\
-		\hline CPU & 2 x Intel Atom @ 1.6 GHz \\
+		\hline CPU & Intel Atom @ 1.6 GHz \\
 		\hline Built-in OS & Linux \\
-		\hline Compatible OS & Windows, Mac OS, Linux \\
+		\hline SDK available for & Windows, Mac OS, Linux \\
 		\hline Programming languages & C++, Python, Java, MATLAB, Urbi, C, .Net \\
 		\hline Vision & 2 x HD 1280x960 cameras \\
 		\hline Connectivity & Ethernet, Wi-Fi \\
@@ -49,7 +49,7 @@ In this thesis, we will focus on the hand gesture recognition using computer vis
 	\end{tabular}
 \end{table}
 
-\subsection{NAO Vision} Two identical video cameras are located in the forehead of NAO. They provide up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the visual field such as goals and balls, and bottom camera can ease NAO's dribbles. NAO contains a set of algorithms for detecting and recognizing faces and shapes. NAO can recognize who is talking to it or find a ball or, eventually, more complex objects.
+\subsection{NAO Vision} Two identical video cameras are located in the forehead of NAO. They provide up to 1280x960 resolution at 30 frames per second. NAO contains a set of algorithms for detecting and recognizing faces and shapes.
 
 \subsection{Extending NAO with Depth Camera} 
 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition. 
@@ -73,7 +73,7 @@ In this thesis, we focus on using Asus Xtion as an external hardware as shown in
 \end{figure}
 
 
-\section{Hand Gesture} Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at, to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI, it is necessary to provide the means by which they can be interpreted by robots. The HRI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm, and even other parts of the human body, be measurable by the machine \cite{6}. 
+\section{Hand Gesture} Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at, to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI, it is necessary to provide the means by which they can be interpreted by robots. The HRI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm and even other parts of the human body, be measurable by the machine \cite{6}. 
 
 \section{Hand Gesture Recognition} Initial attempts to recognize hand gestures resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors \cite{3}. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
 
@@ -117,7 +117,7 @@ The task of gesture recognition shares certain similarities with other recogniti
 In this thesis, we focus on the recognition using  machine learning technique based on hidden Markov model. HMM is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output dependent on the state is visible.
 
 
-\chapter{Goal} As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
+\chapter{Goal} As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
 
 In this thesis, we attempt to implement the feature for NAO to recognize hand gestures and execute predefined actions based on the gesture. NAO will be extended with an external depth camera, that will enable NAO to recognize 3D hand based modeled gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. Additionally, skeletal points tracking algorithm with machine learning technique using Hidden Markov Models will be used to recognize the gestures. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
 
@@ -183,7 +183,7 @@ This step contains the analysis of gesticulated gesture and finding out the like
 
 Discrete HMM is a finite set of M possible output symbols and a sequence of N hidden states which reveal some probability. To reduce our real gesture data to a workable number of discrete output symbols and states, we can use any clustering algorithm to cluster the 3D points of all our training data of circle gesture into clusters and label them. That is to say, every point in the training data represents an output symbol that is closely tied to one of the 8 true states of the model.
 
-Looking at the labeled data, we can estimate how likely it is that a hand passed through the 8 clusters in the same sequence as a circle gesture, and if the likelihood is high enough, then the gesture is considered to be recognized.
+Looking at the labeled data, we can estimate how likely it is that a hand passed through the 8 clusters in the same sequence as a circle gesture and if the likelihood is high enough, then the gesture is considered to be recognized.
 
 \begin{figure}
 	[h] \centering 
