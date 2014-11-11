@@ -84,7 +84,7 @@ Even though such hand gloves are used in highly specialized domain such as simul
 \begin{figure}
 	[h] \centering 
 	\includegraphics[height=5cm]{figures/ges-model.png} 
-	\caption{Different gesture modeling} 
+	\caption{Classification of  gesture modeling. Source: \cite{10}}
 	\label{fig:ges:model} 
 \end{figure}
 
@@ -102,7 +102,7 @@ Several alternative taxonomies have been suggested that deal with psychological 
 \begin{figure}
 	[h] \centering 
 	\includegraphics[width=13cm]{figures/ges-tax.png} 
-	\caption{Different gesture modeling} 
+	\caption{Classification of gestures. Source: \cite{3}}
 	\label{fig:ges:tax} 
 \end{figure}
 
@@ -112,7 +112,7 @@ In this thesis, we focus on communicative gestures in the form of symbols. They 
 
 
 \subsection{Gesture Recognition}
-The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as DP-matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models \cite{5}. 
+The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as Dynamic Programming (DP) matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models \cite{5}. 
 
 In this thesis, we focus on the recognition using  machine learning technique based on hidden Markov model. HMM is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output dependent on the state is visible.
 
@@ -122,17 +122,17 @@ In this thesis, we focus on the recognition using  machine learning technique ba
 In this thesis, we attempt to implement the feature for NAO to recognize hand gestures and execute predefined actions based on the gesture. NAO will be extended with an external depth camera, that will enable NAO to recognize 3D hand based modeled gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. Additionally, skeletal points tracking algorithm with machine learning technique using Hidden Markov Models will be used to recognize the gestures. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
 
 \begin{itemize}
-	\item \textbf{Command mode:} In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, part of NAO intelligence such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
+	\item \textbf{Command mode:} In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, other interfaces such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
 	\item \textbf{Translation mode:} In this mode, NAO will be directly translating the meaning of the gesticulated gestures. To achieve this, text-to-speech library of NAO will be used and recognized gesture can be spoken out using the integrated loudspeaker. In future, it will allow NAO to translate a sign language to assist people with hearing and speech disabilities.
 \end{itemize}
 
-In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
+In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has computational limitations. Gestures will involve both the hands or single hand to interact with the robot.
 
-\chapter{Approach} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition system that is going to implemented in this project work. Each block contains different software components that are executed sequentially. However, training phase must be carried out before this system is available for recognition. Finally, these components will be integrated into NAO.
+\chapter{Approach} The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition system that is going to implemented in this thesis. Each block contains different software components that are executed sequentially. However, training phase must be carried out before this system is available for recognition. Finally, these components will be integrated into NAO.
 
 \begin{figure}
 	[!h] \centering 
-	\includegraphics[width=9cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system} \label{fig:flow} 
+	\includegraphics[width=9cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system. Source: \cite{5}} \label{fig:flow} 
 \end{figure}
 
 \section{Sensing} 
@@ -167,13 +167,13 @@ For example, a gesture is gesticulated by simply drawing a circle in the air and
 	\begin{minipage}{.3\textwidth}
 		\centering
 		\includegraphics[width=6cm]{figures/ges-states.png}
-		\captionof{figure}{HMM States of circular gesture}
+		\captionof{figure}{HMM States of circular gesture. Source \cite{9}}
 		\label{fig:ges:state}
 	\end{minipage}%
 	\begin{minipage}{.7\textwidth}
 		\centering
 		\includegraphics[width=10cm]{figures/ges-train.png}
-		\captionof{figure}{Observations of circular gestures}
+		\captionof{figure}{Observations of circular gestures. Source \cite{9}}
 		\label{fig:ges:train}
 	\end{minipage}
 \end{figure}
@@ -181,13 +181,13 @@ For example, a gesture is gesticulated by simply drawing a circle in the air and
 \section{Gesture Analysis and Recognition}
 This step contains the analysis of gesticulated gesture and finding out the likelihood of that gesture with trained data, known as gesture recognition. Figure \ref{fig:ges:train}  contains colored rings of noisy data of gestures that represent instances of a real circle gesture. Sensing and feature detection module will produce 60 observations of the circle gesture for 2 seconds, since the depth camera records at 30 frame per second. To decide whether a given set of 60 observations contains a circle gesture, we need to first determine the likelihood that the hand passed through the eight states of the gesture in the expected sequence.
 
-Discrete HMM is a finite set of M possible output symbols and a sequence of N hidden states which reveal some probability. To reduce our real gesture data to a workable number of discrete output symbols and states, we can use any clustering algorithm to cluster the 3D points of all our training data of circle gesture into clusters and label them. That is to say, every point in the training data represents an output symbol that is closely tied to one of the 8 true states of the model.
+Discrete HMM is a finite set of possible output symbols and a sequence of hidden states which reveal some probability. To reduce our real gesture data to a workable number of discrete output symbols and states, we can use any clustering algorithm to cluster the 3D points of all our training data of circle gesture into clusters and label them. That is to say, every point in the training data represents an output symbol that is closely tied to one of the 8 true states of the model.
 
 Looking at the labeled data, we can estimate how likely it is that a hand passed through the 8 clusters in the same sequence as a circle gesture and if the likelihood is high enough, then the gesture is considered to be recognized.
 
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{shows the states of Arabic sign language to convey "Hello". It is consisted of 11 states of Markov models and if there is higher likelihood of the hand position passed through states sequentially from initial to final, then it is recognized as "Hello".} \label{fig:ges:reg} 
+	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{shows the states of Arabic sign language to convey "Hello". It is consisted of 11 states of Markov models and if there is higher likelihood of the hand position passed through states sequentially from initial to final, then it is recognized as "Hello". Source \cite{11}} \label{fig:ges:reg} 
 \end{figure}
 
 \section{Human-Robot Interaction}
@@ -196,7 +196,6 @@ Finally, the recognized gesture will be interpreted by NAO to execute a specifie
 
 \chapter{Schedule}
 \begin{itemize}
-	\item \textbf{October - Preparation:} This includes the analysis of relevant papers as well as the consideration of the already available components.
 	\item \textbf{November - Setup:} Software and Hardware environment setup. Getting to know the tools that will be used during this project work.
 	\item \textbf{December / January - Implementation:} Proposed functionalities will be implemented.
 	\item \textbf{January / February - Testing:} This includes testing, bug fixing and improvising the implementation.
