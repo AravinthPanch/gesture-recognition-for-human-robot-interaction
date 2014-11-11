@@ -11,21 +11,24 @@ We further hope to provide a platform to integrate Sign Language Translation to 
 
 Interaction with smart devices has still been mostly through displays, keyboards, mouse and touch interfaces. These devices have grown to be familiar but inherently limit the speed and naturalness with which we can interact with the computer.  Usage of robots for domestic and industrial purposes has been continuously increasing. Thus in recent years, there has been a tremendous push in research toward an intuitive and easy communication with the robot through speech, gestures and facial expressions.
 
-Tremendous progress had been made in speech recognition and several commercially successful speech interfaces are available. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures \ref{fig:nao:interaction}. The use of hand gestures provides an alternative mode of communication for Human-robot interaction than the conventional cumbersome devices.
+Tremendous progress had been made in speech recognition and several commercially successful speech interfaces are available. However, speech recognition systems have certain limitations such as misinterpretation due to various accents and background noise interference. It may not be able to differentiate between your speech, other people talking and other ambient noise, leading to transcription mix-ups and errors.
 
-\begin{figure}
-	[h] \centering 
-	\includegraphics[width=5.5cm]{figures/nao-interaction.png} 
-	\caption{Human Robot Interaction by Aldebaran Robotics} 
-	\label{fig:nao:interaction} 
-\end{figure}
+ Furthermore, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an attractive alternative for Human-robot interaction than the conventional cumbersome devices. 
 
 \chapter{Background} 
-\section{Robot and Artificial intelligence} Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. High-level information about the environment could be provided by a computer vision system that is acting as a vision sensor.
+\section{Computer Vision in Robotics} Computer vision is a broad field that includes methods for acquiring, processing, analyzing and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions \cite{1}.
 
-Computer vision is a field that includes methods for acquiring, processing, analyzing and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions \cite{1}.
+Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. High-level information about the environment could be provided by a computer vision system that is acting as a vision sensor.
 
 In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot named as NAO, as shown in the figure \ref{fig:nao}. NAO is an autonomous, programmable humanoid robot developed by Aldebaran Robotics. The NAO Academics Edition was developed for universities and laboratories for research and education purposes. Table \ref{tb:nao} shows the specification of NAO according to Aldebaran Robotics.
+
+\subsection{NAO Vision} Two identical video cameras are located in the forehead of NAO. They provide up to 1280x960 resolution at 30 frames per second. NAO contains a set of algorithms for detecting and recognizing faces and shapes.
+
+\subsection{Extending NAO with Depth Camera} 
+3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{12}. 
+
+In this thesis, we focus on using Asus Xtion as an external hardware as shown in the figure \ref{fig:xtion}, due to the computational limitations of the NAO to process the images from two inbuilt hd stereo cameras, that ultimately makes NAO incapable of doing an efficient gesture recognition in real time.
+
 \begin{table}
 	[h] \centering \caption{NAO's hardware and software specification } \label{tb:nao} 
 	\begin{tabular}
@@ -35,7 +38,7 @@ In this thesis, we will focus on the hand gesture recognition using computer vis
 		\hline Degrees of freedom & 21 to 25 \\
 		\hline CPU & Intel Atom @ 1.6 GHz \\
 		\hline Built-in OS & Linux \\
-		\hline SDK available for & Windows, Mac OS, Linux \\
+		\hline SDK compatibility & Windows, Mac OS, Linux \\
 		\hline Programming languages & C++, Python, Java, MATLAB, Urbi, C, .Net \\
 		\hline Vision & 2 x HD 1280x960 cameras \\
 		\hline Connectivity & Ethernet, Wi-Fi \\
@@ -48,13 +51,6 @@ In this thesis, we will focus on the hand gesture recognition using computer vis
 		\hline 
 	\end{tabular}
 \end{table}
-
-\subsection{NAO Vision} Two identical video cameras are located in the forehead of NAO. They provide up to 1280x960 resolution at 30 frames per second. NAO contains a set of algorithms for detecting and recognizing faces and shapes.
-
-\subsection{Extending NAO with Depth Camera} 
-3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition. 
-
-In this thesis, we focus on using Asus Xtion as an external hardware as shown in the figure \ref{fig:xtion}, due to the computational limitations of the NAO to process the images from two inbuilt hd stereo cameras, that ultimately makes NAO incapable of doing an efficient gesture recognition in real time.
 
 \begin{figure}
 	\centering
@@ -84,7 +80,7 @@ Even though such hand gloves are used in highly specialized domain such as simul
 \begin{figure}
 	[h] \centering 
 	\includegraphics[height=5cm]{figures/ges-model.png} 
-	\caption{Classification of  gesture modeling. Source: \cite{10}}
+	\caption{Classification of gesture modeling. Source: \cite{10}}
 	\label{fig:ges:model} 
 \end{figure}
 
@@ -101,7 +97,7 @@ Several alternative taxonomies have been suggested that deal with psychological 
 
 \begin{figure}
 	[h] \centering 
-	\includegraphics[width=13cm]{figures/ges-tax.png} 
+	\includegraphics[width=12cm]{figures/ges-tax.png} 
 	\caption{Classification of gestures. Source: \cite{3}}
 	\label{fig:ges:tax} 
 \end{figure}
@@ -114,7 +110,7 @@ In this thesis, we focus on communicative gestures in the form of symbols. They 
 \subsection{Gesture Recognition}
 The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as Dynamic Programming (DP) matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models \cite{5}. 
 
-In this thesis, we focus on the recognition using  machine learning technique based on hidden Markov model. HMM is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output dependent on the state is visible.
+In this thesis, we have chosen a machine learning technique based on hidden Markov model to recognize gestures. HMM is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output dependent on the state is visible.
 
 
 \chapter{Goal} As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
@@ -191,7 +187,7 @@ Looking at the labeled data, we can estimate how likely it is that a hand passed
 \end{figure}
 
 \section{Human-Robot Interaction}
-Finally, the recognized gesture will be interpreted by NAO to execute a specified task. The motion of NAO will be defined by the application Choregraphe in Command Mode. For example. circle gesture would ask NAO to turn around. However, NAO will also be available in Translation Mode by using ALTextToSpeech Library to translate the recognized gesture.
+Finally, the recognized gesture will be interpreted by NAO to execute a specified task. For example. circle gesture would ask NAO to turn around. However, NAO will also be available in Translation Mode by using ALTextToSpeech Library to translate the recognized gesture.
 
 
 \chapter{Schedule}
@@ -205,10 +201,10 @@ Finally, the recognized gesture will be interpreted by NAO to execute a specifie
 \chapter{Details}
 \begin{itemize}
 	\item Language of the Master Thesis: English
-	\item Document processing system: LaTex with TexStudio
-	\item Operating system: Linux Ubuntu, Mac OS X
-	\item Software components: OpenNI, OpenCV, NAO Choregraphe
-	\item Hardware components: NAO, Asus Xtion
+	\item Document processing system: LaTeX with TexStudio
+	\item Operating system: Linux Ubuntu, Mac OSX
+	\item Software: OpenNI, OpenCV, NAO Choregraphe
+	\item Hardware : NAO, Asus Xtion
 	\item Programming Language: C++, Python
 	\item Version control system: Git
 	\item Advisor: Dr. Yuan Xu
