@@ -27,7 +27,7 @@ In this thesis, we will focus on the hand gesture recognition using computer vis
 \subsection{Extending NAO} 
 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{12}. 
 
-3D model based gesture recognition needs 3D data. Hence we attempt to use Asus Xtion as an external camera that will be mounted on the head of NAO as shown in the figure \ref{fig:xtion}. Computational limitations of NAO hinders us to build an effective real time gesture recognition. Therefore, we propose to use off-board computer to process the sensor data from NAO, execute the gesture recognition algorithm and finally command NAO to do an appropriate action.
+3D model based gesture recognition needs 3D data. Hence we attempt to use Asus Xtion as an external camera that will be mounted on the head of NAO as shown in the figure \ref{fig:xtion}. Computational limitations of NAO hinders us to build an effective real time gesture recognition. Therefore, we propose to use an off-board computer to process the sensor data from NAO, execute the gesture recognition algorithm and finally command NAO to do an appropriate action.
 
 \begin{table}
 	[h] \centering \caption{NAO V5 hardware and software specification } \label{tb:nao} 
@@ -115,7 +115,7 @@ In this thesis, we have chosen a machine learning technique based on hidden Mark
 
 \chapter{Goal} As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
 
-In this thesis, we attempt to implement the feature for NAO to recognize hand gestures and execute predefined actions based on the gesture. NAO will be extended with an external depth camera, that will enable NAO to recognize 3D hand based modeled gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon.  Additionally, skeletal points tracking algorithm with machine learning technique using Hidden Markov Models will be used to recognize the gestures. Due to the computational limitations of NAO, gesture recognition algorithm will be execute on off-board computer. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
+In this thesis, we attempt to implement the feature for NAO to recognize gestures and execute predefined actions based on the gesture. NAO will be extended with an external depth camera, that will enable NAO to recognize 3D modeled gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon.  Additionally, skeletal points tracking algorithm with machine learning technique using Hidden Markov Models will be used to recognize the gestures. Due to the computational limitations of NAO, gesture recognition algorithm will be executed on off-board computer. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
 
 \begin{itemize}
 	\item \textbf{Command mode:} In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, other interfaces such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
@@ -139,13 +139,13 @@ In this thesis, we planned to train NAO with few very simple gestures due to the
 	\begin{minipage}{.5\textwidth}
 		\centering
 \includegraphics[height=7cm]{figures/depth.png} 
-		\captionof{figure}{Depth image of 3D Camera}
+		\captionof{figure}{Depth image from 3D Camera}
 		\label{fig:depth}
 	\end{minipage}%
 	\begin{minipage}{.5\textwidth}
 		\centering
 		\includegraphics[height=7cm]{figures/depth-skeleton.png}
-		\captionof{figure}{Skeleton tracking }
+		\captionof{figure}{Skeleton tracking}
 		\label{fig:skeleton}
 	\end{minipage}
 \end{figure}
@@ -156,7 +156,7 @@ Output package from sensor data will be inputted to feature detection and extrac
 \section{Modeling and Classification}
 In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained. Therefore, a set of simple gestures will be chosen and observed for training. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second. 
 
-For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure \ref{fig:ges:state}. It will be modeled as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data. This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels. Each trained model can then be used to determine with what probability a given gesture appears in test data. Therefore, the trained Hidden Markov models will be used to recognize gestures \cite{2}. 
+For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure \ref{fig:ges:state}. It will be  as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data. This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels. Each trained model can then be used to determine with what probability a given gesture appears in test data. Therefore, the trained Hidden Markov models will be used to recognize gestures \cite{2}. 
 
 \begin{figure}
 	\centering
@@ -169,7 +169,7 @@ For example, a gesture is gesticulated by simply drawing a circle in the air and
 	\begin{minipage}{.7\textwidth}
 		\centering
 		\includegraphics[width=10cm]{figures/ges-train.png}
-		\captionof{figure}{Observations of circular gestures \cite{9}.}
+		\captionof{figure}{Observations of a circular gesture in x, y, z axis which are recorded by a depth camera \cite{9}.}
 		\label{fig:ges:train}
 	\end{minipage}
 \end{figure}
