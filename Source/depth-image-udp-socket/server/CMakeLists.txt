@@ -5,7 +5,7 @@
 ####### SETUP #######
 
 cmake_minimum_required(VERSION 2.6)
-PROJECT(depth-image-socket-server)
+PROJECT(depth-image-udp-socket-server)
 
 set(PROJECT_BINARY_DIR "${PROJECT_SOURCE_DIR}/bin")
 
@@ -14,8 +14,8 @@ if( CMAKE_SYSTEM_NAME STREQUAL Darwin )
 	set( BOOST_INCLUDE_DIR "/usr/local/Cellar/boost/1.56.0/include" )
 	set( BOOST_LIBRARY "/usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib" )
 
-elseif( CMAKE_SYSTEM_NAME STREQUAL Linux-2.6.33.9-rt31-aldebaran-rt)
-	message( "-- SYSTEM NAME IS " ${CMAKE_SYSTEM_NAME})
+elseif( CMAKE_SYSTEM STREQUAL Linux-2.6.33.9-rt31-aldebaran-rt)
+	message( "-- SYSTEM NAME IS " ${CMAKE_SYSTEM})
 	set( BOOST_INCLUDE_DIR "/usr/include" )
 	set( BOOST_LIBRARY "/usr/lib/libboost_system.so" )	
 

@@ -32,15 +32,13 @@ private:
     void handle_read(const boost::system::error_code& error,
                      size_t bytes_transferred)
     {
-        if (!error)            
+        if (!error)
         {
-            std::cout << "Data is " << data_ << std::endl;
-                   
+            std::cout << "Data from client :" << data_ << std::endl;
             boost::asio::async_write(socket_,
                                      boost::asio::buffer(data_, bytes_transferred),
                                      boost::bind(&session::handle_write, this,
                                                  boost::asio::placeholders::error));
-            
         }
         else
         {
@@ -74,6 +72,7 @@ public:
     server(boost::asio::io_service& io_service, short port): io_service_(io_service), acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
     {
         start_accept();
+        std::cout << "Depth Image Socket Server started at port : " << SERVER_PORT << std::endl;
     }
     
 private:
@@ -83,7 +82,6 @@ private:
         acceptor_.async_accept(new_session->socket(),
                                boost::bind(&server::handle_accept, this, new_session,
                                            boost::asio::placeholders::error));
-            std::cout << "Depth Image Socket Server started at port : " << SERVER_PORT << std::endl;
     }
     
     void handle_accept(session* new_session,
@@ -108,7 +106,7 @@ private:
 int main(int argc, char* argv[])
 {
     try
-    {                
+    {
         boost::asio::io_service io_service;
         server s(io_service, std::atoi(SERVER_PORT));
         io_service.run();

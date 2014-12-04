@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CEEEE2331A2F7EA000898A8A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEEEE2311A2F7EA000898A8A /* main.cpp */; };
+		CEAE28C71A307775001115DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAE28C61A307775001115DF /* main.cpp */; };
 		CEEEE2351A2F7EE700898A8A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEEE2341A2F7EE700898A8A /* libboost_system.dylib */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +24,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CEEEE21A1A2F7A5B00898A8A /* server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = server; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEEEE2311A2F7EA000898A8A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		CEAE28C61A307775001115DF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CEEEE21A1A2F7A5B00898A8A /* client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = client; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEEE2311A2F7EA000898A8A /* main-x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "main-x.cpp"; path = "src/main-x.cpp"; sourceTree = SOURCE_ROOT; };
 		CEEEE2341A2F7EE700898A8A /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = /usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -53,7 +54,7 @@
 		CEEEE21B1A2F7A5B00898A8A /* bin */ = {
 			isa = PBXGroup;
 			children = (
-				CEEEE21A1A2F7A5B00898A8A /* server */,
+				CEEEE21A1A2F7A5B00898A8A /* client */,
 			);
 			name = bin;
 			path = build/osx/Debug;
@@ -62,7 +63,8 @@
 		CEEEE21C1A2F7A5B00898A8A /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CEEEE2311A2F7EA000898A8A /* main.cpp */,
+				CEAE28C61A307775001115DF /* main.cpp */,
+				CEEEE2311A2F7EA000898A8A /* main-x.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -79,9 +81,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CEEEE2191A2F7A5B00898A8A /* server */ = {
+		CEEEE2191A2F7A5B00898A8A /* client */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CEEEE2211A2F7A5B00898A8A /* Build configuration list for PBXNativeTarget "server" */;
+			buildConfigurationList = CEEEE2211A2F7A5B00898A8A /* Build configuration list for PBXNativeTarget "client" */;
 			buildPhases = (
 				CEEEE2161A2F7A5B00898A8A /* Sources */,
 				CEEEE2171A2F7A5B00898A8A /* Frameworks */,
@@ -91,9 +93,9 @@
 			);
 			dependencies = (
 			);
-			name = server;
+			name = client;
 			productName = sdfsdf;
-			productReference = CEEEE21A1A2F7A5B00898A8A /* server */;
+			productReference = CEEEE21A1A2F7A5B00898A8A /* client */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -110,7 +112,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CEEEE2151A2F7A5B00898A8A /* Build configuration list for PBXProject "server" */;
+			buildConfigurationList = CEEEE2151A2F7A5B00898A8A /* Build configuration list for PBXProject "client" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -122,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CEEEE2191A2F7A5B00898A8A /* server */,
+				CEEEE2191A2F7A5B00898A8A /* client */,
 			);
 		};
 /* End PBXProject section */
@@ -132,7 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEEE2331A2F7EA000898A8A /* main.cpp in Sources */,
+				CEAE28C71A307775001115DF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +227,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/boost/1.56.0/lib,
 				);
-				PRODUCT_NAME = server;
+				PRODUCT_NAME = client;
 				SYMROOT = build/osx;
 			};
 			name = Debug;
@@ -242,7 +244,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/boost/1.56.0/lib,
 				);
-				PRODUCT_NAME = server;
+				PRODUCT_NAME = client;
 				SYMROOT = build/osx;
 			};
 			name = Release;
@@ -250,7 +252,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CEEEE2151A2F7A5B00898A8A /* Build configuration list for PBXProject "server" */ = {
+		CEEEE2151A2F7A5B00898A8A /* Build configuration list for PBXProject "client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEEEE21F1A2F7A5B00898A8A /* Debug */,
@@ -259,7 +261,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEEEE2211A2F7A5B00898A8A /* Build configuration list for PBXNativeTarget "server" */ = {
+		CEEEE2211A2F7A5B00898A8A /* Build configuration list for PBXNativeTarget "client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEEEE2221A2F7A5B00898A8A /* Debug */,
