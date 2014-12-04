@@ -24,9 +24,8 @@ void server(boost::asio::io_service& io_service, short port)
         strcpy(data, "hello");
         boost::asio::deadline_timer timer(io_service, boost::posix_time::seconds(1));
         timer.wait();
-        std::cout << data << std::endl;
+        std::cout << data << sender_endpoint << std::endl;
         sock.send_to(boost::asio::buffer(data, sizeof(data)), sender_endpoint);
-        
     }
 }
 
@@ -35,9 +34,7 @@ int main(int argc, char* argv[])
     try
     {
         boost::asio::io_service io_service;
-        
-        using namespace std; // For atoi.
-        server(io_service, atoi(SERVER_PORT));
+        server(io_service, std::atoi(SERVER_PORT));
         
     }
     catch (std::exception& e)

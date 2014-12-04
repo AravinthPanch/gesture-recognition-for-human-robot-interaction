@@ -3,33 +3,33 @@
 #include <iostream>
 #include <boost/asio.hpp>
 
-using boost::asio::ip::udp;
 
 enum { max_length = 1024 };
 const char* SERVER_PORT = "50005";
-const char* HOST = "localhost";
+const char* SERVER_HOST_NAME = "nao5.local";
+//const char* SERVER_HOST_NAME = "localhost";
 
 int main(int argc, char* argv[])
 {
     try
     {
+        using boost::asio::ip::udp;
+        
         boost::asio::io_service io_service;
-        
-        udp::socket s(io_service, udp::endpoint(udp::v4(), 0));
-        
+        udp::socket socket(io_service, udp::endpoint(udp::v4(), 0));
         udp::resolver resolver(io_service);
-        udp::resolver::query query(udp::v4(), HOST, SERVER_PORT);
+        udp::resolver::query query(udp::v4(), SERVER_HOST_NAME, SERVER_PORT);
         udp::resolver::iterator iterator = resolver.resolve(query);
         
         char request[max_length]= "start";
-        s.send_to(boost::asio::buffer(request, std::strlen(request)), *iterator);
+        socket.send_to(boost::asio::buffer(request, std::strlen(request)), *iterator);
+        udp::endpoint sender_endpoint;
         
-        std::cout << "Client Started" <<std::endl;
+        std::cout << "Client Started with end point" << sender_endpoint <<std::endl;
         
         for(;;){
             char reply[max_length];
-            udp::endpoint sender_endpoint;
-            s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
+            socket.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
             std::cout << reply << std::endl;
         }
     }

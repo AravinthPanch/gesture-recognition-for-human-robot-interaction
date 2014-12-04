@@ -27,9 +27,9 @@
 /* Begin PBXFileReference section */
 		CEAE28C11A30710C001115DF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CEAE28C41A307253001115DF /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
-		CEAE28C81A308DD9001115DF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
+		CEAE28CE1A3099A2001115DF /* main-x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main-x.cpp"; sourceTree = "<group>"; };
+		CEAE28CF1A3099A2001115DF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		CEEEE21A1A2F7A5B00898A8A /* server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = server; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEEEE2311A2F7EA000898A8A /* main-x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "main-x.cpp"; path = "src/main-x.cpp"; sourceTree = SOURCE_ROOT; };
 		CEEEE2341A2F7EE700898A8A /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = /usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -46,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEAE28CD1A3099A2001115DF /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEAE28CE1A3099A2001115DF /* main-x.cpp */,
+				CEAE28CF1A3099A2001115DF /* timer.cpp */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
 		CEEEE2111A2F7A5B00898A8A = {
 			isa = PBXGroup;
 			children = (
@@ -67,9 +76,8 @@
 		CEEEE21C1A2F7A5B00898A8A /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CEAE28C81A308DD9001115DF /* timer.cpp */,
+				CEAE28CD1A3099A2001115DF /* helpers */,
 				CEAE28C11A30710C001115DF /* main.cpp */,
-				CEEEE2311A2F7EA000898A8A /* main-x.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

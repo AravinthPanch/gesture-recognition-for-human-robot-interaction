@@ -14,7 +14,7 @@
 		<string>bitbucket.org:AravinthPanch/master-thesis.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Source/depth-image-socket/client/client.xcodeproj</string>
+	<string>Source/depth-image-udp-socket/client/client.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>
