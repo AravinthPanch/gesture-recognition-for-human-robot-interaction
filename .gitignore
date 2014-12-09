@@ -1,5 +1,6 @@
-Proposal/*.bbl
-Proposal/*.blg
-Proposal/*.brf
-Source/human-robot-interaction/build
-Source/human-robot-interaction/bin
+*.bbl
+*.blg
+*.brf
+build
+bin
+
