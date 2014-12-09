@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CEAE28C51A307253001115DF /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAE28C41A307253001115DF /* libboost_thread-mt.dylib */; };
-		CEAE28CC1A30917A001115DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAE28C11A30710C001115DF /* main.cpp */; };
+		CEAE28D71A30ABDB001115DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAE28D51A30ABDB001115DF /* main.cpp */; };
+		CEAE28D91A30AC91001115DF /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAE28D81A30AC91001115DF /* libOpenNI2.dylib */; };
 		CEEEE2351A2F7EE700898A8A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEEE2341A2F7EE700898A8A /* libboost_system.dylib */; };
 /* End PBXBuildFile section */
 
@@ -25,10 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CEAE28C11A30710C001115DF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CEAE28C11A30710C001115DF /* sock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sock.cpp; sourceTree = "<group>"; };
 		CEAE28C41A307253001115DF /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
 		CEAE28CE1A3099A2001115DF /* main-x.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "main-x.cpp"; sourceTree = "<group>"; };
 		CEAE28CF1A3099A2001115DF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
+		CEAE28D51A30ABDB001115DF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CEAE28D81A30AC91001115DF /* libOpenNI2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenNI2.dylib; path = ../../../../../../../../../../../Applications/OpenNI2/Redist/libOpenNI2.dylib; sourceTree = "<group>"; };
 		CEEEE21A1A2F7A5B00898A8A /* server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = server; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEE2341A2F7EE700898A8A /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = /usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -39,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEEE2351A2F7EE700898A8A /* libboost_system.dylib in Frameworks */,
+				CEAE28D91A30AC91001115DF /* libOpenNI2.dylib in Frameworks */,
 				CEAE28C51A307253001115DF /* libboost_thread-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,7 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				CEAE28CD1A3099A2001115DF /* helpers */,
-				CEAE28C11A30710C001115DF /* main.cpp */,
+				CEAE28D51A30ABDB001115DF /* main.cpp */,
+				CEAE28C11A30710C001115DF /* sock.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -85,6 +90,7 @@
 		CEEEE2361A2F7F0400898A8A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				CEAE28D81A30AC91001115DF /* libOpenNI2.dylib */,
 				CEAE28C41A307253001115DF /* libboost_thread-mt.dylib */,
 				CEEEE2341A2F7EE700898A8A /* libboost_system.dylib */,
 			);
@@ -148,7 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEAE28CC1A30917A001115DF /* main.cpp in Sources */,
+				CEAE28D71A30ABDB001115DF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,10 +242,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/Cellar/boost/1.56.0/include,
+					/Applications/OpenNI2/Include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/boost/1.56.0/lib,
+					"$(SYSTEM_APPS_DIR)/OpenNI2/Redist",
 				);
 				PRODUCT_NAME = server;
 				SYMROOT = build/osx;
@@ -253,10 +261,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/Cellar/boost/1.56.0/include,
+					/Applications/OpenNI2/Include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/boost/1.56.0/lib,
+					"$(SYSTEM_APPS_DIR)/OpenNI2/Redist",
 				);
 				PRODUCT_NAME = server;
 				SYMROOT = build/osx;
