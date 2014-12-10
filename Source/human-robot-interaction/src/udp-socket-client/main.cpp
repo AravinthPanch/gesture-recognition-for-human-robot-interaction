@@ -6,8 +6,8 @@
 
 enum { max_length = 1024 };
 const char* SERVER_PORT = "50005";
-//const char* SERVER_HOST_NAME = "nao5.local";
-const char* SERVER_HOST_NAME = "localhost";
+const char* SERVER_HOST_NAME = "nao5.local";
+//const char* SERVER_HOST_NAME = "localhost";
 
 int main(int argc, char* argv[])
 {
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
         socket.send_to(boost::asio::buffer(request, std::strlen(request)), *iterator);
         udp::endpoint sender_endpoint;
         
-        std::cout << "Client Started with end point " << sender_endpoint <<std::endl;
+        std::cout << "Client Started" <<std::endl;
         
         for(;;){
             char reply[max_length];
