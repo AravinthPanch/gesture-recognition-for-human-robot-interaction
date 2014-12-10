@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <boost/asio.hpp>
+#include <boost/lexical_cast.hpp>
 
 enum { max_length = 1024 };
 const char* SERVER_PORT = "50005";
@@ -76,7 +77,7 @@ int main(int argc, char** argv)
                     std::cout << "Gesture type " << gestures[i].getType() <<std::endl;
                     
                     // Stream gesture via UDP
-                    std::string gestureType =  "{ type : " + std::to_string(gestures[i].getType()) + " }";
+                    std::string gestureType =  "{ type : " + boost::lexical_cast<std::string>(gestures[i].getType()) + " }";
                     strcpy(data, gestureType.c_str());
                     socket.send_to(boost::asio::buffer(data, sizeof(data)), sender_endpoint);
                 }
