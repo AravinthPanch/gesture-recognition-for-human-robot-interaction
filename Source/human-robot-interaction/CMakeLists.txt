@@ -48,9 +48,9 @@ if( CMAKE_SYSTEM_NAME STREQUAL Darwin )
 
 elseif( CMAKE_SYSTEM STREQUAL Linux-2.6.33.9-rt31-aldebaran-rt)
 	message( "-- TARGET SYSTEM IS " ${CMAKE_SYSTEM})
-	set(OPENNI2_LIBRARY "usr/lib/libOpenNI2.so")
+	set(OPENNI2_LIBRARY "/usr/lib/libOpenNI2.so")
 	set(NITE2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/NiTE2/libNiTE2.so)
-	set(BOOST_INCLUDE_DIR "/usr/include")
+	set(BOOST_INCLUDE_DIR "/usr/include/boost")
 	set(BOOST_LIBRARY "/usr/lib/libboost_system.so")	
 
 endif()

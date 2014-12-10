@@ -9,6 +9,6 @@ project(${FOLDER_NAME_AS_PROJECT})
 
 
 ####### BUILD #######
-include_directories( ${OPENNI2_INCLUDE_DIR} ${NITE2_INCLUDE_DIR})
+include_directories( ${OPENNI2_INCLUDE_DIR} ${NITE2_INCLUDE_DIR} ${BOOST_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries( ${PROJECT_NAME} ${OPENNI2_LIBRARY} ${NITE2_LIBRARY})
+target_link_libraries( ${PROJECT_NAME} ${OPENNI2_LIBRARY} ${NITE2_LIBRARY} ${BOOST_LIBRARY})
