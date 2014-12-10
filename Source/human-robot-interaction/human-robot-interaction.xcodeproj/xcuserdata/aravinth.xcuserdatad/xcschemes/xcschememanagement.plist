@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>helper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>ni-simple-sensor-read.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -68,6 +73,11 @@
 			<true/>
 		</dict>
 		<key>CE9E42211A3868460095F65A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE9E42441A3884DF0095F65A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

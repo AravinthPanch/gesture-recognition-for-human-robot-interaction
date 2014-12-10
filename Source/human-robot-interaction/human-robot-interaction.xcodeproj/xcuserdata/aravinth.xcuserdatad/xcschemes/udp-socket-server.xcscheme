@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE9E42211A3868460095F65A"
-               BuildableName = "udp-socket-server"
+               BuildableName = "udp-socket-server-xcode"
                BlueprintName = "udp-socket-server"
                ReferencedContainer = "container:human-robot-interaction.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE9E42211A3868460095F65A"
-            BuildableName = "udp-socket-server"
+            BuildableName = "udp-socket-server-xcode"
             BlueprintName = "udp-socket-server"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE9E42211A3868460095F65A"
-            BuildableName = "udp-socket-server"
+            BuildableName = "udp-socket-server-xcode"
             BlueprintName = "udp-socket-server"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE9E42211A3868460095F65A"
-            BuildableName = "udp-socket-server"
+            BuildableName = "udp-socket-server-xcode"
             BlueprintName = "udp-socket-server"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
