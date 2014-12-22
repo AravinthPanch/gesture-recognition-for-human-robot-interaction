@@ -16,16 +16,16 @@ void server(boost::asio::io_service& io_service, short port)
     
     char data[max_length];
     udp::endpoint sender_endpoint;
-    socket.receive_from(boost::asio::buffer(data, max_length), sender_endpoint);
-    std::cout << "Client connected" <<std::endl;
+    socket.receive_from(boost::asio::buffer(data, 5), sender_endpoint);
+    std::cout << "UDP Client is connected from the address " << sender_endpoint <<std::endl;
     
     for (;;)
     {
         strcpy(data, "hello");
         boost::asio::deadline_timer timer(io_service, boost::posix_time::seconds(1));
         timer.wait();
-        std::cout << data << sender_endpoint << std::endl;
-        socket.send_to(boost::asio::buffer(data, sizeof(data)), sender_endpoint);
+//        std::cout << data << sender_endpoint << std::endl;
+        socket.send_to(boost::asio::buffer(data, 5), sender_endpoint);
     }
 }
 

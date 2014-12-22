@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2C413A1A488EFE008E743E /* hri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41371A488EFE008E743E /* hri.cpp */; };
+		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
+		CE737AEB1A407AA000593328 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
+		CE737AF01A40DE1600593328 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
+		CE737AF11A40DE2700593328 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
+		CE737AF21A40E17200593328 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CE9E41F61A3864070095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E41F51A3864070095F65A /* main.cpp */; };
 		CE9E41F81A38650F0095F65A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE9E42061A3866610095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E42051A3866610095F65A /* main.cpp */; };
@@ -19,13 +25,24 @@
 		CE9E42341A386FF10095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E42331A386FF10095F65A /* main.cpp */; };
 		CE9E42401A3882DF0095F65A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE9E424D1A3885160095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E424C1A3885160095F65A /* main.cpp */; };
-		CE9E424F1A3885940095F65A /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
-		CE9E42511A3885960095F65A /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE9E42521A388FB70095F65A /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE9E42531A388FB90095F65A /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
+		CEE283B81A48C35A00131564 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B51A48C35A00131564 /* main.cpp */; };
+		CEE283B91A48C35A00131564 /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B61A48C35A00131564 /* udp_server.cpp */; };
+		CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
+		CEE283BB1A48C37200131564 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		CE737AE21A407A0E00593328 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		CE9E41C21A3858BF0095F65A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,9 +97,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		CEE283AC1A48C2E300131564 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE2C41371A488EFE008E743E /* hri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hri.cpp; path = "src/udp-server-async/hri.cpp"; sourceTree = SOURCE_ROOT; };
+		CE2C41381A488EFE008E743E /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/udp-server-async/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
+		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
+		CE313DA91A41E1B500B7B8C8 /* ni.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ni.cpp; path = "src/udp-server-async/ni.cpp"; sourceTree = SOURCE_ROOT; };
+		CE313DAA1A41E1B500B7B8C8 /* ni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ni.h; path = "src/udp-server-async/ni.h"; sourceTree = SOURCE_ROOT; };
+		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-server-async-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE737AEC1A407AF100593328 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-server-async/main.cpp"; sourceTree = SOURCE_ROOT; };
+		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
 		CE85EB4E1A389DFA003F51B3 /* udp-socket-client-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-socket-client-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE85EB4F1A389DFA003F51B3 /* udp-socket-server-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-socket-server-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE85EB501A389DFA003F51B3 /* ni-simple-sensor-read-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ni-simple-sensor-read-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,9 +132,22 @@
 		CE9E422B1A3868700095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-socket-server/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E42331A386FF10095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-gesture-wave/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E424C1A3885160095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/helper/main.cpp; sourceTree = SOURCE_ROOT; };
+		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
+		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
+		CEE283B71A48C35A00131564 /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/human-robot-interaction/udp_server.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE737AE11A407A0E00593328 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE737AEB1A407AA000593328 /* libboost_system.dylib in Frameworks */,
+				CE737AF21A40E17200593328 /* libboost_thread-mt.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE9E41C11A3858BF0095F65A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,8 +195,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9E424F1A3885940095F65A /* libNiTE2.dylib in Frameworks */,
-				CE9E42511A3885960095F65A /* libOpenNI2.dylib in Frameworks */,
+				CE737AF01A40DE1600593328 /* libboost_thread-mt.dylib in Frameworks */,
+				CE737AF11A40DE2700593328 /* libboost_system.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE283AB1A48C2E300131564 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */,
+				CEE283BB1A48C37200131564 /* libboost_system.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +224,8 @@
 		CE27733C1A3849AB00D8F52B /* src */ = {
 			isa = PBXGroup;
 			children = (
+				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
+				CE737AE51A407A0E00593328 /* udp-server-async */,
 				CE9E42461A3884DF0095F65A /* helper */,
 				CE9E41EF1A3863AD0095F65A /* udp-socket-client */,
 				CE9E42231A3868460095F65A /* udp-socket-server */,
@@ -179,9 +237,25 @@
 			path = "human-robot-interaction";
 			sourceTree = "<group>";
 		};
+		CE737AE51A407A0E00593328 /* udp-server-async */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C41371A488EFE008E743E /* hri.cpp */,
+				CE2C41381A488EFE008E743E /* udp_server.cpp */,
+				CE2C41391A488EFE008E743E /* udp_server.h */,
+				CE737AEC1A407AF100593328 /* main.cpp */,
+				CE313DA91A41E1B500B7B8C8 /* ni.cpp */,
+				CE313DAA1A41E1B500B7B8C8 /* ni.h */,
+			);
+			name = "udp-server-async";
+			path = "../udp-server-async";
+			sourceTree = "<group>";
+		};
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
+				CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */,
+				CE737AE41A407A0E00593328 /* udp-server-async-xcode */,
 				CE85EB541A389E16003F51B3 /* nite-gesture-wave-xcode */,
 				CE85EB4E1A389DFA003F51B3 /* udp-socket-client-xcode */,
 				CE85EB4F1A389DFA003F51B3 /* udp-socket-server-xcode */,
@@ -195,6 +269,7 @@
 		CE9E41961A384BD80095F65A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */,
 				CE9E41F71A38650F0095F65A /* libboost_system.dylib */,
 				CE9E41911A384BBF0095F65A /* libNiTE2.dylib */,
 				CE9E41941A384BC90095F65A /* libOpenNI2.dylib */,
@@ -256,9 +331,36 @@
 			path = ../helper;
 			sourceTree = "<group>";
 		};
+		CEE283AF1A48C2E300131564 /* human-robot-interaction */ = {
+			isa = PBXGroup;
+			children = (
+				CEE283B51A48C35A00131564 /* main.cpp */,
+				CEE283B61A48C35A00131564 /* udp_server.cpp */,
+				CEE283B71A48C35A00131564 /* udp_server.h */,
+			);
+			name = "human-robot-interaction";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE737AE31A407A0E00593328 /* udp-server-async */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE737AEA1A407A0E00593328 /* Build configuration list for PBXNativeTarget "udp-server-async" */;
+			buildPhases = (
+				CE737AE01A407A0E00593328 /* Sources */,
+				CE737AE11A407A0E00593328 /* Frameworks */,
+				CE737AE21A407A0E00593328 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "udp-server-async";
+			productName = "udp-server-async";
+			productReference = CE737AE41A407A0E00593328 /* udp-server-async-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
 		CE9E41C31A3858BF0095F65A /* nite-gesture-wave */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE9E41C81A3858BF0095F65A /* Build configuration list for PBXNativeTarget "nite-gesture-wave" */;
@@ -361,6 +463,23 @@
 			productReference = CE85EB521A389DFA003F51B3 /* helper */;
 			productType = "com.apple.product-type.tool";
 		};
+		CEE283AD1A48C2E300131564 /* human-robot-interaction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEE283B41A48C2E300131564 /* Build configuration list for PBXNativeTarget "human-robot-interaction" */;
+			buildPhases = (
+				CEE283AA1A48C2E300131564 /* Sources */,
+				CEE283AB1A48C2E300131564 /* Frameworks */,
+				CEE283AC1A48C2E300131564 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "human-robot-interaction";
+			productName = "human-robot-interaction";
+			productReference = CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -370,6 +489,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Aravinth Panchadcharam";
 				TargetAttributes = {
+					CE737AE31A407A0E00593328 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					CE9E41C31A3858BF0095F65A = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -386,6 +508,9 @@
 						CreatedOnToolsVersion = 6.1.1;
 					};
 					CE9E42441A3884DF0095F65A = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					CEE283AD1A48C2E300131564 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
@@ -408,11 +533,22 @@
 				CE9E420E1A3867390095F65A /* nite-simple-user-read */,
 				CE9E41C31A3858BF0095F65A /* nite-gesture-wave */,
 				CE9E42441A3884DF0095F65A /* helper */,
+				CE737AE31A407A0E00593328 /* udp-server-async */,
+				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE737AE01A407A0E00593328 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */,
+				CE2C413A1A488EFE008E743E /* hri.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE9E41C01A3858BF0095F65A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,6 +594,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9E424D1A3885160095F65A /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE283AA1A48C2E300131564 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE283B91A48C35A00131564 /* udp_server.cpp in Sources */,
+				CEE283B81A48C35A00131564 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +708,44 @@
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 				SDKROOT = macosx;
 				SYMROOT = "$(HRI_BUILD)";
+			};
+			name = Release;
+		};
+		CE737AE81A407A0E00593328 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Debug;
+		};
+		CE737AE91A407A0E00593328 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
 		};
@@ -757,6 +940,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/NiTE2",
 					"$(PROJECT_DIR)/lib/OpenNI2",
+					/usr/local/Cellar/boost/1.56.0/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -775,8 +959,47 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/NiTE2",
 					"$(PROJECT_DIR)/lib/OpenNI2",
+					/usr/local/Cellar/boost/1.56.0/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CEE283B21A48C2E300131564 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Debug;
+		};
+		CEE283B31A48C2E300131564 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
 		};
@@ -788,6 +1011,15 @@
 			buildConfigurations = (
 				CE27733F1A3849AB00D8F52B /* Debug */,
 				CE2773401A3849AB00D8F52B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE737AEA1A407A0E00593328 /* Build configuration list for PBXNativeTarget "udp-server-async" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE737AE81A407A0E00593328 /* Debug */,
+				CE737AE91A407A0E00593328 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -845,6 +1077,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CEE283B41A48C2E300131564 /* Build configuration list for PBXNativeTarget "human-robot-interaction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE283B21A48C2E300131564 /* Debug */,
+				CEE283B31A48C2E300131564 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

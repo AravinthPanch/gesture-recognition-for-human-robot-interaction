@@ -6,8 +6,8 @@
 
 enum { max_length = 1024 };
 const char* SERVER_PORT = "50005";
-const char* SERVER_HOST_NAME = "nao5.local";
-//const char* SERVER_HOST_NAME = "localhost";
+//const char* SERVER_HOST_NAME = "nao5.local";
+const char* SERVER_HOST_NAME = "localhost";
 
 int main(int argc, char* argv[])
 {
