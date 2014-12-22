@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-               BuildableName = "human-robot-interaction"
+               BuildableName = "human-robot-interaction-xcode"
                BlueprintName = "human-robot-interaction"
                ReferencedContainer = "container:human-robot-interaction.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-            BuildableName = "human-robot-interaction"
+            BuildableName = "human-robot-interaction-xcode"
             BlueprintName = "human-robot-interaction"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-            BuildableName = "human-robot-interaction"
+            BuildableName = "human-robot-interaction-xcode"
             BlueprintName = "human-robot-interaction"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-            BuildableName = "human-robot-interaction"
+            BuildableName = "human-robot-interaction-xcode"
             BlueprintName = "human-robot-interaction"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>

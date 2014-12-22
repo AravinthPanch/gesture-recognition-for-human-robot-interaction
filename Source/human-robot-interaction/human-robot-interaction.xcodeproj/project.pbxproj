@@ -28,9 +28,10 @@
 		CE9E42521A388FB70095F65A /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE9E42531A388FB90095F65A /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
 		CEE283B81A48C35A00131564 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B51A48C35A00131564 /* main.cpp */; };
-		CEE283B91A48C35A00131564 /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B61A48C35A00131564 /* udp_server.cpp */; };
 		CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
-		CEE283BB1A48C37200131564 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
+		CEE283CC1A48CCB700131564 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */; };
+		CEE283D61A48D17200131564 /* libboost_log-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */; };
+		CEE283D71A48D1FF00131564 /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B61A48C35A00131564 /* udp_server.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +137,8 @@
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B71A48C35A00131564 /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/human-robot-interaction/udp_server.h"; sourceTree = SOURCE_ROOT; };
+		CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.dylib"; sourceTree = "<group>"; };
+		CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,8 +207,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE283CC1A48CCB700131564 /* libboost_system-mt.dylib in Frameworks */,
 				CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */,
-				CEE283BB1A48C37200131564 /* libboost_system.dylib in Frameworks */,
+				CEE283D61A48D17200131564 /* libboost_log-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +273,8 @@
 		CE9E41961A384BD80095F65A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */,
+				CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */,
 				CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */,
 				CE9E41F71A38650F0095F65A /* libboost_system.dylib */,
 				CE9E41911A384BBF0095F65A /* libNiTE2.dylib */,
@@ -601,8 +607,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE283B91A48C35A00131564 /* udp_server.cpp in Sources */,
 				CEE283B81A48C35A00131564 /* main.cpp in Sources */,
+				CEE283D71A48D1FF00131564 /* udp_server.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,10 +974,7 @@
 		CEE283B21A48C2E300131564 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "BOOST_LOG_DYN_LINK=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -989,6 +992,7 @@
 		CEE283B31A48C2E300131564 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = "BOOST_LOG_DYN_LINK=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1085,6 +1089,7 @@
 				CEE283B31A48C2E300131564 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

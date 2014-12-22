@@ -7,8 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <boost/log/trivial.hpp>
 #include "udp_server.h"
-
 
 /**
  * Constructor
@@ -18,7 +18,7 @@
 udp_server::udp_server(boost::asio::io_service& io_service) : socket_(io_service, udp::endpoint(udp::v4(), SERVER_PORT_))
 {
     start_receive();
-    std::cout << "UDP Server started at port : " << SERVER_PORT_ << std::endl;
+    BOOST_LOG_TRIVIAL(info) << "UDP Server started at port : " << SERVER_PORT_;
 }
 
 
@@ -39,6 +39,24 @@ void udp_server::start_receive()
                                            boost::asio::placeholders::bytes_transferred
                                            )
                                );
+}
+
+
+/**
+ * Send data to the remote end point
+ *
+ */
+void udp_server::send(boost::shared_ptr<std::string> message){
+    socket_.async_send_to(boost::asio::buffer(*message),
+                          remote_endpoint_,
+                          boost::bind(
+                                      &udp_server::handle_send,
+                                      this,
+                                      message,
+                                      boost::asio::placeholders::error,
+                                      boost::asio::placeholders::bytes_transferred
+                                      )
+                          );
 }
 
 

@@ -30,7 +30,7 @@ private:
     
 public:
     udp_server(boost::asio::io_service& io_service);
-    void send();
+    void send(boost::shared_ptr<std::string> message);
 };
 
 
