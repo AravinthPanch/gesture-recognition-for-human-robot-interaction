@@ -19,10 +19,11 @@ class udp_server
 {
     
 private:
-    const int SERVER_PORT_ = 50005;
+    const int SERVER_PORT = 50005;
     udp::socket socket_;
     udp::endpoint remote_endpoint_;
     boost::array<char, 4> recv_buffer_;
+    bool connected = false;
     
     void start_receive();
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
@@ -31,6 +32,8 @@ private:
 public:
     udp_server(boost::asio::io_service& io_service);
     void send(boost::shared_ptr<std::string> message);
+    void testSend(int data);
+    bool isConnected();
 };
 
 

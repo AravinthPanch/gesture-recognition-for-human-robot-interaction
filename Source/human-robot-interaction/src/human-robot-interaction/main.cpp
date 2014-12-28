@@ -7,24 +7,27 @@
 
 #include <iostream>
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
 #include "udp_server.h"
+#include "skeleton_tracker.h"
+
 
 int main(){
     
     try
     {
-        
         boost::asio::io_service io_service;
         udp_server server(io_service);
-        io_service.run();
-        
+        boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+
+        skeleton_tracker tracker(&server);
+//        tracker.test();
     }
     
     catch (std::exception& e)
     {
-        
         std::cerr << e.what() << std::endl;
-        
     }
     
     return 0;

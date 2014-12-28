@@ -15,10 +15,10 @@
  *
  */
 
-udp_server::udp_server(boost::asio::io_service& io_service) : socket_(io_service, udp::endpoint(udp::v4(), SERVER_PORT_))
+udp_server::udp_server(boost::asio::io_service& io_service) : socket_(io_service, udp::endpoint(udp::v4(), SERVER_PORT))
 {
     start_receive();
-    BOOST_LOG_TRIVIAL(info) << "UDP Server started at port : " << SERVER_PORT_;
+    BOOST_LOG_TRIVIAL(info) << "UDP Server started at port : " << SERVER_PORT;
 }
 
 
@@ -69,12 +69,14 @@ void udp_server::handle_receive(const boost::system::error_code& error, std::siz
 {
     if (!error || error == boost::asio::error::message_size)
     {
-        std::cout << "Received " << remote_endpoint_ << std::endl;
+        connected = true;
+        std::string data_received(recv_buffer_.begin(), recv_buffer_.end());
+        BOOST_LOG_TRIVIAL(info) << "Received : " << data_received << " : " << remote_endpoint_;
         start_receive();
     }
     else
     {
-        std::cout << "Error " << remote_endpoint_ << std::endl;
+        BOOST_LOG_TRIVIAL(error) << error;
     }
 }
 
@@ -87,6 +89,24 @@ void udp_server::handle_receive(const boost::system::error_code& error, std::siz
 
 void udp_server::handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred)
 {
-    std::cout << "Sent " << remote_endpoint_ << std::endl;
+    BOOST_LOG_TRIVIAL(info) << "Sent : " << message << " to : " << remote_endpoint_;
 }
+
+void udp_server::testSend(int data){
+    BOOST_LOG_TRIVIAL(info) << data;
+}
+
+
+bool udp_server::isConnected(){
+    return connected;
+}
+
+
+
+
+
+
+
+
+
 
