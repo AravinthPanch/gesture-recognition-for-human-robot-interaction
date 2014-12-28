@@ -71,12 +71,9 @@ void skeleton_tracker::track_gestures(){
                 nite::HandId newId;
                 BOOST_LOG_TRIVIAL(info) << "Gesture type " << gestures[i].getType();
                 boost::shared_ptr<std::string> message(new std::string ("{ type : " + boost::lexical_cast<std::string>(gestures[i].getType()) + " }" ));
+                server_->send(message);
             }
         }
     }
     
-}
-
-void skeleton_tracker::test(){
-    server_->testSend(5555);
 }

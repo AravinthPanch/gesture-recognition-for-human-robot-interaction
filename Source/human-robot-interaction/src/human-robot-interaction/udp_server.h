@@ -32,7 +32,6 @@ private:
 public:
     udp_server(boost::asio::io_service& io_service);
     void send(boost::shared_ptr<std::string> message);
-    void testSend(int data);
     bool isConnected();
 };
 

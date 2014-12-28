@@ -43,7 +43,7 @@ void udp_server::start_receive()
 
 
 /**
- * Send data to the remote end point
+ * Send data to the conneted end point
  *
  */
 void udp_server::send(boost::shared_ptr<std::string> message){
@@ -89,17 +89,21 @@ void udp_server::handle_receive(const boost::system::error_code& error, std::siz
 
 void udp_server::handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred)
 {
-    BOOST_LOG_TRIVIAL(info) << "Sent : " << message << " to : " << remote_endpoint_;
+    BOOST_LOG_TRIVIAL(info) << "Sent : " << *message << " to : " << remote_endpoint_;
 }
 
-void udp_server::testSend(int data){
-    BOOST_LOG_TRIVIAL(info) << data;
-}
 
+
+/**
+ * Check whether client is connected
+ *
+ */
 
 bool udp_server::isConnected(){
     return connected;
 }
+
+
 
 
 

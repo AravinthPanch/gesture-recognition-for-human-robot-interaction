@@ -22,7 +22,6 @@ int main(){
         boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
 
         skeleton_tracker tracker(&server);
-//        tracker.test();
     }
     
     catch (std::exception& e)
