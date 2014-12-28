@@ -10,15 +10,16 @@
 #include <boost/log/trivial.hpp>
 #include "udp_server.h"
 
+
 /**
  * Constructor
  *
  */
 
-udp_server::udp_server(boost::asio::io_service& io_service) : socket_(io_service, udp::endpoint(udp::v4(), SERVER_PORT))
+udp_server::udp_server(boost::asio::io_service& io_service) : socket_server(io_service, udp::endpoint(udp::v4(), server_port))
 {
-    start_receive();
-    BOOST_LOG_TRIVIAL(info) << "UDP Server started at port : " << SERVER_PORT;
+    receive();
+    BOOST_LOG_TRIVIAL(info) << "UDP Server started at port : " << server_port;
 }
 
 
@@ -27,11 +28,11 @@ udp_server::udp_server(boost::asio::io_service& io_service) : socket_(io_service
  *
  */
 
-void udp_server::start_receive()
+void udp_server::receive()
 {
-    socket_.async_receive_from(
-                               boost::asio::buffer(recv_buffer_),
-                               remote_endpoint_,
+    socket_server.async_receive_from(
+                               boost::asio::buffer(receive_buffer),
+                               client_endpoint,
                                boost::bind(
                                            &udp_server::handle_receive,
                                            this,
@@ -46,9 +47,10 @@ void udp_server::start_receive()
  * Send data to the conneted end point
  *
  */
+
 void udp_server::send(boost::shared_ptr<std::string> message){
-    socket_.async_send_to(boost::asio::buffer(*message),
-                          remote_endpoint_,
+    socket_server.async_send_to(boost::asio::buffer(*message),
+                          client_endpoint,
                           boost::bind(
                                       &udp_server::handle_send,
                                       this,
@@ -70,16 +72,15 @@ void udp_server::handle_receive(const boost::system::error_code& error, std::siz
     if (!error || error == boost::asio::error::message_size)
     {
         connected = true;
-        std::string data_received(recv_buffer_.begin(), recv_buffer_.end());
-        BOOST_LOG_TRIVIAL(info) << "Received : " << data_received << " : " << remote_endpoint_;
-        start_receive();
+        std::string data_received(receive_buffer.begin(), receive_buffer.end());
+        BOOST_LOG_TRIVIAL(info) << "Received : " << data_received << " : " << bytes_transferred << " bytes : " << client_endpoint;
+        receive();
     }
     else
     {
         BOOST_LOG_TRIVIAL(error) << error;
     }
 }
-
 
 
 /**
@@ -89,9 +90,8 @@ void udp_server::handle_receive(const boost::system::error_code& error, std::siz
 
 void udp_server::handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred)
 {
-    BOOST_LOG_TRIVIAL(info) << "Sent : " << *message << " to : " << remote_endpoint_;
+    BOOST_LOG_TRIVIAL(info) << "Sent : " << *message << " : " << client_endpoint;
 }
-
 
 
 /**

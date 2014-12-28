@@ -9,19 +9,39 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
+#include <boost/log/trivial.hpp>
 #include "udp_server.h"
+#include "udp_client.h"
 #include "skeleton_tracker.h"
 
 
-int main(){
-    
+int main(int argc, char* argv[])
+{
     try
     {
         boost::asio::io_service io_service;
-        udp_server server(io_service);
-        boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-
-        skeleton_tracker tracker(&server);
+        
+        std::cout << "Do you want to start server or client? " << std::endl ;
+        std::string argument;
+        std::getline(std::cin, argument);
+        
+        if(argument == "server")
+        {
+            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server";
+            udp_server server(io_service);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+            skeleton_tracker tracker(&server);
+        }
+        else if(argument == "client")
+        {
+            BOOST_LOG_TRIVIAL(info) << "Starting UDP Client";
+            udp_client client(io_service);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+            std::getline(std::cin, argument);
+        }
+        else{
+            BOOST_LOG_TRIVIAL(info) << "Invalid selection. Enter server or client" ;
+        }
     }
     
     catch (std::exception& e)
