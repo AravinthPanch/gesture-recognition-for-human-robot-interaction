@@ -8,7 +8,6 @@
 #ifndef __human_robot_interaction__udp_client__
 #define __human_robot_interaction__udp_client__
 
-
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
@@ -28,14 +27,15 @@ private:
     udp::endpoint server_endpoint;
     udp::socket socket_client;
     
-
-    void send(boost::shared_ptr<std::string> message);
+    
     void receive();
+    udp::endpoint endpoint_resolver(boost::asio::io_service& io_service, const char* host_name, int port);
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
     void handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred);
     
 public:
     udp_client(boost::asio::io_service& io_service);
+    void send(boost::shared_ptr<std::string> message);
 };
 
 

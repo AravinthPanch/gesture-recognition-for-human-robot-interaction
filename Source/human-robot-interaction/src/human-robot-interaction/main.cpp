@@ -12,6 +12,7 @@
 #include <boost/log/trivial.hpp>
 #include "udp_server.h"
 #include "udp_client.h"
+#include "gesture_tracker.h"
 #include "skeleton_tracker.h"
 
 
@@ -25,12 +26,21 @@ int main(int argc, char* argv[])
         std::string argument;
         std::getline(std::cin, argument);
         
-        if(argument == "server")
+        if(argument == "server hand")
         {
-            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server";
+            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Gesture Tracking";
             udp_server server(io_service);
             boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-            skeleton_tracker tracker(&server);
+            gesture_tracker gestureTracker(&server);
+            gestureTracker.run();
+        }
+        else if(argument == "server user")
+        {
+            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Skeleton Tracking";
+            udp_server server(io_service);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+            skeleton_tracker skeletonTracker(&server);
+            skeletonTracker.run();
         }
         else if(argument == "client")
         {

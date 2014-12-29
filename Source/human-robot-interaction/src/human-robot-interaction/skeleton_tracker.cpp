@@ -1,24 +1,17 @@
 /**
  * Author: Aravinth Panchadcharam
  * Email: me@aravinth.info
- * Date: 28/12/14.
+ * Date: 29/12/14.
  * Project: Gesture Recogntion for Human-Robot Interaction
  */
 
-#include "skeleton_tracker.h"
-#include "NiTE.h"
 #include <iostream>
 #include <boost/log/trivial.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/shared_ptr.hpp>
-
-
+#include "NiTE.h"
+#include "skeleton_tracker.h"
 
 skeleton_tracker::skeleton_tracker(udp_server *server){
     server_ = server;
-    init_nite();
-    start_gesture_detection();
-    track_gestures();
 }
 
 void skeleton_tracker::init_nite(){
@@ -32,48 +25,95 @@ void skeleton_tracker::init_nite(){
         BOOST_LOG_TRIVIAL(info) << "NiTE initialized" ;
     }
     
-    niteRc = handTracker.create();
+    niteRc = userTracker.create();
     if (niteRc != nite::STATUS_OK)
     {
-        BOOST_LOG_TRIVIAL(error) << "Couldn't create hand tracker" ;
+        BOOST_LOG_TRIVIAL(error) << "Couldn't create user tracker" ;
     }
     else
     {
-        BOOST_LOG_TRIVIAL(info) << "Hand tracker created" ;
+        BOOST_LOG_TRIVIAL(info) << "User tracker created" ;
     }
 }
 
-void skeleton_tracker::start_gesture_detection(){
-    handTracker.startGestureDetection(nite::GESTURE_WAVE);
-    handTracker.startGestureDetection(nite::GESTURE_CLICK);
-    BOOST_LOG_TRIVIAL(info) << "Gesture detection started" ;
+
+
+void print_status(std::string message, int userId){
+    BOOST_LOG_TRIVIAL(info) << "User " << userId << " : " << message ;
 }
 
+#define MAX_USERS 10
+void skeleton_tracker::update_user_state(const nite::UserData& user)
+{
+    bool g_visibleUsers[MAX_USERS] = {false};
+    nite::SkeletonState g_skeletonStates[MAX_USERS] = {nite::SKELETON_NONE};
+    
+    if (user.isNew()){
+        print_status("New", user.getId());
+    }else if (user.isVisible() && !g_visibleUsers[user.getId()]){
+        print_status("Visible", user.getId());
+    }else if (!user.isVisible() && g_visibleUsers[user.getId()]){
+        print_status("Out of Scene", user.getId());
+    }else if (user.isLost()){
+        print_status("Lost", user.getId());
+        g_visibleUsers[user.getId()] = user.isVisible();
+    }
+    
+    
+    //    if(g_skeletonStates[user.getId()] != user.getSkeleton().getState())
+    //    {
+    //        switch(g_skeletonStates[user.getId()] = user.getSkeleton().getState())
+    //        {
+    //            case nite::SKELETON_NONE:
+    //                print_status("Stopped tracking.", user.getId());
+    //                break;
+    //            case nite::SKELETON_CALIBRATING:
+    //                print_status("Calibrating", user.getId());
+    //                break;
+    //            case nite::SKELETON_TRACKED:
+    //                print_status("Tracking", user.getId());
+    //                break;
+    //            case nite::SKELETON_CALIBRATION_ERROR_TORSO:
+    //                print_status("Calibration Failed", user.getId());
+    //                break;
+    //        }
+    //    }
+}
 
-void skeleton_tracker::track_gestures(){
-    
-    nite::HandTrackerFrameRef handTrackerFrame;
-    
+void skeleton_tracker::track_skeleton(){
+    nite::UserTrackerFrameRef userTrackerFrame;
     for(;;)
     {
-        niteRc = handTracker.readFrame(&handTrackerFrame);
+        niteRc = userTracker.readFrame(&userTrackerFrame);
         if (niteRc != nite::STATUS_OK)
         {
-            BOOST_LOG_TRIVIAL(error) << "Get next frame failed";
+            printf("Get next frame failed\n");
             continue;
         }
         
-        const nite::Array<nite::GestureData>& gestures = handTrackerFrame.getGestures();
-        for (int i = 0; i < gestures.getSize(); ++i)
+        const nite::Array<nite::UserData>& users = userTrackerFrame.getUsers();
+        for (int i = 0; i < users.getSize(); ++i)
         {
-            if (gestures[i].isComplete() && server_->isConnected())
+            const nite::UserData& user = users[i];
+            
+            if (user.isNew())
             {
-                nite::HandId newId;
-                BOOST_LOG_TRIVIAL(info) << "Gesture type " << gestures[i].getType();
-                boost::shared_ptr<std::string> message(new std::string ("{ type : " + boost::lexical_cast<std::string>(gestures[i].getType()) + " }" ));
-                server_->send(message);
+                userTracker.startSkeletonTracking(user.getId());
+                print_status("New User", user.getId());
+            }
+            else if (user.getSkeleton().getState() == nite::SKELETON_TRACKED)
+            {
+                const nite::SkeletonJoint& head = user.getSkeleton().getJoint(nite::JOINT_HEAD);
+                if (head.getPositionConfidence() > .5){
+                    printf("%d. (%5.2f, %5.2f, %5.2f)\n", user.getId(), head.getPosition().x, head.getPosition().y, head.getPosition().z);
+                }
             }
         }
     }
-    
 }
+
+void skeleton_tracker::run(){
+    init_nite();
+    track_skeleton();
+}
+

@@ -11,15 +11,15 @@
 #include "udp_client.h"
 
 
-using boost::asio::ip::udp;
-
 /**
  * Constructor
  *
  */
 
-udp_client::udp_client(boost::asio::io_service& io_service) : socket_client(io_service, udp::endpoint(udp::v4(), client_port)), server_endpoint(udp::v4(), server_port)
+udp_client::udp_client(boost::asio::io_service& io_service) : socket_client(io_service, udp::endpoint(udp::v4(), client_port))
 {
+    server_endpoint = endpoint_resolver(io_service, server_host_name_local,  server_port);
+    
     boost::shared_ptr<std::string> message(new std::string("01"));
     send(message);
     BOOST_LOG_TRIVIAL(info) << "UDP Client started at port : " << client_port;
@@ -98,13 +98,17 @@ void udp_client::handle_send(boost::shared_ptr<std::string> message, const boost
 }
 
 
+/**
+ * Resolve hostname
+ *
+ */
 
-
-
-
-
-
-
+udp::endpoint udp_client::endpoint_resolver(boost::asio::io_service& io_service, const char* host_name, int port){
+    udp::resolver resolver(io_service);
+    udp::resolver::query query(udp::v4(), host_name, std::to_string(port));
+    udp::resolver::iterator iterator = resolver.resolve(query);
+    return *iterator;
+}
 
 
 

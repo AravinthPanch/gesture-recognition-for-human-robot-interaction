@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		CE2C413A1A488EFE008E743E /* hri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41371A488EFE008E743E /* hri.cpp */; };
 		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
-		CE4AC8DF1A5032EE001B33CF /* skeleton_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* skeleton_tracker.cpp */; };
+		CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */; };
 		CE4AC8E01A50378E001B33CF /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
 		CE4AC8E11A503792001B33CF /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE4AC8E41A506EF6001B33CF /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E21A506EF6001B33CF /* udp_client.cpp */; };
+		CE4AC8E71A51752B001B33CF /* skeleton_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */; };
 		CE737AEB1A407AA000593328 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE737AF01A40DE1600593328 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CE737AF11A40DE2700593328 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
@@ -119,10 +120,12 @@
 		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
 		CE313DA91A41E1B500B7B8C8 /* ni.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ni.cpp; path = "src/udp-server-async/ni.cpp"; sourceTree = SOURCE_ROOT; };
 		CE313DAA1A41E1B500B7B8C8 /* ni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ni.h; path = "src/udp-server-async/ni.h"; sourceTree = SOURCE_ROOT; };
-		CE4AC8DD1A5032EE001B33CF /* skeleton_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skeleton_tracker.cpp; path = "src/human-robot-interaction/skeleton_tracker.cpp"; sourceTree = SOURCE_ROOT; };
-		CE4AC8DE1A5032EE001B33CF /* skeleton_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skeleton_tracker.h; path = "src/human-robot-interaction/skeleton_tracker.h"; sourceTree = SOURCE_ROOT; };
+		CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gesture_tracker.cpp; path = "src/human-robot-interaction/gesture_tracker.cpp"; sourceTree = SOURCE_ROOT; };
+		CE4AC8DE1A5032EE001B33CF /* gesture_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gesture_tracker.h; path = "src/human-robot-interaction/gesture_tracker.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E21A506EF6001B33CF /* udp_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_client.cpp; path = "src/human-robot-interaction/udp_client.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E31A506EF6001B33CF /* udp_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_client.h; path = "src/human-robot-interaction/udp_client.h"; sourceTree = SOURCE_ROOT; };
+		CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skeleton_tracker.cpp; path = "src/human-robot-interaction/skeleton_tracker.cpp"; sourceTree = SOURCE_ROOT; };
+		CE4AC8E61A51752B001B33CF /* skeleton_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skeleton_tracker.h; path = "src/human-robot-interaction/skeleton_tracker.h"; sourceTree = SOURCE_ROOT; };
 		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-server-async-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE737AEC1A407AF100593328 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-server-async/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
@@ -355,8 +358,10 @@
 				CEE283B71A48C35A00131564 /* udp_server.h */,
 				CE4AC8E21A506EF6001B33CF /* udp_client.cpp */,
 				CE4AC8E31A506EF6001B33CF /* udp_client.h */,
-				CE4AC8DD1A5032EE001B33CF /* skeleton_tracker.cpp */,
-				CE4AC8DE1A5032EE001B33CF /* skeleton_tracker.h */,
+				CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */,
+				CE4AC8DE1A5032EE001B33CF /* gesture_tracker.h */,
+				CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */,
+				CE4AC8E61A51752B001B33CF /* skeleton_tracker.h */,
 			);
 			name = "human-robot-interaction";
 			sourceTree = "<group>";
@@ -621,10 +626,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4AC8E71A51752B001B33CF /* skeleton_tracker.cpp in Sources */,
 				CEE283B81A48C35A00131564 /* main.cpp in Sources */,
 				CEE283D71A48D1FF00131564 /* udp_server.cpp in Sources */,
 				CE4AC8E41A506EF6001B33CF /* udp_client.cpp in Sources */,
-				CE4AC8DF1A5032EE001B33CF /* skeleton_tracker.cpp in Sources */,
+				CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
