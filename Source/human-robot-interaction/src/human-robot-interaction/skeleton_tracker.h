@@ -26,6 +26,7 @@ private:
 public:
     skeleton_tracker(udp_server *server);
     void run();
+    void send_skeleton(const nite::UserData& user);
 };
 
 #endif

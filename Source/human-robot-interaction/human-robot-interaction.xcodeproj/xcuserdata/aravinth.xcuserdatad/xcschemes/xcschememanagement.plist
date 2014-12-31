@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>nite-user-glut-viewer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>udp-server-async.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -48,6 +53,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>CE2773391A3849AB00D8F52B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE70B2901A5447E80072BB83</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -15,6 +15,22 @@
 #include "gesture_tracker.h"
 #include "skeleton_tracker.h"
 
+#include <sstream>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
+
+using boost::property_tree::ptree;
+using boost::property_tree::write_json;
+void helper(){
+    ptree pt;
+    pt.put ("foo", 12.5f);
+    std::ostringstream buf;
+    write_json (buf, pt, false);
+    std::string json = buf.str();
+    std::cout << json;
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -51,6 +67,7 @@ int main(int argc, char* argv[])
         }
         else{
             BOOST_LOG_TRIVIAL(info) << "Invalid selection. Enter server or client" ;
+            helper();
         }
     }
     
