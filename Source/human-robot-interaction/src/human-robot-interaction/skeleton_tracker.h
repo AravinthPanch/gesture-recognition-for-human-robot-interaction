@@ -21,12 +21,12 @@ private:
     
     void init_nite();
     void track_skeleton();
-    void update_user_state(const nite::UserData& user);
+    void display_user_status(const nite::UserData& user);
     
 public:
     skeleton_tracker(udp_server *server);
     void run();
-    void send_skeleton(const nite::UserData& user);
+    void send_skeleton(const nite::UserData& user, int frameId);
 };
 
 #endif

@@ -47,11 +47,11 @@ void print_status(std::string message, int userId){
 }
 
 #define MAX_USERS 10
-void skeleton_tracker::update_user_state(const nite::UserData& user)
+bool g_visibleUsers[MAX_USERS] = {false};
+nite::SkeletonState g_skeletonStates[MAX_USERS] = {nite::SKELETON_NONE};
+
+void skeleton_tracker::display_user_status(const nite::UserData& user)
 {
-    bool g_visibleUsers[MAX_USERS] = {false};
-    nite::SkeletonState g_skeletonStates[MAX_USERS] = {nite::SKELETON_NONE};
-    
     if (user.isNew()){
         print_status("New", user.getId());
     }else if (user.isVisible() && !g_visibleUsers[user.getId()]){
@@ -60,28 +60,32 @@ void skeleton_tracker::update_user_state(const nite::UserData& user)
         print_status("Out of Scene", user.getId());
     }else if (user.isLost()){
         print_status("Lost", user.getId());
-        g_visibleUsers[user.getId()] = user.isVisible();
     }
     
+    g_visibleUsers[user.getId()] = user.isVisible();
     
-    //    if(g_skeletonStates[user.getId()] != user.getSkeleton().getState())
-    //    {
-    //        switch(g_skeletonStates[user.getId()] = user.getSkeleton().getState())
-    //        {
-    //            case nite::SKELETON_NONE:
-    //                print_status("Stopped tracking.", user.getId());
-    //                break;
-    //            case nite::SKELETON_CALIBRATING:
-    //                print_status("Calibrating", user.getId());
-    //                break;
-    //            case nite::SKELETON_TRACKED:
-    //                print_status("Tracking", user.getId());
-    //                break;
-    //            case nite::SKELETON_CALIBRATION_ERROR_TORSO:
-    //                print_status("Calibration Failed", user.getId());
-    //                break;
-    //        }
-    //    }
+    if(g_skeletonStates[user.getId()] != user.getSkeleton().getState())
+    {
+        switch(g_skeletonStates[user.getId()] = user.getSkeleton().getState())
+        {
+            case nite::SKELETON_NONE:
+                print_status("Stopped tracking.", user.getId());
+                break;
+            case nite::SKELETON_CALIBRATING:
+                print_status("Calibrating", user.getId());
+                break;
+            case nite::SKELETON_TRACKED:
+                print_status("Tracking", user.getId());
+                break;
+            case nite::SKELETON_CALIBRATION_ERROR_NOT_IN_POSE:
+            case nite::SKELETON_CALIBRATION_ERROR_HANDS:
+            case nite::SKELETON_CALIBRATION_ERROR_LEGS:
+            case nite::SKELETON_CALIBRATION_ERROR_HEAD:
+            case nite::SKELETON_CALIBRATION_ERROR_TORSO:
+                print_status("Calibration Failed", user.getId());
+                break;
+        }
+    }
 }
 
 
@@ -90,20 +94,23 @@ using boost::property_tree::ptree;
 using boost::property_tree::write_json;
 
 ptree joint_serializer(const nite::SkeletonJoint& joint){
-    ptree joint_array, xAxis, yAxis, zAxis;
+    ptree joint_array, xAxis, yAxis, zAxis, joint_confidence;
     
     xAxis.put("", joint.getPosition().x);
     yAxis.put("", joint.getPosition().y);
     zAxis.put("", joint.getPosition().z);
+    joint_confidence.put("", joint.getPositionConfidence());
+    
     
     joint_array.push_back(std::make_pair("", xAxis));
     joint_array.push_back(std::make_pair("", yAxis));
     joint_array.push_back(std::make_pair("", zAxis));
+    joint_array.push_back(std::make_pair("", joint_confidence));
     
     return joint_array;
 }
 
-void skeleton_tracker::send_skeleton(const nite::UserData& user){
+void skeleton_tracker::send_skeleton(const nite::UserData& user, int frameId){
     ptree skeleton;
     const nite::SkeletonJoint& JOINT_HEAD = user.getSkeleton().getJoint(nite::JOINT_HEAD);
     const nite::SkeletonJoint& JOINT_NECK = user.getSkeleton().getJoint(nite::JOINT_NECK);
@@ -136,12 +143,14 @@ void skeleton_tracker::send_skeleton(const nite::UserData& user){
     skeleton.add_child("RIGHT_KNEE", joint_serializer(JOINT_RIGHT_KNEE));
     skeleton.add_child("LEFT_FOOT", joint_serializer(JOINT_LEFT_FOOT));
     skeleton.add_child("RIGHT_FOOT", joint_serializer(JOINT_RIGHT_FOOT));
+    skeleton.add("FRAME", frameId);
     
     std::ostringstream skeleton_buffer;
     write_json (skeleton_buffer, skeleton, false);
     std::string json = skeleton_buffer.str();
     std::cout << json;
 }
+
 
 
 void skeleton_tracker::track_skeleton(){
@@ -160,18 +169,14 @@ void skeleton_tracker::track_skeleton(){
         {
             const nite::UserData& user = users[i];
             
+            display_user_status(user);
             if (user.isNew())
             {
                 userTracker.startSkeletonTracking(user.getId());
-                print_status("New User", user.getId());
             }
             else if (user.getSkeleton().getState() == nite::SKELETON_TRACKED)
             {
-                const nite::SkeletonJoint& head = user.getSkeleton().getJoint(nite::JOINT_HEAD);
-                if (head.getPositionConfidence() > .5){
-                    //                    printf("%d. (%5.2f, %5.2f, %5.2f)\n", user.getId(), head.getPosition().x, head.getPosition().y, head.getPosition().z);
-                    send_skeleton(user);
-                }
+                send_skeleton(user, userTrackerFrame.getFrameIndex());
             }
         }
     }
