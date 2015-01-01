@@ -75,8 +75,12 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
 {
     if (!error || error == boost::asio::error::message_size)
     {
-        std::string data_received(receive_buffer.begin(), receive_buffer.end());
-        BOOST_LOG_TRIVIAL(info) << "Received : " << data_received << " : " << bytes_transferred << " bytes : " << server_endpoint;
+        std::string data_b = receive_buffer.data();
+        std::size_t f = data_b.find_first_of("{");
+        std::size_t l = data_b.find_first_of("}");
+        std::string data_c = data_b.substr(f,l+1);
+        
+        BOOST_LOG_TRIVIAL(info) << "Received : " << data_c << " : " << bytes_transferred << " bytes : " << server_endpoint;        
         receive();
     }
     else

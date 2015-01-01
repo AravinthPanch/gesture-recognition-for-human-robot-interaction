@@ -14,7 +14,6 @@
 class skeleton_tracker
 {
 private:
-    int MAX_USERS = 2;
     nite::UserTracker userTracker;
     nite::Status niteRc;
     udp_server *server_;

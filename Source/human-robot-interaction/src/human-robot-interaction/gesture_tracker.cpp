@@ -59,7 +59,7 @@ void gesture_tracker::track_gestures(){
         const nite::Array<nite::GestureData>& gestures = handTrackerFrame.getGestures();
         for (int i = 0; i < gestures.getSize(); ++i)
         {
-            if (gestures[i].isComplete() && server_->isConnected())
+            if (gestures[i].isComplete() && server_->isClientConnected())
             {
                 nite::HandId newId;
                 BOOST_LOG_TRIVIAL(info) << "Gesture type " << gestures[i].getType();

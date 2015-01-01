@@ -15,20 +15,23 @@
 #include "gesture_tracker.h"
 #include "skeleton_tracker.h"
 
-#include <sstream>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <boost/array.hpp>
 
-
-using boost::property_tree::ptree;
-using boost::property_tree::write_json;
 void helper(){
-    ptree pt;
-    pt.put ("foo", 12.5f);
-    std::ostringstream buf;
-    write_json (buf, pt, false);
-    std::string json = buf.str();
-    std::cout << json;
+    boost::array<char, 16> receive_buffer = {"{hello}"};
+    
+    std::string data_b = receive_buffer.data();
+    std::cout << receive_buffer.data();
+    std::cout << data_b.find_first_of("{");
+    std::cout << data_b.find_first_of("}");
+    
+    std::size_t f = data_b.find_first_of("{");
+    std::size_t l = data_b.find_first_of("}");
+    
+    std::string data_c = data_b.substr(f+1,l-1);
+    
+    std::cout << data_c;
+    
 }
 
 

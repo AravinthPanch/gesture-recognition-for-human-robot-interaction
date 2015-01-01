@@ -20,7 +20,7 @@ class udp_server
 private:
     const int server_port = 50005;
     const int client_port = 50006;
-    bool connected = false;
+    bool clientConnected = false;
     boost::array<char, 2> receive_buffer;
     boost::array<char, 8> send_buffer;
     udp::endpoint client_endpoint;
@@ -34,7 +34,7 @@ private:
 public:
     udp_server(boost::asio::io_service& io_service);
     void send(boost::shared_ptr<std::string> message);
-    bool isConnected();
+    bool isClientConnected();
 };
 
 

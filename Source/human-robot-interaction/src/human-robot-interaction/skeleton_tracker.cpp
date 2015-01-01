@@ -147,8 +147,17 @@ void skeleton_tracker::send_skeleton(const nite::UserData& user, int frameId){
     
     std::ostringstream skeleton_buffer;
     write_json (skeleton_buffer, skeleton, false);
-    std::string json = skeleton_buffer.str();
-    std::cout << json;
+    boost::shared_ptr<std::string> message(new std::string( skeleton_buffer.str()));
+        
+    if(server_->isClientConnected())
+    {
+        server_->send(message);
+    }
+    else
+    {
+        BOOST_LOG_TRIVIAL(debug) << *message;
+    }
+    
 }
 
 

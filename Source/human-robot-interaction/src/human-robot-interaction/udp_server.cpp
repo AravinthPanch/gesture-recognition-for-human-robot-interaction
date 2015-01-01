@@ -31,15 +31,15 @@ udp_server::udp_server(boost::asio::io_service& io_service) : socket_server(io_s
 void udp_server::receive()
 {
     socket_server.async_receive_from(
-                               boost::asio::buffer(receive_buffer),
-                               client_endpoint,
-                               boost::bind(
-                                           &udp_server::handle_receive,
-                                           this,
-                                           boost::asio::placeholders::error,
-                                           boost::asio::placeholders::bytes_transferred
-                                           )
-                               );
+                                     boost::asio::buffer(receive_buffer),
+                                     client_endpoint,
+                                     boost::bind(
+                                                 &udp_server::handle_receive,
+                                                 this,
+                                                 boost::asio::placeholders::error,
+                                                 boost::asio::placeholders::bytes_transferred
+                                                 )
+                                     );
 }
 
 
@@ -49,16 +49,19 @@ void udp_server::receive()
  */
 
 void udp_server::send(boost::shared_ptr<std::string> message){
-    socket_server.async_send_to(boost::asio::buffer(*message),
-                          client_endpoint,
-                          boost::bind(
-                                      &udp_server::handle_send,
-                                      this,
-                                      message,
-                                      boost::asio::placeholders::error,
-                                      boost::asio::placeholders::bytes_transferred
-                                      )
-                          );
+    if(isClientConnected()){
+        socket_server.async_send_to(boost::asio::buffer(*message),
+                                    client_endpoint,
+                                    boost::bind(
+                                                &udp_server::handle_send,
+                                                this,
+                                                message,
+                                                boost::asio::placeholders::error,
+                                                boost::asio::placeholders::bytes_transferred
+                                                )
+                                    );
+    }
+    
 }
 
 
@@ -71,7 +74,7 @@ void udp_server::handle_receive(const boost::system::error_code& error, std::siz
 {
     if (!error || error == boost::asio::error::message_size)
     {
-        connected = true;
+        clientConnected = true;
         std::string data_received(receive_buffer.begin(), receive_buffer.end());
         BOOST_LOG_TRIVIAL(info) << "Received : " << data_received << " : " << bytes_transferred << " bytes : " << client_endpoint;
         receive();
@@ -99,8 +102,8 @@ void udp_server::handle_send(boost::shared_ptr<std::string> message, const boost
  *
  */
 
-bool udp_server::isConnected(){
-    return connected;
+bool udp_server::isClientConnected(){
+    return clientConnected;
 }
 
 
