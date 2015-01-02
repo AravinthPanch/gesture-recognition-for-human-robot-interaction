@@ -9,7 +9,8 @@
 
 
 
-
+var width = window.innerWidth;
+var height = window.innerHeight;
 
 var container;
 
@@ -44,27 +45,14 @@ animate();
 
 function init() {
 
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-
-	container = document.createElement('div');
-	document.body.appendChild(container);
-
-	//var but = document.createElement('button');
-	//but.type = 'button';
-	//but.innerHTML = 'Rotate';
-	//but.style.position = 'absolute';
-	//but.style.top = '10px';
-	//but.style.margin = '10px';
-	//but.onclick = butClick;
-	//container.appendChild(but);
+	initDom();
 
 	scene = new THREE.Scene();
 
 	camera = new THREE.PerspectiveCamera(70, width / height, 1, 10000);
 	camera.position.y = 500;
 	camera.position.x = 1000;
-	camera.position.z =	1000;
+	camera.position.z = 1000;
 
 	controls = new THREE.TrackballControls(camera);
 
@@ -99,7 +87,7 @@ function init() {
 	plane = new THREE.Mesh(planeGeo, planeMat);
 	plane.position.y = 500;
 	plane.position.z = 2000;
-	plane.position.x = -500;
+	plane.position.x = -250;
 	plane.rotation.x = 3 * (Math.PI / 2);
 	scene.add(plane);
 
@@ -155,10 +143,15 @@ function render() {
 	renderer.render(scene, camera);
 }
 
-function butClick() {
-	$.each(joints, function (key, val) {
-		val.rotation.x += 10
-	});
 
-	renderer.render(scene, camera);
+function initDom() {
+	container = document.createElement('div');
+	document.body.appendChild(container);
+
+
+	var title = document.createElement('div');
+	title.innerHTML = 'Human Robot Interaction';
+	title.className = 'appTitle';
+	container.appendChild(title);
+
 }
