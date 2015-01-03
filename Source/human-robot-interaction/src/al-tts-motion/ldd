@@ -1,0 +1,50 @@
+	@rpath/lib//libalaudio.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalthread.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalproxies.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalcommon.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_signals.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//librttools.dylib (compatibility version 0.0.0, current version 0.0.0)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1213.0.0)
+	@rpath/lib//libalvalue.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalerror.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libqimessaging.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libqitype.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libqi.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_chrono.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_filesystem.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_program_options.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_regex.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_locale.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_date_time.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_system.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_thread.dylib (compatibility version 0.0.0, current version 0.0.0)
+	/usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 104.1.0)
+
+
+
+
+
+	@rpath/lib//libalproxies.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalcommon.dylib (compatibility version 0.0.0, current version 0.0.0)	
+	@rpath/lib//librttools.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalvalue.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libalerror.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libqimessaging.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libqitype.dylib (compatibility version 0.0.0, current version 0.0.0)
+	@rpath/lib//libqi.dylib (compatibility version 0.0.0, current version 0.0.0)
+	
+
+
+	
+
+	libboost_signals.dylib (compatibility version 0.0.0, current version 0.0.0)	
+	libboost_chrono.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_filesystem.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_program_options.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_regex.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_locale.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_date_time.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_system.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_thread.dylib (compatibility version 0.0.0, current version 0.0.0)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1213.0.0)
+	/usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 104.1.0)
