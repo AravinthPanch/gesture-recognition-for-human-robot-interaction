@@ -10,5 +10,11 @@
     "http": "0.0.0",
     "log4js": "^0.6.21",
     "socket.io": "^1.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-livereload": "^3.0.2",
+    "gulp-nodemon": "^1.0.4",
+    "gulp-open": "^0.3.1"
   }
 }
