@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6E61B5E0-2453-46C5-8C47-76F4EABB1472</string>
+	<key>IDESourceControlProjectName</key>
+	<string>al-tts</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>
+		<string>github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Source/_research/al-tts/al-tts.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2DC0A90B279F618D83727F10B9F3EDC8F4542874</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2DC0A90B279F618D83727F10B9F3EDC8F4542874</string>
+			<key>IDESourceControlWCCName</key>
+			<string>-GIT</string>
+		</dict>
+	</array>
+</dict>
+</plist>
