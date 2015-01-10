@@ -1,7 +1,7 @@
 __author__ = 'Aravinth Panchadcharam'
 __email__ = "me@aravinth.info"
-__project__ = 'Gesture Recognition for Human-Robot Interaction'
 __date__ = '07/01/15'
+__project__ = 'Gesture Recognition for Human-Robot Interaction'
 
 
 from naoqi import ALProxy
