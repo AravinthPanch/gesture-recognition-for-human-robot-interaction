@@ -37,11 +37,20 @@ server.listen(app.get('port'), function () {
 
 // Stream UDP to Frontend
 function sendUdpData(socket) {
-	var PORT = 50006;
-	var HOST = '127.0.0.1';
+	var server_port = 50005;
+	var client_port = 50006;
+	var server_host = '127.0.0.1';
+	var client_host = '127.0.0.1';
 
 	var dgram = require('dgram');
 	var server = dgram.createSocket('udp4');
+
+	var message = new Buffer('01');
+
+	server.send(message, 0, message.length, server_port, server_host, function (err, bytes) {
+		if (err) throw err;
+		logger.info('UDP message sent to ' + server_host + ':' + server_port);
+	});
 
 	server.on('listening', function () {
 		var address = server.address();
@@ -53,5 +62,6 @@ function sendUdpData(socket) {
 		socket.emit('skeleton', JSON.parse(message));
 	});
 
-	server.bind(PORT, HOST);
+	//
+	//server.bind(client_port, client_host);
 }
