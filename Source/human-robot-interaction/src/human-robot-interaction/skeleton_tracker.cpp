@@ -155,7 +155,7 @@ void skeleton_tracker::send_skeleton(const nite::UserData& user, int frameId){
     }
     else
     {
-        BOOST_LOG_TRIVIAL(debug) << *message;
+//        BOOST_LOG_TRIVIAL(debug) << *message;
     }
     
 }

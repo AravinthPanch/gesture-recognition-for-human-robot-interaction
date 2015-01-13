@@ -45,15 +45,7 @@ int main(int argc, char* argv[])
         std::string argument;
         std::getline(std::cin, argument);
         
-        if(argument == "server hand")
-        {
-            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Gesture Tracking";
-            udp_server server(io_service);
-            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-            gesture_tracker gestureTracker(&server);
-            gestureTracker.run();
-        }
-        else if(argument == "server user")
+        if(argument == "server")
         {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Skeleton Tracking";
             udp_server server(io_service);
@@ -61,6 +53,15 @@ int main(int argc, char* argv[])
             skeleton_tracker skeletonTracker(&server);
             skeletonTracker.run();
         }
+        else if(argument == "server hand")
+        {
+            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Gesture Tracking";
+            udp_server server(io_service);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+            gesture_tracker gestureTracker(&server);
+            gestureTracker.run();
+        }
+        
         else if(argument == "client")
         {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Client";

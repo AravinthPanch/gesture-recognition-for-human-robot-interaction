@@ -44,14 +44,16 @@ if( CMAKE_SYSTEM_NAME STREQUAL Darwin )
 	set(OPENNI2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/OpenNI2/libOpenNI2.dylib)
 	set(NITE2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/NiTE2/libNiTE2.dylib)
 	set(BOOST_INCLUDE_DIR "/usr/local/Cellar/boost/1.56.0/include")
-	set(BOOST_LIBRARY "/usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib")
+	set(BOOST_SYSTEM "/usr/local/Cellar/boost/1.56.0/lib/libboost_system-mt.dylib")
+	set(BOOST_THREAD "/usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib")
+	set(BOOST_LOG "/usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.a")
 
 elseif( CMAKE_SYSTEM STREQUAL Linux-2.6.33.9-rt31-aldebaran-rt)
 	message( "-- TARGET SYSTEM IS " ${CMAKE_SYSTEM})
 	set(OPENNI2_LIBRARY "/usr/lib/libOpenNI2.so")
 	set(NITE2_LIBRARY "/usr/lib/libNiTE2.so")
 	set(BOOST_INCLUDE_DIR "/usr/include/boost")
-	set(BOOST_LIBRARY "/usr/lib/libboost_system.so")	
+	set(BOOST_SYSTEM "/usr/lib/libboost_system.so")	
 
 endif()
 

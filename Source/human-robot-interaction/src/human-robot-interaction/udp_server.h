@@ -12,6 +12,7 @@
 #include <boost/array.hpp>
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
 using boost::asio::ip::udp;
 class udp_server
@@ -26,7 +27,6 @@ private:
     udp::endpoint client_endpoint;
     udp::socket socket_server;
     
-    
     void receive();
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
     void handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred);
@@ -34,6 +34,7 @@ private:
 public:
     udp_server(boost::asio::io_service& io_service);
     void send(boost::shared_ptr<std::string> message);
+    std::string connectedClient;
     bool isClientConnected();
 };
 

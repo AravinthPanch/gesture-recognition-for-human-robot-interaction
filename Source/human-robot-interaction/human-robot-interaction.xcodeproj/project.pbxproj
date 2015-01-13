@@ -630,8 +630,8 @@
 				CE9E41C31A3858BF0095F65A /* nite-gesture-wave */,
 				CE9E42441A3884DF0095F65A /* helper */,
 				CE737AE31A407A0E00593328 /* udp-server-async */,
-				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 				CE70B2901A5447E80072BB83 /* nite-user-glut-viewer */,
+				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 			);
 		};
 /* End PBXProject section */
@@ -1175,6 +1175,7 @@
 				CE70B2961A5447E80072BB83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE737AEA1A407A0E00593328 /* Build configuration list for PBXNativeTarget "udp-server-async" */ = {
 			isa = XCConfigurationList;

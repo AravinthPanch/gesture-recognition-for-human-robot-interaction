@@ -21,6 +21,7 @@ private:
     
     void init_nite();
     void track_gestures();
+    void send_gesture(const nite::GestureData& gesture);
     
 public:
     gesture_tracker(udp_server *server);

@@ -6,9 +6,12 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include <boost/log/trivial.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include "NiTE.h"
 #include "gesture_tracker.h"
 
@@ -43,6 +46,27 @@ void gesture_tracker::init_nite(){
     BOOST_LOG_TRIVIAL(info) << "Gesture detection started" ;
 }
 
+using boost::property_tree::ptree;
+using boost::property_tree::write_json;
+void gesture_tracker::send_gesture(const nite::GestureData& gesture){
+    ptree gestureJson;
+    gestureJson.put("type", gesture.getType());
+    
+    std::ostringstream gesture_buffer;
+    write_json (gesture_buffer, gestureJson, false);
+    boost::shared_ptr<std::string> message(new std::string( gesture_buffer.str()));
+    
+    if(server_->isClientConnected())
+    {
+        server_->send(message);
+    }
+    else
+    {
+        BOOST_LOG_TRIVIAL(debug) << *message;
+    }
+    
+}
+
 void gesture_tracker::track_gestures(){
     
     nite::HandTrackerFrameRef handTrackerFrame;
@@ -59,12 +83,11 @@ void gesture_tracker::track_gestures(){
         const nite::Array<nite::GestureData>& gestures = handTrackerFrame.getGestures();
         for (int i = 0; i < gestures.getSize(); ++i)
         {
-            if (gestures[i].isComplete() && server_->isClientConnected())
+            if (gestures[i].isComplete())
             {
                 nite::HandId newId;
                 BOOST_LOG_TRIVIAL(info) << "Gesture type " << gestures[i].getType();
-                boost::shared_ptr<std::string> message(new std::string ("{ type : " + boost::lexical_cast<std::string>(gestures[i].getType()) + " }" ));
-                server_->send(message);
+                send_gesture(gestures[i]);
             }
         }
     }
