@@ -151,7 +151,7 @@
 		CE70B2A21A5448940072BB83 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-server-async-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE737AEC1A407AF100593328 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-server-async/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
+		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<absolute>"; };
 		CE85EB4E1A389DFA003F51B3 /* udp-socket-client-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-socket-client-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE85EB4F1A389DFA003F51B3 /* udp-socket-server-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-socket-server-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE85EB501A389DFA003F51B3 /* ni-simple-sensor-read-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ni-simple-sensor-read-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +161,7 @@
 		CE9E41911A384BBF0095F65A /* libNiTE2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libNiTE2.dylib; path = lib/NiTE2/libNiTE2.dylib; sourceTree = "<group>"; };
 		CE9E41941A384BC90095F65A /* libOpenNI2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenNI2.dylib; path = lib/OpenNI2/libOpenNI2.dylib; sourceTree = "<group>"; };
 		CE9E41F51A3864070095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-socket-client/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CE9E41F71A38650F0095F65A /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = ../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib; sourceTree = "<group>"; };
+		CE9E41F71A38650F0095F65A /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = /usr/local/Cellar/boost/1.56.0/lib/libboost_system.dylib; sourceTree = "<absolute>"; };
 		CE9E42051A3866610095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/ni-simple-sensor-read/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E42161A3867560095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-simple-user-read/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E422B1A3868700095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-socket-server/main.cpp"; sourceTree = SOURCE_ROOT; };
@@ -171,7 +171,7 @@
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B71A48C35A00131564 /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/human-robot-interaction/udp_server.h"; sourceTree = SOURCE_ROOT; };
-		CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.dylib"; sourceTree = "<group>"; };
+		CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.dylib"; sourceTree = "<absolute>"; };
 		CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -290,6 +290,35 @@
 			path = "human-robot-interaction";
 			sourceTree = "<group>";
 		};
+		CE70962E1A6563590064D196 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				CE70B2A21A5448940072BB83 /* GLUT.framework */,
+				CE70B2A01A54488C0072BB83 /* OpenGL.framework */,
+			);
+			name = OpenGL;
+			sourceTree = "<group>";
+		};
+		CE70962F1A6563690064D196 /* OpenNI */ = {
+			isa = PBXGroup;
+			children = (
+				CE9E41911A384BBF0095F65A /* libNiTE2.dylib */,
+				CE9E41941A384BC90095F65A /* libOpenNI2.dylib */,
+			);
+			name = OpenNI;
+			sourceTree = "<group>";
+		};
+		CE7096301A6563BF0064D196 /* Boost */ = {
+			isa = PBXGroup;
+			children = (
+				CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */,
+				CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */,
+				CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */,
+				CE9E41F71A38650F0095F65A /* libboost_system.dylib */,
+			);
+			name = Boost;
+			sourceTree = "<group>";
+		};
 		CE70B2921A5447E80072BB83 /* nite-user-glut-viewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,14 +364,9 @@
 		CE9E41961A384BD80095F65A /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				CE70B2A21A5448940072BB83 /* GLUT.framework */,
-				CE70B2A01A54488C0072BB83 /* OpenGL.framework */,
-				CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */,
-				CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */,
-				CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */,
-				CE9E41F71A38650F0095F65A /* libboost_system.dylib */,
-				CE9E41911A384BBF0095F65A /* libNiTE2.dylib */,
-				CE9E41941A384BC90095F65A /* libOpenNI2.dylib */,
+				CE7096301A6563BF0064D196 /* Boost */,
+				CE70962F1A6563690064D196 /* OpenNI */,
+				CE70962E1A6563590064D196 /* OpenGL */,
 			);
 			name = lib;
 			sourceTree = "<group>";
