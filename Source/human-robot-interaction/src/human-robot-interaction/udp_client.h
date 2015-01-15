@@ -20,7 +20,7 @@ class udp_client
 private:
     const int server_port = 50005;
     const int client_port = 50006;
-    const char* server_host_name_remote = "nao5.local";
+    const char* server_host_name_remote = "nao6.local";
     const char* server_host_name_local = "localhost";
     boost::array<char, 1024> receive_buffer;
     boost::array<char, 8> send_buffer;

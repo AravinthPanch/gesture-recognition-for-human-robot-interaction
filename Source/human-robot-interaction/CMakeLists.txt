@@ -27,6 +27,9 @@ else()
 	SUBDIRLIST(SUBPROJECTSLIST ${PROJECT_SOURCE_DIR}/src)	
 endif()
 
+####### FLAGS #######
+add_definitions(-DBOOST_LOG_DYN_LINK)
+
 
 ####### SETUP #######
 set(PROJECT_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
@@ -46,14 +49,16 @@ if( CMAKE_SYSTEM_NAME STREQUAL Darwin )
 	set(BOOST_INCLUDE_DIR "/usr/local/Cellar/boost/1.56.0/include")
 	set(BOOST_SYSTEM "/usr/local/Cellar/boost/1.56.0/lib/libboost_system-mt.dylib")
 	set(BOOST_THREAD "/usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib")
-	set(BOOST_LOG "/usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.a")
+	set(BOOST_LOG "/usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.dylib")
 
 elseif( CMAKE_SYSTEM STREQUAL Linux-2.6.33.9-rt31-aldebaran-rt)
 	message( "-- TARGET SYSTEM IS " ${CMAKE_SYSTEM})
 	set(OPENNI2_LIBRARY "/usr/lib/libOpenNI2.so")
 	set(NITE2_LIBRARY "/usr/lib/libNiTE2.so")
 	set(BOOST_INCLUDE_DIR "/usr/include/boost")
-	set(BOOST_SYSTEM "/usr/lib/libboost_system.so")	
+	set(BOOST_SYSTEM "/usr/lib/libboost_system-mt.so")		
+	set(BOOST_THREAD "/usr/lib/libboost_thread-mt.so")
+	set(BOOST_LOG "/usr/lib/libboost_log-mt.so")	
 
 endif()
 

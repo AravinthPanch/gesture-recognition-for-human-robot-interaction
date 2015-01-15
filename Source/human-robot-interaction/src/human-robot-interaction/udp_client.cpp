@@ -18,7 +18,7 @@
 
 udp_client::udp_client(boost::asio::io_service& io_service) : socket_client(io_service, udp::endpoint(udp::v4(), client_port))
 {
-    server_endpoint = endpoint_resolver(io_service, server_host_name_local,  server_port);
+    server_endpoint = endpoint_resolver(io_service, server_host_name_remote,  server_port);
     
     boost::shared_ptr<std::string> message(new std::string("01"));
     send(message);
