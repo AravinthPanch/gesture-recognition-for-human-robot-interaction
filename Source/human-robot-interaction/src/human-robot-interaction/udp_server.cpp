@@ -16,8 +16,9 @@
  *
  */
 
-udp_server::udp_server(boost::asio::io_service& io_service) : socket_server(io_service, udp::endpoint(udp::v4(), server_port))
+udp_server::udp_server(boost::asio::io_service& io_service): socket_server(io_service, udp::endpoint(udp::v4(), server_port))
 {
+    clientConnected = false;
     receive();
     BOOST_LOG_TRIVIAL(info) << "UDP Server started at port : " << server_port;
 }
