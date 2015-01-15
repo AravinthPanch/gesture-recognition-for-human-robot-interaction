@@ -13,15 +13,19 @@
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 
+
+
+
 using boost::asio::ip::udp;
 class udp_client
 {
     
 private:
-    static const int server_port = 50005;
-    static const int client_port = 50006;
-    static constexpr const char* server_host_name_remote = "nao6.local";
-    static constexpr const char* server_host_name_local = "localhost";
+    const int server_port;
+    const int client_port;
+    const char* server_host_name_remote;
+    const char* server_host_name_local;
+    
     boost::array<char, 1024> receive_buffer;
     boost::array<char, 8> send_buffer;
     udp::endpoint server_endpoint;

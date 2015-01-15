@@ -19,8 +19,8 @@ class udp_server
 {
     
 private:
-    static const int server_port = 5005;
-    static const int client_port = 5006;
+    const int server_port;
+    const int client_port;
     bool clientConnected;
     boost::array<char, 2> receive_buffer;
     boost::array<char, 8> send_buffer;

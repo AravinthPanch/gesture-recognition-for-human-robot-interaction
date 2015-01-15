@@ -16,7 +16,8 @@
  *
  */
 
-udp_client::udp_client(boost::asio::io_service& io_service) : socket_client(io_service, udp::endpoint(udp::v4(), client_port))
+udp_client::udp_client(boost::asio::io_service& io_service) : socket_client(io_service, udp::endpoint(udp::v4(), client_port)),
+server_port(5005),client_port(5006), server_host_name_remote("nao6.local"), server_host_name_local("localhost")
 {
     server_endpoint = endpoint_resolver(io_service, server_host_name_remote,  server_port);
     
@@ -80,7 +81,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         std::size_t l = data_b.find_first_of("}");
         std::string data_c = data_b.substr(f,l+1);
         
-        BOOST_LOG_TRIVIAL(info) << "Received : " << data_c << " : " << bytes_transferred << " bytes : " << server_endpoint;        
+        BOOST_LOG_TRIVIAL(info) << "Received : " << data_c << " : " << bytes_transferred << " bytes : " << server_endpoint;
         receive();
     }
     else
