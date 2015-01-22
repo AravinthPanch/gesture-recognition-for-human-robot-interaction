@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>nite-simple-skeleton.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>nite-simple-user-read.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -53,6 +58,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>CE2773391A3849AB00D8F52B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE2A14181A713D7F002F6C8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

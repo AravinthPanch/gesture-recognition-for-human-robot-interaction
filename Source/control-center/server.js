@@ -15,7 +15,7 @@ var express = require('express'),
 
 
 // Sever configuration
-app.set('port', process.env.PORT || 50007);
+app.set('port', process.env.PORT || 5007);
 app.use(express.static(__dirname, '/public'));
 
 
@@ -37,9 +37,9 @@ server.listen(app.get('port'), function () {
 
 // Stream UDP to Frontend
 function sendUdpData(socket) {
-	var server_port = 50005;
-	var client_port = 50006;
-	var server_host = '127.0.0.1';
+	var server_port = 5005;
+	var client_port = 5006;
+	var server_host = 'nao6.local';
 	var client_host = '127.0.0.1';
 
 	var dgram = require('dgram');
@@ -62,6 +62,5 @@ function sendUdpData(socket) {
 		socket.emit('skeleton', JSON.parse(message));
 	});
 
-	//
 	//server.bind(client_port, client_host);
 }

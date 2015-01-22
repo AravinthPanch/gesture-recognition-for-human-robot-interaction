@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2A14251A713E3E002F6C8F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2A14231A713E3E002F6C8F /* main.cpp */; };
+		CE2A14261A713F60002F6C8F /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
+		CE2A14271A713F62002F6C8F /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
+		CE2A14281A713F67002F6C8F /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE2C413A1A488EFE008E743E /* hri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41371A488EFE008E743E /* hri.cpp */; };
 		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
 		CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */; };
@@ -47,6 +51,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		CE2A14171A713D7F002F6C8F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		CE70B28F1A5447E80072BB83 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -131,6 +144,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-simple-skeleton-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE2A14231A713E3E002F6C8F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-simple-skeleton/main.cpp"; sourceTree = SOURCE_ROOT; };
+		CE2A14241A713E3E002F6C8F /* NiteSampleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiteSampleUtilities.h; path = "src/nite-simple-skeleton/NiteSampleUtilities.h"; sourceTree = SOURCE_ROOT; };
 		CE2C41371A488EFE008E743E /* hri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hri.cpp; path = "src/udp-server-async/hri.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41381A488EFE008E743E /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/udp-server-async/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
@@ -176,6 +192,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE2A14161A713D7F002F6C8F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2A14261A713F60002F6C8F /* libNiTE2.dylib in Frameworks */,
+				CE2A14271A713F62002F6C8F /* libOpenNI2.dylib in Frameworks */,
+				CE2A14281A713F67002F6C8F /* libboost_system.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE70B28E1A5447E80072BB83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +302,7 @@
 		CE27733C1A3849AB00D8F52B /* src */ = {
 			isa = PBXGroup;
 			children = (
+				CE2A141A1A713D7F002F6C8F /* nite-simple-skeleton */,
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
 				CE70B2921A5447E80072BB83 /* nite-user-glut-viewer */,
 				CE737AE51A407A0E00593328 /* udp-server-async */,
@@ -288,6 +315,16 @@
 			);
 			name = src;
 			path = "human-robot-interaction";
+			sourceTree = "<group>";
+		};
+		CE2A141A1A713D7F002F6C8F /* nite-simple-skeleton */ = {
+			isa = PBXGroup;
+			children = (
+				CE2A14231A713E3E002F6C8F /* main.cpp */,
+				CE2A14241A713E3E002F6C8F /* NiteSampleUtilities.h */,
+			);
+			name = "nite-simple-skeleton";
+			path = "../nite-simple-skeleton";
 			sourceTree = "<group>";
 		};
 		CE70962E1A6563590064D196 /* OpenGL */ = {
@@ -348,6 +385,7 @@
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
+				CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */,
 				CE70B2911A5447E80072BB83 /* nite-user-glut-viewer-xcode */,
 				CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */,
 				CE737AE41A407A0E00593328 /* udp-server-async-xcode */,
@@ -444,6 +482,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE2A14181A713D7F002F6C8F /* nite-simple-skeleton */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE2A141F1A713D7F002F6C8F /* Build configuration list for PBXNativeTarget "nite-simple-skeleton" */;
+			buildPhases = (
+				CE2A14151A713D7F002F6C8F /* Sources */,
+				CE2A14161A713D7F002F6C8F /* Frameworks */,
+				CE2A14171A713D7F002F6C8F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nite-simple-skeleton";
+			productName = "nite-simple-skeleton";
+			productReference = CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
 		CE70B2901A5447E80072BB83 /* nite-user-glut-viewer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE70B2971A5447E80072BB83 /* Build configuration list for PBXNativeTarget "nite-user-glut-viewer" */;
@@ -606,6 +661,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Aravinth Panchadcharam";
 				TargetAttributes = {
+					CE2A14181A713D7F002F6C8F = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					CE70B2901A5447E80072BB83 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -655,12 +713,21 @@
 				CE9E42441A3884DF0095F65A /* helper */,
 				CE737AE31A407A0E00593328 /* udp-server-async */,
 				CE70B2901A5447E80072BB83 /* nite-user-glut-viewer */,
+				CE2A14181A713D7F002F6C8F /* nite-simple-skeleton */,
 				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE2A14151A713D7F002F6C8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2A14251A713E3E002F6C8F /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE70B28D1A5447E80072BB83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -841,6 +908,48 @@
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 				SDKROOT = macosx;
 				SYMROOT = "$(HRI_BUILD)";
+			};
+			name = Release;
+		};
+		CE2A141D1A713D7F002F6C8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Debug;
+		};
+		CE2A141E1A713D7F002F6C8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
 		};
@@ -1191,6 +1300,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CE2A141F1A713D7F002F6C8F /* Build configuration list for PBXNativeTarget "nite-simple-skeleton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE2A141D1A713D7F002F6C8F /* Debug */,
+				CE2A141E1A713D7F002F6C8F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		CE70B2971A5447E80072BB83 /* Build configuration list for PBXNativeTarget "nite-user-glut-viewer" */ = {
 			isa = XCConfigurationList;
