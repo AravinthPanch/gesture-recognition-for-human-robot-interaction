@@ -114,7 +114,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
 void udp_client::handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred)
 {
     BOOST_LOG_TRIVIAL(info) << "Sent : " << *message << " : " << server_endpoint;
-    receive();
+    receive();q
 }
 
 
@@ -125,7 +125,7 @@ void udp_client::handle_send(boost::shared_ptr<std::string> message, const boost
 
 udp::endpoint udp_client::endpoint_resolver(boost::asio::io_service& io_service, const char* host_name, int port){
     udp::resolver resolver(io_service);
-    udp::resolver::query query(udp::v4(), host_name, std::to_string(port));
+    udp::resolver::query query(udp::v4(), host_name, to_string(port));
     udp::resolver::iterator iterator = resolver.resolve(query);
     return *iterator;
 }
