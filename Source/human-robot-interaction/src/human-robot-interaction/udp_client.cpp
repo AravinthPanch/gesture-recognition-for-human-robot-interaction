@@ -114,7 +114,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
 void udp_client::handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred)
 {
     BOOST_LOG_TRIVIAL(info) << "Sent : " << *message << " : " << server_endpoint;
-    receive();q
+    receive();
 }
 
 
