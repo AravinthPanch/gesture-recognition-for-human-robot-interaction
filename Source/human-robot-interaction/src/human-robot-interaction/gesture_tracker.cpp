@@ -86,10 +86,23 @@ void gesture_tracker::track_gestures(){
             if (gestures[i].isComplete())
             {
                 nite::HandId newId;
-                BOOST_LOG_TRIVIAL(info) << "Gesture type " << gestures[i].getType();
                 send_gesture(gestures[i]);
             }
         }
+        
+        
+        const nite::Array<nite::GestureData>& gestures = handTrackerFrame.getGestures();
+        for (int i = 0; i < gestures.getSize(); ++i)
+        {
+            if (gestures[i].isComplete())
+            {
+                send_gesture(gestures[i]);
+                nite::HandId newId;
+                handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
+            }
+        }
+        
+        
     }
 }
 
