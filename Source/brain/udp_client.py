@@ -10,10 +10,10 @@ import json
 
 class Start(asyncore.dispatcher):
     def __init__(self, logger):
-        self.server_host = "localhost"
-        self.server_port = 50005
+        self.server_host = "nao6.local"
+        self.server_port = 5005
         self.client_host = "localhost"
-        self.client_port = 50006
+        self.client_port = 5006
         self.logger = logger
 
         asyncore.dispatcher.__init__(self)
@@ -26,7 +26,7 @@ class Start(asyncore.dispatcher):
     def handle_read(self):
         data, remote_endpoint = self.recvfrom(1024)
         self.logger.info(data)
-        al_proxy.send(json.loads(data), self.logger)
+        #al_proxy.send(json.loads(data), self.logger)
 
 
 
