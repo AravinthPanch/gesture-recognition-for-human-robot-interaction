@@ -94,10 +94,15 @@ define(['jquery', 'three', 'trackBallControl'], function ($, THREE) {
 	function renderFromData() {
 		if (i < skeletonData.length) {
 			$.each(skeletonData[i], function (key, val) {
+
 				if (key !== "FRAME") {
-					joints[key].position.x = val[0];
-					joints[key].position.y = val[1];
-					joints[key].position.z = -val[2];
+					var positionConfidence = parseFloat(val[3]);
+					console.log(positionConfidence)
+					if (positionConfidence >= 0.5) {
+						joints[key].position.x = val[0];
+						joints[key].position.y = val[1];
+						joints[key].position.z = val[2];
+					}
 				}
 			});
 		}
@@ -108,7 +113,7 @@ define(['jquery', 'three', 'trackBallControl'], function ($, THREE) {
 	function render() {
 		$.each(app.skeletonBuffer, function (key, val) {
 			var positionConfidence = parseInt(val[3]);
-			if (key !== "FRAME" && positionConfidence >= 0.5) {
+			if (key !== "FRAME") {
 				joints[key].position.x = val[0];
 				joints[key].position.y = val[1];
 				joints[key].position.z = -val[2];
@@ -119,6 +124,11 @@ define(['jquery', 'three', 'trackBallControl'], function ($, THREE) {
 
 
 	function animate() {
+		//setTimeout(function () {
+		//	requestAnimationFrame(animate);
+		//
+		//}, 1000 / 30);
+
 		requestAnimationFrame(animate);
 		app.controls.update();
 		render();

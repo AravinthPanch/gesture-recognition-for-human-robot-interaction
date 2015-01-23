@@ -39,7 +39,8 @@ server.listen(app.get('port'), function () {
 function sendUdpData(socket) {
 	var server_port = 5005;
 	var client_port = 5006;
-	var server_host = 'nao6.local';
+	//var server_host = 'nao6.local';
+	var server_host = '127.0.0.1';
 	var client_host = '127.0.0.1';
 
 	var dgram = require('dgram');
