@@ -14,10 +14,24 @@
 #include "skeleton_tracker.h"
 
 
+using boost::property_tree::ptree;
+using boost::property_tree::write_json;
+
+/**
+ *
+ * Constructor
+ *
+ */
 skeleton_tracker::skeleton_tracker(udp_server *server){
     server_ = server;
 }
 
+/**
+ *
+ * Initializes NiTE and takes available OpenNI device
+ * NiTE::initialize() takes OpenNI deviceId as argument, if there ar many
+ *
+ */
 void skeleton_tracker::init_nite(){
     niteRc = nite::NiTE::initialize();
     if (niteRc != nite::STATUS_OK)
@@ -41,7 +55,11 @@ void skeleton_tracker::init_nite(){
 }
 
 
-
+/**
+ *
+ * Prints skeleton status such as new user, callibrating and errors
+ *
+ */
 void print_status(std::string message, int userId){
     BOOST_LOG_TRIVIAL(info) << "User " << userId << " : " << message ;
 }
@@ -89,10 +107,12 @@ void skeleton_tracker::display_user_status(const nite::UserData& user)
 }
 
 
-
-using boost::property_tree::ptree;
-using boost::property_tree::write_json;
-
+/**
+ *
+ * Serializes skeleton data with position in x,y,z axis, joint-confidence and frameId
+ * Send it to the connected client
+ *
+ */
 ptree joint_serializer(const nite::SkeletonJoint& joint){
     ptree joint_array, xAxis, yAxis, zAxis, joint_confidence;
     
@@ -110,6 +130,13 @@ ptree joint_serializer(const nite::SkeletonJoint& joint){
     return joint_array;
 }
 
+
+/**
+ *
+ * Serializes skeleton data with position in x,y,z axis, joint-confidence and frameId
+ * Send it to the connected client
+ *
+ */
 void skeleton_tracker::send_skeleton(const nite::UserData& user, int frameId){
     ptree skeleton;
     const nite::SkeletonJoint& JOINT_HEAD = user.getSkeleton().getJoint(nite::JOINT_HEAD);
@@ -148,24 +175,29 @@ void skeleton_tracker::send_skeleton(const nite::UserData& user, int frameId){
     std::ostringstream skeleton_buffer;
     write_json (skeleton_buffer, skeleton, false);
     boost::shared_ptr<std::string> message(new std::string( skeleton_buffer.str()));
-        
+    
     if(server_->isClientConnected())
     {
         server_->send(message);
     }
     else
     {
-//        BOOST_LOG_TRIVIAL(debug) << *message;
-        std::cout << message;
+        BOOST_LOG_TRIVIAL(debug) << *message;
     }
-    
 }
 
 
-
+/**
+ *
+ * Starts Skeleton tracking after user is in calibrating postition
+ * It tracks it till there is a keyboard ESC Hit and stops
+ *
+ */
 void skeleton_tracker::track_skeleton(){
+    
     nite::UserTrackerFrameRef userTrackerFrame;
-    for(;;)
+    
+    while (!utils::wasKeyboardHit())
     {
         niteRc = userTracker.readFrame(&userTrackerFrame);
         if (niteRc != nite::STATUS_OK)
@@ -190,8 +222,16 @@ void skeleton_tracker::track_skeleton(){
             }
         }
     }
+    
+    nite::NiTE::shutdown();
 }
 
+
+/**
+ *
+ * Called by the main thread and Boost ioService keeps it in the loop
+ *
+ */
 void skeleton_tracker::run(){
     init_nite();
     track_skeleton();

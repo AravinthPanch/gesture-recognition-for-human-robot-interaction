@@ -15,27 +15,6 @@
 #include "gesture_tracker.h"
 #include "skeleton_tracker.h"
 
-#include <boost/array.hpp>
-
-void helper(){
-    boost::array<char, 16> receive_buffer = {"{hello}"};
-    
-    std::string data_b = receive_buffer.data();
-    std::cout << receive_buffer.data();
-    std::cout << data_b.find_first_of("{");
-    std::cout << data_b.find_first_of("}");
-    
-    std::size_t f = data_b.find_first_of("{");
-    std::size_t l = data_b.find_first_of("}");
-    
-    std::string data_c = data_b.substr(f+1,l-1);
-    
-    std::cout << data_c;
-    
-}
-
-
-
 
 
 int main(int argc, char* argv[])
@@ -74,7 +53,7 @@ int main(int argc, char* argv[])
         }
         else{
             BOOST_LOG_TRIVIAL(info) << "Invalid selection. Enter server or client" ;
-            helper();
+            std::cout << "Enter server or server hand or client " << std::endl ;
         }
     }
     

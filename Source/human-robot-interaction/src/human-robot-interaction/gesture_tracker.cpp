@@ -14,17 +14,28 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "NiTE.h"
 #include "gesture_tracker.h"
-#include "utils.h"
+
 
 using boost::property_tree::ptree;
 using boost::property_tree::write_json;
 
+/**
+ *
+ * Constructor
+ *
+ */
 gesture_tracker::gesture_tracker(udp_server *server){
     server_ = server;
 }
 
 
-
+/**
+ *
+ * Initializes NiTE and takes available OpenNI device
+ * NiTE::initialize() takes OpenNI deviceId as argument, if there ar many
+ * Wave and Click Gestures are initiated
+ *
+ */
 void gesture_tracker::init_nite(){
     niteRc = nite::NiTE::initialize();
     if (niteRc != nite::STATUS_OK)
@@ -52,7 +63,12 @@ void gesture_tracker::init_nite(){
 }
 
 
-
+/**
+ *
+ * Serializes gesture data with position of hand at which gesture was detected
+ * Send it to the connected client
+ *
+ */
 void gesture_tracker::send_gesture(const nite::GestureData& gesture){
     ptree gestureJson, gestureType, joint_array, xAxis, yAxis, zAxis, joint_confidence;
     std::string gesture_type;
@@ -90,7 +106,12 @@ void gesture_tracker::send_gesture(const nite::GestureData& gesture){
 }
 
 
-
+/**
+ *
+ * Serializes hand data with position and hand id
+ * Send it to the connected client
+ *
+ */
 void gesture_tracker::send_hand(const nite::HandData& hand){
     ptree handJson, handId, joint_array, xAxis, yAxis, zAxis, joint_confidence;
     
@@ -123,12 +144,17 @@ void gesture_tracker::send_hand(const nite::HandData& hand){
 }
 
 
-
+/**
+ *
+ * Starts Gesture recognition and Hand tracking based on the position of Hand found by WAVE gesture
+ * It tracks it till there is a keyboard ESC Hit and stops 
+ *
+ */
 void gesture_tracker::track_gestures(){
     
     nite::HandTrackerFrameRef handTrackerFrame;
     
-    while (!wasKeyboardHit())
+    while (!utils::wasKeyboardHit())
     {
         niteRc = handTracker.readFrame(&handTrackerFrame);
         if (niteRc != nite::STATUS_OK)
@@ -158,10 +184,17 @@ void gesture_tracker::track_gestures(){
             }
         }
     }
+    
+    nite::NiTE::shutdown();
 }
 
 
 
+/**
+ *
+ * Called by the main thread and Boost ioService keeps it in the loop
+ *
+ */
 void gesture_tracker::run(){
     init_nite();
     track_gestures();

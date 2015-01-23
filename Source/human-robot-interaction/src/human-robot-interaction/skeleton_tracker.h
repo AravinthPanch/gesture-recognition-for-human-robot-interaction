@@ -10,6 +10,7 @@
 
 #include "NiTE.h"
 #include "udp_server.h"
+#include "utils.h"
 
 class skeleton_tracker
 {

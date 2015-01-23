@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "NiTE.h"
 #include "udp_server.h"
+#include "utils.h"
 
 class gesture_tracker
 {
