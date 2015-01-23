@@ -199,6 +199,7 @@
 		CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-hand-tracker-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAA7CB91A72528900C7EF67 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-hand-tracker/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEAA7CBB1A72530100C7EF67 /* NiteSampleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiteSampleUtilities.h; path = "src/nite-simple-skeleton/NiteSampleUtilities.h"; sourceTree = SOURCE_ROOT; };
+		CEAA7CBF1A726B6000C7EF67 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = "src/human-robot-interaction/utils.h"; sourceTree = SOURCE_ROOT; };
 		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
@@ -504,6 +505,7 @@
 		CEE283AF1A48C2E300131564 /* human-robot-interaction */ = {
 			isa = PBXGroup;
 			children = (
+				CEAA7CBF1A726B6000C7EF67 /* utils.h */,
 				CEE283B51A48C35A00131564 /* main.cpp */,
 				CEE283B61A48C35A00131564 /* udp_server.cpp */,
 				CEE283B71A48C35A00131564 /* udp_server.h */,
@@ -1498,6 +1500,7 @@
 				CEAA7CB21A724F6E00C7EF67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CEE283B41A48C2E300131564 /* Build configuration list for PBXNativeTarget "human-robot-interaction" */ = {
 			isa = XCConfigurationList;
