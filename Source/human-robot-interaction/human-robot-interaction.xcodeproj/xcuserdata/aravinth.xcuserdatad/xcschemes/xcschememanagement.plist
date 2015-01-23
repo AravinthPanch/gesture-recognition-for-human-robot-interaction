@@ -12,7 +12,7 @@
 		<key>human-robot-interaction.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>10</integer>
 		</dict>
 		<key>ni-simple-sensor-read.xcscheme</key>
 		<dict>
@@ -24,10 +24,15 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>nite-simple-skeleton.xcscheme</key>
+		<key>nite-hand-tracker.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>nite-simple-skeleton.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>nite-simple-user-read.xcscheme</key>
 		<dict>
@@ -37,7 +42,7 @@
 		<key>nite-user-glut-viewer.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>7</integer>
 		</dict>
 		<key>udp-server-async.xcscheme</key>
 		<dict>
@@ -113,6 +118,11 @@
 			<true/>
 		</dict>
 		<key>CE9E42441A3884DF0095F65A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CEAA7CAC1A724F6E00C7EF67</key>
 		<dict>
 			<key>primary</key>
 			<true/>

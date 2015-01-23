@@ -43,6 +43,10 @@
 		CE9E424D1A3885160095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E424C1A3885160095F65A /* main.cpp */; };
 		CE9E42521A388FB70095F65A /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE9E42531A388FB90095F65A /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
+		CEAA7CB41A724FBB00C7EF67 /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
+		CEAA7CB51A724FBC00C7EF67 /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
+		CEAA7CB61A724FC300C7EF67 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
+		CEAA7CBA1A72528900C7EF67 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAA7CB91A72528900C7EF67 /* main.cpp */; };
 		CEE283B81A48C35A00131564 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B51A48C35A00131564 /* main.cpp */; };
 		CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CEE283CC1A48CCB700131564 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */; };
@@ -132,6 +136,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		CEAA7CAB1A724F6E00C7EF67 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		CEE283AC1A48C2E300131564 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +196,9 @@
 		CE9E422B1A3868700095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-socket-server/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E42331A386FF10095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-gesture-wave/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E424C1A3885160095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/helper/main.cpp; sourceTree = SOURCE_ROOT; };
+		CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-hand-tracker-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAA7CB91A72528900C7EF67 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-hand-tracker/main.cpp"; sourceTree = SOURCE_ROOT; };
+		CEAA7CBB1A72530100C7EF67 /* NiteSampleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NiteSampleUtilities.h; path = "src/nite-simple-skeleton/NiteSampleUtilities.h"; sourceTree = SOURCE_ROOT; };
 		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
@@ -275,6 +291,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEAA7CAA1A724F6E00C7EF67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAA7CB41A724FBB00C7EF67 /* libNiTE2.dylib in Frameworks */,
+				CEAA7CB51A724FBC00C7EF67 /* libOpenNI2.dylib in Frameworks */,
+				CEAA7CB61A724FC300C7EF67 /* libboost_system.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEE283AB1A48C2E300131564 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -302,8 +328,9 @@
 		CE27733C1A3849AB00D8F52B /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CE2A141A1A713D7F002F6C8F /* nite-simple-skeleton */,
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
+				CEAA7CAE1A724F6E00C7EF67 /* nite-hand-tracker */,
+				CE2A141A1A713D7F002F6C8F /* nite-simple-skeleton */,
 				CE70B2921A5447E80072BB83 /* nite-user-glut-viewer */,
 				CE737AE51A407A0E00593328 /* udp-server-async */,
 				CE9E42461A3884DF0095F65A /* helper */,
@@ -385,6 +412,7 @@
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
+				CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */,
 				CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */,
 				CE70B2911A5447E80072BB83 /* nite-user-glut-viewer-xcode */,
 				CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */,
@@ -461,6 +489,16 @@
 			);
 			name = helper;
 			path = ../helper;
+			sourceTree = "<group>";
+		};
+		CEAA7CAE1A724F6E00C7EF67 /* nite-hand-tracker */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA7CBB1A72530100C7EF67 /* NiteSampleUtilities.h */,
+				CEAA7CB91A72528900C7EF67 /* main.cpp */,
+			);
+			name = "nite-hand-tracker";
+			path = "../nite-hand-tracker";
 			sourceTree = "<group>";
 		};
 		CEE283AF1A48C2E300131564 /* human-robot-interaction */ = {
@@ -635,6 +673,23 @@
 			productReference = CE85EB521A389DFA003F51B3 /* helper */;
 			productType = "com.apple.product-type.tool";
 		};
+		CEAA7CAC1A724F6E00C7EF67 /* nite-hand-tracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEAA7CB31A724F6E00C7EF67 /* Build configuration list for PBXNativeTarget "nite-hand-tracker" */;
+			buildPhases = (
+				CEAA7CA91A724F6E00C7EF67 /* Sources */,
+				CEAA7CAA1A724F6E00C7EF67 /* Frameworks */,
+				CEAA7CAB1A724F6E00C7EF67 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nite-hand-tracker";
+			productName = "nite-hand-tracker";
+			productReference = CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
 		CEE283AD1A48C2E300131564 /* human-robot-interaction */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEE283B41A48C2E300131564 /* Build configuration list for PBXNativeTarget "human-robot-interaction" */;
@@ -688,6 +743,9 @@
 					CE9E42441A3884DF0095F65A = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
+					CEAA7CAC1A724F6E00C7EF67 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					CEE283AD1A48C2E300131564 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -714,6 +772,7 @@
 				CE737AE31A407A0E00593328 /* udp-server-async */,
 				CE70B2901A5447E80072BB83 /* nite-user-glut-viewer */,
 				CE2A14181A713D7F002F6C8F /* nite-simple-skeleton */,
+				CEAA7CAC1A724F6E00C7EF67 /* nite-hand-tracker */,
 				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 			);
 		};
@@ -791,6 +850,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9E424D1A3885160095F65A /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEAA7CA91A724F6E00C7EF67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAA7CBA1A72528900C7EF67 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,6 +1316,48 @@
 			};
 			name = Release;
 		};
+		CEAA7CB11A724F6E00C7EF67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Debug;
+		};
+		CEAA7CB21A724F6E00C7EF67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_NI_INCLUDE)/**",
+					/usr/local/Cellar/boost/1.56.0/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Release;
+		};
 		CEE283B21A48C2E300131564 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1308,6 +1417,7 @@
 				CE2A141E1A713D7F002F6C8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE70B2971A5447E80072BB83 /* Build configuration list for PBXNativeTarget "nite-user-glut-viewer" */ = {
 			isa = XCConfigurationList;
@@ -1380,6 +1490,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CEAA7CB31A724F6E00C7EF67 /* Build configuration list for PBXNativeTarget "nite-hand-tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEAA7CB11A724F6E00C7EF67 /* Debug */,
+				CEAA7CB21A724F6E00C7EF67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		CEE283B41A48C2E300131564 /* Build configuration list for PBXNativeTarget "human-robot-interaction" */ = {
 			isa = XCConfigurationList;
