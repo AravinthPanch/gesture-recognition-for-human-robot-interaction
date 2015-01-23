@@ -14,9 +14,8 @@
 #include <boost/shared_ptr.hpp>
 
 
-
-
 using boost::asio::ip::udp;
+
 class udp_client
 {
     
@@ -41,6 +40,5 @@ public:
     udp_client(boost::asio::io_service& io_service);
     void send(boost::shared_ptr<std::string> message);
 };
-
 
 #endif

@@ -11,6 +11,11 @@
 #include "udp_client.h"
 
 
+/**
+ * Patch for to_string. std::to_string is not available in NAO OS. 
+ * It may work it GLICXX hack adds higher version libstdc++ 
+ *
+ */
 #include<sstream>
 template <typename T>
 std::string to_string(T value)
