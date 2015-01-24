@@ -21,9 +21,20 @@ app.use(express.static(__dirname, '/public'));
 
 // Socket interface to the frontend
 io.on('connection', function (socket) {
-	socket.on('init', function () {
-		logger.info('Client Connected');
-		sendUdpData(socket);
+	socket.on('init', function (data) {
+		switch (data) {
+			case 'client':
+				logger.info('Client Connected');
+				break;
+			case 'handTracking':
+				sendUdpData(socket, '01');
+				logger.info('Requested Hand Tracking');
+				break;
+			case 'skeletonTracking':
+				sendUdpData(socket, '02');
+				logger.info('Requested Skeleton Tracking');
+				break;
+		}
 	});
 });
 
@@ -36,7 +47,7 @@ server.listen(app.get('port'), function () {
 
 
 // Stream UDP to Frontend
-function sendUdpData(socket) {
+function sendUdpData(socket, mode) {
 	var server_port = 5005;
 	var client_port = 5006;
 	//var server_host = 'nao6.local';
@@ -46,7 +57,7 @@ function sendUdpData(socket) {
 	var dgram = require('dgram');
 	var server = dgram.createSocket('udp4');
 
-	var message = new Buffer('01');
+	var message = new Buffer(mode);
 
 	server.send(message, 0, message.length, server_port, server_host, function (err, bytes) {
 		if (err) throw err;

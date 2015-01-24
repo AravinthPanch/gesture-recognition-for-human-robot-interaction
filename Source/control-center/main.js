@@ -26,8 +26,8 @@ require.config({
 		three: 'lib/three.min',
 		trackBallControl: 'lib/TrackballControls',
 		stats: 'lib/stats.min',
-		underscore: 'lib/underscore.min'
-
+		underscore: 'lib/underscore.min',
+		semantic : 'css/ui/semantic'
 	},
 
 	shim: {

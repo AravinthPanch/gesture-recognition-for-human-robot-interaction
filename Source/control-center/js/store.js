@@ -13,7 +13,7 @@ define(['socketio'], function (socketio) {
 	var socket = socketio.connect();
 
 	function init() {
-		socket.emit('init', 'udp');
+		socket.emit('init', 'client');
 		socket.on('skeleton', function (data) {
 			app.skeletonBuffer = data;
 		});
