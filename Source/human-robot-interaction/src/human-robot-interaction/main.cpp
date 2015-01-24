@@ -29,21 +29,20 @@ int main(int argc, char* argv[])
         
         if(argument == "server")
         {
+            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Hand Gesture Tracking";
+            udp_server server(io_service);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+            gesture_tracker gestureTracker(&server);
+            gestureTracker.run();
+        }
+        else if(argument == "server skel")
+        {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Skeleton Tracking";
             udp_server server(io_service);
             boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
             skeleton_tracker skeletonTracker(&server);
             skeletonTracker.run();
         }
-        else if(argument == "server hand")
-        {
-            BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Gesture Tracking";
-            udp_server server(io_service);
-            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-            gesture_tracker gestureTracker(&server);
-            gestureTracker.run();
-        }
-        
         else if(argument == "client")
         {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Client";
@@ -53,7 +52,7 @@ int main(int argc, char* argv[])
         }
         else{
             BOOST_LOG_TRIVIAL(info) << "Invalid selection. Enter server or client" ;
-            std::cout << "Enter server or server hand or client " << std::endl ;
+            std::cout << "Enter server or server sekel or client " << std::endl ;
         }
     }
     

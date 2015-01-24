@@ -14,7 +14,6 @@
 #include <boost/shared_ptr.hpp>
 #include <string>
 
-
 using boost::asio::ip::udp;
 
 class udp_server
