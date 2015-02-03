@@ -10,7 +10,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "NiTE.h"
-#include "NiteSampleUtilities.h"
+#include "utils.h"
 
 
 nite::UserTracker userTracker;
@@ -153,7 +153,7 @@ void send_skeleton(const nite::UserData& user, int frameId){
 
 void track_skeleton(){
     nite::UserTrackerFrameRef userTrackerFrame;
-    while (!wasKeyboardHit())
+    while (!utils::wasKeyboardHit())
     {
         niteRc = userTracker.readFrame(&userTrackerFrame);
         if (niteRc != nite::STATUS_OK)
@@ -178,6 +178,8 @@ void track_skeleton(){
             }
         }
     }
+    
+    nite::NiTE::shutdown();
 }
 
 

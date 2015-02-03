@@ -14,7 +14,7 @@
 		<string>github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Source/human-robot-interaction/human-robot-interaction.xcodeproj</string>
+	<string>source/human-robot-interaction/human-robot-interaction.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>

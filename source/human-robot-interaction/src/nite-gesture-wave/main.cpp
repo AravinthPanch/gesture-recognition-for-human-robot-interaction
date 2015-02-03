@@ -2,14 +2,16 @@
  * Author: Aravinth Panchadcharam
  * Email: me@aravinth.info
  * Date: 11/12/14.
- * Contributors:
+ * Project: Gesture Recogntion for Human-Robot Interaction
  */
 
-#include "NiTE.h"
+
 #include <iostream>
 #include <string>
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
+#include "NiTE.h"
+#include "utils.h"
 
 enum { max_length = 1024 };
 const char* SERVER_PORT = "50005";
@@ -59,7 +61,7 @@ int main(int argc, char** argv)
         
         // Get gesture
         nite::HandTrackerFrameRef handTrackerFrame;
-        for(;;)
+        while (!utils::wasKeyboardHit())
         {
             niteRc = handTracker.readFrame(&handTrackerFrame);
             if (niteRc != nite::STATUS_OK)
@@ -84,6 +86,7 @@ int main(int argc, char** argv)
             }
             
         }
+        nite::NiTE::shutdown();
         
         
     }
@@ -95,10 +98,3 @@ int main(int argc, char** argv)
     return 0;
     
 }
-
-
-
-
-
-
-

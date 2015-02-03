@@ -11,7 +11,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "NiTE.h"
-#include "NiteSampleUtilities.h"
+#include "utils.h"
 
 
 nite::HandTracker handTracker;
@@ -107,7 +107,7 @@ void track_hand(){
     
     nite::HandTrackerFrameRef handTrackerFrame;
     
-    while (!wasKeyboardHit())
+    while (!utils::wasKeyboardHit())
     {
         niteRc = handTracker.readFrame(&handTrackerFrame);
         if (niteRc != nite::STATUS_OK)
@@ -138,6 +138,8 @@ void track_hand(){
         }
         
     }
+    
+    nite::NiTE::shutdown();
 }
 
 

@@ -1,12 +1,18 @@
+/**
+ * Author: Aravinth Panchadcharam
+ * Email: me@aravinth.info
+ * Date: 22/12/14.
+ * Project: Gesture Recogntion for Human-Robot Interaction
+ */
+
+
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
 #include <boost/asio.hpp>
 
-
 enum { max_length = 1024 };
 const char* SERVER_PORT = "50005";
-//const char* SERVER_HOST_NAME = "nao5.local";
 const char* SERVER_HOST_NAME = "localhost";
 
 int main(int argc, char* argv[])
