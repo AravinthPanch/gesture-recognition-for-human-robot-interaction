@@ -1,0 +1,140 @@
+\addcontentsline{toc}{chapter}{Hinweise}
+\chapter*{Hinweise}
+%\chapter{Hinweise}
+Wir bitten alle DAI-Labor-Fremden, uns (unter aubrey.schmidt dai-labor.de) eine Mail zu schreiben, in dem Ihr einfach kurz sagt, dass ihr unsere Vorlage benutzt. Dies dient der reinen Zahlenerfassung, da uns interessiert, wie viele Diplomanden unsere Vorlage ausserhalb unseres Institutes erreicht hat. (Ausschliesslich) Feedback kann natürlich an die gleiche Adresse gesendet werden. Auch würden wir uns super über das Auftauchen im Danksagungsteil freuen (letzte Stelle und Vornamen reichen völlig), da wir viel Arbeit und Zeit in diese (und weitere Vorlagen) gesteckt haben.
+
+Für alle DAI-Labor-Internen gilt das Gleiche, bis auf die Bestätigungsmail. Ausserdem bekommt Ihr über den DAI-Lehre-Account Zugriff auf weitere Dokumente, Vorlagen sowie SVN-Funktionalität, die dazu dient, eure Diplomarbeit zu sichern. Mit dieser Vorlage kommt eine Einführungsveranstaltung, die das Schreiben der Diplomarbeit, Latex, SVN und weitere Themen behandelt. Wer noch nicht eingeladen wurde, einfach an seinen Betreuer wenden.\\\\
+
+\noindent Dieses Kapitel dient den Verfassern dieser Vorlage fuer Hinweise und Bemerkungen. Demnach sollte der ``$\backslash$input\{chapter{\slash}hinweise\}'' Befehl aus der {\em vorbereitung.tex} ausgeklammert oder entfernt werden.
+\section{Inhalt}
+Der nachfolgende Aufbau der Arbeit ist als Vorschlag aufzufassen und nicht als unbedingt in allen Einzelheiten zu übernehmende Struktur. Sie muss an die konkrete Themenstellung angepasst werden! Dies gilt insbesondere für die Überschriften in der Vorlage. Diese sind als Abstraktion der konkreten Überschriften aufzufassen, d.h. sie geben an was in dem jeweiligen Kapitel stehen sollte, wie beispielsweise die Problemanalyse, der Text der Überschrift kann jedoch anders lauten. Beispiel: Probleme des Agentenstandards Fipa2000.
+
+Die folgenden Hinweise dienen der Grundlegenden Einführung in \LaTeX.
+
+\section{Diese Vorlage benutzen -- Schnellfassung}
+Eine genauere Beschreibung wird in den Vorträgen vorgestellt.\\
+
+\noindent\\ Was benötige ich (idealerweise), damit ich dieses Dokument benutzen kann?
+\begin{itemize}
+\item Miktex
+\item Texniccenter
+\item Adobe Acrobat Reader
+\item (DAI) Tortoise SVN oder ähnlichen Client
+\end{itemize}
+
+\noindent\\ Vorgehen Installation (am besten alles bei sourceforge.net herunterladen):
+\begin{itemize}
+\item Adobe Acrobat Reader installieren(eignet sich bisher am bestne)
+\item Miktex installieren (Basis genügt, den Rest automatisch mit Bestätigung herunterladen)
+\item Texniccenter installieren
+\item Tortoise SVN installieren
+\end{itemize}
+
+\noindent\\ Vorgehen bearbeiten und kompilieren:
+\begin{itemize}
+\item {\em Diplomarbeit.tcp} mit Texniccenter öffnen
+\item Gewünschte Änderungen eintragen
+\item Reiter auf {\em Diplomarbeit.tex} wechseln und $STRG+F7$ oder einfach nur $F7$ drücken
+\item Gewünschten Fontdownload bestätigen
+\item Bei Bildänderungen $3$ MAL kompilieren, da sonst die Änderungen nicht angezeigt werden
+\item Fehlerlose Änderung committen (SVN)
+\end{itemize}
+
+\section{\LaTeX}
+\LaTeX scheint für Neulinge kompliziert und schwerer als MS-Word zu sein. Erfahrungen vieler, vieler Diplomanden (und vor allem von noch mehr Betreuer) zeigen aber immer wieder, daß sich die Einarbeitung lohnt. \LaTeX entspricht nicht dem gewohnten What-You-See-Is-What-You-Get (WYSIWYG) --Ansatz. Viel mehr ist Design explizit von Inhalt getrennt, was den Vorteil bringt, daß man bei Kapiteländerungen und Ähnlichem nur an einer Stelle etwas ändert, alles andere macht der \LaTeX --Compiler. Kostenintisive Neustrukturierungen gibt es bei \LaTeX nicht, genauso wenig wie Vergleiche, ob das Inhaltverzeichnis zu den aktuellen Seiten passt. Weitere Vorteile lassen sich schnell ``ergooglen''. Hinweise zu Latexbefehlen findet man unter \cite{latexindex} (Befehlsindex) und unter \cite{latexcookbook} (gut gegliederte Befehlsbeschreibung), eine FAQ bietet \cite{dante} (viele Problemlösungen).
+
+\subsection{Elementare, aber (meist) nicht leicht findbare Befehle}
+\begin{itemize}
+\item {\em \$befehl\$} - Mathemodus\\
+\item {\em {$\backslash$}noindent} - verhindert \LaTeX --typische Einrückungen\\
+\item {\em {$\backslash\backslash$}} - Zeilenumbruch\\
+\end{itemize}
+\subsection{Referenzen}
+Referenzen und Zitate bilden die Basis für alle Aussagen, die nicht von Euch selbst kommen. \LaTeX bietet eine schoene und saubere Art an, diese zu benutzen und zu verwalten. Hierfür benötigt Ihr eine oder mehrere Bibliography Datei, z.B. {\em dipl.bib} oder wie in dieser Vorlage im Verzeichnis {\em chapter/} die Datei {\em bib.bib}. Diese wird am Ende des \LaTeX --Hauptdokumentes  über den Befehl {\em {$\backslash$}bibliography\{dipl\} } eingebunden, in unserem Fall liegt die Datei in einem Unterverzeichnis, also {\em {$\backslash$}bibliography\{chapter{\slash}bib\} }.
+
+\subsection{Gleitobjekte}
+\label{gleitobj}
+``Bilder (wie auch Tabellen) sind in \LaTeX sogenannte Gleitobjekte. D.h., dass die Positionierung durch einen komplexen Algorithmus geregelt wird. Dieses Vorgehen wurde gewählt, damit nur teilweise gefüllte Seiten verhindert werden''\cite{fitz}.
+Wer also Probleme hat, ein Bild oder eine Tabelle zu positionieren, dem sei gesagt, dass es viel wichtiger ist, sich um den Inhalt seiner Arbeit zu kümmern, als um das Design. Gerne hält man sich an solchen {\em Kleinigkeiten} auf, die aber in der Summe recht viel Zeit in Anspruch nehmen. Ausserdem ändert man ständig seine Arbeit, was in den meisten Fällen eine Verschiebung der Gleitobjekte mit sich zieht, was wiederum alle Arbeit nichtig macht, die man in die Positionierung gesteckt hat. \\\\
+{\Large REGEL: Kümmer Dich um den Inhalt, \LaTeX kümmert sich um das Design!!}\\\\
+Falls man dennoch unbedingt die Position von Gleitobjekten bestimmen will, sollte man dies erst tun, wenn man sicher ist, daß sich nichts mehr am Text ändert. Jedoch tritt dieser Zustand erfahrungsgemäß sehr spät bis gar nicht ein, deswegen die Positionierung ganz an das Ende der $TODO$ --Liste setzen.
+
+Tipps: Jedes eingebundene Objekt muss {\em scharf} erkennbar sein, ansonsten hat es keinen Wert. Weiterhin muss die Quelle eines jeden objektes über Fußnote angegeben werden (url), auch bei Bildern, die selbst erstellt, aber {\em abgemalt} wurden (oder nachgemachte Tabellen). Eigene Tabellen und Bilder können ohne spezielle Einschränkung benutzt werden, sofern es nicht zu viele sind und sie den Inhalt des Textes stark unterstreichen!
+\subsubsection{Figures}
+%hier wird auch gleich auf ein Bild referenziert. Die Tilde ~ verhindert, daß das Wort 
+%Abbildung von der Nummer des Bildes getrennt wird (z.B. Zeilenumbruch)
+%\ref{fig:...} veranlasst den compiler, das Bild in das Abbildungverzeichnis aufzunehmen
+Wie man das Bild in Abbildung~\ref{fig:agent} einbindet, findet Ihr im Quelltext.
+
+%Anfang der Bildumgebung, bild soll entweder h here, t top oder b bottom plaziert werden
+%aubrey: präferiere [h!]
+\begin{figure}[htb]
+	
+	%bild zentrieren
+	\centering
+		
+		%das einzubindende Bild
+		\includegraphics{figures/agent.jpg}
+	
+	%Bildunterschrift	
+	\caption{Ein Agent}
+	
+	%Name, auf den man referenzieren kann, damit die Nummer der Abbildung erscheint
+	\label{fig:agent}
+
+%Ende der Bildumgebung
+\end{figure}
+
+Übrigens, wenn ihr Logos und Bilder verwendet, achtet darauf, dass ihr auch das Recht dazu habt und ihr sie gemäß der etwaigen Bestimmungen einsetzt\footnote{vgl. \url{http://www.tu-berlin.de/uebertu/logos.htm}}. Selbst wenn ihr ein Bild neu malt, ist auf die ursprüngliche Herkunft zu verweisen!
+
+
+\subsubsection{Tabellen}
+%gleiches wie bei Figure, ~ verhindert Trennung und \ref{tab:...} veranlasst Einschreibung ins Tabellenverzeichnis
+Das Aufbauen von Tabellen wie in Tablle~\ref{tab:EineTabelle} findet Ihr im Quelltext.
+%Tableumgebung
+\begin{table}[ht]
+	%zentrieren
+	\centering
+%konkrete Tabelle, | eine vertikallinie, l Text linksbündig, r Text rechtsbündig, c zentriert
+%jeder der 3 Buchstaben impliziert eine Spalte also cclrl würde 5 Spalten erzeugen
+
+	%Tabellenüberschrift
+	\caption{Eine Tabelle}
+
+\begin{tabular}{||l|r|r|r|r||}
+
+%Horizontallinie
+\hline
+%spalteninhalt & spalteninhalten & ...
+% & springt in die nächste Zelle einer Zeile
+% \\ Zeilenende/Umbruch
+Verlauf &       2004 &       2005 &       2006 &       2007 \\
+
+\hline
+\hline
+Deutschland &       2500 &          0 &       5000 &       4500 \\
+\hline
+   Italien &       1700 &       1000 &       3600 &       5000 \\
+\hline
+   Schweiz &       2000 &       2000 &       1500 &       2000 \\
+\hline
+\end{tabular}  
+	%tabellenreferenzname
+	\label{tab:EineTabelle}
+\end{table}
+
+\section{Verfassen der Diplomarbeit}
+Der Umfang der Diplomarbeit sollte etwa 80 Seiten plus Anhang betragen. Ein Teil der Diplomarbeit beinhaltet auch die Fähigkeit, einen Themenkomplex/eine Problemstellung auf einer begrenzten Seitenzahl abzuhandeln. Je weniger Seiten man dafuer braucht, desto besser, denn niemand ist gewillt, 20 Seiten zu lesen, wenn der Inhalt auch kurz und prägnant auf eine Seite gepasst hätte. Unter 60 Seiten sollten es aber nicht werden, da ansonsten die Vermutung aufkommt, daß entweder das Problem zu einfach für eine Diplomarbeit war, oder der Diplomand unsauber gearbeitet hat.
+
+Zum Schreiben raten wir, die Verfasser, immer wieder von MS Word ab, da ab 20 Seiten, inklusive Bilder, nicht nachvollziehbare Fehler auftreten können, wie Zerreißen von Bildern oder Fehlen von kompletten Fragmenten. Wer es dennoch wünscht, mit Word zu schreiben, kann nicht darauf hoffen, dass Fehler, die durch die Verwendung von MS Word verursacht wurden, besonders milde berücksichtigt werden. Wie beim Fussball gilt auch bei der Benotung: Am Ende zählt nur das Ergebnis (und nicht, wie es dazu kam).
+
+Weitere Hinweise zum Schreiben einer Diplomarbeit kann man unter \cite{wiwi07} oder \cite{Boettcher2004} finden. Ein sehr gute Anleitung kommt ausserdem von Heike Kraft \cite{kraft06}. Sie beschreibt wie eine {\em deutsche} wissentschaftliche Arbeit zu verfassen und zu präsentieren ist. Wie man im Englischen vorgeht, kann man in Kapitel $7$ des folgenden Buches finden \cite{schut07}.
+
+\section{Verfasser dieser Vorlage und Hinweise}
+Dieser Vorlage (Latex-sourcen und Outputs) wurde von den folgenden Personen erstellt.
+\begin{itemize}
+\item Arik: Latex-Vorlage, - Arik.Messerman@dai-labor.de 
+\item Unbekannt: einige Kapitelbeschreibungen, - unbekannt@dai-labor.de
+\item Aubrey: einige Kapitelbeschreibungen, Grundaufbau, Hinweise, - Aubrey.Schmidt@dai-labor.de
+\item Christian: SVN Organisation, Initiator, - Christian.Scheel@dai-labor.de
+\end{itemize}
