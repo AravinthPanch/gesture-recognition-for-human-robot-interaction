@@ -185,6 +185,7 @@
 		CEE283B71A48C35A00131564 /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/human-robot-interaction/udp_server.h"; sourceTree = SOURCE_ROOT; };
 		CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.dylib"; sourceTree = "<absolute>"; };
 		CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
+		CEF852131A8114A800C3BCBA /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = include/utils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +293,7 @@
 			children = (
 				CE9E41961A384BD80095F65A /* lib */,
 				CE27733C1A3849AB00D8F52B /* src */,
+				CEF852141A8114B300C3BCBA /* utils */,
 				CE85EB531A389E0A003F51B3 /* bin */,
 			);
 			sourceTree = "<group>";
@@ -469,6 +471,14 @@
 				CE4AC8E61A51752B001B33CF /* skeleton_tracker.h */,
 			);
 			name = "human-robot-interaction";
+			sourceTree = "<group>";
+		};
+		CEF852141A8114B300C3BCBA /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				CEF852131A8114A800C3BCBA /* utils.h */,
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

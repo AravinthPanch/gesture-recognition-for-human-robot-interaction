@@ -39,11 +39,6 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>test.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
-		</dict>
 		<key>udp-server-async.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

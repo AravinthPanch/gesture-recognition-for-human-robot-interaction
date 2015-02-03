@@ -52,6 +52,8 @@ public:
         
         return 0;
     }
+    
+    static void 
 };
 
 #endif
