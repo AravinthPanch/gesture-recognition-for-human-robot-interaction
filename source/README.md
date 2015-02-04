@@ -1,5 +1,7 @@
 Modules
 ==================================================================
+![Architecture](https://raw.githubusercontent.com/AravinthPanch/gesture-recognition-for-human-robot-interaction/master/document/diagram/hri-architecture.png "Architecture")
+
 
 DESCRIPTION
 --------------------------------------
