@@ -14,7 +14,7 @@ based model of the gesture is used.
 </p>
 
 <p align="justify">
-In this thesis, we attempt to implement the hand gesture recognition for robots with modeling, training, analyzing and
+In this project, we attempt to implement the hand gesture recognition for robots with modeling, training, analyzing and
 recognizing gestures based on computer vision and machine learning techniques. Additionally, 3D based gesture modeling
 with skeletal points tracking will be used. As a result, on the one side, gestures will be used command the robot to
 execute certain actions and on the other side, gestures will be translated and spoken out by the robot.
@@ -60,4 +60,37 @@ Furthermore, there has been an increased interest in recent years in trying to i
 communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand,
 or hand gestures. The use of hand gestures provides an attractive alternative for Human-robot interaction than
 the conventional cumbersome devices.
+</p>
+
+
+Design
+--------------------------------------
+
+###Sensing
+<p align="justify">
+3D camera records 30 frames of color image as well as depth image per second and outputs as a data package.
+Figure shows the single frame of depth image taken from Microsoft Kinect where darker gray values represent the farther distance and lighter gray values represent the closer distance from the camera.
+</p>
+![Depth Image](./document/diagram/depth.png "Depth Image")
+![Skeleton](./document/diagram/depth-skeleton.png "Skeleton")
+
+###Feature Extraction
+<p align="justify">
+Output package from sensor data will be inputted to feature detection and extraction unit.
+OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment length and present them three dimensionally as shown in the figure.
+Finally, only joints of both the arms will be picked out from the array of features, since it will be the significant joints needed for hand gesture recognition.
+</p>
+
+###Modeling and Classification
+<p align="justify">
+In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained.
+Therefore, a set of simple gestures will be chosen and observed for training. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second.
+</p>
+
+<p align="justify">
+For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure.
+It will be  as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data.
+This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels.
+Each trained model can then be used to determine with what probability a given gesture appears in test data.
+Therefore, the trained Hidden Markov models will be used to recognize gestures.
 </p>
