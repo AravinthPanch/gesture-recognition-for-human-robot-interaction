@@ -27,6 +27,24 @@ UDP client uses the port number 5006 in order to avoid the conflicts between man
 - Gesture Tracker is same as above but tracks only the hand joint and tracking must be initiated by using the 'WAVE' gesture.
 Along with the position of hand joint (x,y,z), it also sends the information to the client whether WAVE or CLICK gesture is detected.
 
+DEPENDENCIES
+--------------------------------------
+On Mac OSX
+```
+xcode-select --install
+brew update
+brew install boost
+brew install cmake
+```
+
+On Ubuntu
+```
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get install cmake
+sudo apt-get install libboost-all-dev
+```
+
 
 BUILD
 --------------------------------------
