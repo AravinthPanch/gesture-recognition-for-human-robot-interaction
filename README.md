@@ -1,6 +1,11 @@
 Gesture Recognition For Human-Robot Interaction
 ===============================================
 
+AUTHOR
+--------------------------------------
+Aravinth Panchadcharam < http://www.aravinth.info >
+
+
 Abstract
 --------------------------------------
 <p align="justify">
