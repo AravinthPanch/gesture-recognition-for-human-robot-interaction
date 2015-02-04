@@ -1,7 +1,5 @@
 Modules
 ==================================================================
-![Architecture](../document/diagram/hri-architecture.png "Architecture")
-
 
 DESCRIPTION
 --------------------------------------
@@ -12,6 +10,11 @@ All these modules share a configuration file that contains configurations such a
 - [Human-Robot-Interaction (HRI) module](human-robot-interaction/README.md)
 - [Control Center (CC) module](control-center/README.md)
 - [Brain (AI) module](brain/README.md)
+
+ARCHITECTURE
+--------------------------------------
+![Architecture](../document/diagram/hri-architecture.png "Architecture") 
+
 
 
 
