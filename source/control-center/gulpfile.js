@@ -34,7 +34,7 @@ gulp.task('watch', function () {
 // Watch Task
 gulp.task('open-browser', function () {
 	var options = {
-		url: "http://localhost:50007"
+		url: "http://localhost:5007"
 	};
 	gulp.src("./index.html")
 		.pipe(open("", options));
