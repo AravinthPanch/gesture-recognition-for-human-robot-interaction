@@ -1,4 +1,4 @@
-Gesture Recognition For Human-Robot Interaction
+Human-Robot-Interaction - HRI module
 ==================================================================
 
 DESCRIPTION
@@ -14,7 +14,7 @@ TECHNICAL DETAIL
 --------------------------------------
 HRI module is implemented in C++ using libraries such as Boost, OpenNI2 and NiTE2.
 As described above HRI module must be installed on the robot with necessary libraries and drivers.
-HRI module internally contains a UDP Server, UDP Client, Skeleton Tracker and Gesture Tracker.
+HRI module internally contains an UDP Server, UDP Client, Skeleton Tracker and Gesture Tracker.
 
 - UDP Server is an asynchronous app that is implemented using Boost ASIO.
 Once HRI module is started, UDP Server is initiated and waits for the UDP client to connect at port number 5005.
@@ -56,9 +56,3 @@ TESTED ON
 - Mac OSX 10.10 (Yosemite)
 - Ubuntu Linux
 - Gentoo Linux
-
-
-
-AUTHOR
---------------------------------------
-Aravinth Panchadcharam
