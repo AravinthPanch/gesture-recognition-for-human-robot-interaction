@@ -1,10 +1,10 @@
-Control Center module
+Control Center - CC module
 ==================================================================
 
 DESCRIPTION
 --------------------------------------
 This module works as the control center of the project which will be installed on off-board computer.
-Control Center serves as dashboard to visualize the interaction between the Robot, Depth Camera and Brain.
+Control Center serves as dashboard to visualize the interaction between the Robot, Depth Camera and Brain module.
 It is a cross compatible tool that can work in any latest WebBrowser.
 
 
