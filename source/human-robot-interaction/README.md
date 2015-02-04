@@ -75,7 +75,7 @@ On NAO
 
 It will ask you "Do you want to start server or client? "
 - option "server" will initiate UDP Server, Gesture Tracker (hand tracking and gesture tracking)
-- option "server user" will initiate UDP Server, Skeleton Tracker (full body skeleton tracking)
+- option "server skel" will initiate UDP Server, Skeleton Tracker (full body skeleton tracking)
 - option "client" will initiate UDP Client internally
 
 
