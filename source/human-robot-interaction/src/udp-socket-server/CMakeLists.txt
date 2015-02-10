@@ -9,6 +9,6 @@ project(${FOLDER_NAME_AS_PROJECT})
 
 
 ####### BUILD #######
-include_directories(${BOOST_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} ${BOOST_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
