@@ -45,7 +45,6 @@ sudo apt-get install cmake
 sudo apt-get install libboost-all-dev
 ```
 
-
 BUILD
 --------------------------------------
 If you want to deploy it on NAO, build it on OpenNAO OS (Gentoo Linux Image of NAO).
@@ -53,10 +52,8 @@ If you want to deploy it on NAO, build it on OpenNAO OS (Gentoo Linux Image of N
 ```
 git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git hri
 cd hri/source/human-robot-interaction
-sudo cp lib/OpenNI2/libOpenNI2.{so,dylib} /usr/lib
-sudo cp lib/NiTE2/libNiTE2.{so,dylib} /usr/lib
 mkdir build; cd build
-cmake .. -DSELECT_SUBPROJECT=human-robot-interaction
+cmake ..
 make
 ```
 
@@ -73,10 +70,11 @@ scp -r lib/NiTE2/NiTE2 nao@nao.local:/usr/lib
 
 To run it on local machine Mac OSX, Ubuntu, OpenNAO
 ```
+sudo cp lib/OpenNI2/libOpenNI2.{so,dylib} /usr/lib
+sudo cp lib/NiTE2/libNiTE2.{so,dylib} /usr/lib
 sudo cp lib/NiTE2/NiTE.ini /usr/lib
 sudo cp -R lib/NiTE2/NiTE2 /usr/lib
 ```
-
 
 USAGE
 --------------------------------------
