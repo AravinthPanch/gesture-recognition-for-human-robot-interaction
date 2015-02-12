@@ -60,6 +60,8 @@ make
 
 BUILDING ON OpenNAO-vm.2.1.2 for Nao with NaoQi 2.1.2
 --------------------------------------
+### Problem ###
+
 - NAO runs on Gentoo Linux (2.6.33.9-rt31-aldebaran-rt) with Intel Atom Processor with i686 Architecture
 - Aldeberan provides an image of NAO OS named as OpenNAO that can be run in a virtual machine
 - C++ version available on OpenNAO/Nao is libstdc++.so.6.0.14
@@ -81,26 +83,47 @@ emerge --info
  - libstdc++6_4.6.1-1_i386.deb -> Right click -> Open With -> Archive Manager (Archive Manager available in Ubuntu)
  - Library was found under ﻿/usr/lib/i386-linux-gnu/libstdc++.so.6.0.16
 
+### Solution ###
 
-Please execute the following commands in OpenNAO to apply the patch.
+Please execute the following commands in OpenNAO to apply the patch
 ```
 cd ~/hri/source/human-robot-interaction
-sudo cp lib/OpenNI2/libstdc++.so.6.0.16 /usr/lib
+sudo cp lib/libstdc++.so.6.0.16 /usr/lib
 sudo rm libstdc++.so
 sudo ln -s libstdc++.so.6.0.16 libstdc++.so
 ```
 
+Use the following command in OpenNAO and now it should show versions upto GLIBCXX_3.4.16
+```
+strings /usr/lib/libstdc++.so.6 | grep GLIBC
+```
 
+Finally build it
+```
+cd ~/hri/source/human-robot-interaction
+mkdir build; cd build
+cmake ..
+make
 
 INSTALLATION
 --------------------------------------
-To run it on Robot, executable and libraries must be copied to NAO (Nao must be available in the same network)
+To run it on Robot, executable and libraries must be copied to NAO (Nao must be available in the same network).
 ```
 cd ~/hri/source/human-robot-interaction
 scp bin/human-robot-interaction nao@nao.local:~/hri/
 scp lib/NiTE2/libNiTE2-32.so nao@nao.local:/usr/lib/libNiTE2.so
 scp lib/NiTE2/NiTE.ini nao@nao.local:/usr/lib
 scp -r lib/NiTE2/NiTE2 nao@nao.local:/usr/lib
+scp lib/libstdc++.so.6.0.16 /usr/lib
+```
+
+Patch must be applied on NAO as well. Run these commands on NAO.
+```
+ssh nao@nao.local
+cd /usr/lib
+su #password is root
+rm libstdc++.so
+ln -s libstdc++.so.6.0.16 libstdc++.so
 ```
 
 To run it on local machine Mac OSX, Ubuntu, OpenNAO
