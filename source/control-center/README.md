@@ -26,20 +26,23 @@ Install NodeJS on Mac OSX
 ```
 brew update
 brew install node
+brew install git
 ```
 
 Install NodeJS on Ubuntu
 ```
+sudo apt-get update
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
+sudo apt-get install git
 ```
 
 INSTALLATION
 --------------------------------------
 First install
 ```
-git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git hri
-cd hri/source/control-center
+git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git ~/hri
+cd ~/hri/source/control-center
 sudo npm install
 ```
 
@@ -47,7 +50,7 @@ USAGE
 --------------------------------------
 This will start a control center web app at http://localhost:5007 in your default browser.
 ```
-cd hri/source/control-center
+cd ~/hri/source/control-center
 gulp
 ```
 

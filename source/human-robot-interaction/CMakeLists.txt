@@ -12,15 +12,24 @@ if(!Boost_FOUND)
 message(SEND_ERROR "Boost Libray is not found. Please Install it.")  
 endif()
 
-find_library(OPENNI2_LIBRARY
-    NAMES OpenNI2
-    PATHS ${PROJECT_SOURCE_DIR}/lib/OpenNI2/
-)
 
-find_library(NITE2_LIBRARY
-    NAMES NiTE2
-    PATHS ${PROJECT_SOURCE_DIR}/lib/NiTE2/
-)
+if(CMAKE_SYSTEM_NAME STREQUAL Darwin)
+	message("-- TARGET SYSTEM IS " ${CMAKE_SYSTEM_NAME})
+	set(OPENNI2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/OpenNI2/libOpenNI2.dylib)
+	set(NITE2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/NiTE2/libNiTE2.dylib)
+
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+	if(CMAKE_SIZEOF_VOID_P EQUAL 8)     	
+    	message("-- TARGET SYSTEM IS 64 Bit " ${CMAKE_SYSTEM_NAME})
+		set(OPENNI2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/OpenNI2/libOpenNI2.so)
+		set(NITE2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/NiTE2/libNiTE2.so)
+	else()
+    	message("-- TARGET SYSTEM IS 32 Bit " ${CMAKE_SYSTEM_NAME})
+    	set(OPENNI2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/OpenNI2/libOpenNI2-32.so)
+		set(NITE2_LIBRARY ${PROJECT_SOURCE_DIR}/lib/NiTE2/libNiTE2-32.so)    	
+	endif()
+
+endif() 
 
 
 ####### MACROS #######

@@ -35,6 +35,7 @@ xcode-select --install
 brew update
 brew install boost
 brew install cmake
+brew install git
 ```
 
 On Ubuntu
@@ -43,6 +44,7 @@ sudo apt-get update
 sudo apt-get install build-essential
 sudo apt-get install cmake
 sudo apt-get install libboost-all-dev
+sudo apt-get install git
 ```
 
 BUILD
@@ -50,8 +52,8 @@ BUILD
 If you want to deploy it on NAO, build it on OpenNAO OS (Gentoo Linux Image of NAO).
 
 ```
-git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git hri
-cd hri/source/human-robot-interaction
+git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git ~/hri
+cd ~/hri/source/human-robot-interaction
 mkdir build; cd build
 cmake ..
 make
@@ -61,9 +63,9 @@ INSTALLATION
 --------------------------------------
 To run it on Robot, executable and libraries must be copied to NAO (Nao must be available in the same network)
 ```
-cd hri/source/human-robot-interaction
+cd ~/hri/source/human-robot-interaction
 scp bin/human-robot-interaction nao@nao.local:~/hri/
-scp lib/NiTE2/libNiTE2.so nao@nao.local:/usr/lib
+scp lib/NiTE2/libNiTE2-32.so nao@nao.local:/usr/lib/libNiTE2.so
 scp lib/NiTE2/NiTE.ini nao@nao.local:/usr/lib
 scp -r lib/NiTE2/NiTE2 nao@nao.local:/usr/lib
 ```
@@ -80,8 +82,7 @@ USAGE
 --------------------------------------
 On local machine
 ```
-cd hri/source/human-robot-interaction
-bin/human-robot-interaction
+~/hri/source/human-robot-interaction/bin/human-robot-interaction
 ```
 
 On NAO
