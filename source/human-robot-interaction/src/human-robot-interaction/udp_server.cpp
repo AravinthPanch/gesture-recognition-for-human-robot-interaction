@@ -13,6 +13,7 @@
 #include "udp_server.h"
 #include "skeleton_tracker.h"
 #include "gesture_tracker.h"
+#include "utils.h"
 
 
 /**
@@ -20,8 +21,7 @@
  *
  */
 
-udp_server::udp_server(boost::asio::io_service& io_service): socket_server(io_service, udp::endpoint(udp::v4(), server_port)),
-server_port(5005), client_port(5006)
+udp_server::udp_server(boost::asio::io_service& io_service): socket_server(io_service, udp::endpoint(udp::v4(), server_port))
 {
     clientConnected = false;
     receive();

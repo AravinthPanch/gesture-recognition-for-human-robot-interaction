@@ -14,8 +14,13 @@
 #include "udp_client.h"
 #include "gesture_tracker.h"
 #include "skeleton_tracker.h"
+#include "setup.h"
 
-
+void helper(){
+    int serverPort = 0;
+    serverPort= getConfigValue<int>("serverAddress");
+    std::cout<<" serverPort:"<<serverPort;
+}
 
 int main(int argc, char* argv[])
 {
@@ -53,6 +58,7 @@ int main(int argc, char* argv[])
         else{
             BOOST_LOG_TRIVIAL(info) << "Invalid selection. Enter server or client" ;
             std::cout << "Enter server or server sekel or client " << std::endl ;
+            helper();
         }
     }
     

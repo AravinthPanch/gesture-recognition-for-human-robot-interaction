@@ -13,6 +13,7 @@
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
+#include "setup.h"
 
 using boost::asio::ip::udp;
 
@@ -20,8 +21,8 @@ class udp_server
 {
     
 private:
-    const int server_port;
-    const int client_port;
+    const int server_port = getConfigValue<int>("serverPort");
+    const int client_port = getConfigValue<int>("clientPort");
     bool clientConnected;
     boost::array<char, 2> receive_buffer;
     boost::array<char, 8> send_buffer;
