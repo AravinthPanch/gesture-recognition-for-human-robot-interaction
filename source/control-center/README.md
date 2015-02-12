@@ -32,9 +32,12 @@ brew install git
 Install NodeJS on Ubuntu
 ```
 sudo apt-get update
+sudo apt-get install git
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
-sudo apt-get install git
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+﻿sudo apt-get install npm
+
 ```
 
 INSTALLATION
