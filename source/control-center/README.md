@@ -37,7 +37,6 @@ curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install -y nodejs
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 ﻿sudo apt-get install npm
-
 ```
 
 INSTALLATION
@@ -47,6 +46,7 @@ First install
 git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git ~/hri
 cd ~/hri/source/control-center
 sudo npm install
+sudo npm install -g gulp
 ```
 
 USAGE
