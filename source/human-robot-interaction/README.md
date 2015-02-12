@@ -104,6 +104,7 @@ cd ~/hri/source/human-robot-interaction
 mkdir build; cd build
 cmake ..
 make
+```
 
 INSTALLATION
 --------------------------------------
