@@ -49,7 +49,6 @@ sudo apt-get install git
 
 BUILD
 --------------------------------------
-If you want to deploy it on NAO, build it on OpenNAO OS (Gentoo Linux Image of NAO).
 
 ```
 git clone git@github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git ~/hri
@@ -58,6 +57,40 @@ mkdir build; cd build
 cmake ..
 make
 ```
+
+BUILDING ON OpenNAO-vm.2.1.2 for Nao with NaoQi 2.1.2
+--------------------------------------
+- NAO runs on Gentoo Linux (2.6.33.9-rt31-aldebaran-rt) with Intel Atom Processor with i686 Architecture
+- Aldeberan provides an image of NAO OS named as OpenNAO that can be run in a virtual machine
+- C++ version available on OpenNAO/Nao is libstdc++.so.6.0.14
+- GCC version available on OpenNAO is 4.5.3 (Gentoo 4.5.3-r1 p1.0, pie-0.4.5) with GLIBCXX_3.4.14.
+Use the following command in OpenNAO to check it.
+```
+strings /usr/lib/libstdc++.so.6 | grep GLIBC
+```
+- Emerge is the package manager for Gentoo Linux and Portage is the package tree
+- Portage tree used with OpenNAO/Nao was last updated on 11 Jan 2012. Use the following command in OpenNAO to check it.
+```
+emerge --info
+```
+- Aldeberan doesn't allow users to update emerge/portage tree because that will lead to conflicts with their software
+- NiTE middleware library(libNiTE2.so) was built by PrimeSense using higher version of GCC (higher than GLIBCXX_3.4.14 or libstdc++.so.6.0.14)
+- If you build the code with GCC 4.5.3, it will throw an error while linking libNiTE2.so, '/usr/lib/libstdc++.so.6: version GLIBCXX_3.4.15 not found'
+- Hence small hack must be done in order to do that.
+ - libstdc++6_4.6.1-1_i386.deb was downloaded from http://snapshot.debian.org/package/gcc-4.6/4.6.1-1
+ - libstdc++6_4.6.1-1_i386.deb -> Right click -> Open With -> Archive Manager (Archive Manager available in Ubuntu)
+ - Library was found under ﻿/usr/lib/i386-linux-gnu/libstdc++.so.6.0.16
+
+
+Please execute the following commands in OpenNAO to apply the patch.
+```
+cd ~/hri/source/human-robot-interaction
+sudo cp lib/OpenNI2/libstdc++.so.6.0.16 /usr/lib
+sudo rm libstdc++.so
+sudo ln -s libstdc++.so.6.0.16 libstdc++.so
+```
+
+
 
 INSTALLATION
 --------------------------------------
