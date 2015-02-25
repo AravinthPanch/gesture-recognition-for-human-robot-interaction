@@ -1,7 +1,11 @@
-\chapter{Problemanalyse}
-Länge: ca. 5 - 15 Seiten\\\\
-Das Kapitel Problemanalyse dient dazu, das in der Einleitung identifizierte und eingegrenzte Problem auf seine Ursachen zurückzuführen und so Lösungsmöglichkeiten zu entwickeln. Hierdurch wird die Problembezogenheit der entwickelten Lösung sichergestellt. Wenn möglich, ist durch eine Literaturrecherche nachzuweisen, dass bisher keine geeigneten Lösungen existieren. Der Betreuer hilft bei der Entscheidung, ob die Problemanalyse ausreichend tief erfolgt ist. Häufig führt eine hinreichend genaue Problemanalyse zu präziseren und damit kürzeren Lösungskonzepten.\\\\
+\chapter{Goal}
+As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
 
-\noindent Kapitelzusammenfassung am Ende:\\
-Der Übergang von der Problemanalyse zur Konzeptentwicklung stellt eine wichtige Nahtstelle innerhalb der Arbeit dar, da von einer betrachtend-analysierenden Perspektive auf eine konstruktiv-kreative Perspektive gewechselt wird. Daher empfiehlt es sich, an dieser Stelle die Ergebnisse der Problemanalyse zusammenzufassen.
+In this thesis, we attempt to implement the feature for NAO to recognize gestures and execute predefined actions based on the gesture. NAO will be extended with an external depth camera, that will enable NAO to recognize 3D modeled gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon.  Additionally, skeletal points tracking algorithm with machine learning technique using Hidden Markov Models will be used to recognize the gestures. Due to the computational limitations of NAO, gesture recognition algorithm will be executed on off-board computer. With the hand gesture recognizing feature, NAO will be available to the users in two modes.
 
+\begin{itemize}
+	\item \textbf{Command mode:} In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, other interfaces such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
+	\item \textbf{Translation mode:} In this mode, NAO will be directly translating the meaning of the gesticulated gestures. To achieve this, text-to-speech library of NAO will be used and recognized gesture can be spoken out using the integrated loudspeaker. In future, it will allow NAO to translate a sign language to assist people with hearing and speech disabilities.
+\end{itemize}
+
+In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has computational limitations. Gestures will involve both the hands or single hand to interact with the robot.
