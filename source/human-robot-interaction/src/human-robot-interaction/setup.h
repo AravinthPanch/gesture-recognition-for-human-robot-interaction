@@ -11,8 +11,10 @@
 #include <stdio.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 
-static std::string configFileName = "/Users/aravinth/hri.conf";
+static std::string configFileName = "hri.conf";
 static boost::property_tree::ptree pt;
 
 template<typename T> T getConfigValue(std::string attr)

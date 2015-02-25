@@ -16,9 +16,10 @@
 #include "skeleton_tracker.h"
 #include "setup.h"
 
+
 void helper(){
     int serverPort = 0;
-    serverPort= getConfigValue<int>("serverAddress");
+    serverPort= getConfigValue<int>("serverPort");
     std::cout<<" serverPort:"<<serverPort;
 }
 
