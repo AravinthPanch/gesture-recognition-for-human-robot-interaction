@@ -7,7 +7,8 @@
  * Contributors:
  */
 
-var express = require('express'),
+var config = require('../config/hri.json'),
+	express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
 	io = require('socket.io')(server),
@@ -15,7 +16,6 @@ var express = require('express'),
 
 
 // Sever configuration
-app.set('port', process.env.PORT || 5007);
 app.use(express.static(__dirname, '/public'));
 
 
@@ -40,28 +40,23 @@ io.on('connection', function (socket) {
 
 
 // Server starting
-server.listen(app.get('port'), function () {
+server.listen(config.controlCenterPort, function () {
 	logger.info('Server is started');
-	logger.info('App is started at http://localhost:%d', app.get('port'));
+	logger.info('App is started at http://localhost:%d', config.controlCenterPort);
 });
 
 
 // Stream UDP to Frontend
 function sendUdpData(socket, mode) {
-	var server_port = 5005;
-	var client_port = 5006;
-	//var server_host = 'nao6.local';
-	var server_host = '127.0.0.1';
-	var client_host = '127.0.0.1';
 
 	var dgram = require('dgram');
 	var server = dgram.createSocket('udp4');
 
 	var message = new Buffer(mode);
 
-	server.send(message, 0, message.length, server_port, server_host, function (err, bytes) {
+	server.send(message, 0, message.length, config.serverPort, config.serverHostName, function (err, bytes) {
 		if (err) throw err;
-		logger.info('UDP message sent to ' + server_host + ':' + server_port);
+		logger.info('UDP message sent to ' + config.serverHostName + ':' + config.serverPort);
 	});
 
 	server.on('listening', function () {

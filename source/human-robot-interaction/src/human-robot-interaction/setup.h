@@ -14,7 +14,7 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 
-static std::string configFileName = "hri.conf";
+static std::string configFileName = "hri.json";
 static boost::property_tree::ptree pt;
 
 template<typename T> T getConfigValue(std::string attr)

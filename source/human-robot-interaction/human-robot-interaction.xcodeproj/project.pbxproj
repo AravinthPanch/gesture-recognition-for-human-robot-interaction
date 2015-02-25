@@ -43,7 +43,7 @@
 		CEAA7CB51A724FBC00C7EF67 /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CEAA7CB61A724FC300C7EF67 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CEAA7CBA1A72528900C7EF67 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAA7CB91A72528900C7EF67 /* main.cpp */; };
-		CED6EFAF1A9E08A600402682 /* hri.conf in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4B908F1A8D013500A2EE05 /* hri.conf */; };
+		CED6EFB11A9E14F900402682 /* hri.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED6EFB01A9E14F100402682 /* hri.json */; };
 		CEE283B81A48C35A00131564 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B51A48C35A00131564 /* main.cpp */; };
 		CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CEE283CC1A48CCB700131564 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */; };
@@ -140,7 +140,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				CED6EFAF1A9E08A600402682 /* hri.conf in CopyFiles */,
+				CED6EFB11A9E14F900402682 /* hri.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +157,6 @@
 		CE4AC8E31A506EF6001B33CF /* udp_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_client.h; path = "src/human-robot-interaction/udp_client.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skeleton_tracker.cpp; path = "src/human-robot-interaction/skeleton_tracker.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E61A51752B001B33CF /* skeleton_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skeleton_tracker.h; path = "src/human-robot-interaction/skeleton_tracker.h"; sourceTree = SOURCE_ROOT; };
-		CE4B908F1A8D013500A2EE05 /* hri.conf */ = {isa = PBXFileReference; lastKnownFileType = text; name = hri.conf; path = ../config/hri.conf; sourceTree = "<group>"; };
 		CE4B90921A8D03CD00A2EE05 /* setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = setup.h; path = "src/human-robot-interaction/setup.h"; sourceTree = SOURCE_ROOT; };
 		CE70B2911A5447E80072BB83 /* nite-user-glut-viewer-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-user-glut-viewer-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE70B2981A54484B0072BB83 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-user-glut-viewer/main.cpp"; sourceTree = SOURCE_ROOT; };
@@ -184,6 +183,7 @@
 		CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-hand-tracker-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAA7CB91A72528900C7EF67 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-hand-tracker/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CED6EFAD1A9E082800402682 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
+		CED6EFB01A9E14F100402682 /* hri.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = hri.json; path = ../config/hri.json; sourceTree = "<group>"; };
 		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
@@ -334,7 +334,7 @@
 		CE4B90901A8D013B00A2EE05 /* config */ = {
 			isa = PBXGroup;
 			children = (
-				CE4B908F1A8D013500A2EE05 /* hri.conf */,
+				CED6EFB01A9E14F100402682 /* hri.json */,
 			);
 			name = config;
 			sourceTree = "<group>";

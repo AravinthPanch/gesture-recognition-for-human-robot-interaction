@@ -1,5 +1,6 @@
 {
 	"serverPort": 5005,
 	"clientPort": 5006,
+	"controlCenterPort": 5007,
 	"serverHostName": "localhost"
 }
