@@ -12,42 +12,56 @@ var width = window.innerWidth,
 	height = window.innerHeight,
 	container = {};
 
+var renderStatus = 'renderHand';
+
 var joints = {},
-	limbs = {};
-
-var jointNames = [
-	"HAND"
-];
-
-//jointNames = [
-//	"HEAD",
-//	"NECK",
-//	"LEFT_SHOULDER",
-//	"RIGHT_SHOULDER",
-//	"LEFT_ELBOW",
-//	"RIGHT_ELBOW",
-//	"LEFT_HAND",
-//	"RIGHT_HAND",
-//	"TORSO",
-//	"LEFT_HIP",
-//	"RIGHT_HIP",
-//	"LEFT_KNEE",
-//	"RIGHT_KNEE",
-//	"LEFT_FOOT",
-//	"RIGHT_FOOT"
-//];
+	limbs = {},
+	jointNames = [],
+	handTrackingJoints = ["HAND"],
+	skeletonTrackingJoints = [
+		"HEAD",
+		"NECK",
+		"LEFT_SHOULDER",
+		"RIGHT_SHOULDER",
+		"LEFT_ELBOW",
+		"RIGHT_ELBOW",
+		"LEFT_HAND",
+		"RIGHT_HAND",
+		"TORSO",
+		"LEFT_HIP",
+		"RIGHT_HIP",
+		"LEFT_KNEE",
+		"RIGHT_KNEE",
+		"LEFT_FOOT",
+		"RIGHT_FOOT"
+	];
 
 
-define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function ($, THREE, socketio) {
+define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallControl'], function ($, THREE, socketio, _) {
 
 	var socket = socketio.connect();
 
 	function startHandTracking() {
-		socket.emit('init', 'handTracking');
+		//socket.emit('init', 'handTracking');
+		renderStatus = 'renderHand';
+		jointNames = handTrackingJoints;
+		clearScene();
+		drawJoints();
+		$('.renderStatusLabel').text(renderStatus);
 	}
 
 	function startSkeletonTracking() {
-		socket.emit('init', 'skeletonTracking');
+		//socket.emit('init', 'skeletonTracking');
+		renderStatus = 'renderSkeleton';
+		jointNames = skeletonTrackingJoints;
+		clearScene();
+		drawJoints();
+		$('.renderStatusLabel').text(renderStatus);
+	}
+
+	function startRenderFromData() {
+		renderStatus += "FromData";
+		$('.renderStatusLabel').text(renderStatus);
 	}
 
 	function initControlPanel() {
@@ -67,9 +81,22 @@ define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function
 		sButton.style.cssText = "margin: 10px;";
 		sButton.addEventListener("click", startSkeletonTracking);
 
+		var fromDataButton = document.createElement('button');
+		fromDataButton.innerHTML = "Render from Data";
+		fromDataButton.className = 'ui primary button';
+		fromDataButton.style.cssText = "margin: 10px;";
+		fromDataButton.addEventListener("click", startRenderFromData);
+
+		var statusLabel = document.createElement('div');
+		statusLabel.innerHTML = renderStatus;
+		statusLabel.className = 'ui label renderStatusLabel';
+		statusLabel.style.cssText = "margin: 10px;";
+
 		container.appendChild(title);
 		container.appendChild(hButton);
 		container.appendChild(sButton);
+		container.appendChild(fromDataButton);
+		container.appendChild(statusLabel);
 	}
 
 	function initDom() {
@@ -94,6 +121,13 @@ define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function
 		//app.camera.position.x = 1000;
 		app.camera.position.z = 2000;
 		app.controls = new THREE.TrackballControls(app.camera);
+	}
+
+	function clearScene() {
+		var objsToRemove = _.rest(app.scene.children, 1);
+		_.each(objsToRemove, function (object) {
+			app.scene.remove(object);
+		});
 	}
 
 	function drawJoints() {
@@ -123,7 +157,7 @@ define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function
 
 	var i = 0;
 
-	function renderFromData() {
+	function renderSkeletonFromData() {
 		if (i < skeletonData.length) {
 			$.each(skeletonData[i], function (key, val) {
 
@@ -143,11 +177,11 @@ define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function
 	}
 
 	function renderHandFromData() {
-		if (i < skeletonData.length) {
-			if ('HAND' in skeletonData[i]) {
-				joints['HAND'].position.x = skeletonData[i].HAND[1];
-				joints['HAND'].position.y = skeletonData[i].HAND[2];
-				joints['HAND'].position.z = skeletonData[i].HAND[3];
+		if (i < handData.length) {
+			if ('HAND' in handData[i]) {
+				joints['HAND'].position.x = handData[i].HAND[1];
+				joints['HAND'].position.y = handData[i].HAND[2];
+				joints['HAND'].position.z = handData[i].HAND[3];
 			}
 		}
 		i++;
@@ -165,7 +199,7 @@ define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function
 	}
 
 
-	function render() {
+	function renderSkeleton() {
 		$.each(app.skeletonBuffer, function (key, val) {
 			var positionConfidence = parseInt(val[3]);
 			if (key !== "FRAME") {
@@ -186,10 +220,22 @@ define(['jquery', 'three', 'socketio', 'semantic', 'trackBallControl'], function
 
 		requestAnimationFrame(animate);
 		app.controls.update();
-		//render();
-		//renderHand();
-		//renderFromData();
-		renderHandFromData();
+
+		switch (renderStatus) {
+			case 'renderHandFromData':
+				renderHandFromData();
+				break;
+			case 'renderSkeletonFromData':
+				renderSkeletonFromData();
+				break;
+			case 'renderHand':
+				renderHand();
+				break;
+			case 'renderSkeleton':
+				renderSkeleton();
+				break;
+		}
+
 	}
 
 	function init() {
