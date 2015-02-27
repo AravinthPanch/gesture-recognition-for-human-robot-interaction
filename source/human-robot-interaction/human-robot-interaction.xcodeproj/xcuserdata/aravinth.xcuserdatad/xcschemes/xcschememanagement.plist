@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>grt-ada-boost.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>grt-anbc.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>human-robot-interaction.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -118,6 +128,16 @@
 			<true/>
 		</dict>
 		<key>CEAA7CAC1A724F6E00C7EF67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CEDFA8221AA093F6006B1C0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CEDFA82F1AA094AE006B1C0D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
