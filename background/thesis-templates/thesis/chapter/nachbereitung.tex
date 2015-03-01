@@ -1,0 +1,41 @@
+% Setze Numerierung wieder auf römisch zurück und setzte von oben fort
+% Wert ist demnach der von 'roemisch'
+% ---->
+%\pagenumbering{Roman}
+%\setcounter{page}{\value{roemisch}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Referenzen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix % andere Aufzählung
+\newpage
+%\addcontentsline{toc}{chapter}{Literaturverzeichnis} %Eintrag
+\phantomsection
+%\addtocontents{toc}{Literat}
+\addcontentsline{toc}{chapter}{\numberline{}\bibname}
+\bibliography{chapter/bib}
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}\listfigurename}
+\listoffigures
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}\listtablename}
+\listoftables
+\clearpage
+
+%\appendix
+%\addcontentsline{toc}{chapter}{\numberline{}Abkürzungsverzeichnis}
+\input{chapter/abkuerzung}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Anhang
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%\appendix
+\input{chapter/anhang}
+\clearpage

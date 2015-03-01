@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titelblatt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\trtype}{Diplomarbeit}
+\newcommand{\trauthor}{Manfred Mustermann}
+\newcommand{\trstrasse}{Musterstr. 123}
+\newcommand{\trmatrikelnummer}{12345}
+\newcommand{\trort}{67890 Berlin}
+
+\newcommand{\textss}[1]{"`#1"'}
+%\setlength{\parindent}{0pt}
+% externen Betreuern noch die Adresse ergänzen:
+\newcommand{\trbetreuerB}{Dipl.-Inform. Olaf Kroll-Peters}
+\newcommand{\trbetreuerA}{Prof. Dr.-Ing. habil. Sahin Albayrak}
+\newcommand{\trdate}{\today}
+
+% Deckblatt-Format:
+\pagenumbering{Roman}
+
+\thispagestyle{empty}
+\begin{tabular}{lcr}
+\ifx\pdftexversion\undefined
+  \includegraphics[scale=0.5]{tu_logo2}
+\else
+  \includegraphics[scale=0.5]{tu_logo2}
+\fi
+  &\hspace{1.5cm}
+  Technische Universität Berlin \hspace{1cm} &
+  \includegraphics[scale=0.6]{dailogo}
+  \\
+\end{tabular}
+
+\rule{\textwidth}{0.4pt}
+
+\vspace{2.5cm}
+\begin{center}
+  \textbf{\LARGE \trtitle}
+\end{center}
+\vspace{2cm}
+
+\begin{center}
+  \textbf{\trtype} \\
+  am Fachgebiet Agententechnologien in betrieblichen Anwendungen und der Telekommunikation (AOT)\\
+  Prof.\ Dr.-Ing.\ habil.\ Sahin Albayrak \\
+  Fakultät IV Elektrotechnik und Informatik \\
+  Technische Universität Berlin \\[0.5cm]
+  vorgelegt von \\
+  \textbf{\trauthor}
+\end{center}
+
+\vspace{1cm}
+
+
+\begin{center}
+\begin{tabular}{ll}
+Betreuer: & \trbetreuerA, \\ &\trbetreuerB\\
+\end{tabular}
+\end{center}
+
+\vfill
+
+\begin{tabular}{l}
+\trauthor \\
+Matrikelnummer:  \trmatrikelnummer \\
+\trstrasse \\
+\trort
+\end{tabular}
+
+\rule{\textwidth}{0.4pt}
+
+\clearpage

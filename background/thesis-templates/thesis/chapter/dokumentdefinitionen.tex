@@ -1,0 +1,96 @@
+\newcommand{\trtitle}{Titel dieser Arbeit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bmpstego}{stego}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,a4paper]{report}
+%\documentclass[12pt,a4paper,onepage]{scrbook}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\newcommand{\changefont}[3]{
+\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+
+% Sprachen:
+\usepackage[ngerman]{babel} % Silbentrennung Deutsch neue Rechtschreibung
+\selectlanguage{ngerman}
+
+\sloppy
+%\usepackage{makeidx}
+%\makeglossary
+\makeindex
+
+\usepackage{sty/abbreviations}
+
+\usepackage{amsmath, marvosym} % Mathematik
+\usepackage{times, url, geometry, amssymb, graphicx, booktabs}
+\usepackage{fancyhdr} %Kopf- und Fußzeilen
+\usepackage[colorlinks,pagebackref,pdfpagelabels]{hyperref} %Hyperlinks zw. Textstellen
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage{color} % Farben
+\hypersetup{
+pdffitwindow=true,
+pdfmenubar=true,
+frenchlinks=false,
+colorlinks=false,
+bookmarksopen=true,
+bookmarksnumbered=true,
+pdfstartview=FitH,
+pdftitle = {\trtitle},
+pdfsubject = {\trtitle},
+pdfauthor = {Arik Messerman},
+pdfkeywords = {uidarikmesserman301174 003 0022, arik messerman, Steganographie, Konzelation, Authentikation, Steganoanalyse},
+pdfcreator = {Adobe-Acrobat-Distiller},
+pdfproducer = {LaTeX with hyperref and thumbpdf}
+}
+\usepackage{subfigure} % mehrere Abbildungen nebeneinander/übereinander
+\usepackage{latexsym}
+
+\geometry{a4paper,body={5.8in,9in}}
+\setlength{\headheight}{15pt}
+
+\usepackage{setspace} % 1,5 Zeilenabstand
+\onehalfspacing
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3} 
+
+% Hurenkinder- und Schusterjungenregelung
+\clubpenalty = 10000 % schliesst Schusterjungen aus
+\widowpenalty = 10000 % schliesst Hurenkinder aus
+
+% aller Bilder werden im Unterverzeichnis figures gesucht:
+\graphicspath{{figures/}}
+
+% Headers:
+%\pagestyle{headings}
+\pagestyle{fancy}
+\pagestyle{headings}
+
+% Literaturverzeichnis
+\usepackage{bibgerm}
+%\usepackage{natbib}
+\bibliographystyle{gerunsrt} % Literaturangaben nach Auftreten sortieren %{gerplain}
+
+\usepackage{listings} % für Formatierung in Quelltexten
+\definecolor{grau}{gray}{0.25}
+\lstset{
+	extendedchars=true,
+	basicstyle=\scriptsize\ttfamily,
+	%basicstyle=\tiny\ttfamily,
+	tabsize=2,
+	keywordstyle=\textbf,
+	commentstyle=\color{grau},
+	stringstyle=\textit,
+	numbers=left,
+	numberstyle=\tiny,
+	% für schönen Zeilenumbruch
+	breakautoindent  = true,
+	breakindent      = 2em,
+	breaklines       = true,
+	postbreak        = ,
+	%prebreak         = \raisebox{-.8ex}[0ex][0ex]{\ensuremath{\lrcorner}},
+	prebreak         = \raisebox{-.8ex}[0ex][0ex]{\Righttorque},
+}
+

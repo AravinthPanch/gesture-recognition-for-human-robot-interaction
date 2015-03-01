@@ -1,0 +1,36 @@
+\fancyhead[LO]{}
+\fancyhead[RO]{\slshape \rightmark}
+%\chapter*{ }
+%\clearpage
+\newpage
+
+\phantomsection
+\input{chapter/hinweise}
+
+\phantomsection
+\input{chapter/urheber}
+\clearpage
+
+\phantomsection
+\input{chapter/zusammenfassung}
+\input{chapter/danksagung}
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}\contentsname}
+\tableofcontents
+\clearpage
+
+
+\clearpage
+
+% Merke mir die römische Seitenzahl in 'roemisch'
+\newcounter{roemisch}
+\setcounter{roemisch}{\value{page}}
+\pagenumbering{arabic}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}{}}
+\fancyhead[LO]{}
+\fancyhead[RO]{\slshape \rightmark}
+

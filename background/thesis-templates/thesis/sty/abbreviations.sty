@@ -1,0 +1,118 @@
+%%
+%% This is file `abbreviations.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% abbreviations.dtx  (with options: `package')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from abbreviations.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file abbreviations.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%% Written by Lucas Wartenburger
+%%
+%%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{abbreviations}[2004/08/20 v0.5]
+\RequirePackage{xspace}
+\RequirePackage{ifthen}
+\newif\ifabb@force
+\newif\ifabbrev@long\abbrev@longfalse
+\newif\ifcitepar@out
+\newcommand*{\abbrevname}{Abk\"urzungsverzeichnis}
+\newenvironment{abbreviations}
+     {\section*{\abbrevname
+        \@mkboth{\MakeUppercase\abbrevname}{\MakeUppercase\abbrevname}}
+        \begin{tabular}{ll}
+            {\bf Verwendete Abk\"urzung} & {\bf Bedeutung}\\}%
+     { &
+      \end{tabular}}%
+\newenvironment{longabbreviations}
+  {\abbrev@longtrue}
+  {\abbrev@longfalse}
+\def\@newcell{&}
+\def\abbrev{\@ifstar{\abb@forcetrue\@abbrev}{\abb@forcefalse\@abbrev}}%
+\def\@abbrev#1#2#3{%
+ \if@filesw\immediate\write\@abbout{\string\abbrevdef{#1}{#2}{#3}}\fi
+ \ifabb@force#2\@newcell#3\tabularnewline
+ \else\@ifundefined{uabb#1}{}{#2\@newcell#3\tabularnewline}\fi
+\ignorespaces}%
+\def\abb@declare#1{%                            %
+   \global\expandafter\edef\csname #1\endcsname{% \global\edef\name{
+     \noexpand\protect                          % \protect
+      \expandafter\noexpand\csname              % \noexpand
+         \expandafter\string#1 \endcsname       % \name
+   }%                                           % }
+   \let\@ifdefinable\@rc@ifdefinable
+   \expandafter\global\expandafter\def\csname   % \global\def\name{
+      \expandafter\string#1 \endcsname}%        % definition}
+\def\abbrevdef#1#2#3{%
+\abb@declare{babb#1}{\ifabbrev@long#3\else\if@filesw%
+ \immediate\write\@abbout{\string\abbrevuse{#1}}\fi#2\fi\xspace}%
+\abb@declare{abb#1}{\if@filesw\immediate\write%
+ \@abbout{\string\abbrevuse{#1}}\fi#2\xspace}%
+\global\@namedef{labb#1}{#3\xspace}}%
+\def\abbrevuse#1{\global\@namedef{uabb#1}{true}}%
+\@ifpackageloaded{index}{%
+\def\citelaw{\@ifstar{%
+  \citepar@outfalse\cite@law}{%
+  \citepar@outtrue\cite@law}}% mit Output?
+\def\cite@law{\@ifnextchar[{%
+  \cite@@law}{%
+  \cite@@law[\S~]}} % Default § verwenden?
+\def\cite@@law[#1]#2{\@ifnextchar[{%
+  \cite@@@law[#1]#2}{%
+  \cite@@@law[#1]#2[]}}% mit Absatz?
+\def\cite@@@law[#1]#2[#3]{\@ifnextchar[{%
+  \cite@@@@law[#1]#2[#3]}{%
+  \cite@@@@law[#1]#2[#3][]}} % mit Satz?
+\def\cite@@@@law[#1]#2[#3][#4]#5{%
+  \ifthenelse{\equal{#3}{}}{%ohne Absatz
+   \index[laws]{#5@\csname babb#5\endcsname!#1#2}%
+    \ifcitepar@out #1#2#4 \csname abb#5\endcsname\fi}{%mit Absatz
+   \index[laws]{#5@\csname babb#5\endcsname!#1#2!#3}%
+    \ifcitepar@out #1#2 #3 #4 \csname abb#5\endcsname\fi}}
+\def\citeart{\@ifstar{%
+  \citepar@outfalse\cite@@law[Art.~]}{%
+  \citepar@outtrue\cite@@law[Art.~]}}
+\def\citepar{\@ifstar{%
+  \citepar@outfalse\cite@@law[\S~]}{%
+  \citepar@outtrue\cite@@law[\S~]}}
+}{\relax}%
+\AtBeginDocument{
+  \newwrite\@abbout
+  \@input{\jobname.abb}%
+  \if@filesw
+    \immediate\openout\@abbout\jobname.abb
+    \immediate\write\@abbout{\relax}%
+  \fi}
+\endinput
+%%
+%% End of file `abbreviations.sty'.

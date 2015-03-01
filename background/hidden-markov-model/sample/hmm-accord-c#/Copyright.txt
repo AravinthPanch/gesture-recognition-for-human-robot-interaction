@@ -1,0 +1,27 @@
+Accord.NET Framework
+
+Copyright (c) 2009-2011, César Roberto de Souza <cesarsouza at gmail.com>
+
+Contains routines adapted from Lutz Roeder's Mapack for .NET, September 2000;
+adapted from Mapack for COM and Jama routines. Original ArrayDataview code is
+copyright (c) Mihail Stefanov, 2004. Original SortableBindingList source code
+is copyright (c) Tim Van Wassenhove, 2008. See actual sources for details.
+
+Overall framework architecture and style was greatly inspired by AForge.NET.
+The AForge.NET Framework is a copyrighted work by Andrew Kirillov. This
+framework (Accord.NET) is in no way affiliated with AForge.NET, its authors
+or contributors.
+
+
+This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation; either version 2.1 of the License, or
+(at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
