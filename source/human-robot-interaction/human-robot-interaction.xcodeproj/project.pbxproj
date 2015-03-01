@@ -47,7 +47,11 @@
 		CEDFA82B1AA0942E006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA82A1AA0942E006B1C0D /* main.cpp */; };
 		CEDFA8381AA094E8006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA8371AA094E8006B1C0D /* main.cpp */; };
 		CEDFA9711AA0A422006B1C0D /* libgrt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFA9701AA0A422006B1C0D /* libgrt.dylib */; };
-		CEDFA9741AA0A50A006B1C0D /* training-data.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEDFA9721AA0A4CC006B1C0D /* training-data.txt */; };
+		CEDFA9741AA0A50A006B1C0D /* anbc-training-data.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEDFA9721AA0A4CC006B1C0D /* anbc-training-data.txt */; };
+		CEDFA9811AA0B0DE006B1C0D /* classification_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA9801AA0B0DE006B1C0D /* classification_data.cpp */; };
+		CEDFA98D1AA0B215006B1C0D /* libgrt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFA9701AA0A422006B1C0D /* libgrt.dylib */; };
+		CEDFA9901AA0B736006B1C0D /* libgrt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFA9701AA0A422006B1C0D /* libgrt.dylib */; };
+		CEDFA9921AA0B7A3006B1C0D /* ada-boost-training-data.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEDFA9911AA0B796006B1C0D /* ada-boost-training-data.txt */; };
 		CEE283B81A48C35A00131564 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEE283B51A48C35A00131564 /* main.cpp */; };
 		CEE283BA1A48C37000131564 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CEE283CC1A48CCB700131564 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */; };
@@ -140,12 +144,13 @@
 		};
 		CEDFA8211AA093F6006B1C0D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
+				CEDFA9921AA0B7A3006B1C0D /* ada-boost-training-data.txt in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CEDFA82E1AA094AE006B1C0D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -153,9 +158,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				CEDFA9741AA0A50A006B1C0D /* training-data.txt in CopyFiles */,
+				CEDFA9741AA0A50A006B1C0D /* anbc-training-data.txt in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDFA9771AA0B095006B1C0D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		CEE283AC1A48C2E300131564 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -212,7 +226,10 @@
 		CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-anbc-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDFA8371AA094E8006B1C0D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/grt-anbc/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEDFA9701AA0A422006B1C0D /* libgrt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgrt.dylib; path = lib/GRT/libgrt.dylib; sourceTree = "<group>"; };
-		CEDFA9721AA0A4CC006B1C0D /* training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "training-data.txt"; path = "data/training-data.txt"; sourceTree = "<group>"; };
+		CEDFA9721AA0A4CC006B1C0D /* anbc-training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "anbc-training-data.txt"; path = "data/anbc-training-data.txt"; sourceTree = "<group>"; };
+		CEDFA9791AA0B095006B1C0D /* grt-test-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-test-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDFA9801AA0B0DE006B1C0D /* classification_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = classification_data.cpp; path = "src/grt-test/classification_data.cpp"; sourceTree = SOURCE_ROOT; };
+		CEDFA9911AA0B796006B1C0D /* ada-boost-training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "ada-boost-training-data.txt"; path = "data/ada-boost-training-data.txt"; sourceTree = "<group>"; };
 		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
@@ -311,6 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDFA9901AA0B736006B1C0D /* libgrt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +337,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDFA9711AA0A422006B1C0D /* libgrt.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDFA9761AA0B095006B1C0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDFA98D1AA0B215006B1C0D /* libgrt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
+				CEDFA97A1AA0B095006B1C0D /* grt-test */,
 				CEDFA8311AA094AE006B1C0D /* grt-anbc */,
 				CEDFA8241AA093F6006B1C0D /* grt-ada-boost */,
 				CEAA7CAE1A724F6E00C7EF67 /* nite-hand-tracker */,
@@ -441,6 +468,7 @@
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
+				CEDFA9791AA0B095006B1C0D /* grt-test-xcode */,
 				CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */,
 				CEDFA8231AA093F6006B1C0D /* grt-ada-boost-xcode */,
 				CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */,
@@ -551,9 +579,19 @@
 		CEDFA9731AA0A4D6006B1C0D /* data */ = {
 			isa = PBXGroup;
 			children = (
-				CEDFA9721AA0A4CC006B1C0D /* training-data.txt */,
+				CEDFA9911AA0B796006B1C0D /* ada-boost-training-data.txt */,
+				CEDFA9721AA0A4CC006B1C0D /* anbc-training-data.txt */,
 			);
 			name = data;
+			sourceTree = "<group>";
+		};
+		CEDFA97A1AA0B095006B1C0D /* grt-test */ = {
+			isa = PBXGroup;
+			children = (
+				CEDFA9801AA0B0DE006B1C0D /* classification_data.cpp */,
+			);
+			name = "grt-test";
+			path = "../grt-test";
 			sourceTree = "<group>";
 		};
 		CEE283AF1A48C2E300131564 /* human-robot-interaction */ = {
@@ -771,6 +809,23 @@
 			productReference = CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */;
 			productType = "com.apple.product-type.tool";
 		};
+		CEDFA9781AA0B095006B1C0D /* grt-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEDFA97D1AA0B095006B1C0D /* Build configuration list for PBXNativeTarget "grt-test" */;
+			buildPhases = (
+				CEDFA9751AA0B095006B1C0D /* Sources */,
+				CEDFA9761AA0B095006B1C0D /* Frameworks */,
+				CEDFA9771AA0B095006B1C0D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "grt-test";
+			productName = "grt-test";
+			productReference = CEDFA9791AA0B095006B1C0D /* grt-test-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
 		CEE283AD1A48C2E300131564 /* human-robot-interaction */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEE283B41A48C2E300131564 /* Build configuration list for PBXNativeTarget "human-robot-interaction" */;
@@ -830,6 +885,9 @@
 					CEDFA82F1AA094AE006B1C0D = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
+					CEDFA9781AA0B095006B1C0D = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					CEE283AD1A48C2E300131564 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -859,6 +917,7 @@
 				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 				CEDFA8221AA093F6006B1C0D /* grt-ada-boost */,
 				CEDFA82F1AA094AE006B1C0D /* grt-anbc */,
+				CEDFA9781AA0B095006B1C0D /* grt-test */,
 			);
 		};
 /* End PBXProject section */
@@ -954,6 +1013,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEDFA9751AA0B095006B1C0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDFA9811AA0B0DE006B1C0D /* classification_data.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEE283AA1A48C2E300131564 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1008,6 +1075,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(HRI_NI_INCLUDE)/**",
 					"$(HRI_BOOST_INCLUDE)",
+					"$(HRI_GRT_INCLUDE)",
 				);
 				HRI_BIN = "$(PROJECT_DIR)/bin";
 				HRI_BOOST_INCLUDE = /usr/local/Cellar/boost/1.56.0/include;
@@ -1021,6 +1089,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(HRI_NI_LIB)/**",
 					"$(HRI_BOOST_LIB)",
+					"$(HRI_GRT_LIB)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1065,6 +1134,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(HRI_NI_INCLUDE)/**",
 					"$(HRI_BOOST_INCLUDE)",
+					"$(HRI_GRT_INCLUDE)",
 				);
 				HRI_BIN = "$(PROJECT_DIR)/bin";
 				HRI_BOOST_INCLUDE = /usr/local/Cellar/boost/1.56.0/include;
@@ -1078,6 +1148,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(HRI_NI_LIB)/**",
 					"$(HRI_BOOST_LIB)",
+					"$(HRI_GRT_LIB)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1350,6 +1421,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/GRT",
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Debug;
@@ -1357,6 +1432,10 @@
 		CEDFA8281AA093F6006B1C0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/GRT",
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
@@ -1378,8 +1457,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(HRI_NI_LIB)/**",
 					"$(HRI_BOOST_LIB)",
-					"$(HRI_GRT_LIB",
-					"$(PROJECT_DIR)/lib/GRT",
+					"$(HRI_GRT_LIB)",
 				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
@@ -1398,7 +1476,32 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(HRI_NI_LIB)/**",
 					"$(HRI_BOOST_LIB)",
-					"$(HRI_GRT_LIB",
+					"$(HRI_GRT_LIB)",
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Release;
+		};
+		CEDFA97E1AA0B095006B1C0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/GRT",
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Debug;
+		};
+		CEDFA97F1AA0B095006B1C0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
 					"$(PROJECT_DIR)/lib/GRT",
 				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
@@ -1543,6 +1646,14 @@
 			buildConfigurations = (
 				CEDFA8351AA094AE006B1C0D /* Debug */,
 				CEDFA8361AA094AE006B1C0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CEDFA97D1AA0B095006B1C0D /* Build configuration list for PBXNativeTarget "grt-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDFA97E1AA0B095006B1C0D /* Debug */,
+				CEDFA97F1AA0B095006B1C0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

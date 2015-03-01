@@ -22,7 +22,7 @@
 		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>
 		<string>../../../..</string>
 		<key>CC182281C6D964B9331E36C0CD377F4A30240DEA</key>
-		<string>../../../../source/human-robot-interaction/lib/ToolKit/</string>
+		<string>../../../../source/human-robot-interaction/lib/ToolKit</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git</string>

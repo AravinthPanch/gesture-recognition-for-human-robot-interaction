@@ -7,7 +7,7 @@ int main (int argc, const char * argv[])
     //Load some training data from a file
     ClassificationData trainingData;
     
-    if( !trainingData.loadDatasetFromFile("training-data.txt") ){
+    if( !trainingData.loadDatasetFromFile("anbc-training-data.txt") ){
         cout << "ERROR: Failed to load training data from file\n";
         return EXIT_FAILURE;
     }

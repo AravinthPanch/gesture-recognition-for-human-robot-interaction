@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CEDFA8221AA093F6006B1C0D"
-               BuildableName = "grt-ada-boost-xcode"
-               BlueprintName = "grt-ada-boost"
+               BlueprintIdentifier = "CEDFA9781AA0B095006B1C0D"
+               BuildableName = "grt-test-xcode"
+               BlueprintName = "grt-test"
                ReferencedContainer = "container:human-robot-interaction.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEDFA8221AA093F6006B1C0D"
-            BuildableName = "grt-ada-boost-xcode"
-            BlueprintName = "grt-ada-boost"
+            BlueprintIdentifier = "CEDFA9781AA0B095006B1C0D"
+            BuildableName = "grt-test-xcode"
+            BlueprintName = "grt-test"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -51,9 +51,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEDFA8221AA093F6006B1C0D"
-            BuildableName = "grt-ada-boost-xcode"
-            BlueprintName = "grt-ada-boost"
+            BlueprintIdentifier = "CEDFA9781AA0B095006B1C0D"
+            BuildableName = "grt-test-xcode"
+            BlueprintName = "grt-test"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -69,9 +69,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEDFA8221AA093F6006B1C0D"
-            BuildableName = "grt-ada-boost-xcode"
-            BlueprintName = "grt-ada-boost"
+            BlueprintIdentifier = "CEDFA9781AA0B095006B1C0D"
+            BuildableName = "grt-test-xcode"
+            BlueprintName = "grt-test"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

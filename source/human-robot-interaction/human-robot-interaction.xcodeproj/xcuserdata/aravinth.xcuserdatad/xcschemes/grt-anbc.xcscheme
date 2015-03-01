@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEDFA82F1AA094AE006B1C0D"
-               BuildableName = "grt-anbc"
+               BuildableName = "grt-anbc-xcode"
                BlueprintName = "grt-anbc"
                ReferencedContainer = "container:human-robot-interaction.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEDFA82F1AA094AE006B1C0D"
-            BuildableName = "grt-anbc"
+            BuildableName = "grt-anbc-xcode"
             BlueprintName = "grt-anbc"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEDFA82F1AA094AE006B1C0D"
-            BuildableName = "grt-anbc"
+            BuildableName = "grt-anbc-xcode"
             BlueprintName = "grt-anbc"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEDFA82F1AA094AE006B1C0D"
-            BuildableName = "grt-anbc"
+            BuildableName = "grt-anbc-xcode"
             BlueprintName = "grt-anbc"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
