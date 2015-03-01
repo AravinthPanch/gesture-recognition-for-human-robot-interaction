@@ -1,0 +1,45 @@
+human-robot interaction
+
+The way to interact with NAO is very interesting, there are so many possibilities, since NAO has camera, mic (and external sensors like kinect). The target of such projects can be create a nature interface to control robot, e.g. by gesture and voice;
+
+Infrastructure
+
+The tasks for infrastructure are supporting development of NAO, which are not related to soccer game, but open new application opportunities.
+
+ground truth system
+
+For testing algorithms of self-localization, we need a ground truth system. Some teams use vision system from Small Size League, and some teams build one with kinect.
+
+tracking system
+
+use Sony PS eye with film as infrared camera, together with infrared LEDs.
+
+Extend Nao with hardware
+
+Extending Naos with hardware is not allowed in RoboCup SPL, but it will open opportunities for other applications.
+
+Xtion
+
+Equip NAO with 3D sensor will open many applications possibilities.
+
+
+X86 board
+
+When we have Xtion installed, we may needs more computation power to process 3D sensor data (or use ROS packages), one possible solution is add one X86 board (raspberry pi) on the back of Nao.
+
+
+
+motion
+fall protection
+
+Although the walk is supposed to stable, NAO still falls down in some case, e.g. pushing by other robots. The robot should protect itself when it detects falling. Aldebaran already provides such protection, but I think we can do better. Students can experiment in SimSpark first, and then try in real NAO.
+
+
+path planning
+
+The robot needs to find a path to target position (e.g. ball) which has to satisfy: collision free, and takes as less time as possible.
+The common method are potential field, and RRT.
+
+coach
+
+Since 2014 a coaching robot which observes the game from an external position and to give tactical and strategic advice to its team's field players is introduced.

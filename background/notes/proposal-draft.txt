@@ -1,0 +1,284 @@
+Hand Gesture Recognition 
+
+What is hand gesture?
+Humans use hand as a part of communication
+It is formed by a static symbol or continuous movement/actions
+It is accompanied with any spoken language
+Palm, Fingers, Arm, Shoulder are used in combination
+
+What is hand gesture recognition?
+One can recognize the hand gestures of his mother tongue
+Stranger can also learn it
+Every symbol or action must be explicitly learned
+
+What is hand gesture recognition by computers?
+Like humans, computer sees the hand via camera
+Process the captured data
+Searches for pattern in the image
+Compares the pattern with the dictionary
+Recognizes the communicated hand gestures
+
+Why do we need hand gesture recognition in computers?
+Man-Computer interactions is the main reason
+Man can command a computer to execute some certain tasks
+Computer can assist human in places where human is disabled
+Disability of speech and hearing can be overcome by this recognition
+Sign language translation will ease the interactions with such disabled people
+Conventional interactions are based on typed command
+
+What is Sign language?
+Sign Language is a complex formation of hand signs/gesture to communicate
+Most common among Speech and hearing disabled
+Both speaker and listener should have explicitly learned the sign language
+It varies with region to region
+It contains single symbol as well as formation of symbols to represent a word
+Combinations of symbol and actions form sentence
+It doesn’t only involve hand but also other upper body parts
+
+What does Sign language translator do?
+Signing person will be recorded by 3D - Camera 
+Process the captured data
+Searches for pattern in the image
+Compares the pattern with the dictionary
+Recognizes the communicated sign
+Identified word or sentence will be translated into speech
+Vice Versa, Speech of a person will be recognized
+Corresponding Sign will shown using 3d model or robot
+
+How to recognize a hand gesture?
+Sense 
+Kinect or Xtion or Standard Camera
+3D cameras are used to get the depth information
+It can process information lively 
+It is USB power supplied and external power supplied
+It uses InfraRed to get the depth informations
+
+Process
+Nite middleware is used to retrieve the data from sensors
+Nite also provides basic Skeleton track system
+OpenNI is used to process the information that is captured
+OpenCV provide more functionalities Image processing such as filters
+
+Detection 
+Image processing techniques to detect the signs
+Segmentation to extract only needed parts of body 
+Skin color differentiation
+Edge detection
+Background subtraction
+Feature extraction
+Skeleton, Hand, Fingers, Face extraction using framework such Kinect SDK.
+Contours and convexity hull and defects for fingers
+Shape Model Guided Active Contours (Snakes)
+Hand gesture recognition via model fitting in energy minimization
+Skeleton fitting using detecting anatomical landmarks in the 3D data
+Recognition
+Machine learning techniques to recognize the signs
+OpenCV Cascade Filter 
+Haar Training
+Gesture and Activity Recognition Toolkit from Georgia Tech (GART)
+Hidden Markov Model Toolkit (HTK)
+Static template training
+Machine learning needs lot of training data. Ex. OpenCV cascade filter needs 1000s of Positive and Negative images
+HTK needs 40 videos of signs to get accuracy above 90%
+
+How is Sign language classified?
+Sign Language is a complex formation of signs, movements, gestures, emotions of upper body
+Sentences are formed by combination of all these
+Some signs are static symbols
+Some signs are dynamic movements
+Some signs are formed with just one hand
+Some signs are formed with both the hands
+Some signs are formed by touching certain part of body
+Some signs are formed using just joints of body such as shoulder movements
+
+What the complexities of this project?
+Every sign needs a lot of training data
+Sign languages differ from country to country
+Same language is spoken/shown differently because of the body constraints
+There should be less distraction in the background to do the segmentation correctly
+Brightness of the light affects the quality of detection
+Speech to Sign has mechanical limitations of the robot
+Processing platform must be fast enough to make in live
+Cross Platform issues. Kinect SDK for Windows. OpenKinect with less features.
+
+Hand gesture recognition for NAO
+Nao is a humanoid robot which can be used for several application. Humanoid robots are conceptualized to assist human in various situations. They can be self-autonomous or half-autonomous where commands has to be given by the master (human). 
+Man-Machine interactions were traditionally made through keyboards, mouse or touch screens. With the help of modern technologies it can be achieved by various interactions such as Voice Commands, Hand gestures, Neural attentions, Eye movement and so on. 
+Hand gesture interaction are also be made using certain electronic wearables. This needs an extra hardware in between the machine and man.
+Objective of this project to implement an intelligence for NAO robots to understand the hand gestures or hand signs without using an middleware.
+Therefore NAO can be commanded directly using naked hand
+Static hand gestures/sign
+Dynamic moving hand gesture/sign
+Command mode of NAO
+Translation mode of NAO
+This project also creates a platform to help speech and hearing disabled people to train NAO understand many more signs and develop its vocabulary.
+In the translation mode, recognized signs will be converted into speech
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Abstract
+Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed. HRI research is  focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI. In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research area concerned with computer vision-based analysis and interpretation of hand gestures. Important differences in the gesture interpretation approaches arise depending on whether static model of the gesture or non-static model of the gesture is used. 
+
+In this thesis, we attempt to do the method of modeling, analyzing, and recognizing gestures by using Computer Vision and Machine Learning techniques. Furthermore, Static (Gesture is formed by non-moving appearance of body parts) and non-static gestures (Gesture is formed by moving appearance of body parts), will be used to interact with robot and command the robot to execute certain actions.
+
+We further hope to provide a platform to integrate Sign Language Translation to assist people with hearing and speech disabilities. However, further implementations and training data are needed to use this platform as a full fledged Sign Language Translator.
+
+
+Motivation
+Huge influence of computers in society has made smart devices, an important part of our lives. Availability and affordability of such devices motivated us to use them in our  day-to-day living. 
+
+Interaction with smart devices has still been mostly by displays, keyboards, mouse and touch interfaces. These devices have grown to be familiar but inherently limit the speed and naturalness with which we can interact with the computer. 
+
+The list of smart devices includes personal automatic and semi-automatic robots which are also playing a major role in our household. For an instance, Smart Vacuum Cleaner is an robot that automatically cleans the floor and goes to its charging station without human interaction. Usage of robots for domestic and industrial purposes have been continuously increasing. Thus in recent years there has been a tremendous push in research toward an intuitive, and easy communication with the robot through speech, gestures, and facial expressions.
+
+Tremendous progress had been made in speech recognition, and several commercially successful speech interfaces have been deployed. However, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an alternative mode of communication for Human-robot interaction (HRI) than the conventional interfaced devices.
+
+Background
+Hand gesture
+Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI it is necessary to provide the means by which they can be interpreted by robots. The HCI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm, and even other parts of the human body, be measurable by the machine. 
+
+Hand gesture recognition and Computer Vision
+Initial attempts to recognize hand gestures, resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
+
+Even though such hand gloves are used in highly specialized domain such as simulation of medical surgery or even the real surgery, the everyday user will be certainly deterred by such a sophisticated interfacing devices. As an active result of the motivated research in HCI, computer vision based techniques were innovated to augment the naturalness of interaction.
+
+Computer vision is a field that includes methods for acquiring, processing, analyzing, and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions.
+
+Robot and Artificial intelligence
+Proper vision is of the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotical systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. Information about the environment could be provided by a computer vision system, acting as a vision sensor and providing high-level information about the environment and the robot.
+
+In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot name as NAO.
+
+Nao is an autonomous, programmable humanoid robot developed by Aldebaran Robotics. The Nao Academics Edition was developed for universities and laboratories for research and education purposes.
+
+Table below shows the hardware specification of Nao.
+
+
+
+
+
+Height
+58 centimetres (23 in)
+Weight
+4.3 kilograms (9.5 lb)
+Autonomy
+60 minutes (active use), 90 minutes (normal use)
+Degrees of freedom
+21 to 25
+CPU
+2 x  Intel Atom @ 1.6 GHz
+Built-in OS
+Linux
+Compatible OS
+Windows, Mac OS, Linux
+Programming languages
+C++, Python, Java, MATLAB, Urbi, C, .Net
+Vision
+2 x HD 1280x960 cameras
+Connectivity
+Ethernet, Wi-Fi
+Sensors
+4 x directional microphones
+1 x sonar rangefinder
+2 x IR emitters and receivers
+1 x inertial board
+9 x tactile sensors 
+8 x pressure sensors
+
+NAO Vision
+Two identical video cameras are located in the forehead. They provide a up to 1280x960 resolution at 30 frames per second. They can be used to identify objects in the visual field such as goals and balls, and bottom camera can ease NAO’s dribbles. NAO contains a set of algorithms for detecting and recognizing faces and shapes. NAO can recognize who is talking to it or find a ball or, eventually, more complex objects.
+
+
+
+
+
+
+Sensors
+The computational limitations of the NAO robot make it impossible to process the entire image in real time. Therefore, different methods of capturing the real time gesture must be used. Hence, it is been proposed to use a separate 3D camera such as Microsoft Kinect or Asus Xtion. Microsoft’s Kinect sensor is the first large-scale, commercial release of a depth camera device. Microsoft’s novel use of the device as a game controller is driven by the company’s own software for analyzing its 3D data, including proprietary algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition. 
+
+
+Gesture Modelling
+		 	 	 		
+			
+				
+					
+						
+the scope of a gestural interface for HCI is directly related to the proper modeling of hand gestures. How to model hand gestures depends primarily on the intended application within the HCI context. For a given application, a very coarse and simple model may be sufficient. However, if the purpose is a natural-like interaction, a model has to be es- tablished that allows many if not all natural gestures to be interpreted by the computer. The following discussion ad- dresses the question of modeling of hand gestures for HCI. 
+					
+				
+			
+		
+
+3D model based
+Skeletal based - using skeletal based spatial model in x, y, z
+Appearance based
+
+Gestural Taxonomy 
+Manipulative
+Communicative
+
+HMM
+The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics: given a signal varying in time, how can we identify variations in the signal that fit some known model? Though alternatives have been attempted (e.g. Dynamic Programming, or DP-matching algorithms), the most successful solutions still tend to involve some kind of feature-based, bottom-up statistical learning, usually Hidden Markov Models. The landmark article on the topic is Rabiner’s “tutorial” on HMMs (PDF), in which he not only describes using HMMs in speech recognition, but also demonstrates the broad application of HMMs to practical tasks of recognition, identification, prediction, etc.. An early effort by Yamato et al. applied discrete HMMs to learning six different tennis strokes, or “actions,” successfully recognizing them in image sequences with more than 90% accuracy . Starner and Pentland demonstrated that explicit gesture recognition focused on American Sign Language could be accomplished in real time using HMMs applied to data from a video camera. Lee and Kim (PDF) developed an HMM-based “threshold model” to address the special challenge in gesture recognition of differentiating gestures from non-gestures in a continuous stream of data. Others have sought to develop more complex models for vision-based gesture recognition by, for example, causally “linking” or “coupling” models for both the left and right hands. A handful of studies have extended gesture recognition to 3D space using sterescopic cameras and wearable sensors.
+There are some known shortcomings of the canonical HMM, such as its incapacity to model state durations, something that might be useful to gesture recognition. Still, for this exercise, we’re going to apply a basic, canonical HMM. And we’re going to use what’s called a “left-to-right HMM,” a model constrained in terms of the state transitions that are possible.
+
+
+Goal 
+As described earlier, HRI research is focusing to build an intuitive, and easy communication with the robot through speech, gestures, and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
+
+In this thesis, we attempt to implement a feature for NAO to recognize hand gestures and execute a predefined action based on the gesture. 
+
+In order to achieve this, NAO will be extended with an external Depth Camera, that will enable NAO to recognize static as well as dynamic gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. 
+
+With the hand gesture recognizing feature, NAO will be available to the users in two modes a) Command mode b) Translation mode.
+
+In command mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based Interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, part of NAO intelligence such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.
+
+In translation mode, NAO will be directly translating the meaning of the trained gestures. To achieve this, text-to-speech SDK of NAO will be used and translated gesture can be said out loud using the integrated speaker. This feature of NAO will be allowing it to translate a sign language to assist people with hearing and speech disabilities.
+
+In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has limited resources. Gestures will involve both the hands or single hand to interact with the robot.
+
+Approach	
+The figure below shows the flow diagram of hand gesture recognition. Each block contains submodules which are processed by different software components.
+
+
+Sense Sensor data from the 3D camera as images as shown in the figure 1, will be sent to Feature Detection module that will track the anatomical landmarks of the human body to extract the features as shown in the figure 2
+
+
+
+Feature extraction - Skeletal based - using skeletal based spatial model in x, y, z
+
+
+	
+
+
+Gesture Analysis
+
+					
+Gesture Recognition
+		 	 	 		
+			
+
+
