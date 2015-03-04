@@ -36,6 +36,12 @@ brew update
 brew install boost
 brew install cmake
 brew install git
+
+cd ~/hri/source/human-robot-interaction
+sudo cp lib/OpenNI2/libOpenNI2.dylib /usr/lib
+sudo cp lib/NiTE2/libNiTE2.dylib /usr/lib
+sudo cp lib/NiTE2/NiTE.ini /usr/lib
+sudo cp -R lib/NiTE2/NiTE2 /usr/lib
 ```
 
 On Ubuntu
@@ -45,6 +51,20 @@ sudo apt-get install build-essential
 sudo apt-get install cmake
 sudo apt-get install libboost-all-dev
 sudo apt-get install git
+
+cd ~/hri/source/human-robot-interaction
+sudo cp lib/OpenNI2/libOpenNI2.so /usr/lib
+sudo cp lib/NiTE2/libNiTE2.so /usr/lib
+sudo cp lib/NiTE2/NiTE.ini /usr/lib
+sudo cp -R lib/NiTE2/NiTE2 /usr/lib
+```
+
+On OpenNAO / NaoOS / Gentooo 
+```
+cd ~/hri/source/human-robot-interaction
+sudo cp lib/NiTE2/libNiTE2-32.so /usr/lib/libNiTE2.so
+sudo cp lib/NiTE2/NiTE.ini /usr/lib
+sudo cp -R lib/NiTE2/NiTE2 /usr/lib
 ```
 
 BUILD
@@ -106,7 +126,7 @@ cmake ..
 make
 ```
 
-INSTALLATION
+INSTALLATION ON ROBOT
 --------------------------------------
 To run it on Robot, executable and libraries must be copied to NAO (Nao must be available in the same network).
 ```
@@ -125,14 +145,6 @@ cd /usr/lib
 su #password is root
 rm libstdc++.so
 ln -s libstdc++.so.6.0.16 libstdc++.so
-```
-
-To run it on local machine Mac OSX, Ubuntu, OpenNAO
-```
-sudo cp lib/OpenNI2/libOpenNI2.{so,dylib} /usr/lib
-sudo cp lib/NiTE2/libNiTE2.{so,dylib} /usr/lib
-sudo cp lib/NiTE2/NiTE.ini /usr/lib
-sudo cp -R lib/NiTE2/NiTE2 /usr/lib
 ```
 
 USAGE
