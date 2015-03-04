@@ -21,7 +21,10 @@
  *
  */
 
-udp_server::udp_server(boost::asio::io_service& io_service): socket_server(io_service, udp::endpoint(udp::v4(), server_port))
+udp_server::udp_server(boost::asio::io_service& io_service):
+client_port(getConfigValue<int>("clientPort")),
+server_port(getConfigValue<int>("serverPort")),
+socket_server(io_service, udp::endpoint(udp::v4(), server_port))
 {
     clientConnected = false;
     receive();

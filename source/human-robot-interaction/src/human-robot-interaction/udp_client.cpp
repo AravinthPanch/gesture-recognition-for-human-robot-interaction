@@ -12,38 +12,21 @@
 
 
 /**
- * Patch for to_string. std::to_string is not available in NAO OS.
- * It may work it GLICXX hack adds higher version libstdc++
- *
- */
-#include<sstream>
-template <typename T>
-std::string to_string(T value)
-{
-    //create an output string stream
-    std::ostringstream os ;
-    
-    //throw the value into the string stream
-    os << value ;
-    
-    //convert the string stream into a string and return
-    return os.str() ;
-}
-
-
-/**
  * Constructor
  *
  */
 
-udp_client::udp_client(boost::asio::io_service& io_service) : socket_client(io_service, udp::endpoint(udp::v4(), client_port))
+udp_client::udp_client(boost::asio::io_service& io_service) :
+client_port(getConfigValue<int>("clientPort")),
+server_port(getConfigValue<int>("serverPort")),
+server_host_name(getConfigValue<char*>("serverHostName")),
+socket_client(io_service, udp::endpoint(udp::v4(), client_port))
 {
     server_endpoint = endpoint_resolver(io_service, server_host_name,  server_port);
     
     boost::shared_ptr<std::string> message(new std::string("01"));
     send(message);
     BOOST_LOG_TRIVIAL(info) << "UDP Client started at port : " << client_port;
-    
 }
 
 
@@ -119,6 +102,26 @@ void udp_client::handle_send(boost::shared_ptr<std::string> message, const boost
 {
     BOOST_LOG_TRIVIAL(info) << "Sent : " << *message << " : " << server_endpoint;
     receive();
+}
+
+
+/**
+ * Patch for to_string. std::to_string is not available in NAO OS.
+ * It may work it GLICXX hack adds higher version libstdc++
+ *
+ */
+#include<sstream>
+template <typename T>
+std::string to_string(T value)
+{
+    //create an output string stream
+    std::ostringstream os ;
+    
+    //throw the value into the string stream
+    os << value ;
+    
+    //convert the string stream into a string and return
+    return os.str() ;
 }
 
 

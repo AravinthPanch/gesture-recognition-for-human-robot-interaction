@@ -20,9 +20,9 @@ class udp_client
 {
     
 private:
-    const int server_port = getConfigValue<int>("serverPort");
-    const int client_port = getConfigValue<int>("clientPort");
-    const char* server_host_name = getConfigValue<char*>("serverHostName");
+    const int server_port;
+    const int client_port;
+    const char* server_host_name;
     
     boost::array<char, 1024> receive_buffer;
     boost::array<char, 8> send_buffer;
