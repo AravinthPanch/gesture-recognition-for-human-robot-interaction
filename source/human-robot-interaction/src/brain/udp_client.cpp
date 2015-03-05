@@ -17,17 +17,17 @@
  *
  */
 
-udp_client::udp_client(boost::asio::io_service& io_service) :
+udp_client::udp_client(boost::asio::io_service& io_service, brain *brain) :
 client_port(getConfigValue<int>("clientPort")),
 server_port(getConfigValue<int>("serverPort")),
 server_host_name(getConfigValue<char*>("serverHostName")),
 socket_client(io_service, udp::endpoint(udp::v4(), client_port))
 {
+    //Reference Brain Module
+    brain_ = brain;
     
+    // Resolve hostname and attach io service from main threas
     server_endpoint = endpoint_resolver(io_service, server_host_name,  server_port);
-    
-    //Initiate Brain Module
-    
     
     // Send message to the server. Message is a string that is 01 to initate Hand Tracker
     boost::shared_ptr<std::string> message(new std::string("01"));
@@ -135,6 +135,8 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
 {
     if (!error || error == boost::asio::error::message_size)
     {
+        // Receive next data
+        receive();
         
         // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
         std::string trimmedData = trim_data(receive_buffer.data());
@@ -147,12 +149,8 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         
         
         // predict the input sample of left and right hand
-        UINT classLabel = brain_.predict(handVector[0], handVector[1]);
-        BOOST_LOG_TRIVIAL(info) << "Predicted Class : " << classLabel ;
+        string classLabel = brain_->incomingData(handVector[0], handVector[1]);
         
-        
-        // Receive next data
-        receive();
     }
     else
     {

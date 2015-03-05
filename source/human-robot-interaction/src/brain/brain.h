@@ -11,6 +11,11 @@
 #include <stdio.h>
 #include "GRT.h"
 
+#define DEFAULT_PREP_TIME 5000
+#define DEFAULT_RECORD_TIME 5000
+#define SAMPLE_DIMENSION 3
+#define HRI_PIPELINE "hri_pipeline"
+
 using namespace GRT;
 
 class brain
@@ -37,8 +42,19 @@ private:
     
 public:
     brain();
-    void train();
+    bool startTraining();
+    bool stopTraining();
+    int train(vector< double > leftHand, vector< double > rightHand);
+    UINT trainNext();
+    bool trainPipeline();
     UINT predict(vector< double > leftHand, vector< double > rightHand);
+    
+    string incomingData(vector< double > leftHand, vector< double > rightHand);
+    
+    bool setPredictionModeActive();
+    bool setTrainingModeActive();
+    bool isPredictionModeActive();
+    bool isTrainingModeActive();
     
 };
 

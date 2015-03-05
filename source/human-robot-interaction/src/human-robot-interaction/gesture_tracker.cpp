@@ -125,6 +125,9 @@ void gesture_tracker::send_hand(const nite::HandData& hand){
     joint_array.push_back(std::make_pair("", yAxis));
     joint_array.push_back(std::make_pair("", zAxis));
     
+    
+    // send it as left hand and right hand based on odd and even number of hand ids
+    // reset hand ids if they are lost
     handJson.add_child("HAND", joint_array);
     
     std::ostringstream hand_buffer;

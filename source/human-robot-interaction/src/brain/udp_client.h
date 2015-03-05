@@ -36,10 +36,10 @@ private:
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
     void handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred);
     
-    brain brain_;
+    brain *brain_;
     
 public:
-    udp_client(boost::asio::io_service& io_service);
+    udp_client(boost::asio::io_service& io_service, brain *brain);
     void send(boost::shared_ptr<std::string> message);
 };
 

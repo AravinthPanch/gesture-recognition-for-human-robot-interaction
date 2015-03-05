@@ -11,7 +11,7 @@
 #include <boost/thread.hpp>
 #include <boost/log/trivial.hpp>
 #include "udp_client.h"
-
+#include "brain.h"
 
 void helper(){
 }
@@ -20,19 +20,55 @@ int main(int argc, char* argv[])
 {
     try
     {
-        
         boost::asio::io_service io_service;
+        brain brain;
         
-        BOOST_LOG_TRIVIAL(info) << "Starting Brain Module";
-        udp_client client(io_service);
-        boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-        
+        std::cout << "Press \n 1 -> predict \n 2 -> train \n: ";
         std::string argument;
         std::getline(std::cin, argument);
         
+        if(argument == "1")
+        {
+            BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
+            
+            if(brain.setPredictionModeActive()){
+                BOOST_LOG_TRIVIAL(debug) << "Set Predication Mode Active";
+            }
+            else{
+                BOOST_LOG_TRIVIAL(error) << "Failed to Set Predication Mode Active";
+            };
+            
+            udp_client client(io_service, &brain);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+            
+            while(brain.isPredictionModeActive()){}
+            
+        }
+        else if(argument == "2")
+        {
+            BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
+            
+            if(brain.setTrainingModeActive()){
+                BOOST_LOG_TRIVIAL(debug) << "Set Training Mode Active";
+            }
+            else{
+                BOOST_LOG_TRIVIAL(error) << "Failed to Set Training Mode Active";
+            };
+            
+            udp_client client(io_service, &brain);
+            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+
+            while(brain.isTrainingModeActive()){}
+            
+            std::cout << "Press \n 1 -> Train next class \n 2 -> Stop training and go to prediction mode \n: ";
+            std::getline(std::cin, argument);
+
+        }
+        
+        
+        
         
         //        helper();
-        
     }
     
     catch (std::exception& e)

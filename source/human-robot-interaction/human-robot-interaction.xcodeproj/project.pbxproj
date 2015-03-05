@@ -17,13 +17,13 @@
 		CE4AC8E71A51752B001B33CF /* skeleton_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */; };
 		CE70B29C1A54484B0072BB83 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE70B2981A54484B0072BB83 /* main.cpp */; };
 		CE70B29D1A54484B0072BB83 /* Viewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE70B29A1A54484B0072BB83 /* Viewer.cpp */; };
-		CE70B29E1A54487E0072BB83 /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
-		CE70B29F1A5448800072BB83 /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE70B2A11A54488C0072BB83 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE70B2A01A54488C0072BB83 /* OpenGL.framework */; };
 		CE70B2A31A5448940072BB83 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE70B2A21A5448940072BB83 /* GLUT.framework */; };
 		CE70B2A41A544A750072BB83 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE737AEB1A407AA000593328 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE737AF21A40E17200593328 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
+		CE79B0C31AA88E18006CEBBB /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
+		CE79B0C41AA88E1B006CEBBB /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE8506331AA7447F0094FBCB /* brain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506311AA7447F0094FBCB /* brain.cpp */; };
 		CE8506361AA744DB0094FBCB /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506341AA744DB0094FBCB /* udp_client.cpp */; };
 		CE8506381AA745270094FBCB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506371AA745270094FBCB /* main.cpp */; };
@@ -590,11 +590,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE70B2A41A544A750072BB83 /* libboost_system.dylib in Frameworks */,
+				CE79B0C41AA88E1B006CEBBB /* libOpenNI2.dylib in Frameworks */,
+				CE79B0C31AA88E18006CEBBB /* libNiTE2.dylib in Frameworks */,
 				CE70B2A31A5448940072BB83 /* GLUT.framework in Frameworks */,
 				CE70B2A11A54488C0072BB83 /* OpenGL.framework in Frameworks */,
-				CE70B29E1A54487E0072BB83 /* libNiTE2.dylib in Frameworks */,
-				CE70B29F1A5448800072BB83 /* libOpenNI2.dylib in Frameworks */,
+				CE70B2A41A544A750072BB83 /* libboost_system.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2527,7 +2527,11 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Debug;
@@ -2539,7 +2543,11 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
@@ -2971,6 +2979,7 @@
 				CE8506681AA85E170094FBCB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE9E41C81A3858BF0095F65A /* Build configuration list for PBXNativeTarget "nite-gesture-wave" */ = {
 			isa = XCConfigurationList;
