@@ -151,6 +151,9 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         // predict the input sample of left and right hand
         string classLabel = brain_->incomingData(handVector[0], handVector[1]);
         
+        boost::shared_ptr<std::string> message(new string("Done"));
+        
+        send(message);
     }
     else
     {

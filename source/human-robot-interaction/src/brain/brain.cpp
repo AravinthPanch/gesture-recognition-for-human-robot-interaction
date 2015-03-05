@@ -168,3 +168,11 @@ UINT brain::predict(vector< double > leftHand, vector< double > rightHand){
     UINT classLabel = 1;
     return classLabel;
 }
+
+
+string brain::incomingData(vector< double > leftHand, vector< double > rightHand){
+    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] << leftHand[1] << leftHand[2] << leftHand.size() ;
+    trainingModeActive = false;
+    
+    return "Done";
+}
