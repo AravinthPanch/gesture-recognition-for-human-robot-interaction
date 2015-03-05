@@ -34,6 +34,7 @@ private:
     bool predictionModeActive;
     UINT trainingClassLabel;
     
+    
 public:
     brain();
     void train();

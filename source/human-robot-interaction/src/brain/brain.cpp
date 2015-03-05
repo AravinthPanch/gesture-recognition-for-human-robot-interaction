@@ -6,6 +6,7 @@
  */
 
 #include "brain.h"
+#include <boost/log/trivial.hpp>
 
 /**
  *
@@ -23,4 +24,11 @@ void brain::train(){
     trainingModeActive = false;
     predictionModeActive = false;
     trainingClassLabel = 1;
+}
+
+UINT brain::predict(vector< double > leftHand, vector< double > rightHand){
+    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] << leftHand[1] << leftHand[2] ;
+    BOOST_LOG_TRIVIAL(info) << "Right Hand " << rightHand[0] << rightHand[1] << rightHand[2];
+    UINT classLabel = 1;
+    return classLabel;
 }

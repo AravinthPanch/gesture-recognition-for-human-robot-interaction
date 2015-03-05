@@ -5,11 +5,11 @@
  * Project: Gesture Recogntion for Human-Robot Interaction
  */
 
+#include "udp_client.h"
 #include <iostream>
 #include <string>
 #include <boost/log/trivial.hpp>
-#include "udp_client.h"
-#include "brain.h"
+#include "rapidjson/document.h"
 
 
 /**
@@ -23,11 +23,11 @@ server_port(getConfigValue<int>("serverPort")),
 server_host_name(getConfigValue<char*>("serverHostName")),
 socket_client(io_service, udp::endpoint(udp::v4(), client_port))
 {
-
+    
     server_endpoint = endpoint_resolver(io_service, server_host_name,  server_port);
     
     //Initiate Brain Module
-    brain brain_;    
+    
     
     // Send message to the server. Message is a string that is 01 to initate Hand Tracker
     boost::shared_ptr<std::string> message(new std::string("01"));
@@ -74,7 +74,57 @@ void udp_client::send(boost::shared_ptr<std::string> message){
                                 );
 }
 
+/**
+ * Parse the received string and extract the data
+ *
+ */
 
+vector<vector<double>> getHandData(const char* json){
+    
+    rapidjson::Document document;
+    document.Parse(json);
+    
+    
+    // NiTE gesture must be taken care as welll
+    rapidjson::Value& handData = document["HAND"];
+    
+    vector<double> leftHand;
+    vector<double> rightHand;
+    
+    
+    // Hand tracker may send hand id greater than 2. Hand tracker must reset the ids if both the hands are lost from the scene
+    if(strcmp(handData[0u].GetString(), "1") == 0){
+        leftHand.push_back(std::atof(handData[1u].GetString()));
+        leftHand.push_back(std::atof(handData[2u].GetString()));
+        leftHand.push_back(std::atof(handData[3u].GetString()));
+        
+    }
+    else if(strcmp(handData[0].GetString(), "2") == 0){
+        rightHand.push_back(std::atof(handData[1u].GetString()));
+        rightHand.push_back(std::atof(handData[2u].GetString()));
+        rightHand.push_back(std::atof(handData[3u].GetString()));
+    }
+    
+    vector<vector<double>> handVector;
+    handVector.push_back(leftHand);
+    handVector.push_back(rightHand);
+    
+    return handVector;
+}
+
+
+
+/**
+ * receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
+ *
+ */
+
+string trim_data(string receivedBufferData){
+    std::size_t first = receivedBufferData.find_first_of("{");
+    std::size_t last = receivedBufferData.find_first_of("}");
+    std::string trimmedData = receivedBufferData.substr(first,last+1);
+    return trimmedData;
+}
 
 /**
  * Create UDP connection handler for receiving data
@@ -85,15 +135,23 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
 {
     if (!error || error == boost::asio::error::message_size)
     {
-        std::string data_b = receive_buffer.data();
-        std::size_t f = data_b.find_first_of("{");
-        std::size_t l = data_b.find_first_of("}");
-        std::string data_c = data_b.substr(f,l+1);
         
-        BOOST_LOG_TRIVIAL(info) << "Received : " << data_c << " : " << bytes_transferred << " bytes : " << server_endpoint;
+        // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
+        std::string trimmedData = trim_data(receive_buffer.data());
+        BOOST_LOG_TRIVIAL(info) << "Received : " << trimmedData << " : " << bytes_transferred << " bytes : " << server_endpoint;
         
         
+        // Parse the received json string to get data
+        const char * jsonString = trimmedData.c_str();
+        vector<vector<double>> handVector = getHandData(jsonString);
         
+        
+        // predict the input sample of left and right hand
+        UINT classLabel = brain_.predict(handVector[0], handVector[1]);
+        BOOST_LOG_TRIVIAL(info) << "Predicted Class : " << classLabel ;
+        
+        
+        // Receive next data
         receive();
     }
     else
