@@ -47,12 +47,14 @@ bool brain::setPredictionModeActive(){
     
     //    if(pipeline.loadPipelineFromFile(HRI_PIPELINE) ){
     //        BOOST_LOG_TRIVIAL(debug) << "Pipeline loaded from file " << HRI_PIPELINE ;
+    //    trainPipeline();
     //        return true;
     //    }
     //    else{
     //        BOOST_LOG_TRIVIAL(error) << "Failed to load Pipeline from file " << HRI_PIPELINE ;
     //        return false;
     //    };
+    
     
 }
 
@@ -102,6 +104,7 @@ bool brain::stopTraining(){
  */
 UINT brain::trainNext(){
     trainingClassLabel++;
+    BOOST_LOG_TRIVIAL(debug) << "Traingin Class Label" << trainingClassLabel;
     return trainingClassLabel;
 }
 
@@ -119,12 +122,15 @@ int brain::train(vector< double > leftHand, vector< double > rightHand){
     
     if(trainingTimer.getInRecordingMode()){
         trainingData.addSample(trainingClassLabel, inputVector);
+        BOOST_LOG_TRIVIAL(debug) << "Training Class Label " << trainingClassLabel << " with Input Vector " << leftHand[0] << " , " << leftHand[1] << " , " << leftHand[2];
         return 0;
     }
     else if(trainingTimer.getRecordingStopped()){
+        BOOST_LOG_TRIVIAL(debug) << "Training timer stopped";
         return 1;
     }
     else{
+        BOOST_LOG_TRIVIAL(debug) << "Error in training";
         return 2;
     }
 }
@@ -153,26 +159,18 @@ bool brain::trainPipeline(){
  * It predicts the incoming handVector and returns the identified class label and likelyhood.
  *
  */
-UINT brain::predict(vector< double > leftHand, vector< double > rightHand){
+string brain::predict(vector< double > leftHand, vector< double > rightHand){
     BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] << leftHand[1] << leftHand[2] << leftHand.size() ;
     
-    //    vector< double > inputVector(SAMPLE_DIMENSION);
-    //    inputVector[0] = leftHand[0];
-    //    inputVector[1] = leftHand[1];
-    //    inputVector[2] = leftHand[2];
-    //
-    //    pipeline.predict(inputVector);
-    //    pipeline.getPredictedClassLabel();
-    //    pipeline.getMaximumLikelihood();
+    vector< double > inputVector(SAMPLE_DIMENSION);
+    inputVector[0] = leftHand[0];
+    inputVector[1] = leftHand[1];
+    inputVector[2] = leftHand[2];
     
-    UINT classLabel = 1;
-    return classLabel;
+    pipeline.predict(inputVector);
+    UINT predictedClassLabel = pipeline.getPredictedClassLabel();
+    double maxLikelihood =  pipeline.getMaximumLikelihood();
+    
+    return "hola";
 }
 
-
-string brain::incomingData(vector< double > leftHand, vector< double > rightHand){
-    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] << leftHand[1] << leftHand[2] << leftHand.size() ;
-    trainingModeActive = false;
-    
-    return "Done";
-}

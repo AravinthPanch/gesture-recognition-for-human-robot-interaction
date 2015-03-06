@@ -16,6 +16,26 @@
 void helper(){
 }
 
+void activatePredictionMode(brain *brain){
+    if(brain->setPredictionModeActive()){
+        BOOST_LOG_TRIVIAL(debug) << "Set Predication Mode Active";
+    }
+    else{
+        BOOST_LOG_TRIVIAL(error) << "Failed to Set Predication Mode Active";
+    };
+}
+
+void activateTrainingMode(brain *brain){
+    if(brain->setTrainingModeActive()){
+        BOOST_LOG_TRIVIAL(debug) << "Set Training Mode Active";
+    }
+    else{
+        BOOST_LOG_TRIVIAL(error) << "Failed to Set Training Mode Active";
+    };
+}
+
+
+
 int main(int argc, char* argv[])
 {
     try
@@ -31,12 +51,7 @@ int main(int argc, char* argv[])
         {
             BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
             
-            if(brain.setPredictionModeActive()){
-                BOOST_LOG_TRIVIAL(debug) << "Set Predication Mode Active";
-            }
-            else{
-                BOOST_LOG_TRIVIAL(error) << "Failed to Set Predication Mode Active";
-            };
+            activatePredictionMode(&brain);
             
             udp_client client(io_service, &brain);
             boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
@@ -48,27 +63,29 @@ int main(int argc, char* argv[])
         {
             BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
             
-            if(brain.setTrainingModeActive()){
-                BOOST_LOG_TRIVIAL(debug) << "Set Training Mode Active";
-            }
-            else{
-                BOOST_LOG_TRIVIAL(error) << "Failed to Set Training Mode Active";
-            };
+            activateTrainingMode(&brain);
             
             udp_client client(io_service, &brain);
             boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-
-            while(brain.isTrainingModeActive()){}
             
-            std::cout << "Press \n 1 -> Train next class \n 2 -> Stop training and go to prediction mode \n: ";
-            std::getline(std::cin, argument);
-
+            while(true){
+                if(!brain.isTrainingModeActive() && !brain.isPredictionModeActive()){
+                    
+                    BOOST_LOG_TRIVIAL(debug) << "Training Mode Off";
+                    std::cout << "Press \n 1 -> Train next class \n 2 -> Stop training and go to prediction mode \n: ";
+                    std::getline(std::cin, argument);
+                    
+                    if(argument == "1"){
+                        brain.trainNext();
+                        activateTrainingMode(&brain);
+                    }
+                    else if(argument == "2"){
+                        activatePredictionMode(&brain);
+                    }
+                }
+            }
         }
         
-        
-        
-        
-        //        helper();
     }
     
     catch (std::exception& e)

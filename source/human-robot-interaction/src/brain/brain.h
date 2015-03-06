@@ -47,7 +47,7 @@ public:
     int train(vector< double > leftHand, vector< double > rightHand);
     UINT trainNext();
     bool trainPipeline();
-    UINT predict(vector< double > leftHand, vector< double > rightHand);
+    string predict(vector< double > leftHand, vector< double > rightHand);
     
     string incomingData(vector< double > leftHand, vector< double > rightHand);
     
