@@ -15,6 +15,7 @@
 #define DEFAULT_RECORD_TIME 5000
 #define SAMPLE_DIMENSION 3
 #define HRI_PIPELINE "hri_pipeline"
+#define HRI_TRAINING_DATASET "hri-training-dataset.txt"
 
 using namespace GRT;
 
@@ -40,21 +41,24 @@ private:
     UINT trainingClassLabel;
     
     
+    void saveTrainingDataSetToFile();
+    void trainPipelineFromTrainingData();
+    void startTraining();
+    void stopTraining();
+    
+    
 public:
     brain();
-    bool startTraining();
-    bool stopTraining();
-    int train(vector< double > leftHand, vector< double > rightHand);
-    UINT trainNext();
-    bool trainPipeline();
-    string predict(vector< double > leftHand, vector< double > rightHand);
     
-    string incomingData(vector< double > leftHand, vector< double > rightHand);
-    
-    bool setPredictionModeActive();
-    bool setTrainingModeActive();
+    void setPredictionModeActive();
+    void setTrainingModeActive();
     bool isPredictionModeActive();
     bool isTrainingModeActive();
+    
+    void train(vector< double > leftHand, vector< double > rightHand);
+    void trainNext();
+    
+    string predict(vector< double > leftHand, vector< double > rightHand);
     
 };
 

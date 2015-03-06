@@ -13,28 +13,6 @@
 #include "udp_client.h"
 #include "brain.h"
 
-void helper(){
-}
-
-void activatePredictionMode(brain *brain){
-    if(brain->setPredictionModeActive()){
-        BOOST_LOG_TRIVIAL(debug) << "Set Predication Mode Active";
-    }
-    else{
-        BOOST_LOG_TRIVIAL(error) << "Failed to Set Predication Mode Active";
-    };
-}
-
-void activateTrainingMode(brain *brain){
-    if(brain->setTrainingModeActive()){
-        BOOST_LOG_TRIVIAL(debug) << "Set Training Mode Active";
-    }
-    else{
-        BOOST_LOG_TRIVIAL(error) << "Failed to Set Training Mode Active";
-    };
-}
-
-
 
 int main(int argc, char* argv[])
 {
@@ -51,7 +29,7 @@ int main(int argc, char* argv[])
         {
             BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
             
-            activatePredictionMode(&brain);
+            brain.setPredictionModeActive();
             
             udp_client client(io_service, &brain);
             boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
@@ -63,7 +41,7 @@ int main(int argc, char* argv[])
         {
             BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
             
-            activateTrainingMode(&brain);
+            brain.setTrainingModeActive();
             
             udp_client client(io_service, &brain);
             boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
@@ -77,10 +55,10 @@ int main(int argc, char* argv[])
                     
                     if(argument == "1"){
                         brain.trainNext();
-                        activateTrainingMode(&brain);
+                        brain.setTrainingModeActive();
                     }
                     else if(argument == "2"){
-                        activatePredictionMode(&brain);
+                        brain.setPredictionModeActive();
                     }
                 }
             }

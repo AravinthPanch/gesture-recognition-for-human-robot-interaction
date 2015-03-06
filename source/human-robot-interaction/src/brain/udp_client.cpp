@@ -140,7 +140,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         
         // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
         std::string trimmedData = trim_data(receive_buffer.data());
-        BOOST_LOG_TRIVIAL(info) << "Received : " << trimmedData << " : " << bytes_transferred << " bytes : " << server_endpoint;
+//        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData << " : " << bytes_transferred << " bytes : " << server_endpoint;
         
         
         // Parse the received json string to get data

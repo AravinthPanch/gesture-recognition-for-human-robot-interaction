@@ -22,56 +22,61 @@ brain::brain(){
     anbc.enableNullRejection(true);
     anbc.setNullRejectionCoeff(5);
     pipeline.setClassifier( anbc );
+    
+    trainingData.setNumDimensions(SAMPLE_DIMENSION);
 }
 
 
+/**
+ *
+ * Check whether predictionMode is active
+ *
+ */
 bool brain::isPredictionModeActive(){
     return predictionModeActive;
 }
 
 
+/**
+ *
+ * Check whether traingMode is Active
+ *
+ */
 bool brain::isTrainingModeActive(){
     return trainingModeActive;
 }
 
+
 /**
  *
- *
+ * Set predictionMode active and load the training data from dataset. If training dataset is not found, then throws an error.
  *
  */
-bool brain::setPredictionModeActive(){
+void brain::setPredictionModeActive(){
     predictionModeActive = true;
     trainingModeActive = false;
     
-    return true;
+    if(trainingData.loadDatasetFromFile(HRI_TRAINING_DATASET) ){
+        BOOST_LOG_TRIVIAL(debug) << "Training Data Loaded From File";
+    }
+    else{
+        BOOST_LOG_TRIVIAL(error) << "Failed To Load Training Data From File";
+    };
     
-    //    if(pipeline.loadPipelineFromFile(HRI_PIPELINE) ){
-    //        BOOST_LOG_TRIVIAL(debug) << "Pipeline loaded from file " << HRI_PIPELINE ;
-    //    trainPipeline();
-    //        return true;
-    //    }
-    //    else{
-    //        BOOST_LOG_TRIVIAL(error) << "Failed to load Pipeline from file " << HRI_PIPELINE ;
-    //        return false;
-    //    };
-    
-    
+    trainPipelineFromTrainingData();
 }
-
 
 
 /**
  *
- *
+ * Set trainingMode active and start the training.
  *
  */
-bool brain::setTrainingModeActive(){
+void brain::setTrainingModeActive(){
     predictionModeActive = false;
     trainingModeActive = true;
     brain::startTraining();
-    return true;
 }
-
 
 
 /**
@@ -79,33 +84,69 @@ bool brain::setTrainingModeActive(){
  * Initiates the training data with given dimension and starts the training timer with given prepartion time and recording time.
  * training timer starts immediately with preparation.
  */
-bool brain::startTraining(){
-    trainingData.setNumDimensions(SAMPLE_DIMENSION);
-    trainingTimer.startRecording(DEFAULT_PREP_TIME, DEFAULT_RECORD_TIME);
-    return true;
+void brain::startTraining(){
+    if(trainingTimer.startRecording(DEFAULT_PREP_TIME, DEFAULT_RECORD_TIME)){
+        BOOST_LOG_TRIVIAL(debug) << "Training Timer Started";
+    }
+    else{
+        BOOST_LOG_TRIVIAL(error) << "Failed To Start Training Timer";
+    };
 }
 
 
 /**
  *
- * Initiates the training data with given dimension and starts the training timer with prepartion time and recording time.
+ * Stop the recording of training. Recording stops automatically with default record time.
  *
  */
-bool brain::stopTraining(){
-    trainingTimer.stopRecording();
-    return true;
+void brain::stopTraining(){
+    if(trainingTimer.stopRecording()){
+        BOOST_LOG_TRIVIAL(debug) << "Training Timer Stopped";
+    }
+    else{
+        BOOST_LOG_TRIVIAL(error) << "Failed To Stop Training Timer";
+    };
 }
 
 
 /**
  *
- * Initiates the training data with given dimension and starts the training timer with prepartion time and recording time.
+ * Increase the classlabel
  *
  */
-UINT brain::trainNext(){
+void brain::trainNext(){
     trainingClassLabel++;
-    BOOST_LOG_TRIVIAL(debug) << "Traingin Class Label" << trainingClassLabel;
-    return trainingClassLabel;
+    BOOST_LOG_TRIVIAL(debug) << "New Training Class Label Is " << trainingClassLabel;
+}
+
+
+/**
+ *
+ * Save the training data to a file
+ *
+ */
+void brain::saveTrainingDataSetToFile(){
+    if(trainingData.saveDatasetToFile(HRI_TRAINING_DATASET)){
+        BOOST_LOG_TRIVIAL(debug) << "Training Data Saved To File";
+    }
+    else{
+        BOOST_LOG_TRIVIAL(error) << "Failed To Save Training Data To File";
+    };
+}
+
+
+/**
+ *
+ * Train the pipeline using training data. Training data must be loaded from file if it is prediction mode.
+ *
+ */
+void brain::trainPipelineFromTrainingData(){
+    if( pipeline.train( trainingData ) ){
+        BOOST_LOG_TRIVIAL(info) << "Pipeline Trained";
+    }
+    else {
+        BOOST_LOG_TRIVIAL(error) <<  "Failed To Train Pipeline";
+    }
 }
 
 
@@ -114,7 +155,7 @@ UINT brain::trainNext(){
  * It receives the handVector and adds them to the trainingData with given class label.
  *
  */
-int brain::train(vector< double > leftHand, vector< double > rightHand){
+void brain::train(vector< double > leftHand, vector< double > rightHand){
     vector< double > inputVector(SAMPLE_DIMENSION);
     inputVector[0] = leftHand[0];
     inputVector[1] = leftHand[1];
@@ -122,34 +163,20 @@ int brain::train(vector< double > leftHand, vector< double > rightHand){
     
     if(trainingTimer.getInRecordingMode()){
         trainingData.addSample(trainingClassLabel, inputVector);
-        BOOST_LOG_TRIVIAL(debug) << "Training Class Label " << trainingClassLabel << " with Input Vector " << leftHand[0] << " , " << leftHand[1] << " , " << leftHand[2];
-        return 0;
+        BOOST_LOG_TRIVIAL(debug) << "Training Class Label " << trainingClassLabel << " With Sample " << leftHand[0] << " , " << leftHand[1] << " , " << leftHand[2];
+        BOOST_LOG_TRIVIAL(debug) << "Timer" << trainingTimer.getSeconds();
     }
     else if(trainingTimer.getRecordingStopped()){
-        BOOST_LOG_TRIVIAL(debug) << "Training timer stopped";
-        return 1;
+        BOOST_LOG_TRIVIAL(debug) << "Training Timer Stopped";
+        saveTrainingDataSetToFile();
+        trainPipelineFromTrainingData();
+        trainingModeActive = false;
     }
-    else{
-        BOOST_LOG_TRIVIAL(debug) << "Error in training";
-        return 2;
-    }
-}
-
-
-
-/**
- *
- * It predicts the incoming handVector and returns the identified class label and likelyhood.
- *
- */
-bool brain::trainPipeline(){
-    if( pipeline.train( trainingData ) ){
-        BOOST_LOG_TRIVIAL(info) << "Pipeline Trained";
-        return true;
+    else if(trainingTimer.getInPrepMode()){
+        BOOST_LOG_TRIVIAL(debug) << "Training Timer In Preparation Mode";
     }
     else {
-        BOOST_LOG_TRIVIAL(error) <<  "Failed to train pipeline";
-        return false;
+        BOOST_LOG_TRIVIAL(debug) << "Error In Training";
     }
 }
 
@@ -168,8 +195,8 @@ string brain::predict(vector< double > leftHand, vector< double > rightHand){
     inputVector[2] = leftHand[2];
     
     pipeline.predict(inputVector);
-    UINT predictedClassLabel = pipeline.getPredictedClassLabel();
-    double maxLikelihood =  pipeline.getMaximumLikelihood();
+    //    UINT predictedClassLabel = pipeline.getPredictedClassLabel();
+    //    double maxLikelihood =  pipeline.getMaximumLikelihood();
     
     return "hola";
 }
