@@ -27,13 +27,16 @@ int main(int argc, char* argv[])
 {
     try
     {
-        boost::asio::io_service io_service;
+        std::cout << "================ Gesture Recognition For Human-Robot Interaction ================ \n";
+        std::cout << "================ Author: Aravinth Panchadcharam <me@aravinth.info> ============== \n" <<std::endl;
         
-        std::cout << "Do you want to start server or client? " << std::endl ;
+        boost::asio::io_service io_service;
         std::string argument;
+        
+        std::cout << "Press \n 1 -> Gesture Tracker \n 2 -> Skeleton Tracker \n 3 -> Client \n: ";
         std::getline(std::cin, argument);
         
-        if(argument == "server")
+        if(argument == "1")
         {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Hand Gesture Tracking";
             udp_server server(io_service);
@@ -41,7 +44,7 @@ int main(int argc, char* argv[])
             gesture_tracker gestureTracker(&server);
             gestureTracker.run();
         }
-        else if(argument == "server skel")
+        else if(argument == "2")
         {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Skeleton Tracking";
             udp_server server(io_service);
@@ -49,7 +52,7 @@ int main(int argc, char* argv[])
             skeleton_tracker skeletonTracker(&server);
             skeletonTracker.run();
         }
-        else if(argument == "client")
+        else if(argument == "3")
         {
             BOOST_LOG_TRIVIAL(info) << "Starting UDP Client";
             udp_client client(io_service);

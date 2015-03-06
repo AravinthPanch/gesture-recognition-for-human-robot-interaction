@@ -18,11 +18,14 @@ int main(int argc, char* argv[])
 {
     try
     {
+        std::cout << "================ Gesture Recognition For Human-Robot Interaction ================ \n";
+        std::cout << "================ Author: Aravinth Panchadcharam <me@aravinth.info> ============== \n" <<std::endl;
+        
         boost::asio::io_service io_service;
         brain brain;
-        
-        std::cout << "Press \n 1 -> predict \n 2 -> train \n: ";
         std::string argument;
+        
+        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n: ";
         std::getline(std::cin, argument);
         
         if(argument == "1")
@@ -50,7 +53,7 @@ int main(int argc, char* argv[])
                 if(!brain.isTrainingModeActive() && !brain.isPredictionModeActive()){
                     
                     BOOST_LOG_TRIVIAL(debug) << "Training Mode Off";
-                    std::cout << "Press \n 1 -> Train next class \n 2 -> Stop training and go to prediction mode \n: ";
+                    std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n: ";
                     std::getline(std::cin, argument);
                     
                     if(argument == "1"){
