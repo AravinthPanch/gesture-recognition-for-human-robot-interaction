@@ -27,6 +27,7 @@
 		CE84E61C1B19B8C500CF11C4 /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE84E61D1B19B8C700CF11C4 /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
 		CE84E61E1B19B8D000CF11C4 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
+		CE84E6201B19CC9400CF11C4 /* NiTE2 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE84E61F1B19CC7700CF11C4 /* NiTE2 */; };
 		CE8506331AA7447F0094FBCB /* brain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506311AA7447F0094FBCB /* brain.cpp */; };
 		CE8506361AA744DB0094FBCB /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506341AA744DB0094FBCB /* udp_client.cpp */; };
 		CE8506381AA745270094FBCB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506371AA745270094FBCB /* main.cpp */; };
@@ -80,12 +81,13 @@
 		};
 		CE70B28F1A5447E80072BB83 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
+				CE84E6201B19CC9400CF11C4 /* NiTE2 in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CE737AE21A407A0E00593328 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -229,6 +231,7 @@
 		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-server-async-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE737AEC1A407AF100593328 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-server-async/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<absolute>"; };
+		CE84E61F1B19CC7700CF11C4 /* NiTE2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NiTE2; path = lib/NiTE2/NiTE2; sourceTree = "<group>"; };
 		CE85062A1AA7440B0094FBCB /* brain-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "brain-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8506311AA7447F0094FBCB /* brain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = brain.cpp; path = src/brain/brain.cpp; sourceTree = SOURCE_ROOT; };
 		CE8506321AA7447F0094FBCB /* brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = brain.h; path = src/brain/brain.h; sourceTree = SOURCE_ROOT; };
@@ -781,6 +784,7 @@
 		CE70962F1A6563690064D196 /* OpenNI */ = {
 			isa = PBXGroup;
 			children = (
+				CE84E61F1B19CC7700CF11C4 /* NiTE2 */,
 				CE9E41911A384BBF0095F65A /* libNiTE2.dylib */,
 				CE9E41941A384BC90095F65A /* libOpenNI2.dylib */,
 			);
