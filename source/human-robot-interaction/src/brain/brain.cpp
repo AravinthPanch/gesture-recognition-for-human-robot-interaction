@@ -187,7 +187,7 @@ void brain::train(vector< double > leftHand, vector< double > rightHand){
  *
  */
 string brain::predict(vector< double > leftHand, vector< double > rightHand){
-    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] << leftHand[1] << leftHand[2] << leftHand.size() ;
+    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] <<", " << leftHand.size() ;
     
     vector< double > inputVector(SAMPLE_DIMENSION);
     inputVector[0] = leftHand[0];
@@ -195,8 +195,11 @@ string brain::predict(vector< double > leftHand, vector< double > rightHand){
     inputVector[2] = leftHand[2];
     
     pipeline.predict(inputVector);
-    //    UINT predictedClassLabel = pipeline.getPredictedClassLabel();
-    //    double maxLikelihood =  pipeline.getMaximumLikelihood();
+    UINT predictedClassLabel = pipeline.getPredictedClassLabel();
+    double maxLikelihood =  pipeline.getMaximumLikelihood();
+    
+    std::cout << "predictedClassLabel : " << predictedClassLabel << std::endl;
+    std::cout << "maxLikelihood : " << maxLikelihood << std::endl;
     
     return "hola";
 }

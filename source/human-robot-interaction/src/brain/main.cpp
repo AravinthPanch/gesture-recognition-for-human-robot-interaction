@@ -54,17 +54,20 @@ int main(int argc, char* argv[])
                     if(!brain.isTrainingModeActive() && !brain.isPredictionModeActive()){
                         
                         BOOST_LOG_TRIVIAL(debug) << "Training Mode Off";
-                        std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n 3 -> Exit \n: ";
+                        std::cout << "Press \n 1 -> Train the Class again \n 2 -> Train Next Class \n 3 -> Stop Training And Go To Prediction Mode \n 4 -> Exit \n: ";
                         std::getline(std::cin, argument2);
                         
                         if(argument2 == "1"){
-                            brain.trainNext();
                             brain.setTrainingModeActive();
                         }
                         else if(argument2 == "2"){
-                            brain.setPredictionModeActive();
+                            brain.trainNext();
+                            brain.setTrainingModeActive();
                         }
                         else if(argument2 == "3"){
+                            brain.setPredictionModeActive();
+                        }
+                        else if(argument2 == "4"){
                             BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
                             return 0;
                         }

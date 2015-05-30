@@ -151,8 +151,8 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         // Predict or train
         if(brain_->isPredictionModeActive()){
             string classLabel = brain_->predict(handVector[0], handVector[1]);
-            boost::shared_ptr<std::string> message(new string(classLabel));
-            send(message);
+//            boost::shared_ptr<std::string> message(new string(classLabel));
+//            send(message);
         }
         else if(brain_->isTrainingModeActive()){
             brain_->train(handVector[0], handVector[1]);
