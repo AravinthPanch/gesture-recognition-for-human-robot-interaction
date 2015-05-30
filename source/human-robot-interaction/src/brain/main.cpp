@@ -26,15 +26,14 @@ int main(int argc, char* argv[])
         std::string argument1;
         std::string argument2;
         bool optionSelected1 = false;
-        bool optionSelected2 = false;
         
         std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Exit \n: ";
         std::getline(std::cin, argument1);
         
         while (!optionSelected1) {
             
-            if(argument1 == "1"){
-                
+            if(argument1 == "1")
+            {
                 optionSelected1 = true;
                 BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
                 brain.setPredictionModeActive();
@@ -43,8 +42,8 @@ int main(int argc, char* argv[])
                 while(brain.isPredictionModeActive()){}
             }
             
-            else if(argument1 == "2"){
-                
+            else if(argument1 == "2")
+            {
                 optionSelected1 = true;
                 BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
                 brain.setTrainingModeActive();
@@ -58,33 +57,24 @@ int main(int argc, char* argv[])
                         std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n 3 -> Exit \n: ";
                         std::getline(std::cin, argument2);
                         
-                        while(!optionSelected2){
-                            if(argument2 == "1"){
-                                optionSelected2 = true;
-                                brain.trainNext();
-                                brain.setTrainingModeActive();
-                            }
-                            else if(argument2 == "2"){
-                                optionSelected2 = true;
-                                brain.setPredictionModeActive();
-                            }
-                            else if(argument2 == "3"){
-                                optionSelected2 = true;
-                                BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
-                                return 0;
-                            }
-                            else {
-                                optionSelected2 = false;
-                                BOOST_LOG_TRIVIAL(info) << "Invalid selection." ;
-                                std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n 3 -> Exit \n: ";
-                                std::getline(std::cin, argument2);
-                            }
+                        if(argument2 == "1"){
+                            brain.trainNext();
+                            brain.setTrainingModeActive();
                         }
+                        else if(argument2 == "2"){
+                            brain.setPredictionModeActive();
+                        }
+                        else if(argument2 == "3"){
+                            BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
+                            return 0;
+                        }
+                        
                     }
                 }
             }
             
-            else if(argument1 == "3"){
+            else if(argument1 == "3")
+            {
                 optionSelected1 = true;
                 BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
                 return 0;

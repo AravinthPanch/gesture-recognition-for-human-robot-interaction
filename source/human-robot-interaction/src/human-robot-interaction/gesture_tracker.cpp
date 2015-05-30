@@ -47,6 +47,7 @@ void gesture_tracker::init_nite(){
         BOOST_LOG_TRIVIAL(info) << "NiTE initialized" ;
     }
     
+    // Check for OpenNI device and start hand tracker.
     niteRc = handTracker.create();
     if (niteRc != nite::STATUS_OK)
     {
@@ -115,6 +116,7 @@ void gesture_tracker::send_gesture(const nite::GestureData& gesture){
 void gesture_tracker::send_hand(const nite::HandData& hand){
     ptree handJson, handId, joint_array, xAxis, yAxis, zAxis, joint_confidence;
     
+    // check for hand id and add key as Lefthand and right hand based on odd and even hand ids
     handId.put("", hand.getId());
     xAxis.put("", hand.getPosition().x);
     yAxis.put("", hand.getPosition().y);
@@ -171,8 +173,9 @@ void gesture_tracker::track_gestures(){
         {
             if (gestures[i].isComplete())
             {
-                send_gesture(gestures[i]);
+//                send_gesture(gestures[i]);
                 nite::HandId newId;
+                // Reset the hand id here if it is more than 2
                 handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
             }
         }
@@ -189,6 +192,7 @@ void gesture_tracker::track_gestures(){
     }
     
     nite::NiTE::shutdown();
+    
 }
 
 
