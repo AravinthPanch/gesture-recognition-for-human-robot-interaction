@@ -24,6 +24,9 @@
 		CE737AF21A40E17200593328 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CE79B0C31AA88E18006CEBBB /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
 		CE79B0C41AA88E1B006CEBBB /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
+		CE84E61C1B19B8C500CF11C4 /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
+		CE84E61D1B19B8C700CF11C4 /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
+		CE84E61E1B19B8D000CF11C4 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE8506331AA7447F0094FBCB /* brain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506311AA7447F0094FBCB /* brain.cpp */; };
 		CE8506361AA744DB0094FBCB /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506341AA744DB0094FBCB /* udp_client.cpp */; };
 		CE8506381AA745270094FBCB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE8506371AA745270094FBCB /* main.cpp */; };
@@ -48,9 +51,6 @@
 		CE9E42401A3882DF0095F65A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE9E42521A388FB70095F65A /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE9E42531A388FB90095F65A /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
-		CEAA7CB41A724FBB00C7EF67 /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
-		CEAA7CB51A724FBC00C7EF67 /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
-		CEAA7CB61A724FC300C7EF67 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CEAA7CBA1A72528900C7EF67 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEAA7CB91A72528900C7EF67 /* main.cpp */; };
 		CED6EFB11A9E14F900402682 /* hri.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED6EFB01A9E14F100402682 /* hri.json */; };
 		CEDFA82B1AA0942E006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA82A1AA0942E006B1C0D /* main.cpp */; };
@@ -229,7 +229,7 @@
 		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-server-async-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE737AEC1A407AF100593328 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-server-async/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<absolute>"; };
-		CE85062A1AA7440B0094FBCB /* brain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = brain; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE85062A1AA7440B0094FBCB /* brain-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "brain-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8506311AA7447F0094FBCB /* brain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = brain.cpp; path = src/brain/brain.cpp; sourceTree = SOURCE_ROOT; };
 		CE8506321AA7447F0094FBCB /* brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = brain.h; path = src/brain/brain.h; sourceTree = SOURCE_ROOT; };
 		CE8506341AA744DB0094FBCB /* udp_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_client.cpp; path = src/brain/udp_client.cpp; sourceTree = SOURCE_ROOT; };
@@ -672,9 +672,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEAA7CB41A724FBB00C7EF67 /* libNiTE2.dylib in Frameworks */,
-				CEAA7CB51A724FBC00C7EF67 /* libOpenNI2.dylib in Frameworks */,
-				CEAA7CB61A724FC300C7EF67 /* libboost_system.dylib in Frameworks */,
+				CE84E61E1B19B8D000CF11C4 /* libboost_system.dylib in Frameworks */,
+				CE84E61D1B19B8C700CF11C4 /* libNiTE2.dylib in Frameworks */,
+				CE84E61C1B19B8C500CF11C4 /* libOpenNI2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,8 +732,8 @@
 		CE27733C1A3849AB00D8F52B /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CE85062B1AA7440B0094FBCB /* brain */,
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
+				CE85062B1AA7440B0094FBCB /* brain */,
 				CE8506631AA85E170094FBCB /* rapidjson-test */,
 				CEDFA97A1AA0B095006B1C0D /* grt-test */,
 				CEDFA8311AA094AE006B1C0D /* grt-anbc */,
@@ -1733,7 +1733,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8506621AA85E170094FBCB /* rapidjson-test-xcode */,
-				CE85062A1AA7440B0094FBCB /* brain */,
+				CE85062A1AA7440B0094FBCB /* brain-xcode */,
 				CEDFA9791AA0B095006B1C0D /* grt-test-xcode */,
 				CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */,
 				CEDFA8231AA093F6006B1C0D /* grt-ada-boost-xcode */,
@@ -1957,7 +1957,7 @@
 			);
 			name = brain;
 			productName = brain;
-			productReference = CE85062A1AA7440B0094FBCB /* brain */;
+			productReference = CE85062A1AA7440B0094FBCB /* brain-xcode */;
 			productType = "com.apple.product-type.tool";
 		};
 		CE8506611AA85E170094FBCB /* rapidjson-test */ = {
@@ -2592,7 +2592,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/GRT",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Debug;
 		};
@@ -2608,7 +2608,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/GRT",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
 		};
@@ -2793,7 +2793,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Debug;
@@ -2805,7 +2810,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+					"$(PROJECT_DIR)/lib/NiTE2",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;

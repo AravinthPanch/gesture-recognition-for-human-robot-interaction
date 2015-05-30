@@ -23,50 +23,81 @@ int main(int argc, char* argv[])
         
         boost::asio::io_service io_service;
         brain brain;
-        std::string argument;
+        std::string argument1;
+        std::string argument2;
+        bool optionSelected1 = false;
+        bool optionSelected2 = false;
         
-        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n: ";
-        std::getline(std::cin, argument);
+        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Exit \n: ";
+        std::getline(std::cin, argument1);
         
-        if(argument == "1")
-        {
-            BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
+        while (!optionSelected1) {
             
-            brain.setPredictionModeActive();
+            if(argument1 == "1"){
+                
+                optionSelected1 = true;
+                BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
+                brain.setPredictionModeActive();
+                udp_client client(io_service, &brain);
+                boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+                while(brain.isPredictionModeActive()){}
+            }
             
-            udp_client client(io_service, &brain);
-            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-            
-            while(brain.isPredictionModeActive()){}
-            
-        }
-        else if(argument == "2")
-        {
-            BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
-            
-            brain.setTrainingModeActive();
-            
-            udp_client client(io_service, &brain);
-            boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
-            
-            while(true){
-                if(!brain.isTrainingModeActive() && !brain.isPredictionModeActive()){
-                    
-                    BOOST_LOG_TRIVIAL(debug) << "Training Mode Off";
-                    std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n: ";
-                    std::getline(std::cin, argument);
-                    
-                    if(argument == "1"){
-                        brain.trainNext();
-                        brain.setTrainingModeActive();
-                    }
-                    else if(argument == "2"){
-                        brain.setPredictionModeActive();
+            else if(argument1 == "2"){
+                
+                optionSelected1 = true;
+                BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
+                brain.setTrainingModeActive();
+                udp_client client(io_service, &brain);
+                boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+                
+                while(true){
+                    if(!brain.isTrainingModeActive() && !brain.isPredictionModeActive()){
+                        
+                        BOOST_LOG_TRIVIAL(debug) << "Training Mode Off";
+                        std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n 3 -> Exit \n: ";
+                        std::getline(std::cin, argument2);
+                        
+                        while(!optionSelected2){
+                            if(argument2 == "1"){
+                                optionSelected2 = true;
+                                brain.trainNext();
+                                brain.setTrainingModeActive();
+                            }
+                            else if(argument2 == "2"){
+                                optionSelected2 = true;
+                                brain.setPredictionModeActive();
+                            }
+                            else if(argument2 == "3"){
+                                optionSelected2 = true;
+                                BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
+                                return 0;
+                            }
+                            else {
+                                optionSelected2 = false;
+                                BOOST_LOG_TRIVIAL(info) << "Invalid selection." ;
+                                std::cout << "Press \n 1 -> Train Next Class \n 2 -> Stop Training And Go To Prediction Mode \n 3 -> Exit \n: ";
+                                std::getline(std::cin, argument2);
+                            }
+                        }
                     }
                 }
             }
+            
+            else if(argument1 == "3"){
+                optionSelected1 = true;
+                BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
+                return 0;
+            }
+            
+            else {
+                optionSelected1 = false;
+                BOOST_LOG_TRIVIAL(info) << "Invalid selection." ;
+                std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Exit \n: ";
+                std::getline(std::cin, argument1);
+            }
+            
         }
-        
     }
     
     catch (std::exception& e)
