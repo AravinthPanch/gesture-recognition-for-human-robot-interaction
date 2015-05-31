@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>boost-multicast-rx.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>boost-multicast-tx.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
 		<key>brain.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -88,6 +98,26 @@
 			<true/>
 		</dict>
 		<key>CE2A14181A713D7F002F6C8F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE2C34731B1ADAA200A8CD0F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE2C34831B1B07C000A8CD0F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE2C348E1B1B07E400A8CD0F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE2C34991B1B07F000A8CD0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
