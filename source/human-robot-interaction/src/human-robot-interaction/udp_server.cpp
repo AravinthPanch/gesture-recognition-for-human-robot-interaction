@@ -22,10 +22,12 @@
  */
 
 udp_server::udp_server(boost::asio::io_service& io_service):
-multicast_endpoint(boost::asio::ip::address::from_string("239.255.0.1"),50006),
+multicast_port(getConfigValue<int>("multicastPort")),
+multicast_address(getConfigValue<std::string>("multicastAddress")),
+multicast_endpoint(boost::asio::ip::address::from_string(multicast_address),multicast_port),
 socket_server(io_service, multicast_endpoint.protocol())
 {
-    BOOST_LOG_TRIVIAL(info) << "UDP Multicast Server started";
+    BOOST_LOG_TRIVIAL(info) << "UDP Multicast Server added membership to IP : " << multicast_address << " at Port : " << multicast_port;
 }
 
 

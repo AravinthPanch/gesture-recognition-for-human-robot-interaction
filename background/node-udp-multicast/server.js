@@ -12,8 +12,8 @@ var dgram = require('dgram');
 var socket = dgram.createSocket('udp4');
 
 var testMessage = "[hello world] pid: " + process.pid;
-var multicastAddress = '239.255.0.1';
-var multicastPort = 50006;
+var multicastAddress = '239.255.0.5';
+var multicastPort = 5008;
 
 
 socket.bind(multicastPort, '0.0.0.0', function () {

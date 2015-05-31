@@ -10,7 +10,7 @@
 #include <boost/asio.hpp>
 #include "boost/bind.hpp"
 
-const short multicast_port = 50006;
+const short multicast_port = 5008;
 
 class receiver
 {
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
         boost::asio::io_service io_service;
         receiver r(io_service,
                    boost::asio::ip::address::from_string("0.0.0.0"),
-                   boost::asio::ip::address::from_string("239.255.0.1"));
+                   boost::asio::ip::address::from_string("239.255.0.5"));
         io_service.run();
     }
     catch (std::exception& e)

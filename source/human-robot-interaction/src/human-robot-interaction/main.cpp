@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
             if(argument == "1")
             {
                 optionSelected = true;
-                BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Hand Gesture Tracking";
+                BOOST_LOG_TRIVIAL(info) << "Starting Hand Gesture Tracking";
                 udp_server server(io_service);
                 boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
                 gesture_tracker gestureTracker(&server);
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
             else if(argument == "2")
             {
                 optionSelected = true;
-                BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Skeleton Tracking";
+                BOOST_LOG_TRIVIAL(info) << "Starting Skeleton Tracking";
                 udp_server server(io_service);
                 boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
                 skeleton_tracker skeletonTracker(&server);

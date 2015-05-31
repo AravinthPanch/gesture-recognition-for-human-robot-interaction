@@ -7,17 +7,17 @@
 		<key>boost-multicast-rx.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>13</integer>
 		</dict>
 		<key>boost-multicast-tx.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>14</integer>
 		</dict>
 		<key>brain.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>16</integer>
 		</dict>
 		<key>grt-ada-boost.xcscheme</key>
 		<dict>
@@ -37,7 +37,7 @@
 		<key>human-robot-interaction.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>15</integer>
 		</dict>
 		<key>ni-simple-sensor-read.xcscheme</key>
 		<dict>

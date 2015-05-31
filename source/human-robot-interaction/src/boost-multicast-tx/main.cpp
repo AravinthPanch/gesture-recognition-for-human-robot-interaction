@@ -12,7 +12,7 @@
 #include "boost/bind.hpp"
 #include "boost/date_time/posix_time/posix_time_types.hpp"
 
-const short multicast_port = 50006;
+const short multicast_port = 5008;
 const int max_message_count = 10;
 
 class sender
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
     {
         
         boost::asio::io_service io_service;
-        sender s(io_service, boost::asio::ip::address::from_string("239.255.0.1"));
+        sender s(io_service, boost::asio::ip::address::from_string("239.255.0.5"));
         io_service.run();
         
         std::cout << "Started";

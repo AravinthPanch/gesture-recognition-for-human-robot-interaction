@@ -21,13 +21,17 @@ class udp_server
 {
     
 private:
-    //    const int server_port;
-    //    const int client_port;
-    bool clientConnected = true;
-    boost::array<char, 2> receive_buffer;
+    const short multicast_port;
+    std::string multicast_address;
     boost::array<char, 8> send_buffer;
     udp::endpoint multicast_endpoint;
     udp::socket socket_server;
+    
+    
+    //    const int server_port;
+    //    const int client_port;
+    boost::array<char, 2> receive_buffer;
+    bool clientConnected = true;
     
     void receive();
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
