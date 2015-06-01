@@ -177,7 +177,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
             
             // BOOST_LOG_TRIVIAL(debug) << buffer.GetString();
             
-            //Send it via websocket
+            //Send it via websocket with prediction results
             if(ws_socket.isClientConnected())
             {
                 ws_socket.send(buffer.GetString());
@@ -186,7 +186,14 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         else if(brain_->isTrainingModeActive()){
             brain_->train(handVector[0], handVector[1]);
             
-            //Send it via websocket
+            //Send it via websocket without prediction results
+            if(ws_socket.isClientConnected())
+            {
+                ws_socket.send(jsonString);
+            }
+        }
+        else {
+            //Forward it via websocket
             if(ws_socket.isClientConnected())
             {
                 ws_socket.send(jsonString);

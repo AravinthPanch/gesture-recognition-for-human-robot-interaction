@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
         std::string argument2;
         bool optionSelected1 = false;
         
-        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Exit \n: ";
+        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Hand Viewer \n 4 -> Exit \n: ";
         std::getline(std::cin, argument1);
         
         while (!optionSelected1) {
@@ -79,6 +79,15 @@ int main(int argc, char* argv[])
             else if(argument1 == "3")
             {
                 optionSelected1 = true;
+                BOOST_LOG_TRIVIAL(info) << "Starting Hand Viewer";
+                udp_client client(io_service, &brain);
+                boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
+                while(true){};
+            }
+            
+            else if(argument1 == "4")
+            {
+                optionSelected1 = true;
                 BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
                 return 0;
             }
@@ -86,7 +95,7 @@ int main(int argc, char* argv[])
             else {
                 optionSelected1 = false;
                 BOOST_LOG_TRIVIAL(info) << "Invalid selection." ;
-                std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Exit \n: ";
+                std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Hand Viewer \n 4 -> Exit \n: ";
                 std::getline(std::cin, argument1);
             }
             
