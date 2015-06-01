@@ -24,16 +24,17 @@ server_port(getConfigValue<int>("serverPort")),
 server_host_name(getConfigValue<char*>("serverHostName")),
 socket_client(io_service, udp::endpoint(udp::v4(), client_port))
 {
-    //Reference Brain Module
-    brain_ = brain;
+    BOOST_LOG_TRIVIAL(info) << "UDP Client started at port : " << client_port;
     
-    // Resolve hostname and attach io service from main threas
+    // Resolve hostname to IP (Eg: nao5.local to 10.0.7.5) and attach io service from main thread
     server_endpoint = endpoint_resolver(io_service, server_host_name,  server_port);
     
     // Send message to the server. Message is a string that is 01 to initate Hand Tracker
     boost::shared_ptr<std::string> message(new std::string("01"));
     send(message);
-    BOOST_LOG_TRIVIAL(info) << "UDP Client started at port : " << client_port;
+    
+    //Reference Brain Module
+    brain_ = brain;
     
     // Start a thread for Websocket
     boost::thread socket_thread(boost::bind(&websocket_server::init, &ws_socket));
@@ -98,7 +99,7 @@ vector<vector<double>> getHandData(const char* json){
     
     
     // Hand tracker may send hand id greater than 2. Hand tracker must reset the ids if both the hands are lost from the scene
-    if(strcmp(handData[0u].GetString(), "1") == 0){
+    if(strcmp(handData[0].GetString(), "1") == 0){
         leftHand.push_back(std::atof(handData[1u].GetString()));
         leftHand.push_back(std::atof(handData[2u].GetString()));
         leftHand.push_back(std::atof(handData[3u].GetString()));
@@ -192,7 +193,7 @@ void udp_client::handle_send(boost::shared_ptr<std::string> message, const boost
 
 
 /**
- * Resolve hostname
+ * Resolve hostname to IP
  *
  */
 
