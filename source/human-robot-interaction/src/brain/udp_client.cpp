@@ -10,6 +10,8 @@
 #include <string>
 #include <boost/log/trivial.hpp>
 #include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 #include <boost/thread.hpp>
 
 
@@ -80,6 +82,7 @@ void udp_client::send(boost::shared_ptr<std::string> message){
                                 );
 }
 
+
 /**
  * Parse the received string and extract the data
  *
@@ -99,13 +102,13 @@ vector<vector<double>> getHandData(const char* json){
     
     
     // Hand tracker may send hand id greater than 2. Hand tracker must reset the ids if both the hands are lost from the scene
-    if(strcmp(handData[0].GetString(), "1") == 0){
+    if(strcmp(handData[0u].GetString(), "1") == 0){
         leftHand.push_back(std::atof(handData[1u].GetString()));
         leftHand.push_back(std::atof(handData[2u].GetString()));
         leftHand.push_back(std::atof(handData[3u].GetString()));
         
     }
-    else if(strcmp(handData[0].GetString(), "2") == 0){
+    else if(strcmp(handData[0u].GetString(), "2") == 0){
         rightHand.push_back(std::atof(handData[1u].GetString()));
         rightHand.push_back(std::atof(handData[2u].GetString()));
         rightHand.push_back(std::atof(handData[3u].GetString()));
@@ -146,30 +149,48 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         
         // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
         std::string trimmedData = trim_data(receive_buffer.data());
-        //        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData << " : " << bytes_transferred << " bytes : " << server_endpoint;
-        
+        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData;
         
         // Parse the received json string to get data
         const char * jsonString = trimmedData.c_str();
         vector<vector<double>> handVector = getHandData(jsonString);
         
-        
         // Predict or train
         if(brain_->isPredictionModeActive()){
-            string classLabel = brain_->predict(handVector[0], handVector[1]);
-            //            boost::shared_ptr<std::string> message(new string(classLabel));
-            //            send(message);
+            
+            // Predict and get classLabel and maximum likelihood
+            vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
+            
+            // Parse the same received json
+            rapidjson::Document document;
+            document.Parse(jsonString);
+            
+            // Add an array OUTPUT with prediction results
+            rapidjson::Value predictionArray(rapidjson::kArrayType);
+            predictionArray.PushBack(predictionResults[0], document.GetAllocator()).PushBack(predictionResults[1], document.GetAllocator());
+            document.AddMember("OUTPUT", predictionArray, document.GetAllocator());
+            
+            // Write the document to the buffer
+            rapidjson::StringBuffer buffer;
+            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+            document.Accept(writer);
+            
+//            BOOST_LOG_TRIVIAL(debug) << buffer.GetString();
+            
+            //Send it via websocket
+            if(ws_socket.isClientConnected())
+            {
+                ws_socket.send(buffer.GetString());
+            }
         }
         else if(brain_->isTrainingModeActive()){
             brain_->train(handVector[0], handVector[1]);
-        }
-        
-        if(ws_socket.isClientConnected()){
-            std::stringstream ss;
-            ss << trimmedData;
             
-            // Send it via websocket
-            ws_socket.send(&ss);
+            //Send it via websocket
+            if(ws_socket.isClientConnected())
+            {
+                ws_socket.send(jsonString);
+            }
         }
     }
     else

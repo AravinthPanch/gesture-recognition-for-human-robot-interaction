@@ -23,8 +23,8 @@ class brain
 {
     
 private:
-    vector< double > leftHand;
-    vector< double > rightHand;
+    vector<double> leftHand;
+    vector<double> rightHand;
     
     GestureRecognitionPipeline pipeline;
     ANBC anbc;
@@ -58,7 +58,7 @@ public:
     void train(vector< double > leftHand, vector< double > rightHand);
     void trainNext();
     
-    string predict(vector< double > leftHand, vector< double > rightHand);
+    vector<double> predict(vector< double > leftHand, vector< double > rightHand);
     
 };
 

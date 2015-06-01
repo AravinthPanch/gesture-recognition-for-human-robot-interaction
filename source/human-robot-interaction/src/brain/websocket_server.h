@@ -26,7 +26,7 @@ private:
     
 public:
     void init();
-    void send(std::stringstream* ss);
+    void send(const char* parsedData);
     bool isClientConnected();
 };
 

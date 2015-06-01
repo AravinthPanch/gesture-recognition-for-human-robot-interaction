@@ -57,7 +57,7 @@ void brain::setPredictionModeActive(){
     trainingModeActive = false;
     
     if(trainingData.loadDatasetFromFile(HRI_TRAINING_DATASET) ){
-        BOOST_LOG_TRIVIAL(debug) << "Training Data Loaded From File";
+        BOOST_LOG_TRIVIAL(info) << "Training Data Loaded From File";
     }
     else{
         BOOST_LOG_TRIVIAL(error) << "Failed To Load Training Data From File";
@@ -186,10 +186,10 @@ void brain::train(vector< double > leftHand, vector< double > rightHand){
  * It predicts the incoming handVector and returns the identified class label and likelyhood.
  *
  */
-string brain::predict(vector< double > leftHand, vector< double > rightHand){
-    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] <<", " << leftHand.size() ;
+vector<double> brain::predict(vector< double > leftHand, vector< double > rightHand){
+    //    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] <<", " << leftHand.size() ;
     
-    vector< double > inputVector(SAMPLE_DIMENSION);
+    vector<double> inputVector(SAMPLE_DIMENSION);
     inputVector[0] = leftHand[0];
     inputVector[1] = leftHand[1];
     inputVector[2] = leftHand[2];
@@ -198,9 +198,10 @@ string brain::predict(vector< double > leftHand, vector< double > rightHand){
     UINT predictedClassLabel = pipeline.getPredictedClassLabel();
     double maxLikelihood =  pipeline.getMaximumLikelihood();
     
-    std::cout << "predictedClassLabel : " << predictedClassLabel << std::endl;
-    std::cout << "maxLikelihood : " << maxLikelihood << std::endl;
+    vector<double> result(2);
+    result[0] = maxLikelihood;
+    result[1] = double(predictedClassLabel);
     
-    return "hola";
+    return result;
 }
 

@@ -64,8 +64,9 @@ void websocket_server::init(){
  *
  */
 
-void websocket_server::send(std::stringstream* ss){
-    ws_socket_.send(hdl_, ss->str(), websocketpp::frame::opcode::text);
+void websocket_server::send(const char* parsedData){
+    ws_socket_.send(hdl_, parsedData, websocketpp::frame::opcode::text);
+    BOOST_LOG_TRIVIAL(debug) << "Sent : " << parsedData;
 }
 
 

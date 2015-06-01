@@ -11,14 +11,21 @@ int main() {
     Document d;
     d.Parse(json);
     
+    
     // 2. Modify it by DOM.
     Value& s = d["stars"];
     s.SetInt(s.GetInt() + 1);
+    
+    Value array(kArrayType);
+    array.PushBack("A", d.GetAllocator()).PushBack(1, d.GetAllocator());
+    d.AddMember("ALPHA", array, d.GetAllocator());
+    
     
     // 3. Stringify the DOM
     StringBuffer buffer;
     Writer<StringBuffer> writer(buffer);
     d.Accept(writer);
+    
     
     // Output {"project":"rapidjson","stars":11}
     std::cout << buffer.GetString() << std::endl;
