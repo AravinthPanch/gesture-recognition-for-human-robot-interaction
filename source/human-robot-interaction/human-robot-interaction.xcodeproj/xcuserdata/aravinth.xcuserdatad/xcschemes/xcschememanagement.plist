@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>brain.xcscheme</key>
+		<key>boost-multicast-rx.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>14</integer>
+		</dict>
+		<key>boost-multicast-tx.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>brain.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 		<key>grt-ada-boost.xcscheme</key>
 		<dict>
@@ -27,7 +37,7 @@
 		<key>human-robot-interaction.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>15</integer>
 		</dict>
 		<key>ni-simple-sensor-read.xcscheme</key>
 		<dict>
@@ -88,6 +98,16 @@
 			<true/>
 		</dict>
 		<key>CE2A14181A713D7F002F6C8F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE62E0AF1B1C4188002D16CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE62E0BA1B1C4198002D16CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
