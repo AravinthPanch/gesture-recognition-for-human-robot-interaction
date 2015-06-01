@@ -175,7 +175,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
             rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
             document.Accept(writer);
             
-//            BOOST_LOG_TRIVIAL(debug) << buffer.GetString();
+            // BOOST_LOG_TRIVIAL(debug) << buffer.GetString();
             
             //Send it via websocket
             if(ws_socket.isClientConnected())

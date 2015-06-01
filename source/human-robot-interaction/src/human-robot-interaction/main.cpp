@@ -31,14 +31,14 @@ int main(int argc, char* argv[])
         std::string argument;
         bool optionSelected = false;
         
-        std::cout << "Press \n 1 -> Gesture Tracker \n 2 -> Skeleton Tracker \n 3 -> Client \n 4 -> Exit \n: ";
+        std::cout << "Press \n 1 -> Hand Gesture Tracker \n 2 -> Skeleton Tracker \n 3 -> Client \n 4 -> Exit \n: ";
         std::getline(std::cin, argument);
         
         while (!optionSelected) {
             if(argument == "1")
             {
                 optionSelected = true;
-                BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Hand Gesture Tracking";
+                BOOST_LOG_TRIVIAL(info) << "Starting Hand Gesture Tracker";
                 udp_server server(io_service);
                 boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
                 gesture_tracker gestureTracker(&server);
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
             else if(argument == "2")
             {
                 optionSelected = true;
-                BOOST_LOG_TRIVIAL(info) << "Starting UDP Server with Skeleton Tracking";
+                BOOST_LOG_TRIVIAL(info) << "Starting Skeleton Tracker";
                 udp_server server(io_service);
                 boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
                 skeleton_tracker skeletonTracker(&server);
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
             else{
                 optionSelected = false;
                 BOOST_LOG_TRIVIAL(info) << "Invalid selection." ;
-                std::cout << "Press \n 1 -> Gesture Tracker \n 2 -> Skeleton Tracker \n 3 -> Client \n 4 -> Exit \n: ";
+                std::cout << "Press \n 1 -> Hand Gesture Tracker \n 2 -> Skeleton Tracker \n 3 -> Client \n 4 -> Exit \n: ";
                 std::getline(std::cin, argument);
             }
         }
