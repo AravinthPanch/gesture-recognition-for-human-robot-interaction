@@ -1,6 +1,7 @@
 {
-	"serverPort": 5005,
-	"clientPort": 5006,
-	"controlCenterPort": 5007,
-	"serverHostName": "localhost"
+    "serverPort": 5005,
+    "clientPort": 5006,
+    "controlCenterPort": 5007,
+    "websocketPort":5008,
+    "serverHostName": "localhost"
 }

@@ -14,6 +14,7 @@
 #include <boost/shared_ptr.hpp>
 #include "setup.h"
 #include "brain.h"
+#include "websocket_server.h"
 
 
 using boost::asio::ip::udp;
@@ -30,13 +31,15 @@ private:
     boost::array<char, 8> send_buffer;
     udp::endpoint server_endpoint;
     udp::socket socket_client;
+    websocket_server ws_socket;
     
     void receive();
     udp::endpoint endpoint_resolver(boost::asio::io_service& io_service, const char* host_name, int port);
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
     void handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred);
     
-    brain *brain_;
+    brain* brain_;
+    
     
 public:
     udp_client(boost::asio::io_service& io_service, brain *brain);

@@ -10,6 +10,7 @@
 #include <string>
 #include <boost/log/trivial.hpp>
 #include "rapidjson/document.h"
+#include <boost/thread.hpp>
 
 
 /**
@@ -33,7 +34,11 @@ socket_client(io_service, udp::endpoint(udp::v4(), client_port))
     boost::shared_ptr<std::string> message(new std::string("01"));
     send(message);
     BOOST_LOG_TRIVIAL(info) << "UDP Client started at port : " << client_port;
+    
+    // Start a thread for Websocket
+    boost::thread socket_thread(boost::bind(&websocket_server::init, &ws_socket));
 }
+
 
 
 /**
@@ -140,7 +145,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         
         // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
         std::string trimmedData = trim_data(receive_buffer.data());
-//        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData << " : " << bytes_transferred << " bytes : " << server_endpoint;
+        //        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData << " : " << bytes_transferred << " bytes : " << server_endpoint;
         
         
         // Parse the received json string to get data
@@ -151,13 +156,20 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         // Predict or train
         if(brain_->isPredictionModeActive()){
             string classLabel = brain_->predict(handVector[0], handVector[1]);
-//            boost::shared_ptr<std::string> message(new string(classLabel));
-//            send(message);
+            //            boost::shared_ptr<std::string> message(new string(classLabel));
+            //            send(message);
         }
         else if(brain_->isTrainingModeActive()){
             brain_->train(handVector[0], handVector[1]);
         }
         
+        if(ws_socket.isClientConnected()){
+            std::stringstream ss;
+            ss << trimmedData;
+            
+            // Send it via websocket
+            ws_socket.send(&ss);
+        }
     }
     else
     {
