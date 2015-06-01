@@ -89,14 +89,20 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 
 		var statusLabel = document.createElement('div');
 		statusLabel.innerHTML = renderStatus;
-		statusLabel.className = 'ui label renderStatusLabel';
+		statusLabel.className = 'ui label big renderStatusLabel';
 		statusLabel.style.cssText = "margin: 10px;";
+
+		var predictionLabel = document.createElement('div');
+		predictionLabel.innerHTML = "Predicted Class : , Maximum Likelihood : ";
+		predictionLabel.className = 'ui label big predictionLabel';
+		predictionLabel.style.cssText = "margin: 10px;";
 
 		container.appendChild(title);
 		container.appendChild(hButton);
 		container.appendChild(sButton);
 		container.appendChild(fromDataButton);
 		container.appendChild(statusLabel);
+		container.appendChild(predictionLabel);
 	}
 
 	function initDom() {
@@ -195,6 +201,14 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 			joints['HAND'].position.y = app.skeletonBuffer.HAND[2];
 			joints['HAND'].position.z = app.skeletonBuffer.HAND[3];
 		}
+
+		if ('OUTPUT' in app.skeletonBuffer) {
+			var predictionLabel = "Predicted Class : " + app.skeletonBuffer.OUTPUT[0]
+				+ " , Maximum Likelihood : " + app.skeletonBuffer.OUTPUT[1];
+
+			$('.predictionLabel').text(predictionLabel);
+		}
+
 		app.renderer.render(app.scene, app.camera);
 	}
 

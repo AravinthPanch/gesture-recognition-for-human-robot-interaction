@@ -199,8 +199,8 @@ vector<double> brain::predict(vector< double > leftHand, vector< double > rightH
     double maxLikelihood =  pipeline.getMaximumLikelihood();
     
     vector<double> result(2);
-    result[0] = maxLikelihood;
-    result[1] = double(predictedClassLabel);
+    result[1] = maxLikelihood;
+    result[0] = double(predictedClassLabel);
     
     return result;
 }
