@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE8506291AA7440B0094FBCB"
-               BuildableName = "brain-xcode"
+               BuildableName = "brain"
                BlueprintName = "brain"
                ReferencedContainer = "container:human-robot-interaction.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE8506291AA7440B0094FBCB"
-            BuildableName = "brain-xcode"
+            BuildableName = "brain"
             BlueprintName = "brain"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -48,12 +48,11 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE8506291AA7440B0094FBCB"
-            BuildableName = "brain-xcode"
+            BuildableName = "brain"
             BlueprintName = "brain"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
@@ -67,12 +66,11 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE8506291AA7440B0094FBCB"
-            BuildableName = "brain-xcode"
+            BuildableName = "brain"
             BlueprintName = "brain"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>

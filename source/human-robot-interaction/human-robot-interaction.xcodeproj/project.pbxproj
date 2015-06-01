@@ -11,10 +11,6 @@
 		CE2A14261A713F60002F6C8F /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
 		CE2A14271A713F62002F6C8F /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE2A14281A713F67002F6C8F /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
-		CE2C34A21B1B085E00A8CD0F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C34A11B1B085E00A8CD0F /* main.cpp */; };
-		CE2C34A31B1B08AD00A8CD0F /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
-		CE2C34A41B1B08B100A8CD0F /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
-		CE2C34A61B1B092700A8CD0F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C34A51B1B092700A8CD0F /* main.cpp */; };
 		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
 		CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */; };
 		CE4AC8E41A506EF6001B33CF /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E21A506EF6001B33CF /* udp_client.cpp */; };
@@ -75,24 +71,6 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		CE2A14171A713D7F002F6C8F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		CE2C348D1B1B07E400A8CD0F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		CE2C34981B1B07F000A8CD0F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -236,10 +214,6 @@
 /* Begin PBXFileReference section */
 		CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-simple-skeleton-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2A14231A713E3E002F6C8F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-simple-skeleton/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CE2C348F1B1B07E400A8CD0F /* boost-multicast-rx-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "boost-multicast-rx-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE2C349A1B1B07F000A8CD0F /* boost-multicast-tx-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "boost-multicast-tx-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE2C34A11B1B085E00A8CD0F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/boost-multicast-tx/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CE2C34A51B1B092700A8CD0F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/boost-multicast-rx/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41381A488EFE008E743E /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/udp-server-async/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gesture_tracker.cpp; path = "src/human-robot-interaction/gesture_tracker.cpp"; sourceTree = SOURCE_ROOT; };
@@ -615,22 +589,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE2C348C1B1B07E400A8CD0F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE2C34A41B1B08B100A8CD0F /* libboost_system.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CE2C34971B1B07F000A8CD0F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE2C34A31B1B08AD00A8CD0F /* libboost_system.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CE70B28E1A5447E80072BB83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -777,8 +735,6 @@
 		CE27733C1A3849AB00D8F52B /* src */ = {
 			isa = PBXGroup;
 			children = (
-				CE2C34901B1B07E400A8CD0F /* boost-multicast-rx */,
-				CE2C349B1B1B07F000A8CD0F /* boost-multicast-tx */,
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
 				CE85062B1AA7440B0094FBCB /* brain */,
 				CE8506631AA85E170094FBCB /* rapidjson-test */,
@@ -806,24 +762,6 @@
 			);
 			name = "nite-simple-skeleton";
 			path = "../nite-simple-skeleton";
-			sourceTree = "<group>";
-		};
-		CE2C34901B1B07E400A8CD0F /* boost-multicast-rx */ = {
-			isa = PBXGroup;
-			children = (
-				CE2C34A51B1B092700A8CD0F /* main.cpp */,
-			);
-			name = "boost-multicast-rx";
-			path = "../boost-multicast-rx";
-			sourceTree = "<group>";
-		};
-		CE2C349B1B1B07F000A8CD0F /* boost-multicast-tx */ = {
-			isa = PBXGroup;
-			children = (
-				CE2C34A11B1B085E00A8CD0F /* main.cpp */,
-			);
-			name = "boost-multicast-tx";
-			path = "../boost-multicast-tx";
 			sourceTree = "<group>";
 		};
 		CE4B90901A8D013B00A2EE05 /* config */ = {
@@ -858,9 +796,9 @@
 			children = (
 				CED6EFAD1A9E082800402682 /* libboost_filesystem-mt.dylib */,
 				CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */,
-				CE9E41F71A38650F0095F65A /* libboost_system.dylib */,
 				CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */,
 				CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */,
+				CE9E41F71A38650F0095F65A /* libboost_system.dylib */,
 			);
 			name = Boost;
 			sourceTree = "<group>";
@@ -1798,8 +1736,6 @@
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
-				CE2C348F1B1B07E400A8CD0F /* boost-multicast-rx-xcode */,
-				CE2C349A1B1B07F000A8CD0F /* boost-multicast-tx-xcode */,
 				CE8506621AA85E170094FBCB /* rapidjson-test-xcode */,
 				CE85062A1AA7440B0094FBCB /* brain-xcode */,
 				CEDFA9791AA0B095006B1C0D /* grt-test-xcode */,
@@ -1975,40 +1911,6 @@
 			name = "nite-simple-skeleton";
 			productName = "nite-simple-skeleton";
 			productReference = CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */;
-			productType = "com.apple.product-type.tool";
-		};
-		CE2C348E1B1B07E400A8CD0F /* boost-multicast-rx */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CE2C34931B1B07E400A8CD0F /* Build configuration list for PBXNativeTarget "boost-multicast-rx" */;
-			buildPhases = (
-				CE2C348B1B1B07E400A8CD0F /* Sources */,
-				CE2C348C1B1B07E400A8CD0F /* Frameworks */,
-				CE2C348D1B1B07E400A8CD0F /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "boost-multicast-rx";
-			productName = "boost-multicast-rx";
-			productReference = CE2C348F1B1B07E400A8CD0F /* boost-multicast-rx-xcode */;
-			productType = "com.apple.product-type.tool";
-		};
-		CE2C34991B1B07F000A8CD0F /* boost-multicast-tx */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CE2C349E1B1B07F000A8CD0F /* Build configuration list for PBXNativeTarget "boost-multicast-tx" */;
-			buildPhases = (
-				CE2C34961B1B07F000A8CD0F /* Sources */,
-				CE2C34971B1B07F000A8CD0F /* Frameworks */,
-				CE2C34981B1B07F000A8CD0F /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "boost-multicast-tx";
-			productName = "boost-multicast-tx";
-			productReference = CE2C349A1B1B07F000A8CD0F /* boost-multicast-tx-xcode */;
 			productType = "com.apple.product-type.tool";
 		};
 		CE70B2901A5447E80072BB83 /* nite-user-glut-viewer */ = {
@@ -2261,12 +2163,6 @@
 					CE2A14181A713D7F002F6C8F = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
-					CE2C348E1B1B07E400A8CD0F = {
-						CreatedOnToolsVersion = 6.3.2;
-					};
-					CE2C34991B1B07F000A8CD0F = {
-						CreatedOnToolsVersion = 6.3.2;
-					};
 					CE70B2901A5447E80072BB83 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -2338,8 +2234,6 @@
 				CE8506611AA85E170094FBCB /* rapidjson-test */,
 				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 				CE8506291AA7440B0094FBCB /* brain */,
-				CE2C348E1B1B07E400A8CD0F /* boost-multicast-rx */,
-				CE2C34991B1B07F000A8CD0F /* boost-multicast-tx */,
 			);
 		};
 /* End PBXProject section */
@@ -2350,22 +2244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2A14251A713E3E002F6C8F /* main.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CE2C348B1B1B07E400A8CD0F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE2C34A61B1B092700A8CD0F /* main.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CE2C34961B1B07F000A8CD0F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE2C34A21B1B085E00A8CD0F /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2638,66 +2516,6 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
-			};
-			name = Release;
-		};
-		CE2C34941B1B07E400A8CD0F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/boost/1.56.0/lib,
-				);
-				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
-			};
-			name = Debug;
-		};
-		CE2C34951B1B07E400A8CD0F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/boost/1.56.0/lib,
-				);
-				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
-			};
-			name = Release;
-		};
-		CE2C349F1B1B07F000A8CD0F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/boost/1.56.0/lib,
-				);
-				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
-			};
-			name = Debug;
-		};
-		CE2C34A01B1B07F000A8CD0F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/local/Cellar/boost/1.56.0/lib,
-				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
@@ -3140,22 +2958,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		CE2C34931B1B07E400A8CD0F /* Build configuration list for PBXNativeTarget "boost-multicast-rx" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CE2C34941B1B07E400A8CD0F /* Debug */,
-				CE2C34951B1B07E400A8CD0F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		CE2C349E1B1B07F000A8CD0F /* Build configuration list for PBXNativeTarget "boost-multicast-tx" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CE2C349F1B1B07F000A8CD0F /* Debug */,
-				CE2C34A01B1B07F000A8CD0F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 		CE70B2971A5447E80072BB83 /* Build configuration list for PBXNativeTarget "nite-user-glut-viewer" */ = {
 			isa = XCConfigurationList;

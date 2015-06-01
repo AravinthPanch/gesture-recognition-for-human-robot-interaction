@@ -137,16 +137,14 @@ void gesture_tracker::send_hand(const nite::HandData& hand){
     
     boost::shared_ptr<std::string> message(new std::string( hand_buffer.str()));
     
-    server_->send(message);
-    
-    //    if(server_->isClientConnected())
-    //    {
-    //        server_->send(message);
-    //    }
-    //    else
-    //    {
-    //        BOOST_LOG_TRIVIAL(debug) << *message;
-    //    }
+    if(server_->isClientConnected())
+    {
+        server_->send(message);
+    }
+    else
+    {
+        BOOST_LOG_TRIVIAL(debug) << *message;
+    }
     
 }
 
@@ -154,7 +152,7 @@ void gesture_tracker::send_hand(const nite::HandData& hand){
 /**
  *
  * Starts Gesture recognition and Hand tracking based on the position of Hand found by WAVE gesture
- * It tracks it till there is a keyboard ESC Hit and stops
+ * It tracks it till there is a keyboard ESC Hit and stops 
  *
  */
 void gesture_tracker::track_gestures(){
@@ -175,7 +173,7 @@ void gesture_tracker::track_gestures(){
         {
             if (gestures[i].isComplete())
             {
-                //                send_gesture(gestures[i]);
+//                send_gesture(gestures[i]);
                 nite::HandId newId;
                 // Reset the hand id here if it is more than 2
                 handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);

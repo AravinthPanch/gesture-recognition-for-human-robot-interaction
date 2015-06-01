@@ -1,8 +1,6 @@
 {
-    "multicastAddress": "239.255.0.5",
-    "multicastPort": 5008,
-    "serverPort": 5005,
-    "clientPort": 5006,
-    "controlCenterPort": 5007,
-    "serverHostName": "localhost"
+	"serverPort": 5005,
+	"clientPort": 5006,
+	"controlCenterPort": 5007,
+	"serverHostName": "localhost"
 }
