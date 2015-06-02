@@ -34,6 +34,11 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>helper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
 		<key>human-robot-interaction.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -218,6 +223,11 @@
 			<true/>
 		</dict>
 		<key>CEE283AD1A48C2E300131564</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CEF78A741B1DAE5500FE79D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

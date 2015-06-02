@@ -59,7 +59,7 @@ void gesture_tracker::init_nite(){
     }
     
     handTracker.startGestureDetection(nite::GESTURE_WAVE);
-    handTracker.startGestureDetection(nite::GESTURE_CLICK);
+    //    handTracker.startGestureDetection(nite::GESTURE_CLICK);
     BOOST_LOG_TRIVIAL(info) << "Gesture detection started: Wave your Hand to start the hand tracking" ;
 }
 
@@ -114,6 +114,8 @@ void gesture_tracker::send_gesture(const nite::GestureData& gesture){
  *
  */
 void gesture_tracker::send_hand(const nite::HandData& hand){
+    
+    // keys and values for json array
     ptree handJson, handId, joint_array, xAxis, yAxis, zAxis, joint_confidence;
     
     // check for hand id and add key as Lefthand and right hand based on odd and even hand ids
@@ -127,16 +129,16 @@ void gesture_tracker::send_hand(const nite::HandData& hand){
     joint_array.push_back(std::make_pair("", yAxis));
     joint_array.push_back(std::make_pair("", zAxis));
     
-    
     // send it as left hand and right hand based on odd and even number of hand ids
     // reset hand ids if they are lost
     handJson.add_child("HAND", joint_array);
     
+    // Stringify the ptree
     std::ostringstream hand_buffer;
     write_json (hand_buffer, handJson, false);
-    
     boost::shared_ptr<std::string> message(new std::string( hand_buffer.str()));
     
+    // Send it to client if it is connected
     if(server_->isClientConnected())
     {
         server_->send(message);
@@ -145,14 +147,34 @@ void gesture_tracker::send_hand(const nite::HandData& hand){
     {
         BOOST_LOG_TRIVIAL(debug) << *message;
     }
+}
+
+
+/**
+ *
+ *
+ * Finds the hand name based on given handId
+ *
+ */
+
+std::string gesture_tracker::getHandName(int handId){
+    std::string handName;
     
+    if(handId == leftHand){
+        handName = "LEFT";
+    }
+    else if(handId == rightHand){
+        handName = "RIGHT";
+    }
+    
+    return handName;
 }
 
 
 /**
  *
  * Starts Gesture recognition and Hand tracking based on the position of Hand found by WAVE gesture
- * It tracks it till there is a keyboard ESC Hit and stops 
+ * It tracks it till there is a keyboard ESC Hit and stops
  *
  */
 void gesture_tracker::track_gestures(){
@@ -173,7 +195,7 @@ void gesture_tracker::track_gestures(){
         {
             if (gestures[i].isComplete())
             {
-//                send_gesture(gestures[i]);
+                //                send_gesture(gestures[i]);
                 nite::HandId newId;
                 // Reset the hand id here if it is more than 2
                 handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
@@ -181,13 +203,67 @@ void gesture_tracker::track_gestures(){
         }
         
         const nite::Array<nite::HandData>& hands = handTrackerFrame.getHands();
+        
+        
+        
+        // hands.getSize() gives the number of active hands, but handId increases
+        // hands.getSize() = 0 and goes to hands.getSize() = 2, when there is a new hand detected
+        // hands.getSize() = 0, this happens for a fraction of second when tacking is troubled
+        BOOST_LOG_TRIVIAL(debug) << "HgS : " << hands.getSize();
+        
         for (int i = 0; i < hands.getSize(); ++i)
         {
+            // Get Hand data
             const nite::HandData& hand = hands[i];
+            
+            // If hand is lost, update the losthandid
+            if(!hand.isTracking())
+            {
+                lastLostHand = hand.getId();
+                BOOST_LOG_TRIVIAL(info) << "Hand : " << hand.getId() << " is Lost";
+                
+                // When there is no active hands, reset all the values
+                if(hands.getSize() == 0){
+                    leftHand = 0;
+                    rightHand = 0;
+                    lastLostHand = 0;
+                    handsSize = 0;
+                }
+            }
+            
+            // If new hand is found
+            if(hand.isNew()){
+                BOOST_LOG_TRIVIAL(info) << "Hand : " << hand.getId() << " is New";
+                
+                handsSize++;
+                
+                // Check if it is a hand for the first time or second time
+                if(handsSize == 1 && lastLostHand == 0){
+                    BOOST_LOG_TRIVIAL(debug) << "First Hand";
+                    rightHand = hand.getId();
+                }
+                else if (handsSize == 2 && lastLostHand == 0){
+                    BOOST_LOG_TRIVIAL(debug) << "Second Hand";
+                    leftHand = hand.getId();
+                }
+                // If a hand was lost and a hand is active, then update the appropriate id to left or right hand
+                else if(handsSize > 2 && lastLostHand > 0){
+                    if(lastLostHand == leftHand){
+                        leftHand = hand.getId();
+                    }else if(lastLostHand == rightHand){
+                        rightHand = hand.getId();
+                    }
+                }
+            }
+            
+            // If hand is been tracked, send the data to client
             if (hand.isTracking())
             {
+                BOOST_LOG_TRIVIAL(debug) << getHandName(hand.getId()) << " : " << hand.getId()  << " is Tracking";
+                BOOST_LOG_TRIVIAL(debug) << "r :" << rightHand << " l:" << leftHand << " ll:" << lastLostHand << " HS :" << handsSize <<std::endl;
                 send_hand(hand);
             }
+            
         }
     }
     

@@ -21,10 +21,16 @@ private:
     nite::Status niteRc;
     udp_server *server_;
     
+    int leftHand = 0;
+    int rightHand = 0;
+    int lastLostHand = 0;
+    int handsSize = 0;
+    
     void init_nite();
     void track_gestures();
     void send_gesture(const nite::GestureData& gesture);
     void send_hand(const nite::HandData& hand);
+    std::string getHandName(int handId);
     
 public:
     gesture_tracker(udp_server *server);
