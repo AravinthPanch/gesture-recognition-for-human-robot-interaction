@@ -83,6 +83,7 @@ void udp_client::send(boost::shared_ptr<std::string> message){
 }
 
 
+
 /**
  * Parse the received string and extract the data
  *
@@ -93,30 +94,41 @@ vector<vector<double>> getHandData(const char* json){
     rapidjson::Document document;
     document.Parse(json);
     
-    
-    // NiTE gesture must be taken care as welll
-    rapidjson::Value& handData = document["HAND"];
-    
+    vector<vector<double>> handVector;
     vector<double> leftHand;
     vector<double> rightHand;
     
-    
-    // Hand tracker may send hand id greater than 2. Hand tracker must reset the ids if both the hands are lost from the scene
-    if(strcmp(handData[0u].GetString(), "1") == 0){
-        leftHand.push_back(std::atof(handData[1u].GetString()));
-        leftHand.push_back(std::atof(handData[2u].GetString()));
-        leftHand.push_back(std::atof(handData[3u].GetString()));
+    // NiTE gesture must be taken care as welll
+    if(document.HasMember("RIGHT") && document.HasMember("LEFT")){
+        rapidjson::Value& handData1 = document["RIGHT"];
+        rightHand.push_back(std::atof(handData1[0u].GetString()));
+        rightHand.push_back(std::atof(handData1[1u].GetString()));
+        rightHand.push_back(std::atof(handData1[2u].GetString()));
         
+        rapidjson::Value& handData2 = document["LEFT"];
+        leftHand.push_back(std::atof(handData2[0u].GetString()));
+        leftHand.push_back(std::atof(handData2[1u].GetString()));
+        leftHand.push_back(std::atof(handData2[2u].GetString()));
+        
+        handVector.push_back(rightHand);
+        handVector.push_back(leftHand);
     }
-    else if(strcmp(handData[0u].GetString(), "2") == 0){
-        rightHand.push_back(std::atof(handData[1u].GetString()));
-        rightHand.push_back(std::atof(handData[2u].GetString()));
-        rightHand.push_back(std::atof(handData[3u].GetString()));
+    else if(document.HasMember("RIGHT")){
+        rapidjson::Value& handData1 = document["RIGHT"];
+        rightHand.push_back(std::atof(handData1[0u].GetString()));
+        rightHand.push_back(std::atof(handData1[1u].GetString()));
+        rightHand.push_back(std::atof(handData1[2u].GetString()));
+        
+        handVector.push_back(rightHand);
     }
-    
-    vector<vector<double>> handVector;
-    handVector.push_back(leftHand);
-    handVector.push_back(rightHand);
+    else if(document.HasMember("LEFT")){
+        rapidjson::Value& handData2 = document["LEFT"];
+        leftHand.push_back(std::atof(handData2[0u].GetString()));
+        leftHand.push_back(std::atof(handData2[1u].GetString()));
+        leftHand.push_back(std::atof(handData2[2u].GetString()));
+        
+        handVector.push_back(leftHand);
+    }
     
     return handVector;
 }

@@ -10,11 +10,8 @@
 #include <boost/log/trivial.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include "NiTE.h"
 #include "gesture_tracker.h"
-
 
 using boost::property_tree::ptree;
 using boost::property_tree::write_json;
@@ -113,39 +110,90 @@ void gesture_tracker::send_gesture(const nite::GestureData& gesture){
  * Send it to the connected client
  *
  */
-void gesture_tracker::send_hand(const nite::HandData& hand){
+ptree gesture_tracker::parseToJSON(const nite::HandData& hand){
     
     // keys and values for json array
-    ptree handJson, handId, joint_array, xAxis, yAxis, zAxis, joint_confidence;
+    ptree joint_array, xAxis, yAxis, zAxis;
     
-    // check for hand id and add key as Lefthand and right hand based on odd and even hand ids
-    handId.put("", hand.getId());
     xAxis.put("", hand.getPosition().x);
     yAxis.put("", hand.getPosition().y);
     zAxis.put("", hand.getPosition().z);
     
-    joint_array.push_back(std::make_pair("", handId));
+    // Make an array of hand joint for x,y,z axes
     joint_array.push_back(std::make_pair("", xAxis));
     joint_array.push_back(std::make_pair("", yAxis));
     joint_array.push_back(std::make_pair("", zAxis));
     
-    // send it as left hand and right hand based on odd and even number of hand ids
-    // reset hand ids if they are lost
-    handJson.add_child("HAND", joint_array);
+    return joint_array;
+}
+
+
+/**
+ *
+ * Serializes hand data with position and hand id
+ * Send it to the connected client
+ *
+ */
+void gesture_tracker::send_hand(const nite::HandData& hand1){
     
-    // Stringify the ptree
-    std::ostringstream hand_buffer;
-    write_json (hand_buffer, handJson, false);
-    boost::shared_ptr<std::string> message(new std::string( hand_buffer.str()));
+    ptree handJson;
+    std::string handName1 = getHandName(hand1.getId());
     
-    // Send it to client if it is connected
-    if(server_->isClientConnected())
+    if(!handName1.empty())
     {
-        server_->send(message);
+        // Parse it json array and add to object
+        handJson.add_child(handName1, parseToJSON(hand1));
+        
+        // Stringify the ptree
+        std::ostringstream hand_buffer;
+        write_json (hand_buffer, handJson, false);
+        boost::shared_ptr<std::string> message(new std::string( hand_buffer.str()));
+        
+        // Send it to client if it is connected
+        if(server_->isClientConnected())
+        {
+            server_->send(message);
+        }
+        else
+        {
+            BOOST_LOG_TRIVIAL(debug) << *message;
+        }
     }
-    else
+}
+
+
+/**
+ *
+ * Serializes hand data with position and hand id
+ * Send it to the connected client
+ *
+ */
+void gesture_tracker::send_hand(const nite::HandData& hand1, const nite::HandData& hand2){
+    
+    ptree handJson;
+    std::string handName1 = getHandName(hand1.getId());
+    std::string handName2 = getHandName(hand2.getId());
+    
+    if(!handName1.empty() && !handName2.empty())
     {
-        BOOST_LOG_TRIVIAL(debug) << *message;
+        // Parse it json array and add to object
+        handJson.add_child(handName1, parseToJSON(hand1));
+        handJson.add_child(handName2, parseToJSON(hand2));
+        
+        // Stringify the ptree
+        std::ostringstream hand_buffer;
+        write_json (hand_buffer, handJson, false);
+        boost::shared_ptr<std::string> message(new std::string( hand_buffer.str()));
+        
+        // Send it to client if it is connected
+        if(server_->isClientConnected())
+        {
+            server_->send(message);
+        }
+        else
+        {
+            BOOST_LOG_TRIVIAL(debug) << *message;
+        }
     }
 }
 
@@ -204,13 +252,9 @@ void gesture_tracker::track_gestures(){
         
         const nite::Array<nite::HandData>& hands = handTrackerFrame.getHands();
         
-        
-        
         // hands.getSize() gives the number of active hands, but handId increases
         // hands.getSize() = 0 and goes to hands.getSize() = 2, when there is a new hand detected
         // hands.getSize() = 0, this happens for a fraction of second when tacking is troubled
-        BOOST_LOG_TRIVIAL(debug) << "HgS : " << hands.getSize();
-        
         for (int i = 0; i < hands.getSize(); ++i)
         {
             // Get Hand data
@@ -223,7 +267,8 @@ void gesture_tracker::track_gestures(){
                 BOOST_LOG_TRIVIAL(info) << "Hand : " << hand.getId() << " is Lost";
                 
                 // When there is no active hands, reset all the values
-                if(hands.getSize() == 0){
+                // Last active hand
+                if(hands.getSize() == 1){
                     leftHand = 0;
                     rightHand = 0;
                     lastLostHand = 0;
@@ -256,21 +301,25 @@ void gesture_tracker::track_gestures(){
                 }
             }
             
-            // If hand is been tracked, send the data to client
-            if (hand.isTracking())
-            {
-                BOOST_LOG_TRIVIAL(debug) << getHandName(hand.getId()) << " : " << hand.getId()  << " is Tracking";
-                BOOST_LOG_TRIVIAL(debug) << "r :" << rightHand << " l:" << leftHand << " ll:" << lastLostHand << " HS :" << handsSize <<std::endl;
-                send_hand(hand);
-            }
+            //            if (hand.isTracking())
+            //            {
+            //                BOOST_LOG_TRIVIAL(debug) << getHandName(hand.getId()) << " : " << hand.getId()  << " is Tracking";
+            //                BOOST_LOG_TRIVIAL(debug) << "r :" << rightHand << " l:" << leftHand << " ll:" << lastLostHand << " HS :" << handsSize <<std::endl;
+            //            }
             
         }
+        
+        if(hands.getSize() == 2 && hands[0].isTracking() && !hands[0].isNew() && hands[1].isTracking() && !hands[1].isNew()){
+            send_hand(hands[0], hands[1]);
+        }
+        else if(hands.getSize() == 1 && hands[0].isTracking() && !hands[0].isNew()){
+            send_hand(hands[0]);
+        }
+        
     }
     
     nite::NiTE::shutdown();
-    
 }
-
 
 
 /**
