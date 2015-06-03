@@ -120,6 +120,7 @@ vector<vector<double>> getHandData(const char* json){
         rightHand.push_back(std::atof(handData1[2u].GetString()));
         
         handVector.push_back(rightHand);
+        handVector.push_back(leftHand);
     }
     else if(document.HasMember("LEFT")){
         rapidjson::Value& handData2 = document["LEFT"];
@@ -127,6 +128,7 @@ vector<vector<double>> getHandData(const char* json){
         leftHand.push_back(std::atof(handData2[1u].GetString()));
         leftHand.push_back(std::atof(handData2[2u].GetString()));
         
+        handVector.push_back(rightHand);
         handVector.push_back(leftHand);
     }
     
@@ -168,7 +170,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         vector<vector<double>> handVector = getHandData(jsonString);
         
         // Predict or train
-        if(brain_->isPredictionModeActive()){
+        if(brain_->isPredictionModeActive() && !handVector.empty()){
             
             // Predict and get classLabel and maximum likelihood
             vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
