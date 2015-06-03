@@ -10,7 +10,8 @@
 
 var width = window.innerWidth,
 	height = window.innerHeight,
-	container;
+	container,
+	consoleBox;
 
 var renderStatus = 1;
 
@@ -42,7 +43,7 @@ var datGUI = {},
 	};
 
 
-define(['jquery', 'three', 'underscore', 'trackBallControl', 'font'], function ($, THREE, _) {
+define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi'], function ($, THREE, _) {
 
 	/*
 	 *
@@ -53,6 +54,21 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font'], function (
 	function initDom() {
 		container = document.createElement('div');
 		document.body.appendChild(container);
+
+		//Jquery Ui components
+		consoleBox = document.createElement('div');
+		consoleBox.id = "consoleBox";
+		document.body.appendChild(consoleBox);
+
+		$(function () {
+			$("#consoleBox").dialog({
+				dialogClass: "consoleBox",
+				title: "Console",
+				height: 150,
+				width: 550,
+				position: {my: "left bottom", at: "left bottom", of: window}
+			});
+		});
 	}
 
 

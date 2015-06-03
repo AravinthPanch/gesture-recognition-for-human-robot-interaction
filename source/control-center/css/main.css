@@ -8,10 +8,19 @@ canvas {
     height: 100%
 }
 
-.appTitle {
-    position: absolute;
-    z-index: 10;
-    font-size: 36px;
-    font-family: fantasy;
-    margin: 70px 20px 20px 20px;
+.consoleBox {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    overflow: hidden;
 }
+
+.consoleBox .log {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.consoleBox .ui-dialog-titlebar-close {
+    display: none;
+}
+

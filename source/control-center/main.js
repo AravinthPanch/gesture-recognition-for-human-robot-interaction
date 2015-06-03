@@ -21,23 +21,22 @@ if (typeof app === 'undefined') {
  */
 require.config({
 	paths: {
-		socketio: 'lib/socket.io',
 		jquery: 'lib/jquery.min',
+		jqueryUi: 'css/jquery-ui/jquery-ui.min',
 		three: 'lib/three.min',
 		trackBallControl: 'lib/TrackballControls',
 		stats: 'lib/stats.min',
 		underscore: 'lib/underscore.min',
-		semantic: 'css/ui/semantic',
 		gui: 'lib/dat.gui.min',
-		font: 'css/helvetiker_regular.typeface'
-
+		font: 'css/typeface/helvetiker_regular.typeface'
 	},
 
 	shim: {
 		'three': {exports: 'THREE'},
 		'trackBallControl': {deps: ['three'], exports: 'THREE'},
 		'stats': {exports: 'Stats'},
-		'font': {deps: ['three']}
+		'font': {deps: ['three']},
+		'jqueryUi': {deps: ['jquery']}
 	}
 });
 

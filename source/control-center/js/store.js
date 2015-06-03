@@ -26,7 +26,8 @@ define(function () {
 		};
 
 		websocket.onmessage = function (e) {
-			app.skeletonBuffer = JSON.parse(e.data)
+			app.skeletonBuffer = JSON.parse(e.data);
+			$('#consoleBox').prepend("<div class='log'>" + e.data + "</div>");
 		};
 
 		websocket.onerror = function (e) {
