@@ -81,9 +81,9 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font'], function (
 				'Hand Tracker From Data': 3, 'Skeleton Tracker From Data': 4
 			}
 		);
-		datGUI.add(guiParams, 'Predicted Class');
-		datGUI.add(guiParams, 'Maximum Likelihood');
-		datGUI.add(guiParams, 'Gesture');
+		datGUI.add(guiParams, 'Predicted Class').listen();
+		datGUI.add(guiParams, 'Maximum Likelihood').listen();
+		datGUI.add(guiParams, 'Gesture').listen();
 
 
 		// Based on the tracker selected, draw the joints after clearing the scene
@@ -257,7 +257,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font'], function (
 
 		if ('OUTPUT' in app.skeletonBuffer) {
 			guiParams['Predicted Class'] = app.skeletonBuffer.OUTPUT[0];
-			guiParams['Maximum Likelihood'] = app.skeletonBuffer.OUTPUT[0];
+			guiParams['Maximum Likelihood'] = app.skeletonBuffer.OUTPUT[1];
 		}
 
 		app.renderer.render(app.scene, app.camera);
