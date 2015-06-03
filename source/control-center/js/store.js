@@ -9,43 +9,29 @@
 
 app.skeletonBuffer = {};
 
-define(['socketio'], function (socketio) {
-
-	var websocketUri = "ws://localhost:5008";
-	var websocket = new WebSocket(websocketUri);
-
-	websocket.onopen = function (e) {
-		onOpen(e)
-	};
-	websocket.onclose = function (e) {
-		onClose(e)
-	};
-	websocket.onmessage = function (e) {
-		onMessage(e)
-	};
-	websocket.onerror = function (e) {
-		onError(e)
-	};
-
-	function onOpen(e) {
-		console.log("Open");
-		websocket.send("HRI:Control Center");
-	}
-
-	function onClose(e) {
-		console.log("Websocket Closed")
-	}
-
-	function onMessage(e) {
-		app.skeletonBuffer = JSON.parse(e.data)
-	}
-
-	function onError(e) {
-		console.error(e.data)
-	}
+define(function () {
+	var websocket = {},
+		websocketUri = "ws://localhost:5008";
 
 	function init() {
-		console.log("init")
+		websocket = new WebSocket(websocketUri);
+
+		websocket.onopen = function (e) {
+			console.log("Websocket Opened");
+			websocket.send("HRI:Control Center");
+		};
+
+		websocket.onclose = function (e) {
+			console.log("Websocket Closed")
+		};
+
+		websocket.onmessage = function (e) {
+			app.skeletonBuffer = JSON.parse(e.data)
+		};
+
+		websocket.onerror = function (e) {
+			console.log("Websocket Error")
+		};
 	}
 
 	return {

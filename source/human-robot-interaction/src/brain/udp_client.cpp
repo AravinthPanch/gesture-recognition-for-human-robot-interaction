@@ -197,7 +197,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
                 ws_socket.send(buffer.GetString());
             }
         }
-        else if(brain_->isTrainingModeActive()){
+        else if(brain_->isTrainingModeActive() && !handVector.empty()){
             brain_->train(handVector[0], handVector[1]);
             
             //Send it via websocket without prediction results

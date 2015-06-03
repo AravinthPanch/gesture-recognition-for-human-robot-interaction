@@ -10,14 +10,13 @@
 
 var width = window.innerWidth,
 	height = window.innerHeight,
-	container = {};
+	container;
 
-var renderStatus = 'renderHand';
+var renderStatus = 1;
 
 var joints = {},
-	limbs = {},
 	jointNames = [],
-	handTrackingJoints = ["HAND"],
+	handTrackingJoints = ["RIGHT", "LEFT"],
 	skeletonTrackingJoints = [
 		"HEAD",
 		"NECK",
@@ -36,84 +35,93 @@ var joints = {},
 		"RIGHT_FOOT"
 	];
 
+var datGUI = {},
+	guiParams = {},
+	datGuiSize = {
+		width: 400
+	};
 
-define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallControl'], function ($, THREE, socketio, _) {
 
-	var socket = socketio.connect();
+define(['jquery', 'three', 'underscore', 'trackBallControl', 'font'], function ($, THREE, _) {
 
-	function startHandTracking() {
-		//socket.emit('init', 'handTracking');
-		renderStatus = 'renderHand';
-		jointNames = handTrackingJoints;
-		clearScene();
-		drawJoints();
-		$('.renderStatusLabel').text(renderStatus);
-	}
-
-	function startSkeletonTracking() {
-		//socket.emit('init', 'skeletonTracking');
-		renderStatus = 'renderSkeleton';
-		jointNames = skeletonTrackingJoints;
-		clearScene();
-		drawJoints();
-		$('.renderStatusLabel').text(renderStatus);
-	}
-
-	function startRenderFromData() {
-		renderStatus += "FromData";
-		$('.renderStatusLabel').text(renderStatus);
-	}
-
-	function initControlPanel() {
-		var title = document.createElement('div');
-		title.innerHTML = 'Human Robot Interaction';
-		title.className = 'appTitle';
-
-		var hButton = document.createElement('button');
-		hButton.innerHTML = "Hand Tracking";
-		hButton.className = 'ui primary button';
-		hButton.style.cssText = "margin: 10px;";
-		hButton.addEventListener("click", startHandTracking);
-
-		var sButton = document.createElement('button');
-		sButton.innerHTML = "Skeleton Tracking";
-		sButton.className = 'ui primary button';
-		sButton.style.cssText = "margin: 10px;";
-		sButton.addEventListener("click", startSkeletonTracking);
-
-		var fromDataButton = document.createElement('button');
-		fromDataButton.innerHTML = "Render from Data";
-		fromDataButton.className = 'ui primary button';
-		fromDataButton.style.cssText = "margin: 10px;";
-		fromDataButton.addEventListener("click", startRenderFromData);
-
-		var statusLabel = document.createElement('div');
-		statusLabel.innerHTML = renderStatus;
-		statusLabel.className = 'ui label big renderStatusLabel';
-		statusLabel.style.cssText = "margin: 10px;";
-
-		var predictionLabel = document.createElement('div');
-		predictionLabel.innerHTML = "Predicted Class : , Maximum Likelihood : ";
-		predictionLabel.className = 'ui label big predictionLabel';
-		predictionLabel.style.cssText = "margin: 10px;";
-
-		container.appendChild(title);
-		container.appendChild(hButton);
-		container.appendChild(sButton);
-		container.appendChild(fromDataButton);
-		container.appendChild(statusLabel);
-		container.appendChild(predictionLabel);
-	}
-
+	/*
+	 *
+	 * Creates a div under main body to use it as canvas for the threejs renderer
+	 * Components such scene, camera and objects will be added to the renderer
+	 *
+	 * */
 	function initDom() {
 		container = document.createElement('div');
 		document.body.appendChild(container);
 	}
 
+
+	/*
+	 *
+	 * Creates a dat.GUI
+	 * Adds the parameters and eventHandlers to GUI
+	 *
+	 * */
+	function initGui() {
+
+		datGUI = new dat.GUI({
+			width: datGuiSize.width
+		});
+
+		// Add GUI parameters
+		guiParams = {
+			Tracker: 'Hand Tracker',
+			'Predicted Class': 0,
+			'Maximum Likelihood': 0,
+			Gesture: ""
+		};
+		var trackerSelection = datGUI.add(guiParams, 'Tracker',
+			{
+				'Hand Tracker': 1, 'Skeleton Tracker': 2,
+				'Hand Tracker From Data': 3, 'Skeleton Tracker From Data': 4
+			}
+		);
+		datGUI.add(guiParams, 'Predicted Class');
+		datGUI.add(guiParams, 'Maximum Likelihood');
+		datGUI.add(guiParams, 'Gesture');
+
+
+		// Based on the tracker selected, draw the joints after clearing the scene
+		trackerSelection.onChange(function (value) {
+			renderStatus = parseInt(value);
+			switch (renderStatus) {
+				case 1:
+					startHandTracking();
+					break;
+				case 2:
+					startSkeletonTracking();
+					break;
+				case 3:
+					startHandTracking();
+					break;
+				case 4:
+					startSkeletonTracking();
+					break;
+			}
+		});
+	}
+
+
+	/*
+	 *
+	 * Creates a threejs scene
+	 *
+	 * */
 	function initScene() {
 		app.scene = new THREE.Scene();
 	}
 
+
+	/*
+	 *
+	 * Creates WebGL renderer and appends to the DOM
+	 *
+	 * */
 	function initRenderer() {
 		app.renderer = new THREE.WebGLRenderer();
 		app.renderer.setSize(width, height);
@@ -121,12 +129,37 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 		container.appendChild(app.renderer.domElement);
 	}
 
+
+	/*
+	 *
+	 * Creates a camera for the initial view
+	 * TrackballControll changes the camera view based mouse events
+	 *
+	 * TODO: Camera is must be mirrored so that when skeleton comes closer to camera, objects should get bigger
+	 *
+	 * */
 	function initCamera() {
 		app.camera = new THREE.PerspectiveCamera(70, width / height, 1, 10000);
 		//app.camera.position.y = 500;
 		//app.camera.position.x = 1000;
 		app.camera.position.z = 2000;
-		app.controls = new THREE.TrackballControls(app.camera);
+
+		// Add dom element as second element on which trackball controller should work
+		app.controls = new THREE.TrackballControls(app.camera, app.renderer.domElement);
+	}
+
+	function startHandTracking() {
+		jointNames = handTrackingJoints;
+		clearScene();
+		drawJoints();
+		drawPlane();
+	}
+
+	function startSkeletonTracking() {
+		jointNames = skeletonTrackingJoints;
+		clearScene();
+		drawJoints();
+		drawPlane();
 	}
 
 	function clearScene() {
@@ -136,18 +169,46 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 		});
 	}
 
+
+	/*
+	 * Draw only hand joints in red and blue (right and left).
+	 * If not draw all the joints of the skeleton
+	 * */
 	function drawJoints() {
 		var sphereGeo = new THREE.SphereGeometry(20);
-		var sphereMat = new THREE.MeshBasicMaterial({
+
+		// Red colored wireframe
+		var sphereMatRIGHT = new THREE.MeshBasicMaterial({
 			color: 0xff0000, wireframe: true
 		});
 
+		// Blue colored wireframe
+		var sphereMatLEFT = new THREE.MeshBasicMaterial({
+			color: 0x0000ff, wireframe: true
+		});
+
 		$.each(jointNames, function (key, val) {
-			joints[val] = new THREE.Mesh(sphereGeo, sphereMat);
+
+			if (val == "RIGHT") {
+				joints[val] = new THREE.Mesh(sphereGeo, sphereMatRIGHT);
+			}
+			else if (val == "LEFT") {
+				joints[val] = new THREE.Mesh(sphereGeo, sphereMatLEFT);
+			}
+			else {
+				// If skeleton, Draw all the joints in red
+				joints[val] = new THREE.Mesh(sphereGeo, sphereMatRIGHT);
+			}
+
 			app.scene.add(joints[val]);
 		});
 	}
 
+
+	/*
+	 * Draw plane below the skeleton as base. Position of this plane
+	 * is calculated by calculating the height of the skeleton
+	 * */
 	function drawPlane() {
 		var planeGeo = new THREE.PlaneGeometry(5000, 5000);
 		var planeMat = new THREE.MeshBasicMaterial({
@@ -160,6 +221,60 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 		plane.rotation.x = 3 * (Math.PI / 2);
 		app.scene.add(plane);
 	}
+
+
+	function drawTitle() {
+		var material = new THREE.MeshPhongMaterial({
+			color: 0xdddddd
+		});
+		var textGeom = new THREE.TextGeometry('Human Robot Interaction', {
+			font: "helvetiker",
+			weight: 'normal'
+		});
+		var textMesh = new THREE.Mesh(textGeom, material);
+
+		app.scene.add(textMesh);
+
+		// Do some optional calculations. This is only if you need to get the
+		// width of the generated text
+		textGeom.computeBoundingBox();
+		textGeom.textWidth = textGeom.boundingBox.max.x - textGeom.boundingBox.min.x;
+
+	}
+
+	function renderHand() {
+		if ('RIGHT' in app.skeletonBuffer) {
+			joints['RIGHT'].position.x = app.skeletonBuffer.RIGHT[0];
+			joints['RIGHT'].position.y = app.skeletonBuffer.RIGHT[1];
+			joints['RIGHT'].position.z = app.skeletonBuffer.RIGHT[2];
+		}
+
+		if ('LEFT' in app.skeletonBuffer) {
+			joints['LEFT'].position.x = app.skeletonBuffer.LEFT[0];
+			joints['LEFT'].position.y = app.skeletonBuffer.LEFT[1];
+			joints['LEFT'].position.z = app.skeletonBuffer.LEFT[2];
+		}
+
+		if ('OUTPUT' in app.skeletonBuffer) {
+			guiParams['Predicted Class'] = app.skeletonBuffer.OUTPUT[0];
+			guiParams['Maximum Likelihood'] = app.skeletonBuffer.OUTPUT[0];
+		}
+
+		app.renderer.render(app.scene, app.camera);
+	}
+
+	function renderSkeleton() {
+		$.each(app.skeletonBuffer, function (key, val) {
+			var positionConfidence = parseInt(val[3]);
+			if (key !== "FRAME") {
+				joints[key].position.x = val[0];
+				joints[key].position.y = val[1];
+				joints[key].position.z = -val[2];
+			}
+		});
+		app.renderer.render(app.scene, app.camera);
+	}
+
 
 	var i = 0;
 
@@ -195,37 +310,6 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 	}
 
 
-	function renderHand() {
-		if ('HAND' in app.skeletonBuffer) {
-			joints['HAND'].position.x = app.skeletonBuffer.HAND[1];
-			joints['HAND'].position.y = app.skeletonBuffer.HAND[2];
-			joints['HAND'].position.z = app.skeletonBuffer.HAND[3];
-		}
-
-		if ('OUTPUT' in app.skeletonBuffer) {
-			var predictionLabel = "Predicted Class : " + app.skeletonBuffer.OUTPUT[0]
-				+ " , Maximum Likelihood : " + app.skeletonBuffer.OUTPUT[1];
-
-			$('.predictionLabel').text(predictionLabel);
-		}
-
-		app.renderer.render(app.scene, app.camera);
-	}
-
-
-	function renderSkeleton() {
-		$.each(app.skeletonBuffer, function (key, val) {
-			var positionConfidence = parseInt(val[3]);
-			if (key !== "FRAME") {
-				joints[key].position.x = val[0];
-				joints[key].position.y = val[1];
-				joints[key].position.z = -val[2];
-			}
-		});
-		app.renderer.render(app.scene, app.camera);
-	}
-
-
 	function animate() {
 		//setTimeout(function () {
 		//	requestAnimationFrame(animate);
@@ -236,17 +320,17 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 		app.controls.update();
 
 		switch (renderStatus) {
-			case 'renderHandFromData':
-				renderHandFromData();
-				break;
-			case 'renderSkeletonFromData':
-				renderSkeletonFromData();
-				break;
-			case 'renderHand':
+			case 1:
 				renderHand();
 				break;
-			case 'renderSkeleton':
+			case 2:
 				renderSkeleton();
+				break;
+			case 3:
+				renderHandFromData();
+				break;
+			case 4:
+				renderSkeletonFromData();
 				break;
 		}
 
@@ -254,12 +338,12 @@ define(['jquery', 'three', 'socketio', 'underscore', 'semantic', 'trackBallContr
 
 	function init() {
 		initDom();
-		initControlPanel();
+		initGui();
 		initScene();
-		initCamera();
-		drawPlane();
-		drawJoints();
 		initRenderer();
+		initCamera();
+		//drawTitle();
+		startHandTracking(); // Start Hand Tracker by Default
 		animate();
 	}
 

@@ -27,17 +27,21 @@ require.config({
 		trackBallControl: 'lib/TrackballControls',
 		stats: 'lib/stats.min',
 		underscore: 'lib/underscore.min',
-		semantic : 'css/ui/semantic'
+		semantic: 'css/ui/semantic',
+		gui: 'lib/dat.gui.min',
+		font: 'css/helvetiker_regular.typeface'
+
 	},
 
 	shim: {
 		'three': {exports: 'THREE'},
 		'trackBallControl': {deps: ['three'], exports: 'THREE'},
-		'stats': {exports: 'Stats'}
+		'stats': {exports: 'Stats'},
+		'font': {deps: ['three']}
 	}
 });
 
-require(['js/view', 'js/store'], function (view,store) {
+require(['js/view', 'js/store'], function (view, store) {
 	view.init();
 	store.init();
 });
