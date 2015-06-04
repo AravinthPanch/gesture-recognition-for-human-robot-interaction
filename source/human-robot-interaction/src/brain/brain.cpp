@@ -155,14 +155,18 @@ void brain::trainPipelineFromTrainingData(){
  *
  */
 void brain::train(vector< double > rightHand, vector< double > leftHand){
-    if(!rightHand.empty()){
-        BOOST_LOG_TRIVIAL(info) << "RIGHT" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
-    }
     
-    vector< double > inputVector(SAMPLE_DIMENSION);
-    inputVector[0] = rightHand[0];
-    inputVector[1] = rightHand[1];
-    inputVector[2] = rightHand[2];
+    BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
+    BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
+    
+    vector<double> inputVector(SAMPLE_DIMENSION);
+    inputVector[3] = rightHand[0];
+    inputVector[4] = rightHand[1];
+    inputVector[5] = rightHand[2];
+    
+    inputVector[0] = leftHand[0];
+    inputVector[1] = leftHand[1];
+    inputVector[2] = leftHand[2];
     
     if(trainingTimer.getInRecordingMode()){
         trainingData.addSample(trainingClassLabel, inputVector);
@@ -190,12 +194,17 @@ void brain::train(vector< double > rightHand, vector< double > leftHand){
  *
  */
 vector<double> brain::predict(vector< double > rightHand, vector< double > leftHand){
-    BOOST_LOG_TRIVIAL(info) << "RIGHT" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
+//    BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
+//    BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
     
     vector<double> inputVector(SAMPLE_DIMENSION);
-    inputVector[0] = rightHand[0];
-    inputVector[1] = rightHand[1];
-    inputVector[2] = rightHand[2];
+    inputVector[3] = rightHand[0];
+    inputVector[4] = rightHand[1];
+    inputVector[5] = rightHand[2];
+    
+    inputVector[0] = leftHand[0];
+    inputVector[1] = leftHand[1];
+    inputVector[2] = leftHand[2];
     
     pipeline.predict(inputVector);
     UINT predictedClassLabel = pipeline.getPredictedClassLabel();

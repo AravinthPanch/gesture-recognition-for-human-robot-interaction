@@ -114,8 +114,6 @@ vector<vector<double>> getHandData(const char* json){
         handVector.push_back(leftHand);
     }
     else if(document.HasMember("RIGHT")){
-        //        BOOST_LOG_TRIVIAL(debug) << "RIGHT";
-        
         rapidjson::Value& handData1 = document["RIGHT"];
         rightHand.push_back(std::atof(handData1[0u].GetString()));
         rightHand.push_back(std::atof(handData1[1u].GetString()));
@@ -172,7 +170,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         vector<vector<double>> handVector = getHandData(jsonString);
         
         // Predict or train
-        if(brain_->isPredictionModeActive() && !handVector[0].empty()){
+        if(brain_->isPredictionModeActive() && !handVector[0].empty() && !handVector[1].empty()){
             
             // Predict and get classLabel and maximum likelihood
             vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
@@ -199,7 +197,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
                 ws_socket.send(buffer.GetString());
             }
         }
-        else if(brain_->isTrainingModeActive() && !handVector[0].empty()){
+        else if(brain_->isTrainingModeActive() && !handVector[0].empty() && !handVector[1].empty()){
             brain_->train(handVector[0], handVector[1]);
             
             //Send it via websocket without prediction results

@@ -72,7 +72,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				dialogClass: "consoleBox",
 				title: "Console",
 				height: 150,
-				width: 550,
+				width: 650,
 				position: {my: "left bottom", at: "left bottom", of: window}
 			});
 		});
@@ -382,7 +382,6 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 
 				if (key !== "FRAME") {
 					var positionConfidence = parseFloat(val[3]);
-					console.log(positionConfidence)
 					if (positionConfidence >= 0.5) {
 						joints[key].position.x = val[0];
 						joints[key].position.y = val[1];
@@ -397,11 +396,34 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 
 	function renderHandFromData() {
 		if (i < handData.length) {
-			if ('HAND' in handData[i]) {
-				joints['HAND'].position.x = handData[i].HAND[1];
-				joints['HAND'].position.y = handData[i].HAND[2];
-				joints['HAND'].position.z = handData[i].HAND[3];
+
+			if ('RIGHT' in handData[i]) {
+				joints['RIGHT'].position.x = handData[i].RIGHT[0];
+				joints['RIGHT'].position.y = handData[i].RIGHT[1];
+				joints['RIGHT'].position.z = handData[i].RIGHT[2];
+
+				guiParams.RightX = handData[i].RIGHT[0];
+				guiParams.RightY = handData[i].RIGHT[1];
+				guiParams.RightZ = handData[i].RIGHT[2];
 			}
+
+			if ('LEFT' in handData[i]) {
+				joints['LEFT'].position.x = handData[i].LEFT[0];
+				joints['LEFT'].position.y = handData[i].LEFT[1];
+				joints['LEFT'].position.z = handData[i].LEFT[2];
+
+				guiParams.LeftX = handData[i].LEFT[0];
+				guiParams.LeftY = handData[i].LEFT[1];
+				guiParams.LeftZ = handData[i].LEFT[2];
+			}
+
+			if ('OUTPUT' in handData[i]) {
+				guiParams.PredictedClass = handData[i].OUTPUT[0];
+				guiParams.MaximumLikelihood = handData[i].OUTPUT[1];
+				$("#outputBox").text(handData[i].OUTPUT[0] + " : " + handData[i].OUTPUT[1].toFixed(2));
+			}
+
+			$('#consoleBox').prepend("<div class='log'>" + JSON.stringify(handData[i]) + "</div>");
 		}
 		i++;
 		app.renderer.render(app.scene, app.camera);
