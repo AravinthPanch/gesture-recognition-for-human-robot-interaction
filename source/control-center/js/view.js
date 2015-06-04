@@ -11,7 +11,8 @@
 var width = window.innerWidth,
 	height = window.innerHeight,
 	container,
-	consoleBox;
+	consoleBox,
+	outputBox;
 
 var renderStatus = 1;
 
@@ -52,6 +53,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	 *
 	 * */
 	function initDom() {
+
 		container = document.createElement('div');
 		document.body.appendChild(container);
 
@@ -60,6 +62,11 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		consoleBox.id = "consoleBox";
 		document.body.appendChild(consoleBox);
 
+		outputBox = document.createElement('div');
+		outputBox.id = "outputBox";
+		document.body.appendChild(outputBox);
+
+		// Initiate the console ui
 		$(function () {
 			$("#consoleBox").dialog({
 				dialogClass: "consoleBox",
@@ -67,6 +74,17 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				height: 150,
 				width: 550,
 				position: {my: "left bottom", at: "left bottom", of: window}
+			});
+		});
+
+		// Initiate the output ui
+		$(function () {
+			$("#outputBox").dialog({
+				dialogClass: "outputBox",
+				title: "Output",
+				height: 150,
+				width: 400,
+				position: {my: "right bottom", at: "right bottom", of: window}
 			});
 		});
 	}
@@ -87,9 +105,18 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		// Add GUI parameters
 		guiParams = {
 			Tracker: 'Hand Tracker',
-			'Predicted Class': 0,
-			'Maximum Likelihood': 0,
-			Gesture: ""
+			PredictedClass: 0,
+			MaximumLikelihood: 0,
+			Gesture: "",
+			cameraX: 0,
+			cameraY: 0,
+			cameraZ: 0,
+			RightX: 0,
+			RightY: 0,
+			RightZ: 0,
+			LeftX: 0,
+			LeftY: 0,
+			LeftZ: 0
 		};
 		var trackerSelection = datGUI.add(guiParams, 'Tracker',
 			{
@@ -97,10 +124,30 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				'Hand Tracker From Data': 3, 'Skeleton Tracker From Data': 4
 			}
 		);
-		datGUI.add(guiParams, 'Predicted Class').listen();
-		datGUI.add(guiParams, 'Maximum Likelihood').listen();
-		datGUI.add(guiParams, 'Gesture').listen();
 
+		var predictionFolder = datGUI.addFolder("Prediction Data");
+		predictionFolder.add(guiParams, 'PredictedClass').listen();
+		predictionFolder.add(guiParams, 'MaximumLikelihood').listen();
+		predictionFolder.add(guiParams, 'Gesture').listen();
+
+		//predictionFolder.open();
+
+		var cameraFolder = datGUI.addFolder("ThreeJS Camera Data");
+		cameraFolder.add(guiParams, 'cameraX').listen();
+		cameraFolder.add(guiParams, 'cameraY').listen();
+		cameraFolder.add(guiParams, 'cameraZ').listen();
+
+		//cameraFolder.open();
+
+		var handFolder = datGUI.addFolder("Hand Data");
+		handFolder.add(guiParams, 'RightX').listen();
+		handFolder.add(guiParams, 'RightY').listen();
+		handFolder.add(guiParams, 'RightZ').listen();
+		handFolder.add(guiParams, 'LeftX').listen();
+		handFolder.add(guiParams, 'LeftY').listen();
+		handFolder.add(guiParams, 'LeftZ').listen();
+
+		//handFolder.open();
 
 		// Based on the tracker selected, draw the joints after clearing the scene
 		trackerSelection.onChange(function (value) {
@@ -156,9 +203,9 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	 * */
 	function initCamera() {
 		app.camera = new THREE.PerspectiveCamera(70, width / height, 1, 10000);
-		//app.camera.position.y = 500;
-		//app.camera.position.x = 1000;
-		app.camera.position.z = 2000;
+		app.camera.position.x = 0;
+		app.camera.position.y = 0;
+		app.camera.position.z = 3500;
 
 		// Add dom element as second element on which trackball controller should work
 		app.controls = new THREE.TrackballControls(app.camera, app.renderer.domElement);
@@ -168,18 +215,17 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		jointNames = handTrackingJoints;
 		clearScene();
 		drawJoints();
-		drawPlane();
 	}
 
 	function startSkeletonTracking() {
 		jointNames = skeletonTrackingJoints;
 		clearScene();
 		drawJoints();
-		drawPlane();
 	}
 
 	function clearScene() {
-		var objsToRemove = _.rest(app.scene.children, 1);
+		// Dont remove plane mesh, triangle mesh and sensor mesh
+		var objsToRemove = _.rest(app.scene.children, 3);
 		_.each(objsToRemove, function (object) {
 			app.scene.remove(object);
 		});
@@ -193,9 +239,9 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	function drawJoints() {
 		var sphereGeo = new THREE.SphereGeometry(20);
 
-		// Red colored wireframe
+		// Brown colored wireframe
 		var sphereMatRIGHT = new THREE.MeshBasicMaterial({
-			color: 0xff0000, wireframe: true
+			color: 0x663300, wireframe: true
 		});
 
 		// Blue colored wireframe
@@ -239,6 +285,32 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	}
 
 
+	function drawSensorTriangle() {
+		var triangleGeometry = new THREE.Geometry();
+		triangleGeometry.vertices.push(new THREE.Vector3(0, -300, 0));
+		triangleGeometry.vertices.push(new THREE.Vector3(-300, 150, 0));
+		triangleGeometry.vertices.push(new THREE.Vector3(300, 150, 0));
+		triangleGeometry.faces.push(new THREE.Face3(0, 1, 2));
+		triangleGeometry.computeFaceNormals();
+
+		var triangleMaterial = new THREE.MeshBasicMaterial({
+			color: 0x999999,
+			wireframe: true
+		});
+		var triangleMesh = new THREE.Mesh(triangleGeometry, triangleMaterial);
+
+		app.scene.add(triangleMesh);
+
+		var sphereGeo = new THREE.SphereGeometry(20);
+		var sphereMatRIGHT = new THREE.MeshBasicMaterial({
+			color: 0xff0000, wireframe: true
+		});
+		var sphereMesh = new THREE.Mesh(sphereGeo, sphereMatRIGHT);
+
+		app.scene.add(sphereMesh);
+	}
+
+
 	function drawTitle() {
 		var material = new THREE.MeshPhongMaterial({
 			color: 0xdddddd
@@ -263,18 +335,28 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 			joints['RIGHT'].position.x = app.skeletonBuffer.RIGHT[0];
 			joints['RIGHT'].position.y = app.skeletonBuffer.RIGHT[1];
 			joints['RIGHT'].position.z = app.skeletonBuffer.RIGHT[2];
+
+			guiParams.RightX = app.skeletonBuffer.RIGHT[0];
+			guiParams.RightY = app.skeletonBuffer.RIGHT[1];
+			guiParams.RightZ = app.skeletonBuffer.RIGHT[2];
 		}
 
 		if ('LEFT' in app.skeletonBuffer) {
 			joints['LEFT'].position.x = app.skeletonBuffer.LEFT[0];
 			joints['LEFT'].position.y = app.skeletonBuffer.LEFT[1];
 			joints['LEFT'].position.z = app.skeletonBuffer.LEFT[2];
+
+			guiParams.LeftX = app.skeletonBuffer.LEFT[0];
+			guiParams.LeftY = app.skeletonBuffer.LEFT[1];
+			guiParams.LeftZ = app.skeletonBuffer.LEFT[2];
 		}
 
 		if ('OUTPUT' in app.skeletonBuffer) {
-			guiParams['Predicted Class'] = app.skeletonBuffer.OUTPUT[0];
-			guiParams['Maximum Likelihood'] = app.skeletonBuffer.OUTPUT[1];
+			guiParams.PredictedClass = app.skeletonBuffer.OUTPUT[0];
+			guiParams.MaximumLikelihood = app.skeletonBuffer.OUTPUT[1];
+			$("#outputBox").text(app.skeletonBuffer.OUTPUT[0] + " : " + app.skeletonBuffer.OUTPUT[1].toFixed(2));
 		}
+
 
 		app.renderer.render(app.scene, app.camera);
 	}
@@ -335,6 +417,11 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		requestAnimationFrame(animate);
 		app.controls.update();
 
+		guiParams.cameraX = app.camera.position.x;
+		guiParams.cameraY = app.camera.position.y;
+		guiParams.cameraZ = app.camera.position.z;
+
+
 		switch (renderStatus) {
 			case 1:
 				renderHand();
@@ -359,6 +446,8 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		initRenderer();
 		initCamera();
 		//drawTitle();
+		drawPlane();
+		drawSensorTriangle();
 		startHandTracking(); // Start Hand Tracker by Default
 		animate();
 	}

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "GRT.h"
 
-#define DEFAULT_PREP_TIME 5000
+#define DEFAULT_PREP_TIME 10000
 #define DEFAULT_RECORD_TIME 5000
 #define SAMPLE_DIMENSION 3
 #define HRI_PIPELINE "hri_pipeline"

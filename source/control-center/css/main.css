@@ -24,3 +24,25 @@ canvas {
     display: none;
 }
 
+.outputBox {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.outputBox .ui-dialog-content {
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outputBox .log {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.outputBox .ui-dialog-titlebar-close {
+    display: none;
+}

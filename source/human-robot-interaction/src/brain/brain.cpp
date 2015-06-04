@@ -58,12 +58,11 @@ void brain::setPredictionModeActive(){
     
     if(trainingData.loadDatasetFromFile(HRI_TRAINING_DATASET) ){
         BOOST_LOG_TRIVIAL(info) << "Training Data Loaded From File";
+        trainPipelineFromTrainingData();
     }
     else{
         BOOST_LOG_TRIVIAL(error) << "Failed To Load Training Data From File";
     };
-    
-    trainPipelineFromTrainingData();
 }
 
 
@@ -155,15 +154,19 @@ void brain::trainPipelineFromTrainingData(){
  * It receives the handVector and adds them to the trainingData with given class label.
  *
  */
-void brain::train(vector< double > leftHand, vector< double > rightHand){
+void brain::train(vector< double > rightHand, vector< double > leftHand){
+    if(!rightHand.empty()){
+        BOOST_LOG_TRIVIAL(info) << "RIGHT" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
+    }
+    
     vector< double > inputVector(SAMPLE_DIMENSION);
-    inputVector[0] = leftHand[0];
-    inputVector[1] = leftHand[1];
-    inputVector[2] = leftHand[2];
+    inputVector[0] = rightHand[0];
+    inputVector[1] = rightHand[1];
+    inputVector[2] = rightHand[2];
     
     if(trainingTimer.getInRecordingMode()){
         trainingData.addSample(trainingClassLabel, inputVector);
-        BOOST_LOG_TRIVIAL(debug) << "Training Class Label " << trainingClassLabel << " With Sample " << leftHand[0] << " , " << leftHand[1] << " , " << leftHand[2];
+        BOOST_LOG_TRIVIAL(debug) << "Training Class Label " << trainingClassLabel << " With Sample " << rightHand[0] << " , " << rightHand[1] << " , " << rightHand[2];
         BOOST_LOG_TRIVIAL(debug) << "Timer" << trainingTimer.getSeconds();
     }
     else if(trainingTimer.getRecordingStopped()){
@@ -186,13 +189,13 @@ void brain::train(vector< double > leftHand, vector< double > rightHand){
  * It predicts the incoming handVector and returns the identified class label and likelyhood.
  *
  */
-vector<double> brain::predict(vector< double > leftHand, vector< double > rightHand){
-    //    BOOST_LOG_TRIVIAL(info) << "Left Hand " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] <<", " << leftHand.size() ;
+vector<double> brain::predict(vector< double > rightHand, vector< double > leftHand){
+    BOOST_LOG_TRIVIAL(info) << "RIGHT" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
     
     vector<double> inputVector(SAMPLE_DIMENSION);
-    inputVector[0] = leftHand[0];
-    inputVector[1] = leftHand[1];
-    inputVector[2] = leftHand[2];
+    inputVector[0] = rightHand[0];
+    inputVector[1] = rightHand[1];
+    inputVector[2] = rightHand[2];
     
     pipeline.predict(inputVector);
     UINT predictedClassLabel = pipeline.getPredictedClassLabel();

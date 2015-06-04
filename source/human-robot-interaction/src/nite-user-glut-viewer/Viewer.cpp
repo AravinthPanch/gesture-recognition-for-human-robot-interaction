@@ -316,7 +316,7 @@ void send_skeleton(const nite::UserData& user, int frameId){
     std::ostringstream skeleton_buffer;
     write_json (skeleton_buffer, skeleton, false);
     std::string json = skeleton_buffer.str();
-    std::cout << json;
+    std::cout << json << std::endl;
 }
 
 

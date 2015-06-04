@@ -114,6 +114,8 @@ vector<vector<double>> getHandData(const char* json){
         handVector.push_back(leftHand);
     }
     else if(document.HasMember("RIGHT")){
+        //        BOOST_LOG_TRIVIAL(debug) << "RIGHT";
+        
         rapidjson::Value& handData1 = document["RIGHT"];
         rightHand.push_back(std::atof(handData1[0u].GetString()));
         rightHand.push_back(std::atof(handData1[1u].GetString()));
@@ -163,14 +165,14 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         
         // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
         std::string trimmedData = trim_data(receive_buffer.data());
-        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData;
+        //        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData;
         
         // Parse the received json string to get data
         const char * jsonString = trimmedData.c_str();
         vector<vector<double>> handVector = getHandData(jsonString);
         
         // Predict or train
-        if(brain_->isPredictionModeActive() && !handVector.empty()){
+        if(brain_->isPredictionModeActive() && !handVector[0].empty()){
             
             // Predict and get classLabel and maximum likelihood
             vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
@@ -197,7 +199,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
                 ws_socket.send(buffer.GetString());
             }
         }
-        else if(brain_->isTrainingModeActive() && !handVector.empty()){
+        else if(brain_->isTrainingModeActive() && !handVector[0].empty()){
             brain_->train(handVector[0], handVector[1]);
             
             //Send it via websocket without prediction results
