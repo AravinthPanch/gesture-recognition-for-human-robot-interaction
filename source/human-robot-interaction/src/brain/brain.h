@@ -12,8 +12,7 @@
 #include "GRT.h"
 
 #define DEFAULT_PREP_TIME 15000
-#define DEFAULT_RECORD_TIME 5000
-//#define SAMPLE_DIMENSION 3
+#define DEFAULT_RECORD_TIME 20000
 #define SAMPLE_DIMENSION 6
 #define HRI_PIPELINE "hri_pipeline"
 #define HRI_TRAINING_DATASET "hri-training-dataset.txt"
