@@ -12,7 +12,8 @@ var width = window.innerWidth,
 	height = window.innerHeight,
 	container,
 	consoleBox,
-	outputBox;
+	outputBox,
+	gestureBox;
 
 var renderStatus = 1;
 
@@ -66,6 +67,11 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		outputBox.id = "outputBox";
 		document.body.appendChild(outputBox);
 
+
+		gestureBox = document.createElement('div');
+		gestureBox.id = "gestureBox";
+		document.body.appendChild(gestureBox);
+
 		// Initiate the console ui
 		$(function () {
 			$("#consoleBox").dialog({
@@ -82,6 +88,17 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 			$("#outputBox").dialog({
 				dialogClass: "outputBox",
 				title: "Output",
+				height: 100,
+				width: 200,
+				position: {my: "left top", at: "left top", of: window}
+			});
+		});
+
+		// Initiate the gestureBox ui
+		$(function () {
+			$("#gestureBox").dialog({
+				dialogClass: "gestureBox",
+				title: "Gesture",
 				height: 150,
 				width: 400,
 				position: {my: "right bottom", at: "right bottom", of: window}
@@ -132,7 +149,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 
 		//predictionFolder.open();
 
-		var cameraFolder = datGUI.addFolder("ThreeJS Camera Data");
+		var cameraFolder = datGUI.addFolder("WebGL Camera Data");
 		cameraFolder.add(guiParams, 'cameraX').listen();
 		cameraFolder.add(guiParams, 'cameraY').listen();
 		cameraFolder.add(guiParams, 'cameraZ').listen();
@@ -357,6 +374,14 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 			$("#outputBox").text(app.skeletonBuffer.OUTPUT[0] + " : " + app.skeletonBuffer.OUTPUT[1].toFixed(2));
 		}
 
+		if ('GESTURE' in app.skeletonBuffer) {
+			$('#gestureBox').text(app.skeletonBuffer.GESTURE);
+
+			setTimeout(function () {
+				$('#gestureBox').empty()
+			}, 5000);
+		}
+
 
 		app.renderer.render(app.scene, app.camera);
 	}
@@ -421,6 +446,14 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				guiParams.PredictedClass = handData[i].OUTPUT[0];
 				guiParams.MaximumLikelihood = handData[i].OUTPUT[1];
 				$("#outputBox").text(handData[i].OUTPUT[0] + " : " + handData[i].OUTPUT[1].toFixed(2));
+			}
+
+			if ('GESTURE' in handData[i]) {
+				$('#gestureBox').text(handData[i].GESTURE);
+
+				setTimeout(function () {
+					$('#gestureBox').empty()
+				}, 5000);
 			}
 
 			$('#consoleBox').prepend("<div class='log'>" + JSON.stringify(handData[i]) + "</div>");
