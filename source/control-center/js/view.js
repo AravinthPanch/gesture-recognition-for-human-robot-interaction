@@ -374,15 +374,6 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 			$("#outputBox").text(app.skeletonBuffer.OUTPUT[0] + " : " + app.skeletonBuffer.OUTPUT[1].toFixed(2));
 		}
 
-		if ('GESTURE' in app.skeletonBuffer) {
-			$('#gestureBox').text(app.skeletonBuffer.GESTURE);
-
-			setTimeout(function () {
-				$('#gestureBox').empty()
-			}, 5000);
-		}
-
-
 		app.renderer.render(app.scene, app.camera);
 	}
 
@@ -422,6 +413,16 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	function renderHandFromData() {
 		if (i < handData.length) {
 
+			if ('GESTURE' in handData[i]) {
+				$('#gestureBox').text(handData[i].GESTURE);
+
+				var timer = setTimeout(function () {
+					$('#gestureBox').text("")
+				}, 5000);
+			}
+
+			$('#consoleBox').prepend("<div class='log'>" + JSON.stringify(handData[i]) + "</div>");
+
 			if ('RIGHT' in handData[i]) {
 				joints['RIGHT'].position.x = handData[i].RIGHT[0];
 				joints['RIGHT'].position.y = handData[i].RIGHT[1];
@@ -447,16 +448,6 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				guiParams.MaximumLikelihood = handData[i].OUTPUT[1];
 				$("#outputBox").text(handData[i].OUTPUT[0] + " : " + handData[i].OUTPUT[1].toFixed(2));
 			}
-
-			if ('GESTURE' in handData[i]) {
-				$('#gestureBox').text(handData[i].GESTURE);
-
-				setTimeout(function () {
-					$('#gestureBox').empty()
-				}, 5000);
-			}
-
-			$('#consoleBox').prepend("<div class='log'>" + JSON.stringify(handData[i]) + "</div>");
 		}
 		i++;
 		app.renderer.render(app.scene, app.camera);

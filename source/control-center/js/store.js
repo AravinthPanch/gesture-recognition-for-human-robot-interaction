@@ -28,11 +28,28 @@ define(function () {
 		websocket.onmessage = function (e) {
 			app.skeletonBuffer = JSON.parse(e.data);
 			$('#consoleBox').prepend("<div class='log'>" + e.data + "</div>");
+			updateGestureBox();
 		};
 
 		websocket.onerror = function (e) {
 			console.log("Websocket Error")
 		};
+	}
+
+	function updateGestureBox() {
+		if ('GESTURE' in app.skeletonBuffer) {
+			var timeOut = 1000;
+			if (app.skeletonBuffer.GESTURE != "WAVE") {
+				timeOut = 2000;
+			}
+
+			$('#gestureBox').text(app.skeletonBuffer.GESTURE);
+			var timer = setTimeout(function () {
+				$('#gestureBox').text("")
+			}, timeOut);
+
+			//console.log("timed" + timer);
+		}
 	}
 
 	return {
