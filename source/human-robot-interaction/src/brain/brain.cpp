@@ -19,11 +19,14 @@ brain::brain(){
     predictionModeActive = false;
     trainingClassLabel = 1;
     
+    anbc.setNullRejectionCoeff(10);
+    //    anbc.enableScaling(true);
     anbc.enableNullRejection(true);
-    anbc.setNullRejectionCoeff(5);
-    pipeline.setClassifier( anbc );
     
+    pipeline.setClassifier(anbc);
     trainingData.setNumDimensions(SAMPLE_DIMENSION);
+    trainingData.setDatasetName("Right and Left Hand Static Gestures");
+    trainingData.setInfoText("Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>");
 }
 
 
@@ -74,7 +77,7 @@ void brain::setPredictionModeActive(){
 void brain::setTrainingModeActive(){
     predictionModeActive = false;
     trainingModeActive = true;
-    brain::startTraining();
+    startTraining();
 }
 
 
@@ -170,17 +173,16 @@ void brain::train(vector< double > rightHand, vector< double > leftHand){
     
     if(trainingTimer.getInRecordingMode()){
         trainingData.addSample(trainingClassLabel, inputVector);
-        BOOST_LOG_TRIVIAL(debug) << "Training Class Label " << trainingClassLabel << " With Sample " << rightHand[0] << " , " << rightHand[1] << " , " << rightHand[2];
-        BOOST_LOG_TRIVIAL(debug) << "Timer" << trainingTimer.getSeconds();
+        BOOST_LOG_TRIVIAL(debug) << "Training Class Label : " << trainingClassLabel;
+        BOOST_LOG_TRIVIAL(debug) << "Training Time Remaining : " << trainingTimer.getSeconds() << "\n";
     }
     else if(trainingTimer.getRecordingStopped()){
         BOOST_LOG_TRIVIAL(debug) << "Training Timer Stopped";
         saveTrainingDataSetToFile();
-        trainPipelineFromTrainingData();
         trainingModeActive = false;
     }
     else if(trainingTimer.getInPrepMode()){
-        BOOST_LOG_TRIVIAL(debug) << "Training Timer In Preparation Mode";
+        BOOST_LOG_TRIVIAL(debug) << "Preparation Time Remaining : " << trainingTimer.getSeconds() << "\n";
     }
     else {
         BOOST_LOG_TRIVIAL(debug) << "Error In Training";
@@ -194,8 +196,8 @@ void brain::train(vector< double > rightHand, vector< double > leftHand){
  *
  */
 vector<double> brain::predict(vector< double > rightHand, vector< double > leftHand){
-//    BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
-//    BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
+    BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
+    BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
     
     vector<double> inputVector(SAMPLE_DIMENSION);
     inputVector[3] = rightHand[0];

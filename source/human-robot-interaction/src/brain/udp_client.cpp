@@ -85,7 +85,8 @@ void udp_client::send(boost::shared_ptr<std::string> message){
 
 
 /**
- * Parse the received string and extract the data
+ * Parse the received string and extract the hand data
+ * Gesture data is forwarded
  *
  */
 
@@ -98,7 +99,6 @@ vector<vector<double>> getHandData(const char* json){
     vector<double> leftHand;
     vector<double> rightHand;
     
-    // NiTE gesture must be taken care as welll
     if(document.HasMember("RIGHT") && document.HasMember("LEFT")){
         rapidjson::Value& handData1 = document["RIGHT"];
         rightHand.push_back(std::atof(handData1[0u].GetString()));
@@ -163,56 +163,80 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         
         // receive_buffer has also old data. New data must be trimmed by checking the data between { and } brackets
         std::string trimmedData = trim_data(receive_buffer.data());
-        //        BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData;
         
         // Parse the received json string to get data
         const char * jsonString = trimmedData.c_str();
         vector<vector<double>> handVector = getHandData(jsonString);
         
-        // Predict or train
-        if(brain_->isPredictionModeActive() && !handVector[0].empty() && !handVector[1].empty()){
+        
+        BOOST_LOG_TRIVIAL(debug) << brain_->isTrainingModeWaitingForInput;
+        
+        
+        // If both the hand are received
+        if(!handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
             
-            // Predict and get classLabel and maximum likelihood
-            vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
+            // If predictionMode is active and received both the hand data,
+            // predict the classlabel for every sample and send it via socket
+            if(brain_->isPredictionModeActive()){
+                
+                // Predict and get classLabel and maximum likelihood
+                vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
+                
+                // Parse the same received json
+                rapidjson::Document document;
+                document.Parse(jsonString);
+                
+                // Add an array OUTPUT with prediction results
+                rapidjson::Value predictionArray(rapidjson::kArrayType);
+                predictionArray.PushBack(predictionResults[0], document.GetAllocator()).PushBack(predictionResults[1], document.GetAllocator());
+                document.AddMember("OUTPUT", predictionArray, document.GetAllocator());
+                
+                // Write the document to the buffer
+                rapidjson::StringBuffer buffer;
+                rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+                document.Accept(writer);
+                
+                //Send it via websocket with prediction results
+                if(ws_socket.isClientConnected())
+                {
+                    ws_socket.send(buffer.GetString(), true);
+                }
+            }
             
-            // Parse the same received json
-            rapidjson::Document document;
-            document.Parse(jsonString);
-            
-            // Add an array OUTPUT with prediction results
-            rapidjson::Value predictionArray(rapidjson::kArrayType);
-            predictionArray.PushBack(predictionResults[0], document.GetAllocator()).PushBack(predictionResults[1], document.GetAllocator());
-            document.AddMember("OUTPUT", predictionArray, document.GetAllocator());
-            
-            // Write the document to the buffer
-            rapidjson::StringBuffer buffer;
-            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-            document.Accept(writer);
-            
-            // BOOST_LOG_TRIVIAL(debug) << buffer.GetString();
-            
-            //Send it via websocket with prediction results
-            if(ws_socket.isClientConnected())
-            {
-                ws_socket.send(buffer.GetString());
+            // If trainingMode is active and received both the hand data,
+            // train every input sample and simultaneously send the data via socket
+            // but Don't log it in order not to block the user input
+            else if(brain_->isTrainingModeActive()){
+                brain_->train(handVector[0], handVector[1]);
+                
+                if(ws_socket.isClientConnected())
+                {
+                    ws_socket.send(jsonString, false);
+                }
             }
         }
-        else if(brain_->isTrainingModeActive() && !handVector[0].empty() && !handVector[1].empty()){
-            brain_->train(handVector[0], handVector[1]);
-            
-            //Send it via websocket without prediction results
+        
+        // If trainingMode is waiting for user input to train another class
+        // send the data via socket but don't log it in order not to block the user input
+        else if(brain_->isTrainingModeWaitingForInput){
             if(ws_socket.isClientConnected())
             {
-                ws_socket.send(jsonString);
+                ws_socket.send(jsonString, false);
             }
         }
-        else {
-            //Forward it via websocket
+        
+        // If handViewer is selected or single hand is present
+        // Forward all via socket and log
+        else{
             if(ws_socket.isClientConnected())
             {
-                ws_socket.send(jsonString);
+                ws_socket.send(jsonString, true);
+            }
+            else {
+                BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData;
             }
         }
+        
     }
     else
     {

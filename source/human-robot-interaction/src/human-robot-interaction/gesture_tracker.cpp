@@ -56,7 +56,7 @@ void gesture_tracker::init_nite(){
     }
     
     handTracker.startGestureDetection(nite::GESTURE_WAVE);
-    //    handTracker.startGestureDetection(nite::GESTURE_CLICK);
+    handTracker.startGestureDetection(nite::GESTURE_CLICK);
     BOOST_LOG_TRIVIAL(info) << "Gesture detection started: Wave your Hand to start the hand tracking" ;
 }
 
@@ -68,30 +68,15 @@ void gesture_tracker::init_nite(){
  *
  */
 void gesture_tracker::send_gesture(const nite::GestureData& gesture){
-    ptree gestureJson, gestureType, joint_array, xAxis, yAxis, zAxis, joint_confidence;
-    std::string gesture_type;
+    std::string gestureJson;
     
     if(gesture.getType() == 0){
-        gesture_type = "WAVE";
+        gestureJson = "{\"GESTURE\":\"WAVE\"}";
     }else if (gesture.getType() == 1){
-        gesture_type = "CLICK";
+        gestureJson = "{\"GESTURE\":\"CLICK\"}";
     }
     
-    gestureType.put("", gesture_type);
-    xAxis.put("", gesture.getCurrentPosition().x);
-    yAxis.put("", gesture.getCurrentPosition().y);
-    zAxis.put("", gesture.getCurrentPosition().z);
-    
-    joint_array.push_back(std::make_pair("", gestureType));
-    joint_array.push_back(std::make_pair("", xAxis));
-    joint_array.push_back(std::make_pair("", yAxis));
-    joint_array.push_back(std::make_pair("", zAxis));
-    
-    gestureJson.add_child("GESTURE", joint_array);
-    
-    std::ostringstream gesture_buffer;
-    write_json (gesture_buffer, gestureJson, false);
-    boost::shared_ptr<std::string> message(new std::string( gesture_buffer.str()));
+    boost::shared_ptr<std::string> message(new std::string(gestureJson));
     
     if(server_->isClientConnected())
     {
@@ -243,10 +228,12 @@ void gesture_tracker::track_gestures(){
         {
             if (gestures[i].isComplete())
             {
-                //                send_gesture(gestures[i]);
+                send_gesture(gestures[i]);
                 nite::HandId newId;
-                // Reset the hand id here if it is more than 2
-                handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
+                
+                if(gestures[i].getType() == 0){
+                    handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
+                }
             }
         }
         

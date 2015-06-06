@@ -26,7 +26,7 @@ private:
     
 public:
     void init();
-    void send(const char* parsedData);
+    void send(const char* parsedData, bool isLogged);
     bool isClientConnected();
 };
 

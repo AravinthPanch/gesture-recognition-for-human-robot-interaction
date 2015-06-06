@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "GRT.h"
 
-#define DEFAULT_PREP_TIME 10000
+#define DEFAULT_PREP_TIME 15000
 #define DEFAULT_RECORD_TIME 5000
 //#define SAMPLE_DIMENSION 3
 #define SAMPLE_DIMENSION 6
@@ -24,29 +24,19 @@ class brain
 {
     
 private:
-    vector<double> leftHand;
-    vector<double> rightHand;
-    
     GestureRecognitionPipeline pipeline;
     ANBC anbc;
-    vector< UINT > classLabels;
-    
-    
-    ClassificationData testData;
-    
-    
     ClassificationData trainingData;
     TrainingDataRecordingTimer trainingTimer;
+    
     bool trainingModeActive;
     bool predictionModeActive;
     UINT trainingClassLabel;
-    
     
     void saveTrainingDataSetToFile();
     void trainPipelineFromTrainingData();
     void startTraining();
     void stopTraining();
-    
     
 public:
     brain();
@@ -55,10 +45,10 @@ public:
     void setTrainingModeActive();
     bool isPredictionModeActive();
     bool isTrainingModeActive();
+    bool isTrainingModeWaitingForInput;
     
-    void train(vector< double > leftHand, vector< double > rightHand);
     void trainNext();
-    
+    void train(vector< double > leftHand, vector< double > rightHand);
     vector<double> predict(vector< double > leftHand, vector< double > rightHand);
     
 };
