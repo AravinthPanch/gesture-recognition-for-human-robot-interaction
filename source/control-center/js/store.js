@@ -37,8 +37,8 @@ define(function () {
 	}
 
 	function updateGestureBox() {
+		var timeOut = 1000;
 		if ('GESTURE' in app.skeletonBuffer) {
-			var timeOut = 1000;
 			if (app.skeletonBuffer.GESTURE != "WAVE") {
 				timeOut = 2000;
 			}
@@ -47,8 +47,13 @@ define(function () {
 			var timer = setTimeout(function () {
 				$('#gestureBox').text("")
 			}, timeOut);
+		}
 
-			//console.log("timed" + timer);
+		if ('INFO' in app.skeletonBuffer) {
+			$('#gestureBox').text(app.skeletonBuffer.INFO);
+			var timer = setTimeout(function () {
+				$('#gestureBox').text("")
+			}, timeOut);
 		}
 	}
 

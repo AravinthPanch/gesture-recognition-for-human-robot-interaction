@@ -90,6 +90,25 @@ void gesture_tracker::send_gesture(const nite::GestureData& gesture){
 }
 
 
+void gesture_tracker::send_info(std::string info){
+    
+    std::stringstream infoBuffer;
+    infoBuffer << "{\"INFO\":\"" << info << "\"}";
+    
+    boost::shared_ptr<std::string> message(new std::string(infoBuffer.str()));
+    
+    if(server_->isClientConnected())
+    {
+        server_->send(message);
+    }
+    else
+    {
+        BOOST_LOG_TRIVIAL(debug) << *message;
+    }
+}
+
+
+
 /**
  *
  * Serializes hand data with position and hand id
@@ -232,7 +251,9 @@ void gesture_tracker::track_gestures(){
                 send_gesture(gestures[i]);
                 nite::HandId newId;
                 
-                if(gestures[i].getType() == 0){
+                // Dont track more than 2 hands. handTrackerFrame.getHands().getSize() sometime goes to 3 even though
+                // there are 2 active hands
+                if(gestures[i].getType() == 0 && handTrackerFrame.getHands().getSize() <= 3){
                     handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
                 }
             }
@@ -252,7 +273,9 @@ void gesture_tracker::track_gestures(){
             if(!hand.isTracking())
             {
                 lastLostHand = hand.getId();
-                BOOST_LOG_TRIVIAL(info) << "Hand : " << hand.getId() << " is Lost";
+                BOOST_LOG_TRIVIAL(info) << getHandName(hand.getId()) << " Hand : " << hand.getId() << " is Lost";
+                
+                send_info( getHandName(hand.getId()) + " HAND is lost");
                 
                 // When there is no active hands, reset all the values
                 // Last active hand
@@ -288,12 +311,6 @@ void gesture_tracker::track_gestures(){
                     }
                 }
             }
-            
-            //            if (hand.isTracking())
-            //            {
-            //                BOOST_LOG_TRIVIAL(debug) << getHandName(hand.getId()) << " : " << hand.getId()  << " is Tracking";
-            //                BOOST_LOG_TRIVIAL(debug) << "r :" << rightHand << " l:" << leftHand << " ll:" << lastLostHand << " HS :" << handsSize <<std::endl;
-            //            }
             
         }
         

@@ -87,7 +87,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		$(function () {
 			$("#outputBox").dialog({
 				dialogClass: "outputBox",
-				title: "Output",
+				title: "Prediction",
 				height: 100,
 				width: 200,
 				position: {my: "left top", at: "left top", of: window}
@@ -98,9 +98,9 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		$(function () {
 			$("#gestureBox").dialog({
 				dialogClass: "gestureBox",
-				title: "Gesture",
+				title: "Gesture Info",
 				height: 150,
-				width: 400,
+				width: 650,
 				position: {my: "right bottom", at: "right bottom", of: window}
 			});
 		});

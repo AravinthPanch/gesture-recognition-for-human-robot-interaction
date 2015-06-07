@@ -34,6 +34,7 @@ private:
     void send_hand(const nite::HandData& hand1, const nite::HandData& hand2);
     std::string getHandName(int handId);
     boost::property_tree::ptree parseToJSON(const nite::HandData& hand);
+    void send_info(std::string info);
     
 public:
     gesture_tracker(udp_server *server);
