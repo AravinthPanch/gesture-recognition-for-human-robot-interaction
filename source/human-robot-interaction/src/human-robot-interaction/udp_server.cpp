@@ -70,6 +70,10 @@ void udp_server::send(boost::shared_ptr<std::string> message){
                                                 )
                                     );
     }
+    else
+    {
+        BOOST_LOG_TRIVIAL(debug) << *message;
+    }
     
 }
 
@@ -82,26 +86,12 @@ void udp_server::send(boost::shared_ptr<std::string> message){
 void udp_server::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)
 {
     if (!error || error == boost::asio::error::message_size)
-    {
-        
+    {        
         std::string data_received(receive_buffer.begin(), receive_buffer.end());
-        BOOST_LOG_TRIVIAL(info) << "Received : " << data_received << " : " << bytes_transferred << " bytes : " << client_endpoint;
+        BOOST_LOG_TRIVIAL(debug) << "Received : " << data_received << " : " << bytes_transferred << " bytes : " << client_endpoint;
         
-        if(data_received=="01")
-        {
-            BOOST_LOG_TRIVIAL(info) << "Gesture Tracker activated" ;
-            connectedClient="gesture";
-            clientConnected = true;
-        }
-        else if(data_received=="02")
-        {
-            BOOST_LOG_TRIVIAL(info) << "Skeleton Tracker activated" ;
-            connectedClient = "skeleton";
-            clientConnected = true;
-        }else
-        {
-            clientConnected = false;
-        }
+        BOOST_LOG_TRIVIAL(info) << "UDP Client connected" ;
+        clientConnected = true;
         
         receive();
     }
