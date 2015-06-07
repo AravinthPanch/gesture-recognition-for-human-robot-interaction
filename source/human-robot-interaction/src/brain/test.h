@@ -13,7 +13,7 @@
 #include "setup.h"
 
 #define TRAINING_DATASET "../data/hri-Train-2H-4G-HOME.txt"
-#define TEST_DATASET "../data/hri-Test-2H-2G-HOME.txt"
+#define TEST_DATASET "../data/hri-Test-2H-2G-HOME-1.txt"
 
 using namespace GRT;
 

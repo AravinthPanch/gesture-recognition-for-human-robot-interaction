@@ -1,6 +1,6 @@
 GRT_LABELLED_CLASSIFICATION_DATA_FILE_V1.0
 DatasetName: test-data-both-hand-static-gesture-1-2
-InfoText: Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>
+InfoText: Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>. This dataset is taken randomly from training dataset to test the prediction accuracy.
 NumDimensions: 6
 TotalNumExamples: 200
 NumberOfClasses: 2

@@ -73,7 +73,9 @@ void test::run(){
         vector< double > classDistances = pipeline.getClassDistances();
         
         
-        if( classLabel == predictedClassLabel ) accuracy++;
+        if( classLabel == unprocessedClassLabel ) accuracy++;
+        
+        //        BOOST_LOG_TRIVIAL(debug) << i <<  " : " << classLabel << " : "<< unprocessedClassLabel;
         
         
         BOOST_LOG_TRIVIAL(debug) << "TestSample: " << i <<  " ClassLabel: " << classLabel
