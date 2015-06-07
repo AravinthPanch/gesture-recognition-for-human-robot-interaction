@@ -9,6 +9,28 @@
 #define __human_robot_interaction__test__
 
 #include <stdio.h>
+#include "GRT.h"
+#include "setup.h"
+
+#define TRAINING_DATASET "../data/hri-Train-2H-4G-HOME.txt"
+#define TEST_DATASET "../data/hri-Test-2H-2G-HOME.txt"
+
+using namespace GRT;
+
+class test
+{
+    
+private:
+    void run();
+    
+public:
+    test();
+    
+};
+
+
 
 #endif
+
+
 

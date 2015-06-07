@@ -15,11 +15,19 @@
 #include <boost/filesystem/path.hpp>
 
 static std::string configFileName = "hri.json";
+static std::string signsFileName = "signs.json";
 static boost::property_tree::ptree pt;
 
 template<typename T> T getConfigValue(std::string attr)
 {
     boost::property_tree::read_json(configFileName, pt);
+    return pt.get<T>(attr);
+}
+
+
+template<typename T> T getSignName(std::string attr)
+{
+    boost::property_tree::read_json(signsFileName, pt);
     return pt.get<T>(attr);
 }
 

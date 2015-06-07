@@ -13,6 +13,7 @@
 		CE2A14281A713F67002F6C8F /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
 		CE3EC0AF1B2448B200F9A377 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE3EC0AD1B2448B200F9A377 /* test.cpp */; };
+		CE3EC0B21B24693700F9A377 /* signs.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE3EC0B11B24693400F9A377 /* signs.json */; };
 		CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */; };
 		CE4AC8E41A506EF6001B33CF /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E21A506EF6001B33CF /* udp_client.cpp */; };
 		CE4AC8E71A51752B001B33CF /* skeleton_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */; };
@@ -145,6 +146,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				CE62E1581B1C706A002D16CB /* hri.json in CopyFiles */,
+				CE3EC0B21B24693700F9A377 /* signs.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +270,7 @@
 		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
 		CE3EC0AD1B2448B200F9A377 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = src/brain/test.cpp; sourceTree = SOURCE_ROOT; };
 		CE3EC0AE1B2448B200F9A377 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test.h; path = src/brain/test.h; sourceTree = SOURCE_ROOT; };
+		CE3EC0B11B24693400F9A377 /* signs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = signs.json; path = ../config/signs.json; sourceTree = "<group>"; };
 		CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gesture_tracker.cpp; path = "src/human-robot-interaction/gesture_tracker.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8DE1A5032EE001B33CF /* gesture_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gesture_tracker.h; path = "src/human-robot-interaction/gesture_tracker.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E21A506EF6001B33CF /* udp_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_client.cpp; path = "src/human-robot-interaction/udp_client.cpp"; sourceTree = SOURCE_ROOT; };
@@ -955,6 +958,7 @@
 		CE4B90901A8D013B00A2EE05 /* config */ = {
 			isa = PBXGroup;
 			children = (
+				CE3EC0B11B24693400F9A377 /* signs.json */,
 				CED6EFB01A9E14F100402682 /* hri.json */,
 			);
 			name = config;

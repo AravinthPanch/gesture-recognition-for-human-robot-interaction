@@ -5,76 +5,82 @@
  * Project: Gesture Recogntion for Human-Robot Interaction
  */
 
+#include <boost/log/trivial.hpp>
 #include "test.h"
-#include "GRT.h"
 
-using namespace GRT;
-
-int main (int argc, const char * argv[])
+test::test()
 {
+    BOOST_LOG_TRIVIAL(info) << "Test Runner Initiated";
     
-    //Create a new ANBC instance
-    ANBC anbc;
-    anbc.setNullRejectionCoeff( 10 );
-    anbc.enableScaling( true );
-    anbc.enableNullRejection( true );
+    run();
+}
+
+void test::run(){
     
-    //Load some training data to train the classifier
+    //--------------------- Load Datasets --------------------------//
+    
     ClassificationData trainingData;
+    ClassificationData testData;
     
-    if( !trainingData.loadDatasetFromFile("ANBCTrainingData.txt") ){
-        cout << "Failed to load training data!\n";
-        return EXIT_FAILURE;
+    
+    if( !trainingData.loadDatasetFromFile(TRAINING_DATASET) ){
+        BOOST_LOG_TRIVIAL(error) <<"Failed to load training data!\n";
     }
     
-    //Use 20% of the training dataset to create a test dataset
-    ClassificationData testData = trainingData.partition( 80 );
-    
-    //Train the classifier
-    if( !anbc.train( trainingData ) ){
-        cout << "Failed to train classifier!\n";
-        return EXIT_FAILURE;
+    if( !testData.loadDatasetFromFile(TEST_DATASET) ){
+        BOOST_LOG_TRIVIAL(error) <<"Failed to load training data!\n";
     }
     
-    //Save the ANBC model to a file
-    if( !anbc.saveModelToFile("ANBCModel.txt") ){
-        cout << "Failed to save the classifier model!\n";
-        return EXIT_FAILURE;
+    //        testData = trainingData.partition(80);
+    
+    //--------------------- Init Classifiers ------------------------//
+    
+    ANBC anbc;
+    anbc.setNullRejectionCoeff(10);
+    anbc.enableScaling(true);
+    anbc.enableNullRejection(true);
+    
+    //--------------------- Init and Train Pipeline -----------------------//
+    
+    GestureRecognitionPipeline pipeline;
+    pipeline.setClassifier(anbc);
+    pipeline.addPostProcessingModule(ClassLabelFilter(5,10));
+    pipeline.addPostProcessingModule(ClassLabelChangeFilter());
+    
+    if( !pipeline.train( trainingData ) ){
+        BOOST_LOG_TRIVIAL(error) << "Failed to train classifier!\n";
     }
     
-    //Load the ANBC model from a file
-    if( !anbc.loadModelFromFile("ANBCModel.txt") ){
-        cout << "Failed to load the classifier model!\n";
-        return EXIT_FAILURE;
-    }
     
-    //Use the test dataset to test the ANBC model
+    //--------------------- Test Accuracy ---------------------------//
+    
     double accuracy = 0;
+    
     for(UINT i=0; i<testData.getNumSamples(); i++){
-        //Get the i'th test sample
+        
         UINT classLabel = testData[i].getClassLabel();
         vector< double > inputVector = testData[i].getSample();
         
-        //Perform a prediction using the classifier
-        bool predictSuccess = anbc.predict( inputVector );
         
-        if( !predictSuccess ){
-            cout << "Failed to perform prediction for test sampel: " << i <<"\n";
-            return EXIT_FAILURE;
+        if( !pipeline.predict( inputVector )){
+            BOOST_LOG_TRIVIAL(error) << "Failed to perform prediction for test sampel: " << i <<"\n";
         }
         
-        //Get the predicted class label
-        UINT predictedClassLabel = anbc.getPredictedClassLabel();
-        vector< double > classLikelihoods = anbc.getClassLikelihoods();
-        vector< double > classDistances = anbc.getClassDistances();
         
-        //Update the accuracy
+        UINT predictedClassLabel = pipeline.getPredictedClassLabel();
+        UINT unprocessedClassLabel = pipeline.getUnProcessedPredictedClassLabel();
+        vector< double > classLikelihoods = pipeline.getClassLikelihoods();
+        vector< double > classDistances = pipeline.getClassDistances();
+        
+        
         if( classLabel == predictedClassLabel ) accuracy++;
         
-        cout << "TestSample: " << i <<  " ClassLabel: " << classLabel << " PredictedClassLabel: " << predictedClassLabel << endl;
+        
+        BOOST_LOG_TRIVIAL(debug) << "TestSample: " << i <<  " ClassLabel: " << classLabel
+        << " PredictedClassLabel: " << predictedClassLabel << " unprocessedClassLabel: " << unprocessedClassLabel;
+        
     }
     
-    cout << "Test Accuracy: " << accuracy/double(testData.getNumSamples())*100.0 << "%" << endl;
     
-    return EXIT_SUCCESS;
+    BOOST_LOG_TRIVIAL(info) << "Test Accuracy: " << accuracy/double(testData.getNumSamples())*100.0 << "%";
 }

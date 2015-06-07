@@ -24,6 +24,9 @@ brain::brain(){
     anbc.enableNullRejection(true);
     
     pipeline.setClassifier(anbc);
+    pipeline.addPostProcessingModule(ClassLabelFilter(5,10));
+    pipeline.addPostProcessingModule(ClassLabelChangeFilter());
+    
     trainingData.setNumDimensions(SAMPLE_DIMENSION);
     trainingData.setDatasetName("both-hand-static-gesture");
     trainingData.setInfoText("Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>");
@@ -210,11 +213,13 @@ vector<double> brain::predict(vector< double > rightHand, vector< double > leftH
     
     pipeline.predict(inputVector);
     UINT predictedClassLabel = pipeline.getPredictedClassLabel();
+    UINT unprocessedClassLabel = pipeline.getUnProcessedPredictedClassLabel();
     double maxLikelihood =  pipeline.getMaximumLikelihood();
     
-    vector<double> result(2);
-    result[1] = maxLikelihood;
+    vector<double> result(3);
     result[0] = double(predictedClassLabel);
+    result[1] = double(unprocessedClassLabel);
+    result[2] = maxLikelihood;
     
     return result;
 }

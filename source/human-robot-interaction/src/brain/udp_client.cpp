@@ -179,24 +179,40 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
                 vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
                 
                 // Parse the same received json
-                rapidjson::Document document;
-                document.Parse(jsonString);
+                rapidjson::Document outputJson;
+                outputJson.Parse(jsonString);
                 
-                // Add an array OUTPUT with prediction results
+                // Add an array OUTPUT with unprocessed predicted class and maximum likelihood
                 rapidjson::Value predictionArray(rapidjson::kArrayType);
-                predictionArray.PushBack(predictionResults[0], document.GetAllocator()).PushBack(predictionResults[1], document.GetAllocator());
-                document.AddMember("OUTPUT", predictionArray, document.GetAllocator());
+                predictionArray.PushBack(predictionResults[1], outputJson.GetAllocator());
+                predictionArray.PushBack(predictionResults[2], outputJson.GetAllocator());
+                outputJson.AddMember("OUTPUT", predictionArray, outputJson.GetAllocator());
                 
                 // Write the document to the buffer
-                rapidjson::StringBuffer buffer;
-                rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-                document.Accept(writer);
+                rapidjson::StringBuffer outputJsonBuffer;
+                rapidjson::Writer<rapidjson::StringBuffer> outputJsonWriter(outputJsonBuffer);
+                outputJson.Accept(outputJsonWriter);
                 
                 //Send it via websocket with prediction results
                 if(ws_socket.isClientConnected())
                 {
-                    ws_socket.send(buffer.GetString(), true);
+                    ws_socket.send(outputJsonBuffer.GetString(), true);
                 }
+                
+                // Post-processed predicted class
+                if(predictionResults[0] > 0){
+                    
+                    std::string signName = getSignName<std::string>(std::to_string((int)predictionResults[0]));
+                    std::stringstream gestureBuffer;
+                    gestureBuffer << "{\"GESTURE\":\"" << signName << "\"}";
+                    
+                    if(ws_socket.isClientConnected())
+                    {
+                        ws_socket.send(gestureBuffer.str().c_str(), true);
+                    }
+                }
+                
+                
             }
             
             // If trainingMode is active and received both the hand data,

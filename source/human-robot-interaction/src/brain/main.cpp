@@ -12,6 +12,7 @@
 #include <boost/log/trivial.hpp>
 #include "udp_client.h"
 #include "brain.h"
+#include "test.h"
 
 
 int main(int argc, char* argv[])
@@ -94,7 +95,7 @@ int main(int argc, char* argv[])
             {
                 optionSelected1 = true;
                 BOOST_LOG_TRIVIAL(info) << "Starting Tests Runner";
-
+                test testRunner;
             }
             
             else if(argument1 == "5")

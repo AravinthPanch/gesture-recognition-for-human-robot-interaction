@@ -222,7 +222,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		app.camera = new THREE.PerspectiveCamera(70, width / height, 1, 10000);
 		app.camera.position.x = 0;
 		app.camera.position.y = 0;
-		app.camera.position.z = 3500;
+		app.camera.position.z = 4000;
 
 		// Add dom element as second element on which trackball controller should work
 		app.controls = new THREE.TrackballControls(app.camera, app.renderer.domElement);
