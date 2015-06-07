@@ -20,12 +20,12 @@ brain::brain(){
     trainingClassLabel = 1;
     
     anbc.setNullRejectionCoeff(10);
-    //    anbc.enableScaling(true);
+    anbc.enableScaling(true);
     anbc.enableNullRejection(true);
     
     pipeline.setClassifier(anbc);
     trainingData.setNumDimensions(SAMPLE_DIMENSION);
-    trainingData.setDatasetName("Right and Left Hand Static Gestures");
+    trainingData.setDatasetName("both-hand-static-gesture");
     trainingData.setInfoText("Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>");
 }
 

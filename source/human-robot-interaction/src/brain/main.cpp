@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
         std::string argument2;
         bool optionSelected1 = false;
         
-        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Hand Viewer \n 4 -> Exit \n: ";
+        std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Hand Viewer \n 4 -> Test \n 5 -> Exit \n: ";
         std::getline(std::cin, argument1);
         
         while (!optionSelected1) {
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
             if(argument1 == "1")
             {
                 optionSelected1 = true;
-                BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Prediction";
+                BOOST_LOG_TRIVIAL(info) << "Starting Prediction";
                 brain.setPredictionModeActive();
                 udp_client client(io_service, &brain);
                 boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
             else if(argument1 == "2")
             {
                 optionSelected1 = true;
-                BOOST_LOG_TRIVIAL(info) << "Starting Brain Module for Training";
+                BOOST_LOG_TRIVIAL(info) << "Starting Training";
                 brain.setTrainingModeActive();
                 udp_client client(io_service, &brain);
                 boost::thread thread(boost::bind(&boost::asio::io_service::run, &io_service));
@@ -93,14 +93,22 @@ int main(int argc, char* argv[])
             else if(argument1 == "4")
             {
                 optionSelected1 = true;
+                BOOST_LOG_TRIVIAL(info) << "Starting Tests Runner";
+
+            }
+            
+            else if(argument1 == "5")
+            {
+                optionSelected1 = true;
                 BOOST_LOG_TRIVIAL(info) << "Exiting Gesture Recognition For Human-Robot Interaction";
                 return 0;
             }
             
+            
             else {
                 optionSelected1 = false;
                 BOOST_LOG_TRIVIAL(info) << "Invalid selection." ;
-                std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Hand Viewer \n 4 -> Exit \n: ";
+                std::cout << "Press \n 1 -> Predict \n 2 -> Train \n 3 -> Hand Viewer \n 4 -> Test \n 5 -> Exit \n: ";
                 std::getline(std::cin, argument1);
             }
             

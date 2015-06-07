@@ -12,6 +12,7 @@
 		CE2A14271A713F62002F6C8F /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
 		CE2A14281A713F67002F6C8F /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
+		CE3EC0AF1B2448B200F9A377 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE3EC0AD1B2448B200F9A377 /* test.cpp */; };
 		CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */; };
 		CE4AC8E41A506EF6001B33CF /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E21A506EF6001B33CF /* udp_client.cpp */; };
 		CE4AC8E71A51752B001B33CF /* skeleton_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */; };
@@ -265,6 +266,8 @@
 		CE2A14231A713E3E002F6C8F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-simple-skeleton/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41381A488EFE008E743E /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/udp-server-async/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
+		CE3EC0AD1B2448B200F9A377 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = src/brain/test.cpp; sourceTree = SOURCE_ROOT; };
+		CE3EC0AE1B2448B200F9A377 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test.h; path = src/brain/test.h; sourceTree = SOURCE_ROOT; };
 		CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gesture_tracker.cpp; path = "src/human-robot-interaction/gesture_tracker.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8DE1A5032EE001B33CF /* gesture_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gesture_tracker.h; path = "src/human-robot-interaction/gesture_tracker.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E21A506EF6001B33CF /* udp_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_client.cpp; path = "src/human-robot-interaction/udp_client.cpp"; sourceTree = SOURCE_ROOT; };
@@ -1322,6 +1325,8 @@
 				CE8506321AA7447F0094FBCB /* brain.h */,
 				CE62E1551B1C53BD002D16CB /* websocket_server.cpp */,
 				CE62E1561B1C53BD002D16CB /* websocket_server.h */,
+				CE3EC0AD1B2448B200F9A377 /* test.cpp */,
+				CE3EC0AE1B2448B200F9A377 /* test.h */,
 			);
 			name = brain;
 			path = ../brain;
@@ -2882,6 +2887,7 @@
 				CE8506361AA744DB0094FBCB /* udp_client.cpp in Sources */,
 				CE8506331AA7447F0094FBCB /* brain.cpp in Sources */,
 				CE62E1571B1C53BD002D16CB /* websocket_server.cpp in Sources */,
+				CE3EC0AF1B2448B200F9A377 /* test.cpp in Sources */,
 				CE8506381AA745270094FBCB /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3855,6 +3861,7 @@
 				CEF78A7A1B1DAE5600FE79D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

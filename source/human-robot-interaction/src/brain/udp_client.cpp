@@ -168,10 +168,6 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         const char * jsonString = trimmedData.c_str();
         vector<vector<double>> handVector = getHandData(jsonString);
         
-        
-        BOOST_LOG_TRIVIAL(debug) << brain_->isTrainingModeWaitingForInput;
-        
-        
         // If both the hand are received
         if(!handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
             
@@ -212,6 +208,21 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
                 if(ws_socket.isClientConnected())
                 {
                     ws_socket.send(jsonString, false);
+                }
+            }
+            
+            else if(brain_->isTrainingModeWaitingForInput){
+                if(ws_socket.isClientConnected())
+                {
+                    ws_socket.send(jsonString, false);
+                }
+            }
+            
+            // If handViewer is selected and both hands are present
+            else{
+                if(ws_socket.isClientConnected())
+                {
+                    ws_socket.send(jsonString, true);
                 }
             }
         }
