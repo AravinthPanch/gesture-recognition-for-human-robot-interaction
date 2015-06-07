@@ -8,7 +8,6 @@
 #include "brain.h"
 #include <boost/log/trivial.hpp>
 
-
 /**
  *
  * Constructor
@@ -195,7 +194,7 @@ void brain::train(vector< double > rightHand, vector< double > leftHand){
 
 /**
  *
- * It predicts the incoming handVector and returns the identified class label and likelyhood.
+ * It predicts the incoming handVector and returns the identified class label and likelihood.
  *
  */
 vector<double> brain::predict(vector< double > rightHand, vector< double > leftHand){

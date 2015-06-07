@@ -65,9 +65,11 @@ void websocket_server::init(){
  */
 
 void websocket_server::send(const char* parsedData, bool isLogged){
-    ws_socket_.send(hdl_, parsedData, websocketpp::frame::opcode::text);
-    if(isLogged){
-        BOOST_LOG_TRIVIAL(debug) << "Sent : " << parsedData;
+    if(isClientConnected()){
+        ws_socket_.send(hdl_, parsedData, websocketpp::frame::opcode::text);
+        if(isLogged){
+            BOOST_LOG_TRIVIAL(debug) << "Sent : " << parsedData;
+        }
     }
 }
 

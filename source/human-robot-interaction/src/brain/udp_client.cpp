@@ -168,91 +168,57 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         const char * jsonString = trimmedData.c_str();
         vector<vector<double>> handVector = getHandData(jsonString);
         
-        // If both the hand are received
-        if(!handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
+        
+        // If predictionMode is active and received both the hand data,
+        // predict the classlabel for every sample and send it via socket
+        if(brain_->isPredictionModeActive() && !handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
             
-            // If predictionMode is active and received both the hand data,
-            // predict the classlabel for every sample and send it via socket
-            if(brain_->isPredictionModeActive()){
-                
-                // Predict and get classLabel and maximum likelihood
-                vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
-                
-                // Parse the same received json
-                rapidjson::Document outputJson;
-                outputJson.Parse(jsonString);
-                
-                // Add an array OUTPUT with unprocessed predicted class and maximum likelihood
-                rapidjson::Value predictionArray(rapidjson::kArrayType);
-                predictionArray.PushBack(predictionResults[1], outputJson.GetAllocator());
-                predictionArray.PushBack(predictionResults[2], outputJson.GetAllocator());
-                outputJson.AddMember("OUTPUT", predictionArray, outputJson.GetAllocator());
-                
-                // Write the document to the buffer
-                rapidjson::StringBuffer outputJsonBuffer;
-                rapidjson::Writer<rapidjson::StringBuffer> outputJsonWriter(outputJsonBuffer);
-                outputJson.Accept(outputJsonWriter);
-                
-                //Send it via websocket with prediction results
-                if(ws_socket.isClientConnected())
-                {
-                    ws_socket.send(outputJsonBuffer.GetString(), true);
-                }
-                
-                // Post-processed predicted class
-                if(predictionResults[0] > 0){
-                    
-                    std::string signName = getSignName<std::string>(std::to_string((int)predictionResults[0]));
-                    std::stringstream gestureBuffer;
-                    gestureBuffer << "{\"GESTURE\":\"" << signName << "\"}";
-                    
-                    if(ws_socket.isClientConnected())
-                    {
-                        ws_socket.send(gestureBuffer.str().c_str(), true);
-                    }
-                }
-                
-                
-            }
+            // Predict and get classLabel and maximum likelihood
+            vector<double> predictionResults = brain_->predict(handVector[0], handVector[1]);
             
-            // If trainingMode is active and received both the hand data,
-            // train every input sample and simultaneously send the data via socket
-            // but Don't log it in order not to block the user input
-            else if(brain_->isTrainingModeActive()){
-                brain_->train(handVector[0], handVector[1]);
+            // Parse the same received json
+            rapidjson::Document outputJson;
+            outputJson.Parse(jsonString);
+            
+            // Add an array OUTPUT with unprocessed predicted class and maximum likelihood
+            rapidjson::Value predictionArray(rapidjson::kArrayType);
+            predictionArray.PushBack(predictionResults[1], outputJson.GetAllocator());
+            predictionArray.PushBack(predictionResults[2], outputJson.GetAllocator());
+            outputJson.AddMember("OUTPUT", predictionArray, outputJson.GetAllocator());
+            
+            // Write the document to the buffer
+            rapidjson::StringBuffer outputJsonBuffer;
+            rapidjson::Writer<rapidjson::StringBuffer> outputJsonWriter(outputJsonBuffer);
+            outputJson.Accept(outputJsonWriter);
+            
+            //Send it via websocket with prediction results
+            ws_socket.send(outputJsonBuffer.GetString(), true);
+            
+            // Post-processed predicted class
+            if(predictionResults[0] > 0){
                 
-                if(ws_socket.isClientConnected())
-                {
-                    ws_socket.send(jsonString, false);
-                }
+                std::string signName = getSignName<std::string>(std::to_string((int)predictionResults[0]));
+                std::stringstream gestureBuffer;
+                gestureBuffer << "{\"GESTURE\":\"" << signName << "\"}";
+                ws_socket.send(gestureBuffer.str().c_str(), true);
             }
-            
-            else if(brain_->isTrainingModeWaitingForInput){
-                if(ws_socket.isClientConnected())
-                {
-                    ws_socket.send(jsonString, false);
-                }
-            }
-            
-            // If handViewer is selected and both hands are present
-            else{
-                if(ws_socket.isClientConnected())
-                {
-                    ws_socket.send(jsonString, true);
-                }
-            }
+        }
+        
+        // If trainingMode is active and received both the hand data,
+        // train every input sample and simultaneously send the data via socket
+        // but Don't log it in order not to block the user input
+        else if(brain_->isTrainingModeActive() && !handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
+            brain_->train(handVector[0], handVector[1]);
+            ws_socket.send(jsonString, false);
         }
         
         // If trainingMode is waiting for user input to train another class
         // send the data via socket but don't log it in order not to block the user input
         else if(brain_->isTrainingModeWaitingForInput){
-            if(ws_socket.isClientConnected())
-            {
-                ws_socket.send(jsonString, false);
-            }
+            ws_socket.send(jsonString, false);
         }
         
-        // If handViewer is selected or single hand is present
+        // If handViewer is selected and both hands or single hand is present
         // Forward all via socket and log
         else{
             if(ws_socket.isClientConnected())
