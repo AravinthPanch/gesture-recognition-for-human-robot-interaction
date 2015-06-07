@@ -242,9 +242,7 @@ void gesture_tracker::track_gestures(){
             {
                 lastLostHand = hand.getId();
                 BOOST_LOG_TRIVIAL(info) << getHandName(hand.getId()) << " Hand with id " << hand.getId() << " is Lost";
-                
-                send_info( getHandName(hand.getId()) + " Hand is lost");
-                
+                                
                 // When there is no active hands, reset all the values
                 // Last active hand
                 if(hands.getSize() == 1){
@@ -252,6 +250,12 @@ void gesture_tracker::track_gestures(){
                     rightHand = 0;
                     lastLostHand = 0;
                     handsSize = 0;
+                    
+                    send_info("Both hands are lost");
+                }
+                else
+                {
+                    send_info( getHandName(hand.getId()) + " Hand is lost");
                 }
             }
             

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>5A0334AB-6B6D-4848-94DB-BCD8BD7CD58E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>human-robot-interaction</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>
 		<string>github.com:AravinthPanch/gesture-recognition-for-human-robot-interaction.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>source/human-robot-interaction/human-robot-interaction.xcodeproj/project.xcworkspace</string>
+	<string>source/human-robot-interaction/human-robot-interaction.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2DC0A90B279F618D83727F10B9F3EDC8F4542874</key>
