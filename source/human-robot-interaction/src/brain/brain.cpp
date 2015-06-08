@@ -8,6 +8,7 @@
 #include "brain.h"
 #include <boost/log/trivial.hpp>
 
+
 /**
  *
  * Constructor
@@ -154,12 +155,19 @@ void brain::trainPipelineFromTrainingData(){
 }
 
 
+void brain::send_info(std::string info, websocket_server* ws_socket){
+    std::string infoJson = "{\"TIMER\":\"" + info + "\"}";
+    ws_socket->send(infoJson.c_str(), false);
+}
+
+
+
 /**
  *
  * It receives the handVector and adds them to the trainingData with given class label.
  *
  */
-void brain::train(vector< double > rightHand, vector< double > leftHand){
+void brain::train(vector< double > rightHand, vector< double > leftHand, websocket_server* ws_socket){
     
     BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
     BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
@@ -177,14 +185,25 @@ void brain::train(vector< double > rightHand, vector< double > leftHand){
         trainingData.addSample(trainingClassLabel, inputVector);
         BOOST_LOG_TRIVIAL(debug) << "Training Class Label : " << trainingClassLabel;
         BOOST_LOG_TRIVIAL(debug) << "Training Time Remaining : " << trainingTimer.getSeconds() << "\n";
+        
+        std::string message = "Recording : " + std::to_string(trainingTimer.getSeconds());
+        send_info(message, ws_socket);
+        
     }
     else if(trainingTimer.getRecordingStopped()){
         BOOST_LOG_TRIVIAL(debug) << "Training Timer Stopped";
         saveTrainingDataSetToFile();
         trainingModeActive = false;
+        
+        std::string message = "Training of class " + std::to_string(trainingClassLabel) + " stopped";
+        send_info(message, ws_socket);
     }
     else if(trainingTimer.getInPrepMode()){
         BOOST_LOG_TRIVIAL(debug) << "Preparation Time Remaining : " << trainingTimer.getSeconds() << "\n";
+        
+        std::string message = "Preparing : " + std::to_string(trainingTimer.getSeconds());
+        send_info(message, ws_socket);
+        
     }
     else {
         BOOST_LOG_TRIVIAL(debug) << "Error In Training";

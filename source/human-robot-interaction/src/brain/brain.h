@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include "GRT.h"
+#include "websocket_server.h"
+
 
 #define DEFAULT_PREP_TIME 15000
 #define DEFAULT_RECORD_TIME 20000
@@ -37,6 +39,8 @@ private:
     void startTraining();
     void stopTraining();
     
+    void send_info(std::string info, websocket_server* ws_socket);
+    
 public:
     brain();
     
@@ -47,7 +51,7 @@ public:
     bool isTrainingModeWaitingForInput;
     
     void trainNext();
-    void train(vector< double > leftHand, vector< double > rightHand);
+    void train(vector< double > leftHand, vector< double > rightHand, websocket_server* ws_socket);
     vector<double> predict(vector< double > leftHand, vector< double > rightHand);
     
 };

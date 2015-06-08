@@ -55,6 +55,10 @@ define(function () {
 				$('#gestureBox').text("")
 			}, timeOut);
 		}
+
+		if ('TIMER' in app.skeletonBuffer) {
+			$('#gestureBox').text(app.skeletonBuffer.TIMER);
+		}
 	}
 
 	return {

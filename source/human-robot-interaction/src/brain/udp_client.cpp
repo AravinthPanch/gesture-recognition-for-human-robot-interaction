@@ -208,7 +208,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         // train every input sample and simultaneously send the data via socket
         // but Don't log it in order not to block the user input
         else if(brain_->isTrainingModeActive() && !handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
-            brain_->train(handVector[0], handVector[1]);
+            brain_->train(handVector[0], handVector[1], &ws_socket);
             ws_socket.send(jsonString, false);
         }
         

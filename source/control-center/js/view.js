@@ -83,17 +83,6 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 			});
 		});
 
-		// Initiate the output ui
-		$(function () {
-			$("#outputBox").dialog({
-				dialogClass: "outputBox",
-				title: "Prediction",
-				height: 100,
-				width: 200,
-				position: {my: "left top", at: "left top", of: window}
-			});
-		});
-
 		// Initiate the gestureBox ui
 		$(function () {
 			$("#gestureBox").dialog({
@@ -102,6 +91,17 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				height: 150,
 				width: 650,
 				position: {my: "right bottom", at: "right bottom", of: window}
+			});
+		});
+
+		// Initiate the output ui
+		$(function () {
+			$("#outputBox").dialog({
+				dialogClass: "outputBox",
+				title: "Prediction",
+				height: 100,
+				width: 200,
+				position: {my: "left top", at: "left top", of: window}
 			});
 		});
 	}
@@ -390,11 +390,11 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	}
 
 
-	var i = 0;
+	var ii = 0;
 
 	function renderSkeletonFromData() {
-		if (i < skeletonData.length) {
-			$.each(skeletonData[i], function (key, val) {
+		if (ii < skeletonData.length) {
+			$.each(skeletonData[ii], function (key, val) {
 
 				if (key !== "FRAME") {
 					var positionConfidence = parseFloat(val[3]);
@@ -406,19 +406,38 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				}
 			});
 		}
-		i++;
+		ii++;
 		app.renderer.render(app.scene, app.camera);
 	}
 
+
+	var i = handData.length;
+
 	function renderHandFromData() {
-		if (i < handData.length) {
-
+		i--;
+		if (i >= 0) {
+			
+			var timeOut = 1000;
 			if ('GESTURE' in handData[i]) {
-				$('#gestureBox').text(handData[i].GESTURE);
+				if (handData[i].GESTURE != "WAVE") {
+					timeOut = 2000;
+				}
 
+				$('#gestureBox').text(handData[i].GESTURE);
 				var timer = setTimeout(function () {
 					$('#gestureBox').text("")
-				}, 5000);
+				}, timeOut);
+			}
+
+			if ('INFO' in handData[i]) {
+				$('#gestureBox').text(handData[i].INFO);
+				var timer = setTimeout(function () {
+					$('#gestureBox').text("")
+				}, timeOut);
+			}
+
+			if ('TIMER' in handData[i]) {
+				$('#gestureBox').text(handData[i].TIMER);
 			}
 
 			$('#consoleBox').prepend("<div class='log'>" + JSON.stringify(handData[i]) + "</div>");
@@ -449,7 +468,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				$("#outputBox").text(handData[i].OUTPUT[0] + " : " + handData[i].OUTPUT[1].toFixed(2));
 			}
 		}
-		i++;
+
 		app.renderer.render(app.scene, app.camera);
 	}
 
