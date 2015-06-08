@@ -18,7 +18,7 @@ define(function () {
 
 		websocket.onopen = function (e) {
 			console.log("Websocket Opened");
-			websocket.send("HRI:Control Center");
+			websocket.send("CC");
 		};
 
 		websocket.onclose = function (e) {

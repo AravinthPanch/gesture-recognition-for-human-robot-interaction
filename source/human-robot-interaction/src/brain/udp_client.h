@@ -39,8 +39,9 @@ private:
     void receive();
     void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
     void handle_send(boost::shared_ptr<std::string> message, const boost::system::error_code& error, std::size_t bytes_transferred);
-
     udp::endpoint endpoint_resolver(boost::asio::io_service& io_service, const char* host_name, int port);
+    
+    vector<vector<double>> getHandData(const char* json);
     
     
 public:

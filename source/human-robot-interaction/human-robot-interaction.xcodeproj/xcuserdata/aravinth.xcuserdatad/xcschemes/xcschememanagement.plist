@@ -17,7 +17,7 @@
 		<key>brain.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>20</integer>
 		</dict>
 		<key>grt-ada-boost.xcscheme</key>
 		<dict>
@@ -37,12 +37,12 @@
 		<key>helper.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>18</integer>
 		</dict>
 		<key>human-robot-interaction.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>19</integer>
 		</dict>
 		<key>ni-simple-sensor-read.xcscheme</key>
 		<dict>
@@ -97,7 +97,7 @@
 		<key>websocketpp-client.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>17</integer>
 		</dict>
 		<key>websocketpp.xcscheme</key>
 		<dict>
@@ -107,7 +107,7 @@
 		<key>websocketpp_broadcast.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>16</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

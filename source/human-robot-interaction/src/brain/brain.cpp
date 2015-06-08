@@ -157,7 +157,7 @@ void brain::trainPipelineFromTrainingData(){
 
 void brain::send_info(std::string info, websocket_server* ws_socket){
     std::string infoJson = "{\"TIMER\":\"" + info + "\"}";
-    ws_socket->send(infoJson.c_str(), false);
+    ws_socket->send(infoJson.c_str(), false, 1);
 }
 
 

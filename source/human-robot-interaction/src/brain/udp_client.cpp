@@ -90,7 +90,7 @@ void udp_client::send(boost::shared_ptr<std::string> message){
  *
  */
 
-vector<vector<double>> getHandData(const char* json){
+vector<vector<double>> udp_client::getHandData(const char* json){
     
     rapidjson::Document document;
     document.Parse(json);
@@ -131,6 +131,14 @@ vector<vector<double>> getHandData(const char* json){
         handVector.push_back(rightHand);
         handVector.push_back(leftHand);
     }
+    
+    
+    if(document.HasMember("GESTURE")){
+        std::stringstream gestureBuffer;
+        gestureBuffer << "{\"GESTURE\":\"" << document["GESTURE"].GetString() << "\"}";
+        ws_socket.send(gestureBuffer.str().c_str(), true, 2);
+    }
+    
     
     return handVector;
 }
@@ -192,15 +200,14 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
             outputJson.Accept(outputJsonWriter);
             
             //Send it via websocket with prediction results
-            ws_socket.send(outputJsonBuffer.GetString(), true);
+            ws_socket.send(outputJsonBuffer.GetString(), true, 1);
             
             // Post-processed predicted class
             if(predictionResults[0] > 0){
-                
                 std::string signName = getSignName<std::string>(std::to_string((int)predictionResults[0]));
                 std::stringstream gestureBuffer;
                 gestureBuffer << "{\"GESTURE\":\"" << signName << "\"}";
-                ws_socket.send(gestureBuffer.str().c_str(), true);
+                ws_socket.send(gestureBuffer.str().c_str(), true, 3);
             }
         }
         
@@ -209,13 +216,13 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         // but Don't log it in order not to block the user input
         else if(brain_->isTrainingModeActive() && !handVector.empty() && !handVector[0].empty() && !handVector[1].empty()){
             brain_->train(handVector[0], handVector[1], &ws_socket);
-            ws_socket.send(jsonString, false);
+            ws_socket.send(jsonString, false, 1);
         }
         
         // If trainingMode is waiting for user input to train another class
         // send the data via socket but don't log it in order not to block the user input
         else if(brain_->isTrainingModeWaitingForInput){
-            ws_socket.send(jsonString, false);
+            ws_socket.send(jsonString, false, 1);
         }
         
         // If handViewer is selected and both hands or single hand is present
@@ -223,7 +230,7 @@ void udp_client::handle_receive(const boost::system::error_code& error, std::siz
         else{
             if(ws_socket.isClientConnected())
             {
-                ws_socket.send(jsonString, true);
+                ws_socket.send(jsonString, true, 1);
             }
             else {
                 BOOST_LOG_TRIVIAL(debug) << "Received : " << trimmedData;

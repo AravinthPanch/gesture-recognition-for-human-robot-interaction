@@ -19,7 +19,7 @@ void on_message(client* c, websocketpp::connection_hdl hdl, message_ptr msg) {
 
 void on_open(client* c, websocketpp::connection_hdl hdl) {
     BOOST_LOG_TRIVIAL(info) << "open";
-    c->send(hdl, "Hoola", websocketpp::frame::opcode::text);
+    c->send(hdl, "AL", websocketpp::frame::opcode::text);
 }
 
 
@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     BOOST_LOG_TRIVIAL(info) << "started";
     
     client c;
-    std::string uri = "ws://localhost:9002";
+    std::string uri = "ws://localhost:5008";
     
     try {
         c.set_access_channels(websocketpp::log::alevel::none);
