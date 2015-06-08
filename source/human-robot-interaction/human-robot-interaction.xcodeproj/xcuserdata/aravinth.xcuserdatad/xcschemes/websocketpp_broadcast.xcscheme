@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-               BuildableName = "human-robot-interaction-xcode"
-               BlueprintName = "human-robot-interaction"
+               BlueprintIdentifier = "CECCD96A1B26216E00DF0F64"
+               BuildableName = "websocketpp_broadcast-xcode"
+               BlueprintName = "websocketpp_broadcast"
                ReferencedContainer = "container:human-robot-interaction.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-            BuildableName = "human-robot-interaction-xcode"
-            BlueprintName = "human-robot-interaction"
+            BlueprintIdentifier = "CECCD96A1B26216E00DF0F64"
+            BuildableName = "websocketpp_broadcast-xcode"
+            BlueprintName = "websocketpp_broadcast"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,9 +52,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-            BuildableName = "human-robot-interaction-xcode"
-            BlueprintName = "human-robot-interaction"
+            BlueprintIdentifier = "CECCD96A1B26216E00DF0F64"
+            BuildableName = "websocketpp_broadcast-xcode"
+            BlueprintName = "websocketpp_broadcast"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CEE283AD1A48C2E300131564"
-            BuildableName = "human-robot-interaction-xcode"
-            BlueprintName = "human-robot-interaction"
+            BlueprintIdentifier = "CECCD96A1B26216E00DF0F64"
+            BuildableName = "websocketpp_broadcast-xcode"
+            BlueprintName = "websocketpp_broadcast"
             ReferencedContainer = "container:human-robot-interaction.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

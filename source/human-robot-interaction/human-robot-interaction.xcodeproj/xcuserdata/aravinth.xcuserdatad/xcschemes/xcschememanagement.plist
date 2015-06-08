@@ -94,10 +94,20 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>websocketpp-client.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>websocketpp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>15</integer>
+		</dict>
+		<key>websocketpp_broadcast.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -123,6 +133,21 @@
 			<true/>
 		</dict>
 		<key>CE62E0CD1B1C4A3A002D16CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE6EA5771B25E55C000A0C85</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE6EA6011B25EC62000A0C85</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE6EA6161B26010E000A0C85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -198,6 +223,11 @@
 			<true/>
 		</dict>
 		<key>CEAA7CAC1A724F6E00C7EF67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CECCD96A1B26216E00DF0F64</key>
 		<dict>
 			<key>primary</key>
 			<true/>

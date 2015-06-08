@@ -22,16 +22,18 @@ typedef server::message_ptr message_ptr;
 
 // Define a callback to handle incoming messages
 void on_message(server* s, websocketpp::connection_hdl hdl, message_ptr msg) {
-    std::cout << "on_message called with hdl: " << hdl.lock().get()
-    << " and message: " << msg->get_payload()
-    << std::endl;
+    std::cout << " and message: " << msg->get_payload() <<std::endl ;
+    std::cout << " opcode " << msg->get_opcode() <<std::endl ;
     
-    try {
-        s->send(hdl, msg->get_payload(), msg->get_opcode());
-    } catch (const websocketpp::lib::error_code& e) {
-        std::cout << "Echo failed because: " << e
-        << "(" << e.message() << ")" << std::endl;
-    }
+    s->send(hdl, msg->get_payload(), msg->get_opcode());
+}
+
+void on_open(server* s, websocketpp::connection_hdl hdl) {
+    std::cout << "Open \n";
+    
+    const char* msg = "Hola";
+    
+    s->send(hdl, msg, websocketpp::frame::opcode::text);
 }
 
 int main() {
@@ -47,7 +49,9 @@ int main() {
         echo_server.init_asio();
         
         // Register our message handler
+        echo_server.set_open_handler(bind(&on_open,&echo_server,::_1));
         echo_server.set_message_handler(bind(&on_message,&echo_server,::_1,::_2));
+        
         
         // Listen on port 9002
         echo_server.listen(9002);
@@ -59,7 +63,7 @@ int main() {
         // Start the ASIO io_service run loop
         echo_server.run();
         
-
+        
     } catch (websocketpp::exception const & e) {
         std::cout << e.what() << std::endl;
     } catch (...) {
