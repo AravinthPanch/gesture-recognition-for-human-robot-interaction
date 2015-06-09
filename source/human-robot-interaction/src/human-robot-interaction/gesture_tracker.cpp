@@ -61,7 +61,7 @@ void gesture_tracker::init_nite(){
         BOOST_LOG_TRIVIAL(info) << "Hand tracker created" ;
     }
     
-    handTracker.setSmoothingFactor(0.1);
+//    handTracker.setSmoothingFactor(0.1);
     handTracker.startGestureDetection(nite::GESTURE_WAVE);
     handTracker.startGestureDetection(nite::GESTURE_CLICK);
     BOOST_LOG_TRIVIAL(info) << "Wave your hand to start the hand tracking" ;
