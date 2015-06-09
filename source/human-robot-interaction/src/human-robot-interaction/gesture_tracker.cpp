@@ -23,6 +23,12 @@ using boost::property_tree::write_json;
  */
 gesture_tracker::gesture_tracker(udp_server *server){
     server_ = server;
+    
+    // Initialize the variables here because compiling on virtual nao forbides the initialization in the header file
+    leftHand = 0;
+    rightHand = 0;
+    lastLostHand = 0;
+    handsSize = 0;
 }
 
 

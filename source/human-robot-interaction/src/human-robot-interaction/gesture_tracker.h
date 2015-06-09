@@ -22,10 +22,10 @@ private:
     nite::Status niteRc;
     udp_server *server_;
     
-    int leftHand = 0;
-    int rightHand = 0;
-    int lastLostHand = 0;
-    int handsSize = 0;
+    int leftHand;
+    int rightHand;
+    int lastLostHand;
+    int handsSize;
     
     void init_nite();
     void track_gestures();
