@@ -61,7 +61,7 @@ void gesture_tracker::init_nite(){
         BOOST_LOG_TRIVIAL(info) << "Hand tracker created" ;
     }
     
-//    handTracker.setSmoothingFactor(0.1);
+    //    handTracker.setSmoothingFactor(0.1);
     handTracker.startGestureDetection(nite::GESTURE_WAVE);
     handTracker.startGestureDetection(nite::GESTURE_CLICK);
     BOOST_LOG_TRIVIAL(info) << "Wave your hand to start the hand tracking" ;
@@ -235,75 +235,86 @@ void gesture_tracker::track_gestures(){
         
         const nite::Array<nite::HandData>& hands = handTrackerFrame.getHands();
         
+        for (int i = 0; i < hands.getSize(); ++i)
+        {
+            const nite::HandData& hand = hands[i];
+            if (hand.isTracking())
+            {
+                printf("%d. (%5.2f, %5.2f, %5.2f)\n", hand.getId(), hand.getPosition().x, hand.getPosition().y, hand.getPosition().z);
+            }
+        }
+        
+        
+        
         // hands.getSize() gives the number of active hands, but handId increases
         // hands.getSize() = 0 and goes to hands.getSize() = 2, when there is a new hand detected
         // hands.getSize() = 0, this happens for a fraction of second when tacking is troubled
-        for (int i = 0; i < hands.getSize(); ++i)
-        {
-            // Get Hand data
-            const nite::HandData& hand = hands[i];
-            
-            // If hand is lost, update the losthandid
-            if(!hand.isTracking())
-            {
-                lastLostHand = hand.getId();
-                BOOST_LOG_TRIVIAL(info) << getHandName(hand.getId()) << " Hand with id " << hand.getId() << " is Lost";
-                
-                // When there is no active hands, reset all the values
-                // Last active hand
-                if(hands.getSize() == 1){
-                    leftHand = 0;
-                    rightHand = 0;
-                    lastLostHand = 0;
-                    handsSize = 0;
-                    
-                    send_info("Both hands are lost");
-                }
-                else
-                {
-                    send_info( getHandName(hand.getId()) + " Hand is lost");
-                }
-            }
-            
-            // If new hand is found
-            if(hand.isNew()){
-                BOOST_LOG_TRIVIAL(info) << "Found new hand with id " << hand.getId();
-                
-                handsSize++;
-                
-                // Check if it is a hand for the first time or second time
-                if(handsSize == 1 && lastLostHand == 0){
-                    BOOST_LOG_TRIVIAL(debug) << "First hand is found";
-                    rightHand = hand.getId();
-                }
-                else if (handsSize == 2 && lastLostHand == 0){
-                    BOOST_LOG_TRIVIAL(debug) << "Second hand is found";
-                    leftHand = hand.getId();
-                }
-                // If a hand was lost and a hand is active, then update the appropriate id to left or right hand
-                else if(handsSize > 2 && lastLostHand > 0){
-                    if(lastLostHand == leftHand){
-                        leftHand = hand.getId();
-                    }else if(lastLostHand == rightHand){
-                        rightHand = hand.getId();
-                    }
-                }
-                
-                send_info( getHandName(hand.getId()) + " Hand is new");
-            }
-            
-            if(hand.isTouchingFov()){
-                send_info( getHandName(hand.getId()) + " Hand is at FOV");
-            }
-            
-        }
-        
-        if(hands.getSize() == 2 && hands[0].isTracking() && !hands[0].isNew() && hands[1].isTracking() && !hands[1].isNew()){
-            send_hand(hands[0], hands[1]);
-        }
-        else if(hands.getSize() == 1 && hands[0].isTracking() && !hands[0].isNew()){
-            send_hand(hands[0]);
-        }
+        //        for (int i = 0; i < hands.getSize(); ++i)
+        //        {
+        //            // Get Hand data
+        //            const nite::HandData& hand = hands[i];
+        //
+        //            // If hand is lost, update the losthandid
+        //            if(!hand.isTracking())
+        //            {
+        //                lastLostHand = hand.getId();
+        //                BOOST_LOG_TRIVIAL(info) << getHandName(hand.getId()) << " Hand with id " << hand.getId() << " is Lost";
+        //
+        //                // When there is no active hands, reset all the values
+        //                // Last active hand
+        //                if(hands.getSize() == 1){
+        //                    leftHand = 0;
+        //                    rightHand = 0;
+        //                    lastLostHand = 0;
+        //                    handsSize = 0;
+        //
+        //                    send_info("Both hands are lost");
+        //                }
+        //                else
+        //                {
+        //                    send_info( getHandName(hand.getId()) + " Hand is lost");
+        //                }
+        //            }
+        //
+        //            // If new hand is found
+        //            if(hand.isNew()){
+        //                BOOST_LOG_TRIVIAL(info) << "Found new hand with id " << hand.getId();
+        //
+        //                handsSize++;
+        //
+        //                // Check if it is a hand for the first time or second time
+        //                if(handsSize == 1 && lastLostHand == 0){
+        //                    BOOST_LOG_TRIVIAL(debug) << "First hand is found";
+        //                    rightHand = hand.getId();
+        //                }
+        //                else if (handsSize == 2 && lastLostHand == 0){
+        //                    BOOST_LOG_TRIVIAL(debug) << "Second hand is found";
+        //                    leftHand = hand.getId();
+        //                }
+        //                // If a hand was lost and a hand is active, then update the appropriate id to left or right hand
+        //                else if(handsSize > 2 && lastLostHand > 0){
+        //                    if(lastLostHand == leftHand){
+        //                        leftHand = hand.getId();
+        //                    }else if(lastLostHand == rightHand){
+        //                        rightHand = hand.getId();
+        //                    }
+        //                }
+        //
+        //                send_info( getHandName(hand.getId()) + " Hand is new");
+        //            }
+        //
+        //            if(hand.isTouchingFov()){
+        //                send_info( getHandName(hand.getId()) + " Hand is at FOV");
+        //            }
+        //
+        //        }
+        //
+        //        if(hands.getSize() == 2 && hands[0].isTracking() && !hands[0].isNew() && hands[1].isTracking() && !hands[1].isNew()){
+        //            send_hand(hands[0], hands[1]);
+        //        }
+        //        else if(hands.getSize() == 1 && hands[0].isTracking() && !hands[0].isNew()){
+        //            send_hand(hands[0]);
+        //        }
         
     }
     
