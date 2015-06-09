@@ -75,6 +75,16 @@
 		CECCD9741B2621AF00DF0F64 /* libboost_log-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */; };
 		CECCD9751B2621B000DF0F64 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CECCD9761B2621B500DF0F64 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */; };
+		CECCD9831B262FB700DF0F64 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CECCD9821B262FB700DF0F64 /* main.cpp */; };
+		CECCD9F81B26304C00DF0F64 /* libalcommon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F01B26304500DF0F64 /* libalcommon.dylib */; };
+		CECCD9F91B26304D00DF0F64 /* libalerror.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F11B26304500DF0F64 /* libalerror.dylib */; };
+		CECCD9FA1B26304F00DF0F64 /* libalproxies.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F21B26304500DF0F64 /* libalproxies.dylib */; };
+		CECCD9FB1B26305000DF0F64 /* libalvalue.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F31B26304500DF0F64 /* libalvalue.dylib */; };
+		CECCD9FC1B26305200DF0F64 /* libqi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F41B26304500DF0F64 /* libqi.dylib */; };
+		CECCD9FD1B26305400DF0F64 /* libqimessaging.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F51B26304500DF0F64 /* libqimessaging.dylib */; };
+		CECCD9FE1B26305500DF0F64 /* libqitype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F61B26304500DF0F64 /* libqitype.dylib */; };
+		CECCD9FF1B26305700DF0F64 /* librttools.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CECCD9F71B26304500DF0F64 /* librttools.dylib */; };
+		CECCDA001B26305E00DF0F64 /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CED6EFB11A9E14F900402682 /* hri.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = CED6EFB01A9E14F100402682 /* hri.json */; };
 		CEDFA82B1AA0942E006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA82A1AA0942E006B1C0D /* main.cpp */; };
 		CEDFA8381AA094E8006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA8371AA094E8006B1C0D /* main.cpp */; };
@@ -232,6 +242,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		CECCD9691B26216E00DF0F64 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		CECCD9791B262F6E00DF0F64 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -743,6 +762,115 @@
 		CECCD9651B26210700DF0F64 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/websocketpp-client/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CECCD96B1B26216E00DF0F64 /* websocketpp_broadcast-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "websocketpp_broadcast-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECCD9721B26219500DF0F64 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/websocketpp_broadcast/main.cpp; sourceTree = SOURCE_ROOT; };
+		CECCD97B1B262F6E00DF0F64 /* al-proxy-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "al-proxy-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECCD9821B262FB700DF0F64 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/al-proxy/main.cpp"; sourceTree = SOURCE_ROOT; };
+		CECCD9861B26303900DF0F64 /* almotionproxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = almotionproxy.h; sourceTree = "<group>"; };
+		CECCD9871B26303900DF0F64 /* altexttospeechproxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = altexttospeechproxy.h; sourceTree = "<group>"; };
+		CECCD9881B26303900DF0F64 /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
+		CECCD98A1B26303900DF0F64 /* alvalue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = alvalue.h; sourceTree = "<group>"; };
+		CECCD98B1B26303900DF0F64 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		CECCD98D1B26303900DF0F64 /* api.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = api.hpp; sourceTree = "<group>"; };
+		CECCD98E1B26303900DF0F64 /* application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = application.hpp; sourceTree = "<group>"; };
+		CECCD98F1B26303900DF0F64 /* atomic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = atomic.hpp; sourceTree = "<group>"; };
+		CECCD9901B26303900DF0F64 /* buffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = buffer.hpp; sourceTree = "<group>"; };
+		CECCD9911B26303900DF0F64 /* bufferreader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bufferreader.hpp; sourceTree = "<group>"; };
+		CECCD9921B26303900DF0F64 /* clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = clock.hpp; sourceTree = "<group>"; };
+		CECCD9931B26303900DF0F64 /* clock.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = clock.hxx; sourceTree = "<group>"; };
+		CECCD9941B26303900DF0F64 /* config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
+		CECCD9961B26303900DF0F64 /* eventloop.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = eventloop.hxx; sourceTree = "<group>"; };
+		CECCD9971B26303900DF0F64 /* future.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = future.hxx; sourceTree = "<group>"; };
+		CECCD9981B26303900DF0F64 /* log.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = log.hxx; sourceTree = "<group>"; };
+		CECCD9991B26303900DF0F64 /* trackable.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = trackable.hxx; sourceTree = "<group>"; };
+		CECCD99A1B26303900DF0F64 /* warn_pop_ignore_deprecated.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = warn_pop_ignore_deprecated.hpp; sourceTree = "<group>"; };
+		CECCD99B1B26303900DF0F64 /* warn_push_ignore_deprecated.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = warn_push_ignore_deprecated.hpp; sourceTree = "<group>"; };
+		CECCD99C1B26303900DF0F64 /* error.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = error.hpp; sourceTree = "<group>"; };
+		CECCD99D1B26303900DF0F64 /* eventloop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = eventloop.hpp; sourceTree = "<group>"; };
+		CECCD99E1B26303900DF0F64 /* future.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = future.hpp; sourceTree = "<group>"; };
+		CECCD99F1B26303900DF0F64 /* iocolor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = iocolor.hpp; sourceTree = "<group>"; };
+		CECCD9A11B26303900DF0F64 /* consoleloghandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = consoleloghandler.hpp; sourceTree = "<group>"; };
+		CECCD9A21B26303900DF0F64 /* fileloghandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fileloghandler.hpp; sourceTree = "<group>"; };
+		CECCD9A31B26303900DF0F64 /* headfileloghandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = headfileloghandler.hpp; sourceTree = "<group>"; };
+		CECCD9A41B26303900DF0F64 /* tailfileloghandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tailfileloghandler.hpp; sourceTree = "<group>"; };
+		CECCD9A51B26303900DF0F64 /* log.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = log.hpp; sourceTree = "<group>"; };
+		CECCD9A61B26303900DF0F64 /* macro.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = macro.hpp; sourceTree = "<group>"; };
+		CECCD9A71B26303900DF0F64 /* os.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = os.hpp; sourceTree = "<group>"; };
+		CECCD9A81B26303900DF0F64 /* path.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path.hpp; sourceTree = "<group>"; };
+		CECCD9A91B26303900DF0F64 /* periodictask.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = periodictask.hpp; sourceTree = "<group>"; };
+		CECCD9AA1B26303900DF0F64 /* preproc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = preproc.hpp; sourceTree = "<group>"; };
+		CECCD9AB1B26303900DF0F64 /* qi.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = qi.hpp; sourceTree = "<group>"; };
+		CECCD9AC1B26303900DF0F64 /* shared_ptr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shared_ptr.hpp; sourceTree = "<group>"; };
+		CECCD9AD1B26303900DF0F64 /* stats.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = stats.hpp; sourceTree = "<group>"; };
+		CECCD9AE1B26303900DF0F64 /* threadpool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = threadpool.hpp; sourceTree = "<group>"; };
+		CECCD9AF1B26303900DF0F64 /* trackable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = trackable.hpp; sourceTree = "<group>"; };
+		CECCD9B01B26303900DF0F64 /* traits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = traits.hpp; sourceTree = "<group>"; };
+		CECCD9B11B26303900DF0F64 /* translator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = translator.hpp; sourceTree = "<group>"; };
+		CECCD9B21B26303900DF0F64 /* types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = types.hpp; sourceTree = "<group>"; };
+		CECCD9B31B26303900DF0F64 /* version.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
+		CECCD9B51B26303900DF0F64 /* anyfunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyfunction.hpp; sourceTree = "<group>"; };
+		CECCD9B61B26303900DF0F64 /* anyobject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyobject.hpp; sourceTree = "<group>"; };
+		CECCD9B71B26303900DF0F64 /* anyreference.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyreference.hpp; sourceTree = "<group>"; };
+		CECCD9B81B26303900DF0F64 /* anyvalue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyvalue.hpp; sourceTree = "<group>"; };
+		CECCD9B91B26303900DF0F64 /* api.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = api.hpp; sourceTree = "<group>"; };
+		CECCD9BA1B26303900DF0F64 /* binarycodec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = binarycodec.hpp; sourceTree = "<group>"; };
+		CECCD9BB1B26303900DF0F64 /* config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
+		CECCD9BD1B26303900DF0F64 /* accessor.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = accessor.hxx; sourceTree = "<group>"; };
+		CECCD9BE1B26303900DF0F64 /* anyfunction.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyfunction.hxx; sourceTree = "<group>"; };
+		CECCD9BF1B26303900DF0F64 /* anyfunctionfactory.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyfunctionfactory.hxx; sourceTree = "<group>"; };
+		CECCD9C01B26303900DF0F64 /* anyiterator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyiterator.hpp; sourceTree = "<group>"; };
+		CECCD9C11B26303900DF0F64 /* anyiterator.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyiterator.hxx; sourceTree = "<group>"; };
+		CECCD9C21B26303900DF0F64 /* anyobject.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyobject.hxx; sourceTree = "<group>"; };
+		CECCD9C31B26303900DF0F64 /* anyreference.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyreference.hpp; sourceTree = "<group>"; };
+		CECCD9C41B26303900DF0F64 /* anyreference.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyreference.hxx; sourceTree = "<group>"; };
+		CECCD9C51B26303900DF0F64 /* anyvalue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyvalue.hpp; sourceTree = "<group>"; };
+		CECCD9C61B26303900DF0F64 /* anyvalue.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = anyvalue.hxx; sourceTree = "<group>"; };
+		CECCD9C71B26303900DF0F64 /* bindtype.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bindtype.hxx; sourceTree = "<group>"; };
+		CECCD9C81B26303900DF0F64 /* buffertypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = buffertypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9C91B26303900DF0F64 /* dynamicobjectbuilder.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dynamicobjectbuilder.hxx; sourceTree = "<group>"; };
+		CECCD9CA1B26303900DF0F64 /* dynamictypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dynamictypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9CB1B26303900DF0F64 /* functionsignature.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = functionsignature.hxx; sourceTree = "<group>"; };
+		CECCD9CC1B26303900DF0F64 /* hasless.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hasless.hxx; sourceTree = "<group>"; };
+		CECCD9CD1B26303900DF0F64 /* inttypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = inttypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9CE1B26303900DF0F64 /* listtypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = listtypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9CF1B26303900DF0F64 /* maptypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = maptypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9D01B26303900DF0F64 /* objecttypebuilder.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objecttypebuilder.hxx; sourceTree = "<group>"; };
+		CECCD9D11B26303900DF0F64 /* pointertypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pointertypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9D21B26303900DF0F64 /* property.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = property.hxx; sourceTree = "<group>"; };
+		CECCD9D31B26303900DF0F64 /* signal.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signal.hxx; sourceTree = "<group>"; };
+		CECCD9D41B26303900DF0F64 /* stringtypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = stringtypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9D51B26303900DF0F64 /* structtypeinterface.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = structtypeinterface.hxx; sourceTree = "<group>"; };
+		CECCD9D61B26303900DF0F64 /* type.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = type.hpp; sourceTree = "<group>"; };
+		CECCD9D71B26303900DF0F64 /* type.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = type.hxx; sourceTree = "<group>"; };
+		CECCD9D81B26303900DF0F64 /* typedispatcher.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = typedispatcher.hxx; sourceTree = "<group>"; };
+		CECCD9D91B26303900DF0F64 /* typeimpl.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = typeimpl.hxx; sourceTree = "<group>"; };
+		CECCD9DA1B26303900DF0F64 /* typeinterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = typeinterface.hpp; sourceTree = "<group>"; };
+		CECCD9DB1B26303900DF0F64 /* dynamicobject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dynamicobject.hpp; sourceTree = "<group>"; };
+		CECCD9DC1B26303900DF0F64 /* dynamicobjectbuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dynamicobjectbuilder.hpp; sourceTree = "<group>"; };
+		CECCD9DD1B26303900DF0F64 /* fwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fwd.hpp; sourceTree = "<group>"; };
+		CECCD9DE1B26303900DF0F64 /* jsoncodec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jsoncodec.hpp; sourceTree = "<group>"; };
+		CECCD9DF1B26303900DF0F64 /* manageable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = manageable.hpp; sourceTree = "<group>"; };
+		CECCD9E01B26303900DF0F64 /* metamethod.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = metamethod.hpp; sourceTree = "<group>"; };
+		CECCD9E11B26303900DF0F64 /* metaobject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = metaobject.hpp; sourceTree = "<group>"; };
+		CECCD9E21B26303900DF0F64 /* metaproperty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = metaproperty.hpp; sourceTree = "<group>"; };
+		CECCD9E31B26303900DF0F64 /* metasignal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = metasignal.hpp; sourceTree = "<group>"; };
+		CECCD9E41B26303900DF0F64 /* objectfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objectfactory.hpp; sourceTree = "<group>"; };
+		CECCD9E51B26303900DF0F64 /* objecttypebuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = objecttypebuilder.hpp; sourceTree = "<group>"; };
+		CECCD9E61B26303900DF0F64 /* property.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = property.hpp; sourceTree = "<group>"; };
+		CECCD9E71B26303900DF0F64 /* proxyproperty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = proxyproperty.hpp; sourceTree = "<group>"; };
+		CECCD9E81B26303900DF0F64 /* proxysignal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = proxysignal.hpp; sourceTree = "<group>"; };
+		CECCD9E91B26303900DF0F64 /* signal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signal.hpp; sourceTree = "<group>"; };
+		CECCD9EA1B26303900DF0F64 /* signature.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signature.hpp; sourceTree = "<group>"; };
+		CECCD9EB1B26303900DF0F64 /* traceanalyzer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = traceanalyzer.hpp; sourceTree = "<group>"; };
+		CECCD9EC1B26303900DF0F64 /* typedispatcher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = typedispatcher.hpp; sourceTree = "<group>"; };
+		CECCD9ED1B26303900DF0F64 /* typeinterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = typeinterface.hpp; sourceTree = "<group>"; };
+		CECCD9EE1B26303900DF0F64 /* typeobject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = typeobject.hpp; sourceTree = "<group>"; };
+		CECCD9F01B26304500DF0F64 /* libalcommon.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libalcommon.dylib; sourceTree = "<group>"; };
+		CECCD9F11B26304500DF0F64 /* libalerror.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libalerror.dylib; sourceTree = "<group>"; };
+		CECCD9F21B26304500DF0F64 /* libalproxies.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libalproxies.dylib; sourceTree = "<group>"; };
+		CECCD9F31B26304500DF0F64 /* libalvalue.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libalvalue.dylib; sourceTree = "<group>"; };
+		CECCD9F41B26304500DF0F64 /* libqi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libqi.dylib; sourceTree = "<group>"; };
+		CECCD9F51B26304500DF0F64 /* libqimessaging.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libqimessaging.dylib; sourceTree = "<group>"; };
+		CECCD9F61B26304500DF0F64 /* libqitype.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libqitype.dylib; sourceTree = "<group>"; };
+		CECCD9F71B26304500DF0F64 /* librttools.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = librttools.dylib; sourceTree = "<group>"; };
 		CED6EFAD1A9E082800402682 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
 		CED6EFB01A9E14F100402682 /* hri.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = hri.json; path = ../config/hri.json; sourceTree = "<group>"; };
 		CEDFA8231AA093F6006B1C0D /* grt-ada-boost-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-ada-boost-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -913,6 +1041,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CECCD9781B262F6E00DF0F64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECCDA001B26305E00DF0F64 /* libboost_system.dylib in Frameworks */,
+				CECCD9F81B26304C00DF0F64 /* libalcommon.dylib in Frameworks */,
+				CECCD9F91B26304D00DF0F64 /* libalerror.dylib in Frameworks */,
+				CECCD9FB1B26305000DF0F64 /* libalvalue.dylib in Frameworks */,
+				CECCD9FC1B26305200DF0F64 /* libqi.dylib in Frameworks */,
+				CECCD9FA1B26304F00DF0F64 /* libalproxies.dylib in Frameworks */,
+				CECCD9FF1B26305700DF0F64 /* librttools.dylib in Frameworks */,
+				CECCD9FE1B26305500DF0F64 /* libqitype.dylib in Frameworks */,
+				CECCD9FD1B26305400DF0F64 /* libqimessaging.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEDFA8201AA093F6006B1C0D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -976,6 +1120,7 @@
 			children = (
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
 				CE85062B1AA7440B0094FBCB /* brain */,
+				CECCD97C1B262F6E00DF0F64 /* al-proxy */,
 				CEF78A761B1DAE5600FE79D4 /* helper */,
 				CE62E0CF1B1C4A3A002D16CB /* websocketpp */,
 				CECCD96C1B26216E00DF0F64 /* websocketpp_broadcast */,
@@ -2297,6 +2442,7 @@
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
+				CECCD97B1B262F6E00DF0F64 /* al-proxy-xcode */,
 				CECCD96B1B26216E00DF0F64 /* websocketpp_broadcast-xcode */,
 				CE6EA6171B26010E000A0C85 /* websocketpp-client-xcode */,
 				CEF78A751B1DAE5500FE79D4 /* helper-xcode */,
@@ -2325,6 +2471,7 @@
 		CE9E41961A384BD80095F65A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				CECCD9EF1B26304500DF0F64 /* ALDEBARAN */,
 				CEDFA96F1AA0A412006B1C0D /* GRT */,
 				CE7096301A6563BF0064D196 /* Boost */,
 				CE70962F1A6563690064D196 /* OpenNI */,
@@ -2394,6 +2541,194 @@
 			);
 			name = websocketpp_broadcast;
 			path = ../websocketpp_broadcast;
+			sourceTree = "<group>";
+		};
+		CECCD97C1B262F6E00DF0F64 /* al-proxy */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9821B262FB700DF0F64 /* main.cpp */,
+			);
+			name = "al-proxy";
+			path = "../al-proxy";
+			sourceTree = "<group>";
+		};
+		CECCD9841B26303900DF0F64 /* ALDEBARAN */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9851B26303900DF0F64 /* alproxies */,
+				CECCD9891B26303900DF0F64 /* alvalue */,
+				CECCD98C1B26303900DF0F64 /* qi */,
+				CECCD9B41B26303900DF0F64 /* qitype */,
+			);
+			name = ALDEBARAN;
+			path = include/ALDEBARAN;
+			sourceTree = "<group>";
+		};
+		CECCD9851B26303900DF0F64 /* alproxies */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9861B26303900DF0F64 /* almotionproxy.h */,
+				CECCD9871B26303900DF0F64 /* altexttospeechproxy.h */,
+				CECCD9881B26303900DF0F64 /* api.h */,
+			);
+			path = alproxies;
+			sourceTree = "<group>";
+		};
+		CECCD9891B26303900DF0F64 /* alvalue */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD98A1B26303900DF0F64 /* alvalue.h */,
+				CECCD98B1B26303900DF0F64 /* config.h */,
+			);
+			path = alvalue;
+			sourceTree = "<group>";
+		};
+		CECCD98C1B26303900DF0F64 /* qi */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD98D1B26303900DF0F64 /* api.hpp */,
+				CECCD98E1B26303900DF0F64 /* application.hpp */,
+				CECCD98F1B26303900DF0F64 /* atomic.hpp */,
+				CECCD9901B26303900DF0F64 /* buffer.hpp */,
+				CECCD9911B26303900DF0F64 /* bufferreader.hpp */,
+				CECCD9921B26303900DF0F64 /* clock.hpp */,
+				CECCD9931B26303900DF0F64 /* clock.hxx */,
+				CECCD9941B26303900DF0F64 /* config.hpp */,
+				CECCD9951B26303900DF0F64 /* details */,
+				CECCD99C1B26303900DF0F64 /* error.hpp */,
+				CECCD99D1B26303900DF0F64 /* eventloop.hpp */,
+				CECCD99E1B26303900DF0F64 /* future.hpp */,
+				CECCD99F1B26303900DF0F64 /* iocolor.hpp */,
+				CECCD9A01B26303900DF0F64 /* log */,
+				CECCD9A51B26303900DF0F64 /* log.hpp */,
+				CECCD9A61B26303900DF0F64 /* macro.hpp */,
+				CECCD9A71B26303900DF0F64 /* os.hpp */,
+				CECCD9A81B26303900DF0F64 /* path.hpp */,
+				CECCD9A91B26303900DF0F64 /* periodictask.hpp */,
+				CECCD9AA1B26303900DF0F64 /* preproc.hpp */,
+				CECCD9AB1B26303900DF0F64 /* qi.hpp */,
+				CECCD9AC1B26303900DF0F64 /* shared_ptr.hpp */,
+				CECCD9AD1B26303900DF0F64 /* stats.hpp */,
+				CECCD9AE1B26303900DF0F64 /* threadpool.hpp */,
+				CECCD9AF1B26303900DF0F64 /* trackable.hpp */,
+				CECCD9B01B26303900DF0F64 /* traits.hpp */,
+				CECCD9B11B26303900DF0F64 /* translator.hpp */,
+				CECCD9B21B26303900DF0F64 /* types.hpp */,
+				CECCD9B31B26303900DF0F64 /* version.hpp */,
+			);
+			path = qi;
+			sourceTree = "<group>";
+		};
+		CECCD9951B26303900DF0F64 /* details */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9961B26303900DF0F64 /* eventloop.hxx */,
+				CECCD9971B26303900DF0F64 /* future.hxx */,
+				CECCD9981B26303900DF0F64 /* log.hxx */,
+				CECCD9991B26303900DF0F64 /* trackable.hxx */,
+				CECCD99A1B26303900DF0F64 /* warn_pop_ignore_deprecated.hpp */,
+				CECCD99B1B26303900DF0F64 /* warn_push_ignore_deprecated.hpp */,
+			);
+			path = details;
+			sourceTree = "<group>";
+		};
+		CECCD9A01B26303900DF0F64 /* log */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9A11B26303900DF0F64 /* consoleloghandler.hpp */,
+				CECCD9A21B26303900DF0F64 /* fileloghandler.hpp */,
+				CECCD9A31B26303900DF0F64 /* headfileloghandler.hpp */,
+				CECCD9A41B26303900DF0F64 /* tailfileloghandler.hpp */,
+			);
+			path = log;
+			sourceTree = "<group>";
+		};
+		CECCD9B41B26303900DF0F64 /* qitype */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9B51B26303900DF0F64 /* anyfunction.hpp */,
+				CECCD9B61B26303900DF0F64 /* anyobject.hpp */,
+				CECCD9B71B26303900DF0F64 /* anyreference.hpp */,
+				CECCD9B81B26303900DF0F64 /* anyvalue.hpp */,
+				CECCD9B91B26303900DF0F64 /* api.hpp */,
+				CECCD9BA1B26303900DF0F64 /* binarycodec.hpp */,
+				CECCD9BB1B26303900DF0F64 /* config.hpp */,
+				CECCD9BC1B26303900DF0F64 /* details */,
+				CECCD9DB1B26303900DF0F64 /* dynamicobject.hpp */,
+				CECCD9DC1B26303900DF0F64 /* dynamicobjectbuilder.hpp */,
+				CECCD9DD1B26303900DF0F64 /* fwd.hpp */,
+				CECCD9DE1B26303900DF0F64 /* jsoncodec.hpp */,
+				CECCD9DF1B26303900DF0F64 /* manageable.hpp */,
+				CECCD9E01B26303900DF0F64 /* metamethod.hpp */,
+				CECCD9E11B26303900DF0F64 /* metaobject.hpp */,
+				CECCD9E21B26303900DF0F64 /* metaproperty.hpp */,
+				CECCD9E31B26303900DF0F64 /* metasignal.hpp */,
+				CECCD9E41B26303900DF0F64 /* objectfactory.hpp */,
+				CECCD9E51B26303900DF0F64 /* objecttypebuilder.hpp */,
+				CECCD9E61B26303900DF0F64 /* property.hpp */,
+				CECCD9E71B26303900DF0F64 /* proxyproperty.hpp */,
+				CECCD9E81B26303900DF0F64 /* proxysignal.hpp */,
+				CECCD9E91B26303900DF0F64 /* signal.hpp */,
+				CECCD9EA1B26303900DF0F64 /* signature.hpp */,
+				CECCD9EB1B26303900DF0F64 /* traceanalyzer.hpp */,
+				CECCD9EC1B26303900DF0F64 /* typedispatcher.hpp */,
+				CECCD9ED1B26303900DF0F64 /* typeinterface.hpp */,
+				CECCD9EE1B26303900DF0F64 /* typeobject.hpp */,
+			);
+			path = qitype;
+			sourceTree = "<group>";
+		};
+		CECCD9BC1B26303900DF0F64 /* details */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9BD1B26303900DF0F64 /* accessor.hxx */,
+				CECCD9BE1B26303900DF0F64 /* anyfunction.hxx */,
+				CECCD9BF1B26303900DF0F64 /* anyfunctionfactory.hxx */,
+				CECCD9C01B26303900DF0F64 /* anyiterator.hpp */,
+				CECCD9C11B26303900DF0F64 /* anyiterator.hxx */,
+				CECCD9C21B26303900DF0F64 /* anyobject.hxx */,
+				CECCD9C31B26303900DF0F64 /* anyreference.hpp */,
+				CECCD9C41B26303900DF0F64 /* anyreference.hxx */,
+				CECCD9C51B26303900DF0F64 /* anyvalue.hpp */,
+				CECCD9C61B26303900DF0F64 /* anyvalue.hxx */,
+				CECCD9C71B26303900DF0F64 /* bindtype.hxx */,
+				CECCD9C81B26303900DF0F64 /* buffertypeinterface.hxx */,
+				CECCD9C91B26303900DF0F64 /* dynamicobjectbuilder.hxx */,
+				CECCD9CA1B26303900DF0F64 /* dynamictypeinterface.hxx */,
+				CECCD9CB1B26303900DF0F64 /* functionsignature.hxx */,
+				CECCD9CC1B26303900DF0F64 /* hasless.hxx */,
+				CECCD9CD1B26303900DF0F64 /* inttypeinterface.hxx */,
+				CECCD9CE1B26303900DF0F64 /* listtypeinterface.hxx */,
+				CECCD9CF1B26303900DF0F64 /* maptypeinterface.hxx */,
+				CECCD9D01B26303900DF0F64 /* objecttypebuilder.hxx */,
+				CECCD9D11B26303900DF0F64 /* pointertypeinterface.hxx */,
+				CECCD9D21B26303900DF0F64 /* property.hxx */,
+				CECCD9D31B26303900DF0F64 /* signal.hxx */,
+				CECCD9D41B26303900DF0F64 /* stringtypeinterface.hxx */,
+				CECCD9D51B26303900DF0F64 /* structtypeinterface.hxx */,
+				CECCD9D61B26303900DF0F64 /* type.hpp */,
+				CECCD9D71B26303900DF0F64 /* type.hxx */,
+				CECCD9D81B26303900DF0F64 /* typedispatcher.hxx */,
+				CECCD9D91B26303900DF0F64 /* typeimpl.hxx */,
+				CECCD9DA1B26303900DF0F64 /* typeinterface.hpp */,
+			);
+			path = details;
+			sourceTree = "<group>";
+		};
+		CECCD9EF1B26304500DF0F64 /* ALDEBARAN */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD9F01B26304500DF0F64 /* libalcommon.dylib */,
+				CECCD9F11B26304500DF0F64 /* libalerror.dylib */,
+				CECCD9F21B26304500DF0F64 /* libalproxies.dylib */,
+				CECCD9F31B26304500DF0F64 /* libalvalue.dylib */,
+				CECCD9F41B26304500DF0F64 /* libqi.dylib */,
+				CECCD9F51B26304500DF0F64 /* libqimessaging.dylib */,
+				CECCD9F61B26304500DF0F64 /* libqitype.dylib */,
+				CECCD9F71B26304500DF0F64 /* librttools.dylib */,
+			);
+			name = ALDEBARAN;
+			path = lib/ALDEBARAN;
 			sourceTree = "<group>";
 		};
 		CEDFA8241AA093F6006B1C0D /* grt-ada-boost */ = {
@@ -2468,6 +2803,7 @@
 		CEF852141A8114B300C3BCBA /* inlcude */ = {
 			isa = PBXGroup;
 			children = (
+				CECCD9841B26303900DF0F64 /* ALDEBARAN */,
 				CE8509081AA8664A0094FBCB /* OpenNI2 */,
 				CE8509011AA866440094FBCB /* NiTE2 */,
 				CE8507CC1AA866170094FBCB /* GRT */,
@@ -2754,6 +3090,23 @@
 			productReference = CECCD96B1B26216E00DF0F64 /* websocketpp_broadcast-xcode */;
 			productType = "com.apple.product-type.tool";
 		};
+		CECCD97A1B262F6E00DF0F64 /* al-proxy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CECCD97F1B262F6E00DF0F64 /* Build configuration list for PBXNativeTarget "al-proxy" */;
+			buildPhases = (
+				CECCD9771B262F6E00DF0F64 /* Sources */,
+				CECCD9781B262F6E00DF0F64 /* Frameworks */,
+				CECCD9791B262F6E00DF0F64 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "al-proxy";
+			productName = "al-proxy";
+			productReference = CECCD97B1B262F6E00DF0F64 /* al-proxy-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
 		CEDFA8221AA093F6006B1C0D /* grt-ada-boost */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEDFA8291AA093F6006B1C0D /* Build configuration list for PBXNativeTarget "grt-ada-boost" */;
@@ -2896,6 +3249,9 @@
 					CECCD96A1B26216E00DF0F64 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
+					CECCD97A1B262F6E00DF0F64 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 					CEDFA8221AA093F6006B1C0D = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -2944,6 +3300,7 @@
 				CE6EA6161B26010E000A0C85 /* websocketpp-client */,
 				CECCD96A1B26216E00DF0F64 /* websocketpp_broadcast */,
 				CEF78A741B1DAE5500FE79D4 /* helper */,
+				CECCD97A1B262F6E00DF0F64 /* al-proxy */,
 				CEE283AD1A48C2E300131564 /* human-robot-interaction */,
 				CE8506291AA7440B0094FBCB /* brain */,
 			);
@@ -3085,6 +3442,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CECCD9731B26219500DF0F64 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CECCD9771B262F6E00DF0F64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CECCD9831B262FB700DF0F64 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3384,6 +3749,8 @@
 		CE6EA61C1B26010E000A0C85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "BOOST_LOG_DYN_LINK=1";
@@ -3398,6 +3765,8 @@
 		CE6EA61D1B26010E000A0C85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "BOOST_LOG_DYN_LINK=1";
@@ -3745,6 +4114,54 @@
 			};
 			name = Release;
 		};
+		CECCD9801B262F6E00DF0F64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_AL_INCLUDE)",
+					"$(HRI_BOOST_INCLUDE)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ALDEBARAN",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Debug;
+		};
+		CECCD9811B262F6E00DF0F64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(HRI_AL_INCLUDE)",
+					"$(HRI_BOOST_INCLUDE)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/ALDEBARAN",
+					/usr/local/Cellar/boost/1.56.0/lib,
+				);
+				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
+			};
+			name = Release;
+		};
 		CEDFA8271AA093F6006B1C0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4035,6 +4452,16 @@
 				CECCD9711B26216E00DF0F64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CECCD97F1B262F6E00DF0F64 /* Build configuration list for PBXNativeTarget "al-proxy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CECCD9801B262F6E00DF0F64 /* Debug */,
+				CECCD9811B262F6E00DF0F64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CEDFA8291AA093F6006B1C0D /* Build configuration list for PBXNativeTarget "grt-ada-boost" */ = {
 			isa = XCConfigurationList;

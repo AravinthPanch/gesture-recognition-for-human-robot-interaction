@@ -64,6 +64,11 @@ set(NITE2_DATA_DIR "${PROJECT_SOURCE_DIR}/lib/NiTE2/NiTE2")
 set(OPENNI2_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include/OpenNI2)
 set(NITE2_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include/NiTE2)
 set(UTILS_INCLUDE ${PROJECT_SOURCE_DIR}/include)
+set(WEBSOCKET_INCLUDE ${PROJECT_SOURCE_DIR}/include)
+set(BOOST_SYSTEM /usr/local/lib/libboost_system.dylib)
+set(BOOST_THREAD /usr/local/lib/libboost_thread.dylib)
+set(BOOST_LOG /usr/local/lib/libboost_log.dylib)
+
 
 
 ####### FLAGS #######

@@ -22,8 +22,10 @@ public:
     }
     
     void on_open(connection_hdl hdl) {
+        m_server.send(hdl, "{\"GESTURE\":\"WAVE\"}", websocketpp::frame::opcode::text);
         BOOST_LOG_TRIVIAL(info) << "Open";
         m_connections.insert(hdl);
+        
     }
     
     void on_close(connection_hdl hdl) {
@@ -51,5 +53,5 @@ private:
 
 int main() {
     broadcast_server server;
-    server.run(9002);
+    server.run(5008);
 }
