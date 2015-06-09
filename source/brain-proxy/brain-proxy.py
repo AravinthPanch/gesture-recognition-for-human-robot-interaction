@@ -38,6 +38,7 @@ class BrainProxy():
         self.log.info("Connection closed")
 
     def on_open(self, ws):
+        self.ws.send("AL")
         self.log.info("Connected to Brain")
 
     def al_tts(self, message):
@@ -47,7 +48,7 @@ class BrainProxy():
     def read_config(self):
         with open('../config/hri.json') as config_file:
             self.config = json.load(config_file)
-        print self.config
+        self.log.info("Config file parsed")
 
     def init_logger(self):
         self.log = logging.getLogger('brain')
