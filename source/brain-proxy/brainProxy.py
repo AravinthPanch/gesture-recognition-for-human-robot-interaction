@@ -7,6 +7,7 @@ import sys
 import json
 import websocket
 from naoqi import ALProxy
+from naoMotion import NaoMotion
 
 
 class BrainProxy():
@@ -15,10 +16,12 @@ class BrainProxy():
         self.read_config()
         self.log.info("Brain Proxy started")
 
+        self.motion = NaoMotion(str(self.config['serverHostName']), int(self.config['naoQiPort']))
+
         self.tts = ALProxy("ALTextToSpeech", str(self.config['serverHostName']), int(self.config['naoQiPort']))
 
         websocket.enableTrace(False)
-        self.ws_uri = "ws://" + str(self.config['serverHostName']) + ":" + str(self.config['websocketPort'])
+        self.ws_uri = "ws://localhost:" + str(self.config['websocketPort'])
         self.ws = websocket.WebSocketApp(self.ws_uri,
                                          on_message=self.on_message,
                                          on_error=self.on_error,
@@ -43,6 +46,7 @@ class BrainProxy():
 
     def al_tts(self, message):
         self.tts.say(message)
+        self.motion.action(message)
         self.log.info("Message sent to Al-TTS")
 
     def read_config(self):
@@ -61,3 +65,4 @@ class BrainProxy():
 
 if __name__ == "__main__":
     BrainProxy()
+

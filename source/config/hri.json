@@ -3,6 +3,6 @@
   "clientPort": 5006,
   "controlCenterPort": 5007,
   "websocketPort": 5008,
-  "naoQiPort": 51906,
-  "serverHostName": "localhost"
+  "naoQiPort": 9559,
+  "serverHostName": "nao2.local"
 }

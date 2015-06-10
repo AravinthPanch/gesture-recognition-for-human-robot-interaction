@@ -25,13 +25,15 @@ void on_message(server* s, websocketpp::connection_hdl hdl, message_ptr msg) {
     std::cout << " and message: " << msg->get_payload() <<std::endl ;
     std::cout << " opcode " << msg->get_opcode() <<std::endl ;
     
-    s->send(hdl, msg->get_payload(), msg->get_opcode());
+    //    s->send(hdl, msg->get_payload(), msg->get_opcode());
 }
 
 void on_open(server* s, websocketpp::connection_hdl hdl) {
     std::cout << "Open \n";
     
-    const char* msg = "Hola";
+//    const char* msg = "{\"GESTURE\":\"Left Up Right Wide\"}";
+    
+    const char* msg = "{\"GESTURE\":\"Right Up Left Wide\"}";
     
     s->send(hdl, msg, websocketpp::frame::opcode::text);
 }
