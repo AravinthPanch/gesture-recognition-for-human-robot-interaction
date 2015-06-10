@@ -53,6 +53,7 @@
 		CE8509631AA8680B0094FBCB /* libgrt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFA9701AA0A422006B1C0D /* libgrt.dylib */; };
 		CE8509641AA868D30094FBCB /* libNiTE2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41911A384BBF0095F65A /* libNiTE2.dylib */; };
 		CE8509651AA868D50094FBCB /* libOpenNI2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41941A384BC90095F65A /* libOpenNI2.dylib */; };
+		CE94F7D51B289A7800C2B455 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */; };
 		CE9E41F61A3864070095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E41F51A3864070095F65A /* main.cpp */; };
 		CE9E41F81A38650F0095F65A /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9E41F71A38650F0095F65A /* libboost_system.dylib */; };
 		CE9E42061A3866610095F65A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE9E42051A3866610095F65A /* main.cpp */; };
@@ -925,6 +926,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE62E14E1B1C4CD0002D16CB /* libboost_system.dylib in Frameworks */,
+				CE94F7D51B289A7800C2B455 /* libboost_thread-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

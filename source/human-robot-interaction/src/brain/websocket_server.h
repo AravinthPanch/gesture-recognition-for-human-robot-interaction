@@ -24,6 +24,7 @@ private:
     websocketpp::connection_hdl cc_hdl_;
     websocketpp::connection_hdl al_hdl_;
     bool clientConnected = false;
+    bool proxyConnected = false;
     void on_open(websocketpp::connection_hdl hdl);
     void on_close(websocketpp::connection_hdl hdl);
     void on_message(ws_socket* server_, websocketpp::connection_hdl hdl, message_ptr msg);

@@ -6,10 +6,10 @@
  */
 
 #include <websocketpp/config/asio_no_tls.hpp>
-
 #include <websocketpp/server.hpp>
-
 #include <iostream>
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 typedef websocketpp::server<websocketpp::config::asio> server;
 
@@ -19,6 +19,7 @@ using websocketpp::lib::bind;
 
 // pull out the type of messages sent by our config
 typedef server::message_ptr message_ptr;
+websocketpp::connection_hdl hdl_;
 
 // Define a callback to handle incoming messages
 void on_message(server* s, websocketpp::connection_hdl hdl, message_ptr msg) {
@@ -31,9 +32,13 @@ void on_message(server* s, websocketpp::connection_hdl hdl, message_ptr msg) {
 void on_open(server* s, websocketpp::connection_hdl hdl) {
     std::cout << "Open \n";
     
-//    const char* msg = "{\"GESTURE\":\"Left Up Right Wide\"}";
+    hdl_ = hdl;
     
-    const char* msg = "{\"GESTURE\":\"Right Up Left Wide\"}";
+    //    const char* msg = "{\"GESTURE\":\"Left Up Right Wide\"}";
+    
+    //    const char* msg = "{\"GESTURE\":\"Right Up Left Wide\"}";
+    
+    const char* msg = "{\"GESTURE\":\"Walk\"}";
     
     s->send(hdl, msg, websocketpp::frame::opcode::text);
 }
@@ -42,10 +47,12 @@ int main() {
     // Create a server endpoint
     server echo_server;
     
+    
     try {
         // Set logging settings
-        echo_server.set_access_channels(websocketpp::log::alevel::all);
-        echo_server.clear_access_channels(websocketpp::log::alevel::frame_payload);
+        echo_server.clear_access_channels(websocketpp::log::alevel::all);
+        echo_server.set_access_channels(websocketpp::log::alevel::none);
+        
         
         // Initialize ASIO
         echo_server.init_asio();
@@ -57,13 +64,24 @@ int main() {
         
         // Listen on port 9002
         echo_server.listen(5008);
-        std::cout << "started";
+        std::cout << "Started \n";
         
         // Start the server accept loop
         echo_server.start_accept();
         
         // Start the ASIO io_service run loop
         echo_server.run();
+        
+        //        boost::thread thread(boost::bind(&server::run, &echo_server));
+        
+        
+        //        while (true) {
+        //            std::string argument;
+        //            std::getline(std::cin, argument);
+        //
+        //            echo_server.send(hdl_, argument.c_str(), websocketpp::frame::opcode::text);
+        //            std::cout << "Sent";
+        //        }
         
         
     } catch (websocketpp::exception const & e) {

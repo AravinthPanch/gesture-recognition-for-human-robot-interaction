@@ -16,9 +16,8 @@ class BrainProxy():
         self.read_config()
         self.log.info("Brain Proxy started")
 
-        self.motion = NaoMotion(str(self.config['serverHostName']), int(self.config['naoQiPort']))
-
-        self.tts = ALProxy("ALTextToSpeech", str(self.config['serverHostName']), int(self.config['naoQiPort']))
+        self.naoMotion = NaoMotion(str(self.config['serverHostName']), int(self.config['naoQiPort']))
+        self.ttsProxy = ALProxy("ALTextToSpeech", str(self.config['serverHostName']), int(self.config['naoQiPort']))
 
         websocket.enableTrace(False)
         self.ws_uri = "ws://localhost:" + str(self.config['websocketPort'])
@@ -31,8 +30,12 @@ class BrainProxy():
 
     def on_message(self, ws, message):
         self.log.info("Received : " + message)
-        data = str(json.loads(message)['GESTURE'])
-        self.al_tts(data)
+        sign = str(json.loads(message)['GESTURE'])
+        self.ttsProxy.say(sign)
+        self.log.info("Message sent to Al-TTS")
+        # self.naoMotion.handGesture(data)
+        self.naoMotion.walk(sign)
+
 
     def on_error(self, ws, error):
         print error
@@ -43,11 +46,6 @@ class BrainProxy():
     def on_open(self, ws):
         self.ws.send("AL")
         self.log.info("Connected to Brain")
-
-    def al_tts(self, message):
-        self.tts.say(message)
-        self.motion.action(message)
-        self.log.info("Message sent to Al-TTS")
 
     def read_config(self):
         with open('../config/hri.json') as config_file:

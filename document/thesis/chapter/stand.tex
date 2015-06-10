@@ -53,13 +53,16 @@ In this thesis, we will focus on the hand gesture recognition using computer vis
 
 
 \section{Gesture Recognition} 
+
+
 Human hand gestures are a means of non-verbal interaction among people. They range from simple actions of using our hand to point at, to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI, it is necessary to provide the means by which they can be interpreted by robots. The HRI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm and even other parts of the human body, be measurable by the machine \cite{6}. 
 
 Initial attempts to recognize hand gestures resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors \cite{3}. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
 
 Even though such hand gloves are used in highly specialized domain such as simulation of medical surgery or even in the real surgery, the everyday user will be certainly deterred by such sophisticated interfacing devices. As an active result of the motivated research in HRI, computer vision based techniques were innovated to augment the naturalness of interaction.
 
-\subsection{Gesture Modeling} Figure \ref{fig:ges:model} shows various types of modeling techniques used for Gesture modeling \cite{3}. Selection of an appropriate gesture modeling depends primarily on the intended application. For an application that needs just hand gesture to go up and down or left and light, a very simple model may be sufficient. However, if the purpose is a natural-like interaction, a model has to be sophisticated enough to interpret all the possible gesture. The following section discusses various gesture modeling techniques which are being used by the existing hand gesture recognition applications. 
+\subsection{Gesture Modeling} 
+Figure \ref{fig:ges:model} shows various types of modeling techniques used for Gesture modeling \cite{3}. Selection of an appropriate gesture modeling depends primarily on the intended application. For an application that needs just hand gesture to go up and down or left and light, a very simple model may be sufficient. However, if the purpose is a natural-like interaction, a model has to be sophisticated enough to interpret all the possible gesture. The following section discusses various gesture modeling techniques which are being used by the existing hand gesture recognition applications. 
 
 \begin{figure}
 	[h] \centering 
@@ -95,3 +98,10 @@ In this thesis, we focus on communicative gestures in the form of symbols. They 
 The task of gesture recognition shares certain similarities with other recognition tasks, such as speech recognition and biometrics. Though alternatives such as Dynamic Programming (DP) matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm, usually Hidden Markov Models \cite{5}. 
 
 In this thesis, we have chosen a machine learning technique based on hidden Markov model to recognize gestures. HMM is a statistical model in which the system being modeled is assumed to be a Markov process with unobserved (hidden) states. In simpler Markov models, the state is directly visible to the observer and therefore the state transition probabilities are the only parameters. In a hidden Markov model, the state is not directly visible, but output dependent on the state is visible.
+
+\section{Software and Libraries}
+\subsection{OpenNI 2}
+\subsection{NiTE 2}
+\subsection{UDP}
+\subsection{Websocket}
+\subsection{WebGL ThreeJS}

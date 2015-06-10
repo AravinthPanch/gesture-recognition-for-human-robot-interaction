@@ -40,7 +40,7 @@ void websocket_server::on_message(ws_socket* socket_, websocketpp::connection_hd
     }
     else if (msg->get_payload() == "AL"){
         al_hdl_ = hdl;
-        clientConnected = true;
+        proxyConnected = true;
         BOOST_LOG_TRIVIAL(info) << "Al-Proxy connected via websocket";
     }
     
@@ -96,12 +96,14 @@ void websocket_server::send(const char* parsedData, bool isLogged, int client){
         if(client == 1){
             ws_socket_.send(cc_hdl_, parsedData, websocketpp::frame::opcode::text);
         }
-        else if(client == 2){
+        else if(client == 2 && proxyConnected){
             ws_socket_.send(al_hdl_, parsedData, websocketpp::frame::opcode::text);
         }
         else if(client == 3){
             ws_socket_.send(cc_hdl_, parsedData, websocketpp::frame::opcode::text);
-            ws_socket_.send(al_hdl_, parsedData, websocketpp::frame::opcode::text);
+            if(proxyConnected){
+                ws_socket_.send(al_hdl_, parsedData, websocketpp::frame::opcode::text);
+            }
         }
         
         if(isLogged){

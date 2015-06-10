@@ -19,12 +19,12 @@ brain::brain(){
     predictionModeActive = false;
     trainingClassLabel = 1;
     
-    anbc.setNullRejectionCoeff(10);
+    anbc.setNullRejectionCoeff(5);
     anbc.enableScaling(true);
     anbc.enableNullRejection(true);
     
     pipeline.setClassifier(anbc);
-    pipeline.addPostProcessingModule(ClassLabelFilter(5,10));
+    pipeline.addPostProcessingModule(ClassLabelFilter(30,60));
     pipeline.addPostProcessingModule(ClassLabelChangeFilter());
     
     trainingData.setNumDimensions(SAMPLE_DIMENSION);
