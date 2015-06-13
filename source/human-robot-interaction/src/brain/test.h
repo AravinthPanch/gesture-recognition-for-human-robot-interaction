@@ -15,6 +15,7 @@
 #define TRAINING_DATASET "../data/hri-Train-2H-4G-HOME.txt"
 #define TEST_DATASET "../data/hri-Test-2H-2G-HOME-1.txt"
 
+
 using namespace GRT;
 
 class test
@@ -22,6 +23,9 @@ class test
     
 private:
     void run();
+    void grtDataToJson();
+    void testNullRejection();
+    void testHandsUp();
     
 public:
     test();

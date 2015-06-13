@@ -6,6 +6,7 @@ import logging
 import sys
 import json
 import websocket
+import time
 from naoqi import ALProxy
 from naoMotion import NaoMotion
 
@@ -15,9 +16,12 @@ class BrainProxy():
         self.init_logger()
         self.read_config()
         self.log.info("Brain Proxy started")
+        self.host_name = str(self.config['serverHostName'])
+        # self.host_name = "nao2.local"
+        self.naoqi_port = int(self.config['naoQiPort'])
 
-        self.naoMotion = NaoMotion(str(self.config['serverHostName']), int(self.config['naoQiPort']))
-        self.ttsProxy = ALProxy("ALTextToSpeech", str(self.config['serverHostName']), int(self.config['naoQiPort']))
+        self.naoMotion = NaoMotion(self.host_name, self.naoqi_port)
+        self.ttsProxy = ALProxy("ALTextToSpeech", self.host_name, self.naoqi_port)
 
         websocket.enableTrace(False)
         self.ws_uri = "ws://localhost:" + str(self.config['websocketPort'])
@@ -32,6 +36,7 @@ class BrainProxy():
         self.log.info("Received : " + message)
         sign = str(json.loads(message)['GESTURE'])
         self.ttsProxy.say(sign)
+        # time.sleep(3)
         self.log.info("Message sent to Al-TTS")
         # self.naoMotion.handGesture(data)
         self.naoMotion.walk(sign)

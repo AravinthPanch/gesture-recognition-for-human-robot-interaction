@@ -11,7 +11,7 @@ class NaoMotion():
         self.motionProxy = ALProxy("ALMotion", host_name, port)
         self.postureProxy = ALProxy("ALRobotPosture", host_name, port)
 
-        if self.motionProxy.robotIsWakeUp is False:
+        if self.motionProxy.robotIsWakeUp() is False:
             self.motionProxy.wakeUp()
             self.postureProxy.goToPosture("Stand", 0.5)
 
@@ -28,6 +28,54 @@ class NaoMotion():
         self.rotation = 0
         self.step_frequency = 1.0
 
+    def walk(self, sign):
+        if sign == "Walk":
+            self.forward_direction = 1.0
+            self.sideward_diretion = 0.0
+            self.rotation = 0.0
+            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
+                                        [["Frequency", self.step_frequency]])
+            time.sleep(5)
+            self.motionProxy.stopMove()
+
+        elif sign == "CLICK":
+            self.motionProxy.stopMove()
+
+        elif sign == "Turn Right":
+            self.forward_direction = 0.0
+            self.sideward_diretion = 0.0
+            self.rotation = 0.25
+            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
+                                        [["Frequency", self.step_frequency]])
+            time.sleep(5)
+            self.motionProxy.stopMove()
+
+        elif sign == "Turn Left":
+            self.forward_direction = 0.0
+            self.sideward_diretion = 0.0
+            self.rotation = -0.25
+            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
+                                        [["Frequency", self.step_frequency]])
+            time.sleep(5)
+            self.motionProxy.stopMove()
+
+        elif sign == "Move Right":
+            self.forward_direction = 0.0
+            self.sideward_diretion = 1.0
+            self.rotation = 0.0
+            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
+                                        [["Frequency", self.step_frequency]])
+            time.sleep(5)
+            self.motionProxy.stopMove()
+
+        elif sign == "Move Left":
+            self.forward_direction = 0.0
+            self.sideward_diretion = -1.0
+            self.rotation = 0.0
+            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
+                                        [["Frequency", self.step_frequency]])
+            time.sleep(5)
+            self.motionProxy.stopMove()
 
     def handGesture(self, sign):
         if sign == "Hands Up":
@@ -53,57 +101,6 @@ class NaoMotion():
                            -1.1029877662658691,
                            -1.2486340999603271, 1.2241740226745605, 0.26534008979797363]
             self.motionProxy.setAngles(self.joints, self.angles, self.fractionMaxSpeed)
-
-    def walk(self, sign):
-        if sign == "Walk":
-            self.forward_direction = 1.0
-            self.sideward_diretion = 0.0
-            self.rotation = 0.0
-            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
-                                        [["Frequency", self.step_frequency]])
-            time.sleep(5)
-            self.motionProxy.stopMove()
-
-        elif sign == "Stop":
-            self.motionProxy.stopMove()
-
-        elif sign == "Turn Right":
-            self.forward_direction = 0.5
-            self.sideward_diretion = 0.0
-            self.rotation = 0.6
-            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
-                                        [["Frequency", self.step_frequency]])
-            time.sleep(5)
-            self.motionProxy.stopMove()
-
-        elif sign == "Turn Left":
-            self.forward_direction = 0.5
-            self.sideward_diretion = 0.0
-            self.rotation = -0.6
-            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
-                                        [["Frequency", self.step_frequency]])
-            time.sleep(5)
-            self.motionProxy.stopMove()
-
-        elif sign == "Move Right":
-            self.forward_direction = 0.6
-            self.sideward_diretion = 1.0
-            self.rotation = 0.0
-            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
-                                        [["Frequency", self.step_frequency]])
-            time.sleep(5)
-            self.motionProxy.stopMove()
-
-        elif sign == "Move Left":
-            self.forward_direction = 0.6
-            self.sideward_diretion = -1.0
-            self.rotation = 0.0
-            self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
-                                        [["Frequency", self.step_frequency]])
-            time.sleep(5)
-            self.motionProxy.stopMove()
-
-
 
 
 

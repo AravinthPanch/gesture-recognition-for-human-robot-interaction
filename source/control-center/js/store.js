@@ -43,9 +43,9 @@ define(function () {
 				timeOut = 2000;
 			}
 
-			$('#gestureBox').text(app.skeletonBuffer.GESTURE);
+			$('#gBox').text(app.skeletonBuffer.GESTURE);
 			var timer = setTimeout(function () {
-				$('#gestureBox').text("")
+				$('#gBox').text("")
 			}, timeOut);
 		}
 

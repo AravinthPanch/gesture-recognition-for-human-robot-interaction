@@ -1,9 +1,30 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
+#include "rapidjson/filereadstream.h"
 #include <iostream>
 
 using namespace rapidjson;
+
+
+int main(){
+    
+    FILE* fp = fopen("hri.json", "r");
+    char readBuffer[65536];
+    FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+    Document d;
+    d.ParseStream(is);
+    
+    StringBuffer buffer;
+    Writer<StringBuffer> writer(buffer);
+    d.Accept(writer);
+    
+    std::cout << buffer.GetString() << std::endl;
+    fclose(fp);
+    
+    
+    return 0;
+}
 
 //int main() {
 //    // 1. Parse a JSON string into DOM.
@@ -32,24 +53,25 @@ using namespace rapidjson;
 //}
 
 
-int main() {
-    // 1. Parse a JSON string into DOM.
-    const char* json = "{\"RIGHT\":[\"26.09979\",\"107.4933\",\"1000.195\"],\"LEFT\":[\"-380.2425\",\"185.61\",\"1038.522\"]}";
-    Document d;
-    d.Parse(json);
-    
-    std::cout << d.HasMember("LEFT") << std::endl;
-    
-    if(d.HasMember("RIGHT")){
-        std::cout <<  d["RIGHT"][1u].GetString() << std::endl;
-    }
-    
-    
-    StringBuffer buffer;
-    Writer<StringBuffer> writer(buffer);
-    d.Accept(writer);
-    
-    
-    std::cout << buffer.GetString() << std::endl;
-    return 0;
-}
+//int main() {
+//    // 1. Parse a JSON string into DOM.
+//    const char* json = "{\"RIGHT\":[\"26.09979\",\"107.4933\",\"1000.195\"],\"LEFT\":[\"-380.2425\",\"185.61\",\"1038.522\"]}";
+//    Document d;
+//    d.Parse(json);
+//
+//    std::cout << d.HasMember("LEFT") << std::endl;
+//
+//    if(d.HasMember("RIGHT")){
+//        std::cout <<  d["RIGHT"][1u].GetString() << std::endl;
+//    }
+//
+//
+//    StringBuffer buffer;
+//    Writer<StringBuffer> writer(buffer);
+//    d.Accept(writer);
+//
+//
+//    std::cout << buffer.GetString() << std::endl;
+//    return 0;
+//}
+

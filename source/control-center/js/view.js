@@ -13,7 +13,8 @@ var width = window.innerWidth,
 	container,
 	consoleBox,
 	outputBox,
-	gestureBox;
+	gestureBox,
+	gBox;
 
 var renderStatus = 1;
 
@@ -72,6 +73,10 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		gestureBox.id = "gestureBox";
 		document.body.appendChild(gestureBox);
 
+		gBox = document.createElement('div');
+		gBox.id = "gBox";
+		document.body.appendChild(gBox);
+
 		// Initiate the console ui
 		$(function () {
 			$("#consoleBox").dialog({
@@ -87,7 +92,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		$(function () {
 			$("#gestureBox").dialog({
 				dialogClass: "gestureBox",
-				title: "Gesture Info",
+				title: "Info",
 				height: 150,
 				width: 650,
 				position: {my: "right bottom", at: "right bottom", of: window}
@@ -101,6 +106,17 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				title: "Prediction",
 				height: 100,
 				width: 200,
+				position: {my: "left top", at: "left top", of: window}
+			});
+		});
+
+		// Initiate the output ui
+		$(function () {
+			$("#gBox").dialog({
+				dialogClass: "gBox",
+				title: "Gesture",
+				height: 100,
+				width: 300,
 				position: {my: "left top", at: "left top", of: window}
 			});
 		});
@@ -220,9 +236,16 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	 * */
 	function initCamera() {
 		app.camera = new THREE.PerspectiveCamera(70, width / height, 1, 10000);
+
+		//Training Data Cam Pos
+		//app.camera.position.x = 0;
+		//app.camera.position.y = 4000;
+		//app.camera.position.z = 500;
+
 		app.camera.position.x = 0;
 		app.camera.position.y = 0;
 		app.camera.position.z = 4000;
+
 
 		// Add dom element as second element on which trackball controller should work
 		app.controls = new THREE.TrackballControls(app.camera, app.renderer.domElement);
@@ -416,16 +439,18 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	function renderHandFromData() {
 		i--;
 		if (i >= 0) {
-			
+
+			console.log(i)
+
 			var timeOut = 1000;
 			if ('GESTURE' in handData[i]) {
 				if (handData[i].GESTURE != "WAVE") {
 					timeOut = 2000;
 				}
 
-				$('#gestureBox').text(handData[i].GESTURE);
+				$('#gBox').text(handData[i].GESTURE);
 				var timer = setTimeout(function () {
-					$('#gestureBox').text("")
+					$('#gBox').text("")
 				}, timeOut);
 			}
 

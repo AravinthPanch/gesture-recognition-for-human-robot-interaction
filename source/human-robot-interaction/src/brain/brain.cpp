@@ -19,7 +19,7 @@ brain::brain(){
     predictionModeActive = false;
     trainingClassLabel = 1;
     
-    anbc.setNullRejectionCoeff(5);
+    anbc.setNullRejectionCoeff(3);
     anbc.enableScaling(true);
     anbc.enableNullRejection(true);
     

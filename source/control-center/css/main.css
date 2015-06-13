@@ -64,3 +64,26 @@ canvas {
 .gestureBox .ui-dialog-titlebar-close {
     display: none;
 }
+
+.gBox {
+    margin-top: 10px;
+    margin-left: 220px;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.gBox .ui-dialog-content {
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gBox .log {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.gBox .ui-dialog-titlebar-close {
+    display: none;
+}

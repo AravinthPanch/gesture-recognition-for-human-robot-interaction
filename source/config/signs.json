@@ -1,6 +1,6 @@
 {
   "1": "Walk",
-  "2": "Left Down Right Stop",
-  "3": "Left Up Right Wide",
-  "4": "Right Up Left Wide"
+  "2": "Stop",
+  "3": "Move Right",
+  "4": "Move Left"
 }
