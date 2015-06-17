@@ -27,6 +27,10 @@ void on_message(server* s, websocketpp::connection_hdl hdl, message_ptr msg) {
     std::cout << " opcode " << msg->get_opcode() <<std::endl ;
     
     //    s->send(hdl, msg->get_payload(), msg->get_opcode());
+    
+    const char* msge = "{\"GESTURE\":\"Move Left\"}";
+    
+    s->send(hdl, msge, websocketpp::frame::opcode::text);
 }
 
 void on_open(server* s, websocketpp::connection_hdl hdl) {
@@ -38,9 +42,9 @@ void on_open(server* s, websocketpp::connection_hdl hdl) {
     
     //    const char* msg = "{\"GESTURE\":\"Right Up Left Wide\"}";
     
-    const char* msg = "{\"GESTURE\":\"Walk\"}";
-    
-    s->send(hdl, msg, websocketpp::frame::opcode::text);
+    //    const char* msg = "{\"GESTURE\":\"Walk\"}";
+    //
+    //    s->send(hdl, msg, websocketpp::frame::opcode::text);
 }
 
 int main() {

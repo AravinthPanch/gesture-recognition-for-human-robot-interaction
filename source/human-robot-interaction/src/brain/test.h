@@ -26,6 +26,7 @@ private:
     void grtDataToJson();
     void testNullRejection();
     void testHandsUp();
+    void externalRangeTest();
     
 public:
     test();
