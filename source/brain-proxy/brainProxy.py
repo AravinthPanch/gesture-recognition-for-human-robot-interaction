@@ -58,6 +58,7 @@ class BrainProxy():
         self.log.info("Config file parsed")
 
     def init_logger(self):
+        # logging.basicConfig()
         self.log = logging.getLogger('brain')
         self.log.setLevel(logging.INFO)
         format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
