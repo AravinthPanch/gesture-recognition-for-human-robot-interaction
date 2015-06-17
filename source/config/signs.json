@@ -1,6 +1,8 @@
 {
-  "1": "Walk",
-  "2": "Stop",
-  "3": "Move Right",
-  "4": "Move Left"
+  "1": "Walk",  
+  "2": "Move Right",
+  "3": "Move Left",
+  "4": "Turn Right",
+  "5": "Turn Left",
+  "6": "Stop"
 }
