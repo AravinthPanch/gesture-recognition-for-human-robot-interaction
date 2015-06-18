@@ -16,7 +16,8 @@ test::test()
     //    grtDataToJson();
     //    testNullRejection();
     //        testHandsUp();
-    externalRangeTest();
+//    externalRangeTest();
+    savePipeline();
 }
 
 
@@ -305,7 +306,28 @@ void test::externalRangeTest(){
     
 }
 
-
+void test::savePipeline(){
+    GestureRecognitionPipeline pipeline;
+    ANBC anbc;
+    ClassificationData trainingData;
+    TrainingDataRecordingTimer trainingTimer;
+    
+    anbc.setNullRejectionCoeff(1);
+    anbc.enableScaling(true);
+    anbc.enableNullRejection(true);
+    
+    pipeline.setClassifier(anbc);
+    pipeline.addPostProcessingModule(ClassLabelFilter(30,60));
+    pipeline.addPostProcessingModule(ClassLabelChangeFilter());
+    
+    
+    trainingData.setNumDimensions(6);
+    trainingData.setDatasetName("both-hand-static-gesture");
+    trainingData.setInfoText("Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>");
+    
+    pipeline.savePipelineToFile("pipeline.txt");
+    
+}
 
 
 

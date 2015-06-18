@@ -27,6 +27,7 @@ private:
     void testNullRejection();
     void testHandsUp();
     void externalRangeTest();
+    void savePipeline();
     
 public:
     test();
