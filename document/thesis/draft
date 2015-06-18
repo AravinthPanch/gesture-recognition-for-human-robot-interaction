@@ -1,0 +1,323 @@
+Introduction
+Huge influence of computers in society has made smart devices, an important part of our lives. Availability and affordability of such devices motivated us to use them in our day-to-day living. The list of smart devices includes personal automatic and semi-automatic robots which are also playing a major role in our household. For an instance, Roomba \cite{8} is an autonomous robotic vacuum cleaners that automatically cleans the floor and goes to its charging station without human interaction.
+
+Interaction with smart devices has still been mostly through displays, keyboards, mouse and touch interfaces. These devices have grown to be familiar but inherently limit the speed and naturalness with which we can interact with the computer.  Usage of robots for domestic and industrial purposes has been continuously increasing. Thus in recent years, there has been a tremendous push in research toward an intuitive and easy communication with the robot through speech, gestures and facial expressions.
+
+Tremendous progress had been made in speech recognition and several commercially successful speech interfaces are available \cite{}. However, speech recognition systems have certain limitations such as misinterpretation due to various accents and background noise interference. It may not be able to differentiate between your speech, other people talking and other ambient noise, leading to transcription mix-ups and errors.
+
+Furthermore, there has been an increased interest in recent years in trying to introduce other human-to-human communication modalities into HRI. This includes a class of techniques based on the movement of the human arm and hand, or hand gestures. The use of hand gestures provides an attractive alternative for Human-robot interaction than the conventional cumbersome devices.
+
+---- Add architectural diagram and explain the whole thing.. look at skelton tracking document from microsoft ------ 
+
+
+Set up xcode and cmake environment for development in C++
+Input
+got data from depth camera using openni
+got tracked hand data from depth camera using nite
+Integration with Nao
+set up virtual nao
+on mac developed simple hand tracker using nite 
+on virtual nao gentoo, compiled and linked it
+copied nite library, nite data and libstdc++ to nao
+copied executable to nao
+got tracked hand data from nao
+Networking with Nao
+UDP unicast server & client
+JSON serialization
+HRI module 
+tracked hand by wave gesture
+tracked at most 2 hands
+tracked right and left hand
+sent to client if connected
+Brain Module
+received hand data from hri
+integrated GRT into project
+websocket multicast prediction results, info messages and handdata to CC and Bproxy
+works in train mode, prediction mode, hand viewer and test mode
+Control Center
+visualized hand positions in real world coordinate with sensor in origin
+WebGL dashboard with websocket client connection
+show dumped data, skeleton data
+ui to show received data, prediction, recognized gesture, info messages and webgl camera config
+Brain Proxy
+received gestures via websocket
+connect to nao via ALPROXY
+sent gesture name ALTTS
+wakes up robot by stand posture
+sets head position at 18 deg up for gesture and 18 deg down for walking
+walk, move left, move right, turn left and turn right actions via ALMOTION
+shows hand gestures
+Gesture Recognition Pipeline
+left hand and right hand as input vector of 6 dimension
+ANBC classifier with null rejection with coefficient 1 and scaling
+post-processed class label filter for 30 samples (1 sec to recognize gesture)
+post-processed to output only change in class label
+20 Sec training time and 15 second preparation time
+5 gestures trained in 3 positions 170 cm away from sensor 1 position 220 cm away with the help of control center
+all gestures training data merged
+training data saved to file
+training data loaded and trained in prediction mode
+predict only if two hands exist and out gestures to socket when non-null gestures
+info messages and unprocessed prediction data sent via websocket 
+
+
+	
+
+
+Background
+Computer Vision in Robotics
+Computer vision is a broad field that includes methods for acquiring, processing, analyzing and understanding images and, in general, high-dimensional data from the real world in order to produce numerical or symbolic information, e.g., in the forms of decisions \cite{1}.
+
+Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. High-level information about the environment could be provided by a computer vision system that is acting as a vision sensor.
+
+In this thesis, we will focus on the hand gesture recognition using computer vision techniques for a humanoid robot named as NAO, as shown in the figure \ref{fig:nao}. 
+
+
+NAO
+NAO is an autonomous, programmable humanoid robot developed by Aldebaran Robotics. The NAO Academics Edition was developed for universities and laboratories for research and education purposes. Follow subsections discuss briefly about the specifications of NAO as declared by Aldebaran Robotics.
+
+Construction
+NAO has a body with 25 degrees of freedom (DOF) whose key elements are electric motors and actuators. It has 48.6-watt-hour battery that provides NAO with 1.5 or more hours of autonomy, depending on usage. Table \ref{tb:nao} shows other specifications of NAO.
+
+
+Motion
+NAO's walking uses a simple dynamic model (linear inverse pendulum) and quadratic programming. It is stabilized using feedback from joint sensors. This makes walking robust and resistant to small disturbances, and torso oscillations in the frontal and lateral planes are absorbed. NAO can walk on a variety of floor surfaces, such as carpeted, tiled, and wooden floors. 
+
+NAO's motion module is based on generalized inverse kinematics, which handles Cartesian coordinates, joint control, balance, redundancy, and task priority. This means that when asking NAO to extend its arm, it bends over because its arms and leg joints are taken into account. NAO will stop its movement to maintain balance.
+
+In this thesis, we used locomotion control, stiffness control of Motion API to move NAO to a position in two dimensional space. Robot Posture API was also used to make the robot go to the predefined posture such as Stand, Sit and Crouch. Below given C++ programming function shows how NAO can be moved to another position at the given normalised velocity using Motion API.
+
+void ALMotionProxy::moveToward(const float& x, const float& y, const float& theta)
+where parameters to this function are
+x – normalized, unitless, velocity along X-axis. +1 and -1 correspond to the maximum velocity in the forward and backward directions, respectively.
+y – normalized, unitless, velocity along Y-axis. +1 and -1 correspond to the maximum velocity in the left and right directions, respectively.
+theta – normalized, unitless, velocity around Z-axis. +1 and -1 correspond to the maximum velocity in the counterclockwise and clockwise directions, respectively.
+
+
+Audio
+NAO uses four directional microphones to detect sounds and equipped with a stereo broadcast system made up of 2 loudspeakers in its ears. NAO’s voice recognition and text-to-speech capabilities allow it to communicate in 19 languages. 
+
+
+
+In this thesis, we used Text-To-Speech API of NAO to say some words loud to communicate with the user.  Below given C++ programming function shows how NAO can say words given as strings.
+
+void ALTextToSpeechProxy::say(const std::string& stringToSay)
+
+Vision
+Two identical video RGB cameras are located in the forehead of NAO. They provide up to 1280x960 resolution at 30 frames per second. NAO contains a set of algorithms for detecting and recognizing faces and shapes.
+
+
+
+
+Skeletal points based gesture recognition needs three dimensional data of the human bone joints. However, sensors integrated with NAO couldn’t provide precise three dimensional data for processing heavy algorithms to track human skeletal joints. 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{12}. 
+
+
+Asus Xtion PRO LIVE uses infrared sensors, adaptive depth detection technology, color image sensing and audio stream to capture a user's real-time image, movement, and voice, making user tracking more precise. 
+
+
+Therefore in this thesis, we attempted to use Asus Xtion PRO LIVE as an external camera that was mounted on the head of NAO as shown in the figure \ref{fig:xtion}. 
+
+----- Add a depth Image -----
+Computing
+NAO is equipped with Intel ATOM 1.6 GHz CPU in the head that runs a 32 bit Gentoo Linux to support Aldebaran’s proprietary middleware (NAOqi). The NAOqi Framework is the programming framework used to program Aldebaran robots. This framework allows homogeneous communication between different modules such as motion, audio, video. NAOqi executable which runs on the robot is a broker. The broker provides lookup services so that any module in the tree or across the network can find any method that has been advertised.
+
+
+
+
+Computational limitations of NAO’s CPU hinders us to build a real time gesture recognition based on human skeletal joints. Therefore, we used an off-board computer to execute the gesture recognition program and communicated with NAO via NAOqi proxies. 
+Networking via UDP
+Boost ASIO udp unicast socket
+
+Gesture Recognition
+Human hand gestures are a means of nonverbal interaction among people. They range from simple actions of using our hand to point at, to the more complex ones that express our feelings and allow us to communicate with others. To exploit the use of gestures in HRI, it is necessary to provide the means by which they can be interpreted by robots. The HRI interpretation of gestures requires that dynamic and/or static configurations of the human hand, arm and even other parts of the human body, be measurable by the machine \cite{6}. 
+
+Initial attempts to recognize hand gestures resulted in electro-mechanical devices that directly measure hand and/or arm joint angles and spatial position using sensors \cite{3}. Glove-based gestural interfaces require the user to wear such a complex device that hinders the ease and naturalness with which the user can interact with the computer controlled environment. 
+
+Even though such hand gloves are used in highly specialized domain such as simulation of medical surgery or even in the real surgery, the everyday user will be certainly deterred by such sophisticated interfacing devices. As an active result of the motivated research in HRI, computer vision based techniques were innovated to augment the naturalness of interaction.
+
+
+---- Add a flow chart for gesture recog ------
+Gesture Modeling
+Figure \ref{fig:ges:model} shows various types of modeling techniques used for Gesture modeling \cite{3}. Selection of an appropriate gesture modeling depends primarily on the intended application. For an application that needs just hand gesture to go up and down or left and light, a very simple model may be sufficient. However, if the purpose is a natural-like interaction, a model has to be sophisticated enough to interpret all the possible gesture. The following section discusses various gesture modeling techniques which are being used by the existing hand gesture recognition applications. 
+
+
+
+Appearance based models don't use the spatial representation of the body, because they derive the parameters directly from the images or videos using a template database. 
+
+Volumetric approaches have been heavily used in computer animation industry and for computer vision purposes. The models are generally created of complicated 3D surfaces. The drawback of this method is that is very computational intensive. 
+
+Instead of using intensive processing of 3D hand models and dealing with a lot of parameters, one can just use a simplified version that analyses the joint angle parameters along with segment length. This is known as a skeletal representation of the body, where a virtual skeleton of the person is computed and parts of the body are mapped to certain segments \cite{4}. The analysis here is done using the position and orientation of these segments or the relation between each one of them.
+
+In this thesis, we focus on skeletal based modeling, that is faster because the recognition program has to focus only on the significant parts of the body.
+
+Gestural Taxonomy
+Several alternative taxonomies have been suggested that deal with psychological aspects of gestures \cite{3}. All hand/arm movements are first classified into two major classes as shown in the figure \ref{fig:ges:tax}.
+
+
+
+Manipulative gestures are the ones used to act on objects. For example, moving a chair from one location to another. Manipulative gestures in the context of HRI are mainly developed for medical surgery. Communicative gestures, on the other hand, have purely communicational purpose. In a natural environment they are usually accompanied by speech or spoken as a sign language. In HRI context these gesture are one of the commonly used gestures, since they can often be represented by static as well as dynamic hand postures.
+
+In this thesis, we focus on communicative gestures in the form of symbols. They symbolize some referential action. For instance, circular motion of hand may be referred as an alphabet "O" or as an object such as wheel or as a command to turn in a circular motion.
+
+Feature Extraction
+Feature extraction stage is concerned with the detection of features which are used for the estimation of parameters of the chosen gestural model. In the detection process it is first necessary to localize the gesturer. 
+
+OpenNI 2
+OpenNI or Open Natural Interaction is a framework by the company PrimeSense and open source software project focused on certifying and improving interoperability of natural user interfaces and organic user interfaces for Natural Interaction (NI) devices, applications that use those devices and middleware that facilitates access and use of such devices. Microsoft Kinect and Asus Xtion are commercially available depth cameras which are compatible with OpenNI.
+
+The OpenNI 2.0 API provides access to PrimeSense compatible depth sensors. It allows an application to initialize a sensor and receive depth, RGB, and IR video streams from the device. OpenNI also provides a uniform interface that third party middleware developers can use to interact with depth sensors. Applications are then able to make use of both the third party middleware, as well as underlying basic depth and video data provided directly by OpenNI.
+ 
+Below given example show how a depth camera such as Asus Xtion Pro can be used to retrieve depth information using OpenNI 2 framework. 
+NiTE 2
+PrimeSense’s Natural Interaction Technology for End-user is the middleware that perceives the world in 3D, based on the PrimeSensor depth images, and translates these perceptions into meaningful data in the same way that people do. NITE middleware includes computer vision algorithms that enable identifying users and tracking their movements. Figure shows the architecture of NiTE, how it is working together with OpenNI, depth sensors and applications.
+
+Figure  below displays a layered view of producing, acquiring and processing depth data, up to the level of the application that utilizes it to form a natural- interaction based module. 
+
+
+
+
+
+The lower layer is the PrimeSensor device, which is the physical acquisition layer, resulting in raw sensory data from a stream of depth images. 
+The next C-shaped layer is executed on the host PC represents OpenNI. OpenNI provides communication interfaces that interact with both the sensor’s driver and the middleware components, which analyze the data from the sensor. 
+The sensor data acquisition is a simple acquisition API, enabling the host to operate the sensor. This module is OpenNI compliant interfaces that conforms to OpenNI API standard.
+The NITE Algorithms layer is the computer vision middleware and is also plugged into OpenNI. It processes the depth images produced by the PrimeSensor. 
+The NITE Controls layer is an applicative layer that provides application framework for gesture identification and gesture-based UI controls, on top of the data that was processed by NITE Algorithms. 
+
+NITE Algorithm
+The lower layer of NiTE middleware that performs the groundwork of processing the stream of raw depth images. This layer utilizes computer vision algorithms to perform the following:
+Scene segmentation – a process in which individual users and objects are separated from the background and tagged accordingly.
+Hand point detection and tracking - Users hands are detected and followed.
+Full body tracking – Based on the Scene segmentation output, users’ bodies are tracked to output the current user pose - a set of locations of body joints.
+
+
+
+Real-Time Human Pose Recognition in Parts from Single Depth Images \cite{}
+NiTE uses machine learning algorithms to recognize anatomical landmarks and pose of human body \cite{}. Figure above shows how NiTE tracks human skeleton from a single input depth image and a per-pixel body part distribution is inferred. Colors indicate the most likely part labels at each pixel and correspond to the joint proposals. Local modes of this signal are estimated to give high-quality proposals for the 3D locations of body joints, even for multiple users.
+
+
+
+
+
+In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representations was covered with several localized body part labels as show in the figure.. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
+
+Features are located in depth image as shown in the figure and labeled. The yellow crosses indicates the pixel x being classified. The red circles indicate the offset pixel. In (a), the two example features give a large depth difference response. In (b), the same two features at new image locations give a much smaller response.
+
+
+
+
+
+Randomized decision forest is the classification algorithm used by NiTE predict the probability of  a pixel belonging to a body part. Randomized decision trees and forests have proven fast and effective multi-class classifiers for many tasks. Figure below shows Randomized Decision Forests. A forest is an ensemble of trees. Each tree consists of split nodes (blue) and leaf nodes (green). The red arrows indicate the different paths that might be taken by different trees for a particular input.
+
+
+
+
+-------- Eq must be adapted ----
+To classify pixel x in image I, one starts at the root and repeatedly evaluates equation below., branching left or right according to the comparison to threshold . At the leaf node reached in tree t, a learned distribution Pt(cjI; x) over body part labels c is stored. The distributions are averaged together for all trees in the forest to give the final classification.
+
+
+Each tree is trained on a different set of randomly synthesized images. A random subset of 2000 example pixels from each image is chosen to ensure a roughly even distribution across body parts. Training phase was conducted in distributed manner by training 3 trees from 1 million images on 1000 core cluster.
+
+
+
+
+
+After predicted the probability of a pixel belonging to a body part, the body parts are recognized and reliable proposals for the positions of 3D skeletal joints are generated. These proposals are the final output of the algorithm and used by a tracking algorithm to self initialize and recover from failure.
+
+Figure above shows example inferences. Synthetic (top row); real (middle); failure modes (bottom). Left column: ground truth for a neutral pose as a reference. In each example we see the depth image, the inferred most likely body part labels, and the joint proposals show as front, right, and top views (overlaid on a depth point cloud). Only the most confident proposal for each joint above a fixed, shared threshold is shown.
+
+
+
+Finally NiTE API returns positions and orientations of the skeleton joints as shown in the figure. As well as it returns the lengths of the body segments such as the distance between returned elbow and shoulder. Joint positions and orientations are given in the real world coordinate system. The origin of the system is at the sensor. +X points to the right of the, +Y points up, and +Z points in the direction of increasing depth. 
+
+Even though NiTE framework can recognize full human body, in this thesis we have used only hand recognition and tracking due to computational limitation of NAO.  NiTE provides an interface track only a hand in real time.  In order to start tracking a hand, a “focus gesture” must be gesticulated. There are two supported focus gestures: “click” and „wave‟. In the „click‟ gesture, you should hold your hand up, push your hand towards the sensor, and then immediately pull your hand back towards you. In the „wave‟ gesture, you should hold your hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand was touching another object or closer to another body part. Figure below shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
+
+
+
+
+Focus gestures of NiTE is can be detected even after initiating the hand tracking. NITE gestures are derived from a stream of hand points which record how a hand moves through space over time. Each hand point is the real-world 3D coordinate of the center of the hand, measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. 
+
+NiTE recommends user to follow these suggestions to gain maximum efficiency from its API.
+
+Try to keep the hand that performs the gesture at a distance from your body.
+Your palm should be open, fingers pointing up, and face the sensor.
+The movement should not be too slow or too fast.
+“WAVE” movement should consist of at least 5 horizontal movements (left-right or right-left)
+“CLICK” movement should be long enough (at least 20cm).
+Make sure “CLICK” gesture is performed towards the sensor.
+If you have difficulty to gain focus, try to stand closer to the sensor (around 2m), and make sure that your hand is inside the field of view.
+
+Finally, below given example shows how hand tracking can be initiated using a focus gesture.
+
+Gesture Classification and Prediction
+Like most other recognitions such as speech recognition and biometrics, the tasks of gesture recognition involve modeling, feature extraction, training, classification and prediction as shown in the figure. Though the alternatives such as Dynamic Programming (DP) matching algorithms have been attempted, the most successful solutions involves feature-based statistical learning algorithm. Previous sections explained how gesture is modelled and feature is extracted from raw depth images, and the following sections discuss how extracted feature inputs are trained, classified and predicted.
+
+
+
+In this thesis, we have chosen a machine learning technique based on Adaptive Naive Bayes Classifier (ANBC) with Gesture Recognition Toolkit. ANBC is an extension to the well-known Naive Bayes, one of the most commonly used supervised learning algorithms that works very well on both basic and more complex recognition problems.
+
+Adaptive Naive Bayes Classifier (ANBC)
+ANBC is a supervised learning algorithm that can be used to classify any type of N-dimensional signal. It is based on simple probabilistic classifier called Naive Bayes classifier. It fundamentally works by fitting an N-dimensional Gaussian distribution to each class during the training phase. New gestures can then be recognized in the prediction phase by finding the gesture that results in the maximum likelihood value that is calculated by calculating Gaussian distribution for each sample. 
+
+ANBC like Naive Bayes classifier makes a number of basic assumptions with input data that all the variables in the data are independent. However, despite these naive assumptions, Naive Bayes Classifiers have proved successful in many real-world classification problems. It has also been shown in a study that the Naive Bayes Classifier not only performs well with completely independent features, but also with functionally dependent features.
+
+ANBC algorithm is based on Bayes’ theory and gives the likelihood of event A occurring given the observation of event B.
+
+--- add equation --
+ P( Aj B) =  P( Bj A) P( A)
+ P( B)
+
+The weighting coefficient adds an important feature for the ANBC algorithm as it enables one general classifier to be trained with multi-dimensional inputs, even if a number of inputs are only relevant for one particular gesture. For example, if it is used to recognise hand gestures, the weighting coefficients would enable the classifier to recognise both left and right hand gestures independently, without the position of the left hand affecting the classification of a right handed gesture. In this case left hand gestures will have weights {1,1,1,0,0,0}, right hand gestures will have weights {0,0,0,1,1,1} and both hand gestures will have weights {1,1,1,1,1,1}.
+
+Using the weighted Gaussian model, the ANBC algorithm requires G(3N) parameters, assuming that each of the G gestures require specific values for the N-dimensional k, 2k and k vectors. Assuming that k is set by the user, k and 2 k  values can easily be calculated in a supervised learning scenario by grouping the input training data X into a matrix containing M training examples each with N dimensions, into their corresponding classes. The values for   and 2  of each dimension (n ) for each class (k ) can then be estimated by computing the mean and variance of the grouped training data for each of the respective classes:
+
+--- Check the symbols in the text and add the equation ---
+
+
+After the Gaussian models have been trained for each of the G classes, an unknown N-dimensional vector x can be classified as one of the G classes using the maximum a posterior probability estimate (MAP). The MAP estimate classifies x as the kth class that results in the maximum a posterior probability given by:
+
+
+---- add equation 14 and 15th ---
+
+Using equation (15), an unknown N-dimensional vector x can be classified as one of the G classes from a trained ANBC model. If x actually comes from an unknown distribution that has not been modeled by one of the trained classes (i.e. if it is not any of the gestures in the model) then, unfortunately, it will be incorrectly classified against the k th gesture that gives the maximum log-likelihood value. A rejection threshold, k , must therefore be calculated for each of the G gestures to enable the algorithm to classify any of the G gestures from a continuous stream of data that also contains non-gestural data.
+
+One key element of the Naive Bayes Classifier, is that it can easily be made adaptive. Adding an adaptive online training phase to the common two-phase (training and prediction) provides some significant advantages for the recognition gestures. During the adaptive online training phase the algorithm will not only perform real-time predictions on the continuous stream of input data but also it will also continue to train and refine the models for each gesture. This enables the user to initially train the algorithm with a low number of training examples after and during the adaptive online training phase, the algorithm can continue to train and refine the initial models, creating a more robust model as the number of training examples increases.
+
+ANBC algorithm works well for the classification of static postures and non-temporal pattern recognition. However, The main limitation of the ANBC algorithm is that, because it uses a Gaussian distribution to represent each class, it does not work well when the data you want to classify is not linearly separable. Also when ANBC is working on online training, a small number of incorrectly labelled training examples could create a loose model that becomes less effective at each update step and ultimately lead to a poor performance and accuracy.
+
+Labelled classification data with data partitioning, min max ranges, external ranges, save data to grt or csv, load data, dimension, dataset name
+training timer with time start, recording mode, preparation mode timer stopped
+pipeline with add classifier, post processing module, train data, predict, predicted class, unprocessed predicted and maximum likelihood, class distances
+classifier null rejection and coefficient
+min max scaling 
+grt GUI
+
+Gesture Recognition Toolkit (GRT)
+Gesture Recognition Toolkit is a cross-platform open-source C++ library designed and developed mainly by Nicholas Gillian at MIT Media Lab to make real-time machine learning and gesture recognitions. Emphasis is placed on ease of use, with a consistent, minimalist design that promotes accessibility while supporting flexibility and customization for advanced users. The toolkit features a broad range of classification and regression algorithms and has extensive support for building real-time systems. This includes algorithms for signal processing, feature extraction and automatic gesture spotting. 
+
+In this thesis, we have chose GRT as framework to execute most of the tasks involved in a gesture recognition problem. Figure below shows that GRT provides the full fledge pipeline to achieve a real-time gesture recognition. 
+
+
+
+GRT provides an API to reduce the need for repetitive boilerplate code to perform common functionality, such as passing data between algorithms or to preprocess data sets. GRT uses an object-oriented modular architecture and it is built around a set of core modules and a gesture-recognition pipeline. The input to both the modules and pipeline consists of an N-dimensional double-precision vector, making the toolkit flexible to the type of input signal. The algorithms in each module can be used as stand-alone classes; alternatively a gesture-recognition pipeline can be used to chain modules together to create a more sophisticated gesture-recognition system. Modularity of GRT pipeline offers developers opportunities to work on each stages of gesture recognition independently. Additionally pipeline can be stored and loaded dynamically so that an compiled application can work in many different configurations. Code below shows the basic lines of code needed to build a gesture recognition application.
+
+Accurate labeling of data sets is also critical for building robust machine-learning based systems. The toolkit therefore contains extensive support for recording, labeling and managing supervised and unsupervised data sets for classification, regression and time series analysis. ClassificationData is the data structure used for supervised learning problems and for most of the non-temporal classification algorithms. Code below shows the features of ClassificationData.
+
+GRT allows us to store and load the training data in GRT format or Comma Separated Values (CSV). Since the training data are stored in human readable format, it enables us to add more samples collected separately or remove false samples from the training dataset. Figure shows saved training data in GRT format.
+
+Important part of training is recording positive samples of gestures. Therefore, GRT provides a feature called TrainingDataRecordingTimer that takes recording time and preparation time in milliseconds. Once it is started by calling startRecording(PREPARATION_TIME, RECORD_TIME) method, it waits for given preparation time before it actually starts to store the data. This feature helps the trainer get into the right pose before samples are added to the training data and as well as train all the gestures for the same time duration.
+
+GRT features a broad range of machine-learning algorithms such as AdaBoost, Decision Trees, Dynamic Time Warping (DTW), Hidden Markov Models (HMM), K-Nearest Neighbor (KNN), Linear and Logistic Regression, Adaptive Naive Bayes (ANBC), Multilayer Perceptrons (MLP), Random Forests and Support Vector Machines (SVM). 
+
+Another important feature of GRT is that many of the algorithms are implemented with Null Rejections Thresholds. It means that these algorithms can automatically spot the difference between trained gestures and unintended gestures that can happen when the gesticulator moves the hand in freely. It can be enabled by the method enableNullRejection(true) and the range of the null rejection region can be set by this method setNullRejectionCoeff(double nullRejectionCoeff) of the classifier. Algorithm such as the Adaptive Naive Bayes Classier and N-Dimensional Dynamic Time Warping, learn rejection thresholds from the training data, which are then used to automatically recognize valid gestures from a continuous stream of real-time data.
+
+
+
+
+Figure above shows that the decision boundaries computed by training six of classification algorithms on an example dataset with 3 classes. After training each classifier, each point in the two-dimensional feature space was colored by the likelihood of the predicted class label (red for class 1, green for class 2, blue for class 3). The top row shows the predictions of each classifier with null rejection disabled. The bottom row shows the predictions of each classifier with null rejection enabled and a null rejection coefficient of 3.0. Rejected points are colored white. Note that both the decision boundaries and null-rejection regions are different for each of the classifiers. This results from the different learning and prediction algorithms used by each classifier. 
+
+
+
+In many real-world scenarios, the input to a classification algorithm must be preprocessed and have salient features extracted. GRT therefore supports a wide range of pre/post processing, feature extraction and feature selection algorithms, including popular preprocessing lters (e.g., Moving Average Filter), embedded feature extraction algorithms (e.g., AdaBoost), dimensionality reduction techniques (e.g., Principal Component Analysis), and unsupervised quantizers (e.g., K-Means Quantizer, Self-Organizing Map Quantizer).
+
+
+

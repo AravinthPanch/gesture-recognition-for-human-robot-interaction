@@ -1,0 +1,19 @@
+GRT_LABELLED_CLASSIFICATION_DATA_FILE_V1.0
+DatasetName: two-hand-static-gestures
+InfoText: Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>
+NumDimensions: 6
+TotalNumExamples: 5
+NumberOfClasses: 5
+ClassIDsAndCounters: 
+1	1	NOT_SET
+2   1    NOT_SET
+3   1    NOT_SET
+4   1    NOT_SET
+5   1    NOT_SET
+UseExternalRanges: 0
+Data:
+1	-330.703	214.819    1817.51	  318.93	 228.967	 1828.73
+2   -547.894    145.06     2389.43    688.891   -159.607     2513.55
+3   -680.317   -234.652    2450.67    481.258    263.518     2595.67
+4   -294.098   -542.782    2249.61    734.014   -80.9996     2450.48
+5   -586.263   -160.894    2441.15    414.371   -596.545     2294.15
