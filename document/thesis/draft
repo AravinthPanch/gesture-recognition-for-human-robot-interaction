@@ -160,7 +160,7 @@ Manipulative gestures are the ones used to act on objects. For example, moving a
 In this thesis, we focus on communicative gestures in the form of symbols. They symbolize some referential action. For instance, circular motion of hand may be referred as an alphabet "O" or as an object such as wheel or as a command to turn in a circular motion.
 
 Feature Extraction
-Feature extraction stage is concerned with the detection of features which are used for the estimation of parameters of the chosen gestural model. In the detection process it is first necessary to localize the gesturer. 
+Feature extraction stage is concerned with the detection of features which are used for the estimation of parameters of the chosen gestural model. In the detection process it is first necessary to localize the user. 
 
 OpenNI 2
 OpenNI or Open Natural Interaction is a framework by the company PrimeSense and open source software project focused on certifying and improving interoperability of natural user interfaces and organic user interfaces for Natural Interaction (NI) devices, applications that use those devices and middleware that facilitates access and use of such devices. Microsoft Kinect and Asus Xtion are commercially available depth cameras which are compatible with OpenNI.
@@ -242,7 +242,7 @@ Try to keep the hand that performs the gesture at a distance from your body.
 Your palm should be open, fingers pointing up, and face the sensor.
 The movement should not be too slow or too fast.
 “WAVE” movement should consist of at least 5 horizontal movements (left-right or right-left)
-“CLICK” movement should be long enough (at least 20cm).
+“CLICK” movement should be long enough (at least 20 cm).
 Make sure “CLICK” gesture is performed towards the sensor.
 If you have difficulty to gain focus, try to stand closer to the sensor (around 2m), and make sure that your hand is inside the field of view.
 
@@ -253,7 +253,7 @@ Like most other recognitions such as speech recognition and biometrics, the task
 
 
 
-In this thesis, we have chosen a machine learning technique based on Adaptive Naive Bayes Classifier (ANBC) with Gesture Recognition Toolkit. ANBC is an extension to the well-known Naive Bayes, one of the most commonly used supervised learning algorithms that works very well on both basic and more complex recognition problems.
+In this thesis, we have chosen a machine learning technique based on Adaptive Naive Bayes Classifier (ANBC) with the help of Gesture Recognition Toolkit. ANBC is an extension to the well-known Naive Bayes, one of the most commonly used supervised learning algorithms that works very well on both basic and more complex recognition problems.
 
 Adaptive Naive Bayes Classifier (ANBC)
 ANBC is a supervised learning algorithm that can be used to classify any type of N-dimensional signal. It is based on simple probabilistic classifier called Naive Bayes classifier. It fundamentally works by fitting an N-dimensional Gaussian distribution to each class during the training phase. New gestures can then be recognized in the prediction phase by finding the gesture that results in the maximum likelihood value that is calculated by calculating Gaussian distribution for each sample. 
@@ -283,13 +283,6 @@ Using equation (15), an unknown N-dimensional vector x can be classified as one 
 One key element of the Naive Bayes Classifier, is that it can easily be made adaptive. Adding an adaptive online training phase to the common two-phase (training and prediction) provides some significant advantages for the recognition gestures. During the adaptive online training phase the algorithm will not only perform real-time predictions on the continuous stream of input data but also it will also continue to train and refine the models for each gesture. This enables the user to initially train the algorithm with a low number of training examples after and during the adaptive online training phase, the algorithm can continue to train and refine the initial models, creating a more robust model as the number of training examples increases.
 
 ANBC algorithm works well for the classification of static postures and non-temporal pattern recognition. However, The main limitation of the ANBC algorithm is that, because it uses a Gaussian distribution to represent each class, it does not work well when the data you want to classify is not linearly separable. Also when ANBC is working on online training, a small number of incorrectly labelled training examples could create a loose model that becomes less effective at each update step and ultimately lead to a poor performance and accuracy.
-
-Labelled classification data with data partitioning, min max ranges, external ranges, save data to grt or csv, load data, dimension, dataset name
-training timer with time start, recording mode, preparation mode timer stopped
-pipeline with add classifier, post processing module, train data, predict, predicted class, unprocessed predicted and maximum likelihood, class distances
-classifier null rejection and coefficient
-min max scaling 
-grt GUI
 
 Gesture Recognition Toolkit (GRT)
 Gesture Recognition Toolkit is a cross-platform open-source C++ library designed and developed mainly by Nicholas Gillian at MIT Media Lab to make real-time machine learning and gesture recognitions. Emphasis is placed on ease of use, with a consistent, minimalist design that promotes accessibility while supporting flexibility and customization for advanced users. The toolkit features a broad range of classification and regression algorithms and has extensive support for building real-time systems. This includes algorithms for signal processing, feature extraction and automatic gesture spotting. 
@@ -322,7 +315,7 @@ Min-Max scaling rescales the range in [0, 1] or [−1, 1]. Selecting the target 
 
 In many real-world scenarios, the input to a classification algorithm must be preprocessed and have salient features extracted. GRT therefore supports a wide range of pre/post-processing modules such as Moving Average Filter, Class Label Filter and Class Label Change Filter, embedded feature extraction algorithms such as AdaBoost, dimensionality reduction techniques such as Principal Component Analysis (PCA) and unsupervised quantizers such as K-Means Quantizer, Self-Organizing Map Quantizer.
 
-There won’t be any need of preprocessing modules in this project since raw data received from depth sensor is processed by NiTE framework. However, postprocessing modules such as Class Label Filter and Class Label Change Filter may be needed for a reasons that depth sensor samples 30 frames per second, therefore 30 input samples per second are supplied to the classifier for prediction and the output must be triggered once for every gesture. 
+There won’t be any need of preprocessing modules in this project since raw data received from depth sensor is processed by NiTE framework. However, post processing modules such as Class Label Filter and Class Label Change Filter may be needed for a reasons that depth sensor samples 30 frames per second, therefore 30 input samples per second are supplied to the classifier for prediction and the output must be triggered once for every gesture. 
 
 Class Label Filter is a useful post-processing module which can remove erroneous or sporadic prediction spikes that may be made by a classifier on a continuous input stream of data. Figure shows that the classifier correctly outputs the predicted class label of 1 for a large majority of the time that a user is performing gesture 1. However, may be due to sensor noise or false samples in the training data, the classifier outputs the class label of 2. In this instance the class label filter can be used to remove these sporadic prediction values, with the output of the class label filter in this instance being 1. 
 
@@ -330,7 +323,55 @@ Class Label Filter is a useful post-processing module which can remove erroneous
 
 Class Label Filter module is controlled through two parameters: the minimum count value and buffer size value. The minimum count sets the minimum number of label values that must be present in the buffer to be output by the Class Label Filter. The size of the class labels buffer is set by the buffer size parameter. If there is more than one type of class label in the buffer then the class label with the maximum number of instances will be output. If the maximum number of instances for any class label in the buffer is less than the minimum count parameter then the Class Label Filter will output the default null rejection class label of 0.
 
-Class Label Change Filter is one of the usefull postprocessing module that triggers when the predicted output of a classifier changes. Figure shows that, if the output stream of a classifier was {1,1,1,1,2,2,2,2,3,3}, then the output of the filter would be {1,0,0,0,2,0,0,0,3,0}. This module is useful to trigger a gesture only once if the user is gesticulating the same gesture for longer time duration. 
+Class Label Change Filter is one of the useful postprocessing module that triggers when the predicted output of a classifier changes. Figure shows that, if the output stream of a classifier was {1,1,1,1,2,2,2,2,3,3}, then the output of the filter would be {1,0,0,0,2,0,0,0,3,0}. This module is useful to trigger a gesture only once if the user is gesticulating the same gesture for longer time duration. 
 
 
 Figure below shows GRT-GUI which is an application that provides an easy-to-use graphical interface developed in C++ to setup and configure a gesture recognition pipeline that can be used for classification, regression, or timeseries analysis. Data and control commands are streamed in and out of this application as Open Sound Control (OSC) packets via UDP . Therefore, it acts as a standalone application to record, label, save, load and test the training data and perfoms a real-time prediction for the incoming data, send output to another application. 
+
+
+
+
+
+
+Goal
+As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots.
+In this thesis, we attempt to implement the feature for NAO to recognize gestures and execute predefined actions based on the gesture. NAO will be extended with an external depth camera, that will enable NAO to recognize 3D modeled gestures. This 3D camera will be mounted on the head of NAO, so that it can scan for gestures in the horizon. Additionally, skeletal points tracking algorithm with machine learning technique using Hidden Markov Models will be used to recognize the gestures. Due to the computational limitations of NAO, gesture recognition algorithm will be executed on off-board computer. With the hand gesture recognizing feature, NAO will be available to the users in two modes.  
+
+Command mode: In this mode, a gesture will be recognized by NAO and related task will be executed. Even though the gesture based interaction is real time, NAO can not be interrupted or stopped by using any gesture while it is executing a task. However, other interfaces such as voice commands can be used in such situation to stop or interrupt the ongoing task execution.  
+
+Translation mode: In this mode, NAO will be directly translating the meaning of the gesticulated gestures. To achieve this, text-to-speech library of NAO will be used and recognized gesture can be spoken out using the integrated loudspeaker. In future, it will allow NAO to translate a sign language to assist people with hearing and speech disabilities.
+
+In this thesis, we planned to train NAO with few very simple gestures due to the reason that NAO has computational limitations. Gestures will involve both the hands or single hand to interact with the robot.
+
+Solution
+To build an effective and easy to use hand gesture recognition system for NAO, various tools and technologies were studied during this thesis. Figure below shows the individual components which are essential part of this thesis in implementing the goal. The main challenge is to find a solution that can integrate all these components into a robust system. However, due to the computational and compatibility limitations of NAO, we have faced problems in implementing few contemplated solutions which are described in the next section. Finally the successful solution in achieving the goal will be discussed in the following sections.
+
+
+
+
+
+Experimental Designs
+Everything On-Board
+First experiment design was conceived in a way that depth camera, skeletal joint tracking, gesture recognition infrastructure and robot motion will be embedded into the on-board computer of of NAO. However, gesture recognition infrastructure is composed of computationally intensive machine learning processes and along with skeletal joint tracking by NiTE had pushed NAO to 100 % CPU load consistently.
+--- Show htop of NiTE cpu consumption ----
+
+
+Extending NAO with Single Board Computer
+In order to escape the computational limitation of NAO, another experimental design was contemplated, that the robot will be extended as shown in the figure with a powerful Single Board Computer such as pcDuino. However, Asus Xtion’s higher power consumption of 2.5 Watts with weight of 250 grams, pcDuino’s power consumption of 2A at 5VDC with weight of 100 grams and additional weight by 3D printed mounts, heat sinks and wires will make NAO to be heavier and ultimately result in poor motion performances and higher power consumption. 
+
+Everything Off-Board
+This experimental design pushes all the components to an off-board computer that could be a PC and depth camera will be positioned at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WiFi. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design will suit for other applications such as indoor navigation and localization of NAO.
+
+
+Sensor with Hand tracking On-Board and Gesture recognition Off-Board
+
+
+Architecture 
+After considering the disadvantages of other experimental designs, the final design was chosen to build an efficient real-time hand gesture recognition for human-robot interaction using skeletal points. Figure below shows the architecture of the solution that was implemented during this thesis by grouping many components together as 3 different modules which serve various purposes.  Each module is implemented in different environment and they communicate with one another to complete the data flow. All these modules share a configuration file that contains configurations such as port number, hostname and log path.
+
+ 
+
+HRI (Human-Robot Interaction) Module
+This is the main module that will be installed on the robot in order to get the skeletal information of the user in front of the robot via UDP stream. HRI module works in two modes.
+CC (Control Center) Module
+B (Brain) Module
