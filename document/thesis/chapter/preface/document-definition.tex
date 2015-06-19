@@ -73,25 +73,49 @@ pdfproducer = {LaTeX with hyperref and thumbpdf}
 %\usepackage{natbib}
 \bibliographystyle{gerunsrt} % Literaturangaben nach Auftreten sortieren %{gerplain}
 
-\usepackage{listings} % für Formatierung in Quelltexten
-\definecolor{grau}{gray}{0.25}
-\lstset{
-	extendedchars=true,
-	basicstyle=\scriptsize\ttfamily,
-	%basicstyle=\tiny\ttfamily,
-	tabsize=2,
-	keywordstyle=\textbf,
-	commentstyle=\color{grau},
-	stringstyle=\textit,
-	numbers=left,
-	numberstyle=\tiny,
-	% für schönen Zeilenumbruch
-	breakautoindent  = true,
-	breakindent      = 2em,
-	breaklines       = true,
-	postbreak        = ,
-	%prebreak         = \raisebox{-.8ex}[0ex][0ex]{\ensuremath{\lrcorner}},
-	prebreak         = \raisebox{-.8ex}[0ex][0ex]{\Righttorque},
+%\usepackage{listings} % für Formatierung in Quelltexten
+%\definecolor{grau}{gray}{0.25}
+%\lstset{
+%	extendedchars=true,
+%	basicstyle=\scriptsize\ttfamily,
+%	%basicstyle=\tiny\ttfamily,
+%	tabsize=2,
+%	keywordstyle=\textbf,
+%	commentstyle=\color{grau},
+%	stringstyle=\textit,
+%	numbers=left,
+%	numberstyle=\tiny,
+%	% für schönen Zeilenumbruch
+%	breakautoindent  = true,
+%	breakindent      = 2em,
+%	breaklines       = true,
+%	postbreak        = ,
+%	%prebreak         = \raisebox{-.8ex}[0ex][0ex]{\ensuremath{\lrcorner}},
+%	prebreak         = \raisebox{-.8ex}[0ex][0ex]{\Righttorque},
+%}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
 }
 
 \usepackage{caption}
