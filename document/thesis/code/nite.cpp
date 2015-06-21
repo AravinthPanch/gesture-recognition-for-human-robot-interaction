@@ -1,10 +1,3 @@
-/**
- * Author: Aravinth Panchadcharam
- * Email: me@aravinth.info
- * Date: 28/12/14.
- * Project: Gesture Recogntion for Human-Robot Interaction
- */
-
 #include <iostream>
 #include "NiTE.h"
 
