@@ -1,0 +1,78 @@
+\subsubsection{OpenNI 2} OpenNI or Open Natural Interaction is a framework by the company PrimeSense and open source software project focused on certifying and improving interoperability of natural user interfaces and organic user interfaces for Natural Interaction (NI) devices, applications that use those devices and middleware that facilitates access and use of such devices. Microsoft Kinect and Asus Xtion are commercially available depth cameras which are compatible with OpenNI.
+
+The OpenNI 2.0 API provides access to PrimeSense compatible depth sensors. It allows an application to initialize a sensor and receive depth, RGB, and IR video streams from the device. OpenNI also provides a uniform interface that third party middleware developers can use to interact with depth sensors. Applications are then able to make use of both the third party middleware, as well as underlying basic depth and video data provided directly by OpenNI.
+
+C++ code \ref{code:ni:device} shows how a depth camera such as Asus Xtion Pro can be used to retrieve depth information using OpenNI 2 framework.
+
+\lstinputlisting[language=c++]{code/openni.cpp} \label{code:ni:device}
+
+\subsubsection{NiTE 2} PrimeSense's Natural Interaction Technology for End-user is the middleware that perceives the world in 3D, based on the PrimeSensor depth images, and translates these perceptions into meaningful data in the same way that people do. NITE middleware includes computer vision algorithms that enable identifying users and tracking their movements. Figure shows the architecture of NiTE, how it is working together with OpenNI, depth sensors and applications.
+
+Figure \ref{fg:ni:arch} displays a layered view of producing, acquiring and processing depth data, up to the level of the application that utilizes it to form a natural- interaction based module. 
+
+\input{chapter/figures/ni-arch}
+\begin{itemize}
+	\item The lower layer is the PrimeSensor device, which is the physical acquisition layer, resulting in raw sensory data from a stream of depth images. 
+	\item The next Cshaped layer is executed on the host PC represents OpenNI. OpenNI provides communication interfaces that interact with both the sensor's driver and the middleware components, which analyze the data from the sensor. 
+	\item The sensor data acquisition is a simple acquisition API, enabling the host to operate the sensor. This module is OpenNI compliant interfaces that conforms to OpenNI API standard. 
+	\item The NITE Algorithms layer is the computer vision middleware and is also plugged into OpenNI. It processes the depth images produced by the PrimeSensor. 
+	\item The NITE Controls layer is an applicative layer that provides application framework for gesture identification and gesture-based UI controls, on top of the data that was processed by NITE Algorithms. 
+\end{itemize}
+
+\subsubsection{Algorithm} The lower layer of NiTE middleware that performs the groundwork of processing the stream of raw depth images. This layer utilizes computer vision algorithms to perform the following: 
+\begin{itemize}
+	\item Scene segmentation is a process in which individual users and objects are separated from the background and tagged accordingly. 
+	\item Hand point detection and tracking 
+	\item Full body tracking based on the scene segmentation output. Users bodies are tracked to output the current user pose a set of locations of body joints. 
+\end{itemize}
+
+NiTE uses machine learning algorithms to recognize anatomical landmarks and pose of human body \cite{}. Figure \ref{fg:ni:alg} shows how NiTE tracks human skeleton from a single input depth image and a per-pixel body part distribution is inferred. Colors indicate the most likely part labels at each pixel and correspond to the joint proposals. Local modes of this signal are estimated to give high-quality proposals for the 3D locations of body joints, even for multiple users.
+
+\input{chapter/figures/ni-alg}
+
+In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representations was covered with several localized body part labels as show in the figure \ref{fg:ni:train}. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
+
+\input{chapter/figures/ni-train}
+
+Features are located in depth image as shown in the figure \ref{fg:ni:label} and labeled. The yellow crosses indicates the pixel x being classified. The red circles indicate the offset pixel. In (a), the two example features give a large depth difference response. In (b), the same two features at new image locations give a much smaller response.
+
+\input{chapter/figures/ni-label}
+
+Randomized decision forest is the classification algorithm used by NiTE to predict the probability of a pixel belonging to a body part. Randomized decision trees and forests have proven fast and effective multi-class classifiers for many tasks. Figure \ref{fg:ni:decision} shows Randomized Decision Forests. A forest is an ensemble of trees. Each tree consists of split nodes (blue) and leaf nodes (green). The red arrows indicate the different paths that might be taken by different trees for a particular input.
+
+\input{chapter/figures/ni-decision}
+
+To classify pixel x in image I using Randomized decision tree, one starts at the root and repeatedly evaluates equation \ref{eq:ni:decision}, branching left or right according to the comparison to threshold {$ \tau\ $}. At the leaf node reached in tree t, a learned distribution $ P_{t}(c|I,x) $ over body part labels c is stored. The distributions are averaged together for all trees in the forest to give the final classification.
+
+\input{chapter/equations/ni-decision-forest}
+
+Each tree is trained on a different set of randomly synthesized images. A random subset of 2000 example pixels from each image is chosen to ensure a roughly even distribution across body parts. Training phase was conducted in distributed manner by training 3 trees from 1 million images on 1000 core cluster.
+
+After predicted the probability of a pixel belonging to a body part, the body parts are recognized and reliable proposals for the positions of 3D skeletal joints are generated. These proposals are the final output of the algorithm and used by a tracking algorithm to self initialize and recover from failure.
+
+\input{chapter/figures/ni-pose}
+
+Figure \ref{fg:ni:pose} shows example inferences. Synthetic (top row); real (middle); failure modes (bottom). Left column: ground truth for a neutral pose as a reference. In each example we see the depth image, the inferred most likely body part labels, and the joint proposals show as front, right, and top views (overlaid on a depth point cloud). Only the most confident proposal for each joint above a fixed, shared threshold is shown.
+
+Finally NiTE API returns positions and orientations of the skeleton joints as shown in the figure \ref{fg:ni:joints}. As well as it returns the lengths of the body segments such as the distance between returned elbow and shoulder. Joint positions and orientations are given in the real world coordinate system. The origin of the system is at the sensor. +X points to the right of the, +Y points up, and +Z points in the direction of increasing depth. 
+
+\input{chapter/figures/ni-joints}
+
+Even though NiTE framework can recognize full human body, in this thesis we have used only hand recognition and tracking due to computational limitation of NAO. NiTE provides an interface track only a hand in real time. In order to start tracking a hand, a focus gesture must be gesticulated. There are two supported focus gestures: click and wave. In the click gesture, you should hold your hand up, push your hand towards the sensor, and then immediately pull your hand back towards you. In the wave gesture, you should hold your hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand was touching another object or closer to another body part. Figure \ref{fg:ni:hand} shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
+
+\input{chapter/figures/ni-hand}
+
+Focus gestures of NiTE is can be detected even after initiating the hand tracking. NITE gestures are derived from a stream of hand points which record how a hand moves through space over time. Each hand point is the real-world 3D coordinate of the center of the hand, measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. 
+
+NiTE recommends user to follow these suggestions to gain maximum efficiency from its API. 
+\begin{itemize}
+	\item Try to keep the hand that performs the gesture at a distance from your body. 
+	\item Your palm should be open, fingers pointing up, and face the sensor. 
+	\item The movement should not be too slow or too fast. 
+	\item WAVE movement should consist of at least 5 horizontal movements (left-right or right-left) 
+	\item CLICK movement should be long enough (at least 20 cm). 
+	\item Make sure CLICK gesture is performed towards the sensor. 
+	\item If you have difficulty to gain focus, try to stand closer to the sensor (around 2m), and make sure that your hand is inside the field of view. 
+\end{itemize}
+
+Finally, below given example shows how hand tracking can be initiated using a focus gesture. 

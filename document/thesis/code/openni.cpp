@@ -1,8 +1,12 @@
+/**
+ * Basic OpenNI setup to read data from depth camera
+ */
+
+
 #include <stdio.h>
 #include <OpenNI.h>
 
 #define SAMPLE_READ_WAIT_TIMEOUT 2000
-
 using namespace openni;
 
 int main()
