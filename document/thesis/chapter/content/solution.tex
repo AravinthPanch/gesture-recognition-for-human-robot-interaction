@@ -35,23 +35,43 @@ Once the client is connected, it stores the endpoint details of the client such 
 \subsubsection{Gesture Tracker}
 Gesture tracker is a component of HRI module that makes use of NiTE framework to localize the hand of user in the field of view and track the hand position till the hand leaves the field of view (FOV) or hand is touching another object or hidden by an object. 
 
-It uses HandTracker class of NiTE framework and it needs to go through following steps before it can track a hand.
+It uses HandTracker class of NiTE framework and it needs to go through following steps before it can track a hand. Section \ref{sec:nite} discusses briefly about the functionalities of NiTE framework.
 
 \begin{itemize}
-	\item NiTE framework must be initialized using NiTE::initialize() function.
-	\item Depth camera must be connected and hand tracker must be created using OpenNI compatible  device id. If not, default depth camera will be selected.
-	\item NiTE Gestures such as Wave or Click detection must be initiated in order to localize the hand at first.
-	\item NiTE::HandTrackerFrameRef must be read continuously for a new depth image frame.
+	\item NiTE framework must be initialized using nite::initialize() function.
+	\item Depth camera must be connected and nite::HandTracker must be created using OpenNI compatible  device id. If not, default depth camera will be selected.
+	\item NiTE Focus Gestures such as Wave or Click detection must be initiated in order to localize the hand at first.
+	\item nite::HandTrackerFrameRef must be read continuously for a new depth image frame.
 	\item If Wave or Click gesture is detected, then hand tracking will be started using the position of hand that triggered the gesture.
 \end{itemize}
 
-Once the hand is been tracked, the hand will be added an id and it will be added to HandTrackerFrameRef. NiTE framework allow users to add many number of hand and it will be tracked till there is enough computation power  and hands are not overlapping. HandTrackerFrameRef contains the array of all active hands and every hand is an object of NiTE::HandData. It contains the position of the hand in 3 dimensional float stored in a class called Point3f.
+Once the hand is been tracked, the hand will be added an id and it will be added to HandTrackerFrameRef. NiTE framework allow users to add many number of hand and it will be tracked till there is enough computation power  and hands are not overlapping. HandTrackerFrameRef contains the array of all active hands and every hand is an object of nite::HandData. It contains the position of the hand in 3 dimensional float stored in a class called Point3f.
 
+Unlike nite::UserTracker, HandTracker can return only the hand position in the space and it can not specify whether it is a left or right hand. It is very necessary information for hand gesture training and classification because confused hand names will lead to a false model of the hand gesture and ultimately resulting in a bad performance. Hence, we have implemented a simple logic with the help of an assumption that user will gesticulate the focus gesture (Wave or Click) only in the order of right hand first and left hand second. 
 
-However, functionalities gesture tracker are not only  to track hand, but also send these information to Brain module via UDP. Therefore, C++  NiTE::HandData objects must be serialized before transmitted over the network.
+Four integer variables leftHand, rightHand, lastLostHand and handsSize are used to find whether tracked or hand is left or right. The logic behind is that when handsSize and lastLostHand is zero and a new hand is found, that is considered as right hand and its nite::HandData::HandId is stored in the variable rightHand. Respectively, the next hand is stored as leftHand and handsSize counter is increased. If a hand is lost or not tracking, then lastLostHand will be updated with the id of the hand that was lost. When there is a new hand and handsSize and lastLostHand are not zero, then new handId will be set to leftHand or rightHand based on lastLostHand variable.
+
+However, functionalities gesture tracker are not only  to track hand, but also send these information to Brain module via UDP. Therefore, C++  nite::HandData objects must be serialized before transmitted over the network. Therefore, we chose JSON serialization and send them across the network as strings as shown in \ref{code:hand:data}
+
+\begin{lstlisting}
+{"RIGHT": ["275.456", "339.026", "1841.850"], "LEFT": ["-456.289", "353.880", "1761.360"]}
+\end{lstlisting}
+\label{code:hand:data}
+
+Furthermore, HRI module send informations such as detected focus gesture and info messages to Brain module as shown in \ref{code:hand:info} to be displayed on the control center dashboard. Info messages helps us to know the status of computationally intensive hand tracking algorithm which is the core component of HRI module. 
+
+\begin{lstlisting}
+{"GESTURE":"WAVE"}
+{"GESTURE":"CLICK"}
+{"INFO": "Found new hand with id 1"}
+{"INFO": "LEFT Hand is lost"}
+{"INFO": "RIGHT Hand is lost"}
+{"INFO": "Both hands are lost"}
+{"INFO": "LEFT Hand is at FOV"}
+\end{lstlisting}
+\label{code:hand:info}
 
  
-
 \subsection{Brain Module}
 
 \subsection{Control Center (CC) Module}
