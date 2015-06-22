@@ -121,7 +121,17 @@ Skeleton Tracker is a component of HRI module that is more complex and computati
  
 \subsection{Brain Module} Brain module is the core functional part of this thesis. It is named as Brain since it refers to the anatomical brain that plays the vital role of the human life in learning, classifying, predicting and decision making. 
 
+Brain module is composed of 3 components which are UDP Client, Brain (Gesture Recognition Pipeline) and WebSocket Server. Flowchart \ref{fg:brain:flow} shows the data flow of this module where the user is asked to select Prediction or Training of Hand Viewer mode, when the program is started. It creates a thread and runs a loop on the main thread depending on the selection: 
+
+\begin{itemize}
+	\item UDP Client thread - Asynchronously receiving data from HRI module and thread is always running.
+	\item Prediction or Training of Hand Viewer on main program thread -  Loop in the main thread run always and check if the Brain module is in prediction or training mode. If loop is interrupted, then the thread is exited and finally program is closed.	
+\end{itemize}
+
 \input{chapter/figures/brain-flow}
+
+\subsubsection{UDP Client}
+Brain module receives processed information such as joint positions, detection of focus gestures and info messages from the HRI module as UDP stream of JSON strings via WLAN. Like UDP Server built inside HRI module, this is also an asynchronous socket that starts at port 5006 and connects to the server by resolving the serverHostName and port number from the common configuration file. Once it is connected, it receives the data from HRI module, when it is started tracking a hand or skeleton and asynchronously calls the callback handler.
 
 \subsection{Control Center (CC) Module}
 
