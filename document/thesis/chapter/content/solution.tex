@@ -15,13 +15,21 @@
 
 \input{chapter/figures/hri-architecture}
 
-\subsection{Human-Robot Interaction (HRI) Module} HRI is the main module that is implemented first in order to get the raw data from the depth sensor and process it to track the skeletal joint positions in real world coordinates. This module is deployed on the general purpose computer that is running inside the robot with necessary libraries and drivers. Especially OpenNI library needs depth camera driver and NiTE library needs its training data.
-
-HRI module is composed of 3 components which are UDP Server, Gesture tracker and Skeleton tracker. They are developed in C++ using a core library called Boost and NiTE 2 framework is used for the purpose of skeletal joints tracking.
+\subsection{Human-Robot Interaction (HRI) Module} HRI module is implemented first in order to get the raw data from the depth sensor and process it to track the skeletal joint positions in real world coordinates. It developed in C++ using a core library called Boost and NiTE 2 framework is used for the purpose of skeletal joints tracking. This module is deployed on the general purpose computer that is running inside the robot with necessary libraries and drivers.
 
 Boost is a set of libraries for the C++ programming language that provide support for tasks and structures such as linear algebra, pseudo random number generation, multi threading, image processing, regular expressions, and unit testing. It contains over eighty individual libraries.
 
-This module requests the user to select Gesture tracker or Skeleton tracker, when the program is started. Depending on the selection, it creates 2 threads, one for the UDP server and one for the NiTE tracker. NiTE tracker waits for a new frame from the depth camera till some key was pressed to interrupt the loop, exiting the thread and finally close the program. 
+HRI module is composed of 3 components which are UDP Server, Gesture and Skeleton tracker. Flowchart \ref{fg:hri:flow} shows the data flow of this module where the user is asked to select Gesture or Skeleton tracker, when the program is started. It creates 2 threads depending on the selection: 
+
+\begin{itemize}
+	\item UDP Server thread - Asynchronously send data to the client and thread is always running.
+	\item Gesture or Skeleton tracker thread - A loop in the thread polls for a new frame from the depth camera till some key is pressed. If loop is interrupted, then the thread is exited and finally program is closed.
+
+\end{itemize}
+
+Gesture and Skeleton tracker serve the purpose in extracting features from the raw data to implement a hand gesture recognition system. However, Skeleton tracker tracks 15 skeletal points in the human body and that leads to very intensive computation. Due to processing limitations of NAO, we chose to use Gesture tracker as it tracks only hand joints. Following sections describe internal working HRI module.
+
+\input{chapter/figures/hri-flow}
 
 \subsubsection{UDP Server}
 HRI module has to process the raw information from the depth camera and it has to send it to Brain module for the purpose of gesture recognition. As show in the architecture diagram \ref{fg:hri:architecture}, Brain module must be connected via Wireless Local Area Network (WLAN). WLAN at 2.4GHz readily is available on NAO and lead us to a solution, where we have to choose an UDP protocol to transmit the processed data from depth camera. UDP was chosen over other protocols because depth camera produces 30 depth images per second and transferring such a large amount of data using conventional communication technologies such as TCP will be create much overhead and delay in the communication.
@@ -111,8 +119,9 @@ Skeleton Tracker is a component of HRI module that is more complex and computati
  \end{lstlisting}
  \label{code:skeleton:data}
  
- 
-\subsection{Brain Module}
+\subsection{Brain Module} Brain module is the core functional part of this thesis. It is named as Brain since it refers to the anatomical brain that plays the vital role of the human life in learning, classifying, predicting and decision making. 
+
+\input{chapter/figures/brain-flow}
 
 \subsection{Control Center (CC) Module}
 
