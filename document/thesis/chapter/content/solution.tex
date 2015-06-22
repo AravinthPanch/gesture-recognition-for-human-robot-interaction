@@ -1,66 +1,59 @@
-\chapter{Solution}
-The figure \ref{fig:flow} shows the flow diagram of hand gesture recognition system that is going to implemented in this thesis. Each block contains different software components that are executed sequentially. However, training phase must be carried out before this system is available for recognition. Finally, these components will be integrated into NAO.
+\chapter{Solution} To build an effective and easy to use hand gesture recognition system for NAO, various tools and technologies were studied during this thesis. Figure \ref{fg:hri:components} shows the individual components which are essential part of this thesis in implementing the goal. The main challenge is to find a solution that can integrate all these components into a robust system. However, due to the computational and compatibility limitations of NAO, we have faced problems in implementing few contemplated solutions which are described in the next section. Finally, the successful solution in achieving the goal will be discussed in the following sections.
 
-\begin{figure}
-	[!h] \centering 
-	\includegraphics[width=9cm]{figures/flow.png} \caption{Flow diagram of hand gesture recognition system \cite{5}.} \label{fig:flow} 
-\end{figure}
+\input{chapter/figures/hri-components}
 
-\section{Sensing} 
-3D camera records 30 frames of color image as well as depth image per second and outputs as a data package. Figure \ref{fig:depth} shows the single frame of depth image taken from Microsoft Kinect where darker gray values represent the farther distance and lighter gray values represent the closer distance from the camera.
+\section{Experimental Designs} 
+\subsection{Everything On-Board} First experiment design was conceived in a way that depth camera, skeletal joint tracking, gesture recognition infrastructure and robot motion will be embedded into the on-board computer of NAO. However, gesture recognition infrastructure is composed of computationally intensive machine learning processes and along with skeletal joint tracking by NiTE had pushed NAO to 100 $ \% $ CPU load consistently. --- Show htop of NiTE cpu consumption ----
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.5\textwidth}
-		\centering
-		\includegraphics[height=7cm]{figures/depth.png} 
-		\captionof{figure}{Depth image from 3D Camera}
-		\label{fig:depth}
-	\end{minipage}%
-	\begin{minipage}{.5\textwidth}
-		\centering
-		\includegraphics[height=7cm]{figures/depth-skeleton.png}
-		\captionof{figure}{Skeleton tracking}
-		\label{fig:skeleton}
-	\end{minipage}
-\end{figure}
+\subsection{Extending NAO with Single Board Computer} In order to escape the computational limitation of NAO, another experimental design was contemplated, that the robot will be extended as shown in the figure \ref{fg:nao:bag} with a powerful Single Board Computer such as pcDuino or RaspberryPi. However, Asus Xtions higher power consumption of 2.5 Watts with weight of 250 grams, pcDuinos power consumption of 2A at 5VDC with weight of 100 grams and additional weight by 3D printed mounts, heat sinks and wires will make NAO to be heavier and ultimately result in poor motion performances and higher power consumption. 
 
-\section{Feature Extraction}
-Output package from sensor data will be inputted to feature detection and extraction unit. OpenNI is a software component that will track the anatomical landmarks of the human body from the package and extract significant joint angle parameters along with segment length and present them three dimensionally as shown in the figure \ref{fig:skeleton}. Finally, only joints of both the arms will be picked out from the array of features, since it will be the significant joints needed for hand gesture recognition.
+\input{chapter/figures/nao-bag}
 
-\section{Modeling and Classification}
-In order to use this hand recognition system, all chosen gestures must be observed and the system must be trained. Therefore, a set of simple gestures will be chosen and observed for training. Each gesture is isolated in time and gesticulated for certain duration. However, sensors provides 30 frames of discrete states of gesture per second. 
+\subsection{Everything Off-Board} This experimental design pushes all the components to an off-board computer that could be a PC connected with depth camera at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WLAN. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design will suit for other applications such as indoor navigation and localization of NAO.
 
-For example, a gesture is gesticulated by simply drawing a circle in the air and its ideal states are shown in the figure \ref{fig:ges:state}. It will be  as a position of hand passing through 8 states of the circle. Each state is a point in space with x, y and z axis data. This approach makes it possible for us to reduce our observation data to sequential 3D points and focus on the recognition task without processing all those pixels. Each trained model can then be used to determine with what probability a given gesture appears in test data. Therefore, the trained Hidden Markov models will be used to recognize gestures \cite{2}. 
+\section{Architecture } After analyzing the disadvantages of other experimental designs, the final design was chosen to build an efficient real-time hand gesture recognition for human-robot interaction using skeletal points. Figure \ref{fg:hri:architecture} shows the architecture of the solution that was implemented during this thesis by grouping many components into 4 different modules which serve various purposes. Each module is implemented in different environment as shown in the figure and they communicate with one another to complete the data flow. All these modules uses a common configuration file that contains information such as port number, host name and log path.
 
-\begin{figure}
-	\centering
-	\begin{minipage}{.3\textwidth}
-		\centering
-		\includegraphics[width=6cm]{figures/ges-states.png}
-		\captionof{figure}{HMM States of circular gesture \cite{9}.}
-		\label{fig:ges:state}
-	\end{minipage}%
-	\begin{minipage}{.7\textwidth}
-		\centering
-		\includegraphics[width=10cm]{figures/ges-train.png}
-		\captionof{figure}{Observations of a circular gesture in x, y, z axis which are recorded by a depth camera \cite{9}.}
-		\label{fig:ges:train}
-	\end{minipage}
-\end{figure}
+\input{chapter/figures/hri-architecture}
 
-\section{Gesture Analysis and Recognition}
-This step contains the analysis of gesticulated gesture and finding out the likelihood of that gesture with trained data, known as gesture recognition. Figure \ref{fig:ges:train}  contains colored rings of noisy data of gestures that represent instances of a real circle gesture. Sensing and feature detection module will produce 60 observations of the circle gesture for 2 seconds, since the depth camera records at 30 frame per second. To decide whether a given set of 60 observations contains a circle gesture, we need to first determine the likelihood that the hand passed through the eight states of the gesture in the expected sequence.
+\subsection{Human-Robot Interaction (HRI) Module} HRI is the main module that is implemented first in order to get the raw data from the depth sensor and process it to track the skeletal joint positions in real world coordinates. This module is deployed on the general purpose computer that is running inside the robot with necessary libraries and drivers. Especially OpenNI library needs depth camera driver and NiTE library needs its training data.
 
-Discrete HMM is a finite set of possible output symbols and a sequence of hidden states which reveal some probability. To reduce our real gesture data to a workable number of discrete output symbols and states, we can use any clustering algorithm to cluster the 3D points of all our training data of circle gesture into clusters and label them. That is to say, every point in the training data represents an output symbol that is closely tied to one of the 8 true states of the model.
+HRI module is composed of 3 components which are UDP Server, Gesture tracker and Skeleton tracker. They are developed in C++ using a core library called Boost and NiTE 2 framework is used for the purpose of skeletal joints tracking.
 
-Looking at the labeled data, we can estimate how likely it is that a hand passed through the 8 clusters in the same sequence as a circle gesture and if the likelihood is high enough, then the gesture is considered to be recognized.
+Boost is a set of libraries for the C++ programming language that provide support for tasks and structures such as linear algebra, pseudo random number generation, multi threading, image processing, regular expressions, and unit testing. It contains over eighty individual libraries.
 
-\begin{figure}
-	[h] \centering 
-	\includegraphics[height=7cm]{figures/ges-rec.png} \caption{The states of Arabic sign language to convey "Hello" \cite{11}. It is consisted of 11 states of Markov models and if there is higher likelihood of the hand position passed through states sequentially from initial to final, then it is recognized as "Hello".} \label{fig:ges:reg} 
-\end{figure}
+This module requests the user to select Gesture tracker or Skeleton tracker, when the program is started. Depending on the selection, it creates 2 threads, one for the UDP server and one for the NiTE tracker. NiTE tracker waits for a new frame from the depth camera till some key was pressed to interrupt the loop, exiting the thread and finally close the program. 
 
-\section{Human-Robot Interaction}
-Finally, the recognized gesture will be interpreted by NAO to execute a specified task. For example. circle gesture would ask NAO to turn around. However, NAO will also be available in Translation Mode by using ALTextToSpeech Library to translate the recognized gesture.
+\subsubsection{UDP Server}
+HRI module has to process the raw information from the depth camera and it has to send it to Brain module for the purpose of gesture recognition. As show in the architecture diagram \ref{fg:hri:architecture}, Brain module must be connected via Wireless Local Area Network (WLAN). WLAN at 2.4GHz readily is available on NAO and lead us to a solution, where we have to choose an UDP protocol to transmit the processed data from depth camera. UDP was chosen over other protocols because depth camera produces 30 depth images per second and transferring such a large amount of data using conventional communication technologies such as TCP will be create much overhead and delay in the communication.
 
+Due to asynchronous requirement of the server, Boost Asio library is used to implement UDP server. Boost.Asio is a cross-platform C++ library for network and low-level I/O programming that provides developers with a consistent asynchronous model using a modern C++ approach.
+
+UDP Server is basically an asynchronous programs that creates an UDP socket and listens to an port on the local machine. In this case, we have created a common configuration file that contains port numbers for each module in this project. Therefore, this server listens to the 5005 on NAO and waiting for the clients to connect. 
+
+Once the client is connected, it stores the endpoint details of the client such as IP address and the port number of the UDP client (Brain module), so that it can communicate with the Brain module whenever there is some data to be transmitted. Asynchronous functionality Boost.Asio calls the callback handler only when there is communication with the clients and waits in the thread for the next communication.
+
+\subsubsection{Gesture Tracker}
+Gesture tracker is a component of HRI module that makes use of NiTE framework to localize the hand of user in the field of view and track the hand position till the hand leaves the field of view (FOV) or hand is touching another object or hidden by an object. 
+
+It uses HandTracker class of NiTE framework and it needs to go through following steps before it can track a hand.
+
+\begin{itemize}
+	\item NiTE framework must be initialized using NiTE::initialize() function.
+	\item Depth camera must be connected and hand tracker must be created using OpenNI compatible  device id. If not, default depth camera will be selected.
+	\item NiTE Gestures such as Wave or Click detection must be initiated in order to localize the hand at first.
+	\item NiTE::HandTrackerFrameRef must be read continuously for a new depth image frame.
+	\item If Wave or Click gesture is detected, then hand tracking will be started using the position of hand that triggered the gesture.
+\end{itemize}
+
+Once the hand is been tracked, the hand will be added an id and it will be added to HandTrackerFrameRef. NiTE framework allow users to add many number of hand and it will be tracked till there is enough computation power  and hands are not overlapping. HandTrackerFrameRef contains the array of all active hands and every hand is an object of NiTE::HandData. It contains the position of the hand in 3 dimensional float stored in a class called Point3f.
+
+
+However, functionalities gesture tracker are not only  to track hand, but also send these information to Brain module via UDP. Therefore, C++  NiTE::HandData objects must be serialized before transmitted over the network.
+
+ 
+
+\subsection{Brain Module}
+
+\subsection{Control Center (CC) Module}
+
+\subsection{Command Module} 
