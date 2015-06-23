@@ -30,19 +30,19 @@ NiTE uses machine learning algorithms to recognize anatomical landmarks and pose
 
 \input{chapter/figures/ni-alg}
 
-In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representations was covered with several localized body part labels as show in the figure \ref{fg:ni:train}. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
+\paragraph*{Training} In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representations was covered with several localized body part labels as show in the figure \ref{fg:ni:train}. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
 
 \input{chapter/figures/ni-train}
 
-Features are located in depth image as shown in the figure \ref{fg:ni:label} and labeled. The yellow crosses indicates the pixel x being classified. The red circles indicate the offset pixel. In (a), the two example features give a large depth difference response. In (b), the same two features at new image locations give a much smaller response.
+\paragraph*{Feature Labeling} Features are located in depth image as shown in the figure \ref{fg:ni:label} and labeled. The yellow crosses indicates the pixel x being classified. The red circles indicate the offset pixel. In (a), the two example features give a large depth difference response. In (b), the same two features at new image locations give a much smaller response.
 
 \input{chapter/figures/ni-label}
 
-Randomized decision forest is the classification algorithm used by NiTE to predict the probability of a pixel belonging to a body part. Randomized decision trees and forests have proven fast and effective multi-class classifiers for many tasks. Figure \ref{fg:ni:decision} shows Randomized Decision Forests. A forest is an ensemble of trees. Each tree consists of split nodes (blue) and leaf nodes (green). The red arrows indicate the different paths that might be taken by different trees for a particular input.
+\paragraph*{Classification} Randomized decision forest is the classification algorithm used by NiTE to predict the probability of a pixel belonging to a body part. Randomized decision trees and forests have proven fast and effective multi-class classifiers for many tasks. Figure \ref{fg:ni:decision} shows Randomized Decision Forests. A forest is an ensemble of trees. Each tree consists of split nodes (blue) and leaf nodes (green). The red arrows indicate the different paths that might be taken by different trees for a particular input.
 
 \input{chapter/figures/ni-decision}
 
-To classify pixel x in image I using Randomized decision tree, one starts at the root and repeatedly evaluates equation \ref{eq:ni:decision}, branching left or right according to the comparison to threshold {$ \tau\ $}. At the leaf node reached in tree t, a learned distribution $ P_{t}(c|I,x) $ over body part labels c is stored. The distributions are averaged together for all trees in the forest to give the final classification.
+\paragraph*{Prediction} To classify pixel x in image I using Randomized decision tree, one starts at the root and repeatedly evaluates equation \ref{eq:ni:decision}, branching left or right according to the comparison to threshold {$ \tau\ $}. At the leaf node reached in tree t, a learned distribution $ P_{t}(c|I,x) $ over body part labels c is stored. The distributions are averaged together for all trees in the forest to give the final classification.
 
 \input{chapter/equations/ni-decision-forest}
 
@@ -52,17 +52,17 @@ After predicted the probability of a pixel belonging to a body part, the body pa
 
 \input{chapter/figures/ni-pose}
 
-Figure \ref{fg:ni:pose} shows example inferences. Synthetic (top row); real (middle); failure modes (bottom). Left column: ground truth for a neutral pose as a reference. In each example we see the depth image, the inferred most likely body part labels, and the joint proposals show as front, right, and top views (overlaid on a depth point cloud). Only the most confident proposal for each joint above a fixed, shared threshold is shown.
+\paragraph*{Joints Proposal} Figure \ref{fg:ni:pose} shows example inferences. Synthetic (top row); real (middle); failure modes (bottom). Left column: ground truth for a neutral pose as a reference. In each example we see the depth image, the inferred most likely body part labels, and the joint proposals show as front, right, and top views (overlaid on a depth point cloud). Only the most confident proposal for each joint above a fixed, shared threshold is shown.
 
-Finally NiTE API returns positions and orientations of the skeleton joints as shown in the figure \ref{fg:ni:joints}. As well as it returns the lengths of the body segments such as the distance between returned elbow and shoulder. Joint positions and orientations are given in the real world coordinate system. The origin of the system is at the sensor. +X points to the right of the, +Y points up, and +Z points in the direction of increasing depth. 
+\paragraph*{Skeletal points} Finally NiTE API returns positions and orientations of the skeleton joints as shown in the figure \ref{fg:ni:joints}. As well as it returns the lengths of the body segments such as the distance between returned elbow and shoulder. Joint positions and orientations are given in the real world coordinate system. The origin of the system is at the sensor. +X points to the right of the, +Y points up, and +Z points in the direction of increasing depth. 
 
 \input{chapter/figures/ni-joints}
 
-Even though NiTE framework can recognize full human body, in this thesis we have used only hand recognition and tracking due to computational limitation of NAO. NiTE provides an interface track only a hand in real time. In order to start tracking a hand, a focus gesture must be gesticulated. There are two supported focus gestures: click and wave. In the click gesture, you should hold your hand up, push your hand towards the sensor, and then immediately pull your hand back towards you. In the wave gesture, you should hold your hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand was touching another object or closer to another body part. Figure \ref{fg:ni:hand} shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
+\paragraph*{Hand Tracker} Even though NiTE framework can recognize full human body, in this thesis we have used only hand recognition and tracking due to computational limitation of NAO. NiTE provides an interface track only a hand in real time. In order to start tracking a hand, a focus gesture must be gesticulated. There are two supported focus gestures: click and wave. In the click gesture, you should hold your hand up, push your hand towards the sensor, and then immediately pull your hand back towards you. In the wave gesture, you should hold your hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand was touching another object or closer to another body part. Figure \ref{fg:ni:hand} shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
 
 \input{chapter/figures/ni-hand}
 
-Focus gestures of NiTE is can be detected even after initiating the hand tracking. NITE gestures are derived from a stream of hand points which record how a hand moves through space over time. Each hand point is the real-world 3D coordinate of the center of the hand, measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. 
+\paragraph*{Focus gestures} Focus gestures of NiTE is can be detected even after initiating the hand tracking. NITE gestures are derived from a stream of hand points which record how a hand moves through space over time. Each hand point is the real-world 3D coordinate of the center of the hand, measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. 
 
 NiTE recommends user to follow these suggestions to gain maximum efficiency from its API. 
 \begin{itemize}

@@ -131,7 +131,36 @@ Brain module is composed of 3 components which are UDP Client, Brain (Gesture Re
 \input{chapter/figures/brain-flow}
 
 \subsubsection{UDP Client}
-Brain module receives processed information such as joint positions, detection of focus gestures and info messages from the HRI module as UDP stream of JSON strings via WLAN. Like UDP Server built inside HRI module, this is also an asynchronous socket that starts at port 5006 and connects to the server by resolving the serverHostName and port number from the common configuration file. Once it is connected, it receives the data from HRI module, when it is started tracking a hand or skeleton and asynchronously calls the callback handler.
+Brain module receives processed information such as joint positions, detection of focus gestures and info messages from the HRI module as UDP stream of JSON strings via WLAN. Like the UDP Server built inside HRI module, this is also an asynchronous socket that starts at port 5006 and connects to the server by resolving the serverHostName and port number from the common configuration file. Once it is connected, it receives the data from HRI module, when it is started tracking a hand or skeleton and asynchronously calls the callback handler.
+
+Since data is transmitted as JSON strings, it has to be parsed and relevant informations must be extracted. For this purpose RapidJSON parser is used. Data flow of Brain module is mainly handled in the callback handler of UDP client because it acts as a source of input. Whenever there is a new data arrived, this asynchronous callback handler is called and it does the following tasks as shown in the flowchart \ref{fg:brain:flow} :
+
+\begin{itemize}
+	\item Extract only newly received data from the buffer by trimming the JSON
+	\item Parse the trimmed JSON to populate hand data vectors. 
+	\item If focus gesture or info messages or only one hand data is received, send it via WebSocket to the clients
+	\item Check if the module is Prediction or Training or Hand Viewer mode
+	\item In the prediction mode :
+		\begin{itemize}
+		\item If the positions of both hands are received, predict the class label
+		\item Add predicted class label and maximum likelihood to the sample, and send it via WebSocket
+		\item If there is a class label not than 0, then send the respective gesture name via WebSocket
+		\end{itemize}
+	\item If it is in the training mode and both hands are received, then add them to the training data
+	\item If it is in the hand viewer mode, just forward all the data to the clients via WebSocket
+\end{itemize} 
+
+\subsubsection{Brain}
+This is the core component of Brain module that plays a vital role in training, classifying and predicting the hand gestures. As described in the section \ref{sec:grt}, this component is based on the gesture recognition pipeline provided by Gesture Recognition Toolkit (GRT).
+
+Flowchart \ref{fg:brain:flow} shows various tasks involved in training and predicting phase of this module. However, GRT pipeline must be configured and customized in order to implement a productive gesture recognition system.
+
+\paragraph*{Classifier} Adaptive Naive Bayes Classifier (ANBC) is chosen to be used in this thesis as described in the section \ref{sec:anbc}. Training data for the same gesture will vary in range from person to person and position to position. Therefore the classifier is enabled for Min-Max scaling that is basically a normalization by rescaling the values between 0 to 1.  This is done by calling enableScaling(true) function of the classifier.
+
+\paragraph*{Null Rejection} - Enabling the scaling with ANBC will classify every input samples to belong to any of the class and thereby, do not have the ability to detect non-gestures. In order to avoid this catastrophe GRT offers Null Rejection features to the algorithms, by this function enableNullRejection(true) and also provides a function to set how big the rejection region should be, by setNullRejectionCoeff(1).
+
+\paragraph*{Post Processing} - As discussed in the section \ref{sec:grt}, prediction output must be post processed in order to avoid false gesture spikes. Therefore, class label filter is added to the pipeline by with this function pipeline.addPostProcessingModule(ClassLabelFilter(30,60)). Minimum count is set to 30 with the buffer size of 60 for the reason that the user must gesticulate for minimum of one second and depth camera produces 30 frames per second. Additionally  pipeline.addPostProcessingModule(ClassLabelChangeFilter()) is added so that there is only one output of the predicted class label, when there is a change in the gesture and all other time it outputs 0, that is reserved for non-gesture.
+
 
 \subsection{Control Center (CC) Module}
 
