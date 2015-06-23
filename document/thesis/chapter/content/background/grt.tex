@@ -32,7 +32,9 @@ In this thesis, we have chose GRT as framework to execute most of the tasks invo
 
 \lstinputlisting[language=c++]{code/grt-pipeline.cpp} \label{code:grt}
 
-\paragraph*{ClassificationData} Accurate labeling of data sets is also critical for building robust machine-learning based systems. The toolkit therefore contains extensive support for recording, labeling and managing supervised and unsupervised data sets for classification, regression and time series analysis. ClassificationData is the data structure used for supervised learning problems and for most of the non-temporal classification algorithms. Code below shows the features of ClassificationData.
+\paragraph*{ClassificationData} Accurate labeling of data sets is also critical for building robust machine-learning based systems. The toolkit therefore contains extensive support for recording, labeling and managing supervised and unsupervised data sets for classification, regression and time series analysis. ClassificationData is the data structure used for supervised learning problems and for most of the non-temporal classification algorithms. C++ code \ref{code:grt:class} shows the features of ClassificationData.
+
+\lstinputlisting[language=c++]{code/grt-class-data.cpp} \label{code:grt:class}
 
 GRT allows us to store and load the training data in GRT format or Comma Separated Values (CSV). Since the training data are stored in human readable format, it enables us to add more samples collected separately or remove false samples from the training dataset. Figure shows saved training data in GRT format.
 

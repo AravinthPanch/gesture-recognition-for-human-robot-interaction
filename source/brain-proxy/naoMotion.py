@@ -61,10 +61,10 @@ class NaoMotion():
             time.sleep(3)
             self.forward_direction = 0.0
             self.sideward_diretion = 0.0
-            self.rotation = 0.25
+            self.rotation = 1.0
             self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
                                         [["Frequency", self.step_frequency]])
-            time.sleep(5)
+            time.sleep(3)
             self.motionProxy.stopMove()
             time.sleep(2)
             self.set_head()
@@ -74,10 +74,10 @@ class NaoMotion():
             time.sleep(3)
             self.forward_direction = 0.0
             self.sideward_diretion = 0.0
-            self.rotation = -0.25
+            self.rotation = -1.0
             self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
                                         [["Frequency", self.step_frequency]])
-            time.sleep(5)
+            time.sleep(3)
             self.motionProxy.stopMove()
             time.sleep(2)
             self.set_head()
@@ -87,17 +87,18 @@ class NaoMotion():
             time.sleep(3)
             self.forward_direction = 0.0
             self.sideward_diretion = 0.0
-            self.rotation = 0.5
+            self.rotation = 1.0
             self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
                                         [["Frequency", self.step_frequency]])
-            time.sleep(5)
+            time.sleep(3)
             self.motionProxy.stopMove()
             time.sleep(3)
-            self.forward_direction = 0.5
+            self.forward_direction = 1.0
+            self.sideward_diretion = 0.0
             self.rotation = 0
             self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
                                         [["Frequency", self.step_frequency]])
-            time.sleep(10)
+            time.sleep(5)
             self.motionProxy.stopMove()
             time.sleep(2)
             self.set_head()
@@ -107,13 +108,14 @@ class NaoMotion():
             time.sleep(3)
             self.forward_direction = 0.0
             self.sideward_diretion = 0.0
-            self.rotation = -0.5
+            self.rotation = -1.0
             self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
                                         [["Frequency", self.step_frequency]])
-            time.sleep(10)
+            time.sleep(3)
             self.motionProxy.stopMove()
             time.sleep(3)
-            self.forward_direction = 0.5
+            self.forward_direction = 1.0
+            self.sideward_diretion = 0.0
             self.rotation = 0
             self.motionProxy.moveToward(self.forward_direction, self.sideward_diretion, self.rotation,
                                         [["Frequency", self.step_frequency]])
