@@ -234,11 +234,17 @@ Our gesture recognition pipeline is configured to have 15 seconds preparation ti
 
 \input{chapter/figures/xtion-origin}
 
-Brain is set to training mode and CC is started to visualize the hand positions in order to align the trainer during the preparation time. Each gesture is isolated in time and gesticulated for 20 seconds. Samples are added to the training dataset and when the timer is not in recording mode, Brain asked the trainer to train the same class again or another. Every gesture was assigned a class label from 1 to 5 and the mappings of class label to hand gesture is stored in a configuration file named signs.json. 
+Brain is set to training mode and CC is started to visualize the hand positions in order to align the trainer during the preparation time. Each gesture is isolated in time and gesticulated for 20 seconds. Samples are added to the training dataset and when the timer stopped the recording, Brain asked the trainer to train the same class again or another. Every gesture was assigned a class label from 1 to 5 and the mapping of class label to hand gesture is stored in a configuration file named signs.json. 
 
-\paragraph*{Range Scaling} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture was gesticulated in 4 different positions and in all possible combinations that hands are kept wider or narrower. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. ANBC is an iterative learning algorithm that improves the classification accuracy with increase in positive training data. 
+\paragraph*{Range Training} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture was gesticulated in 4 different positions as shown in the plot \ref{pl:ges:pos} and in all possible combinations that hands are kept wider or narrower as shown in the plots \ref{fg:ges:plot}. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. ANBC is an iterative learning algorithm that improves the classification accuracy with increase in positive training data. 
 
-\subsection{Prediction}
+\input{chapter/figures/ges-plot}
+
+\paragraph*{Training Data} Once all the gestures are recorded, they replayed using CC to find out, if there is any false samples are added to the training data. Such false data leads to an incorrect model that will ultimately affect the prediction performance. Such samples are removed from the training data and a final dataset with all 5 classes are stored as hri-training-dataset.txt. Additionally, some test data for each gesture is recorded in order to evaluation the accuracy of the recognition system. Furthermore, a set of non-gesture dataset was recorded in order to test the Null Rejection accuracy of the classifier. 
+
+\subsection{Prediction} After successfully collecting the training data for all the gestures, Brain is set to prediction mode where the pipeline is trained. HRI module starts to track the user's hand, Brain predicts a gesture when both the hands are present in the input sample. Figure \ref{fg:cc:ges:1} shows Control Center where prediction output for every sample with maximum likelihood is displayed all the time. The predicted gesture is triggered only after it was gesticulated for more than one second.
+
+\input{chapter/figures/cc-ges-1}
 
 \section{Human-Robot Interaction}
 

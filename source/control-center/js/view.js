@@ -154,7 +154,8 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		var trackerSelection = datGUI.add(guiParams, 'Tracker',
 			{
 				'Hand Tracker': 1, 'Skeleton Tracker': 2,
-				'Hand Tracker From Data': 3, 'Skeleton Tracker From Data': 4
+				'Hand Tracker From Data': 3, 'Skeleton Tracker From Data': 4,
+				'Hand Position From Data': 5
 			}
 		);
 
@@ -180,7 +181,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		handFolder.add(guiParams, 'LeftY').listen();
 		handFolder.add(guiParams, 'LeftZ').listen();
 
-		//handFolder.open();
+		handFolder.open();
 
 		// Based on the tracker selected, draw the joints after clearing the scene
 		trackerSelection.onChange(function (value) {
@@ -196,6 +197,9 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 					startHandTracking();
 					break;
 				case 4:
+					startSkeletonTracking();
+					break;
+				case 5:
 					startSkeletonTracking();
 					break;
 			}
@@ -244,7 +248,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 
 		app.camera.position.x = 0;
 		app.camera.position.y = 0;
-		app.camera.position.z = 6000;
+		app.camera.position.z = 3800;
 
 
 		// Add dom element as second element on which trackball controller should work

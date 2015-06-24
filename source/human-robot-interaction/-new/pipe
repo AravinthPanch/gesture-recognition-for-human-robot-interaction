@@ -1,0 +1,50 @@
+GRT_PIPELINE_FILE_V1.0
+PipelineMode: CLASSIFICATION_MODE
+NumPreprocessingModules: 0
+NumFeatureExtractionModules: 0
+NumPostprocessingModules: 0
+Trained: 1
+PreProcessingModuleDatatypes:
+FeatureExtractionModuleDatatypes:
+ClassificationModuleDatatype:	ANBC
+PostProcessingModuleDatatypes:
+GRT_ANBC_MODEL_FILE_V2.0
+Trained: 1
+UseScaling: 1
+NumInputDimensions: 6
+NumOutputDimensions: 0
+NumTrainingIterationsToConverge: 0
+MinNumEpochs: 0
+MaxNumEpochs: 100
+ValidationSetSize: 20
+LearningRate: 0.1
+MinChange: 1e-05
+UseValidationSet: 0
+RandomiseTrainingOrder: 1
+UseNullRejection: 1
+ClassifierMode: 0
+NullRejectionCoeff: 1
+NumClasses: 1
+NullRejectionThresholds:  1.30889
+ClassLabels:  1
+Ranges: 
+-841.427	-17.4535
+-330.703	636.283
+-330.703	2460.07
+-330.703	707.854
+-330.703	625.768
+-330.703	2563.5
+*************_MODEL_*************
+Model_ID: 1
+N: 6
+ClassLabel: 1
+Threshold: 1.30889
+Gamma: 1
+TrainingMu: 2.78903
+TrainingSigma: 1.48014
+Mu:
+	0.486359	0.689316	0.818847	0.645637	0.69752	0.812491
+Sigma:
+	0.295095	0.147658	0.0850061	0.256912	0.150318	0.0864461
+Weights:
+	1	1	1	1	1	1
