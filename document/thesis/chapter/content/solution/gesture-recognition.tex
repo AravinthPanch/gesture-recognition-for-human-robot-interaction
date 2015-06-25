@@ -26,14 +26,18 @@ Therefore, we have chosen five simple static gestures as shown in the figure \re
 
 \paragraph*{Click} It is gesticulated by holding a hand up, push the hand towards the sensor then immediately pull the hand backwards. 
 
-\subsection{Training}
+\subsection{Training} 
 Our gesture recognition pipeline is configured to have 15 seconds preparation time and 20 seconds recording time with 6 dimensional input of both left and right hands at positions x, y and z in the Cartesian coordinates. Depth camera is at the origin of the coordinate system as shown in the figure \ref{fg:xtion:origin}.
 
 \input{chapter/figures/xtion-origin}
 
 Brain is set to training mode and CC is started to visualize the hand positions in order to align the trainer during the preparation time. Each gesture is isolated in time and gesticulated for 20 seconds. Samples are added to the training dataset and when the timer stopped the recording, Brain asked the trainer to train the same class again or another. Every gesture was assigned a class label from 1 to 5 and the mapping of class label to hand gesture is stored in a configuration file named signs.json. 
 
-\paragraph*{Range Training} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture was gesticulated in 4 different positions as shown in the plot \ref{pl:ges:pos} and in all possible combinations that hands are kept wider or narrower as shown in the plots \ref{fg:ges:plot}. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. ANBC is an iterative learning algorithm that improves the classification accuracy with increase in positive training data. 
+\input{chapter/figures/ges-distance}
+
+\paragraph*{Minimum and Maximum Distance Training} \label{sec:range:train} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture was gesticulated in 4 different positions as shown in the plot \ref{pl:ges:pos} and in all possible combinations that hands are kept wider or narrower as shown in the plots \ref{fg:ges:plot}. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. 
+
+ANBC is an iterative learning algorithm that improves the classification accuracy with increase in positive training data. Plot \ref{fg:ges:plot} shows that the trained data makes our gesture recognition system to detect gestures at the minimum distance from 1700 mm to the maximum distance 2500 mm away from the sensor and 800 mm left or right to the sensor. If the user leaves this field of view, the hand tracking algorithm will lose the hand or gesture will fall in the Null Rejection region of the classifier.
 
 \input{chapter/figures/ges-plot}
 

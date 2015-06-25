@@ -16,5 +16,11 @@
 
 \paragraph*{Click} This gesture is used to gain the control of the robot, when the robot lost its balance and fell down. When this gesture is executed, robot wakes up from the sleeping mode and sets itself to the standing position.
 
-\subsection{Gesture-to-Gesture}
+\input{chapter/figures/nao-head}
+
+\subsection{Head Position} As described in the section \ref{sec:range:train}, collection of training data for each gesture was carried out in 4 different positions in front of the robot. During this phase robot was set to standing position where the height of the robot is 58 cm. Figure \ref{fg:nao:head} shows that NAOs head can be tilted by adjusting the pitch and yaw of the head joint. In order to avoid confusing camera perspective during the training, NAOs head pitch was set to -18.0 degrees and yaw was set to 0.0 degree as shown in the figure \ref{fg:nao:head:stand}. At this angle, field of view of the depth camera was enough to cover upper body of the user. 
+
+However, keeping the head tilted with mounted camera will cause the robot to lose balance. Therefore, NAOs head position is reset to initial stand position before it executes the received Gesture-to-Motion command. Once the locomotion phase is completed it looks back at the user. This functionality greatly improves in locating the user at any position in the Minimum-Maximum range as show in the plot \ref{pl:ges:pos}.
+
+\subsection{Gesture-to-Gesture} Apart from offering the essential functionalities, Command module also provides Gesture-to-Gesture translation where NAO will be imitating hand gestures of the user.  Shoulder Roll and Pitch, Shoulder Roll and Yaw angles were measured by manually by positioning NAO for every gesture. When a gesture is detected, the Command modules sets the predefined angles to the shoulder and elbow joints of both the hands of NAO, therefore, translating the human hand gesture to a robotic hand gesture.
 
