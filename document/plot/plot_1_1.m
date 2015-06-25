@@ -1,4 +1,4 @@
-file_name = '2-1.csv';
+file_name = '1-1.csv';
 data = csvread(file_name,0,1);
 lX = data(:,1);
 lY = data(:,2);
@@ -7,18 +7,10 @@ rX = data(:,4);
 rY = data(:,5);
 rZ = data(:,6);
 
+a = 500;
 
-c = 'red';
-scatter(lX,lY,c);
-hold on;
-c = 'black';
-scatter(rX,rY,c);
-hold on;
-a = 50;
-c = 'blue';
-scatter(0,0,a,c,'filled');
-legend('Left Hand','Right Hand', 'Sensor', 'Location','southwest')
-ylim([-50 700])
+scatter3(mean(lX),mean(lY), mean(lZ), a, 'filled');
+
 
 
 

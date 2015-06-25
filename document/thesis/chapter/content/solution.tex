@@ -15,243 +15,27 @@
 
 \input{chapter/figures/hri-architecture}
 
-\subsection{Human-Robot Interaction (HRI) Module} HRI module is implemented first in order to get the raw data from the depth sensor and process it to track the skeletal joint positions in real world coordinates. It developed in C++ using a core library called Boost and NiTE 2 framework is used for the purpose of skeletal joints tracking. This module is deployed on the general purpose computer that is running inside the robot with necessary libraries and drivers.
+% Subsections of implmentation
+\input{chapter/content/solution/hri}
+\input{chapter/content/solution/brain} 
+\input{chapter/content/solution/cc}
+\input{chapter/content/solution/command}
+\input{chapter/content/solution/develop-deploy}
 
-Boost is a set of libraries for the C++ programming language that provide support for tasks and structures such as linear algebra, pseudo random number generation, multi threading, image processing, regular expressions, and unit testing. It contains over eighty individual libraries.
 
-HRI module is composed of 3 components which are UDP Server, Gesture and Skeleton tracker. Flowchart \ref{fg:hri:flow} shows the data flow of this module where the user is asked to select Gesture or Skeleton tracker, when the program is started. It creates 2 threads depending on the selection: 
+% Sections
+\input{chapter/content/solution/gesture-recognition}
+\input{chapter/content/solution/robot-interaction}
 
-\begin{itemize}
-	\item UDP Server thread - Asynchronously send data to the client and thread is always running.
-	\item Gesture or Skeleton tracker thread - A loop in the thread polls for a new frame from the depth camera till some key is pressed. If loop is interrupted, then the thread is exited and finally program is closed.
 
-\end{itemize}
 
-Gesture and Skeleton tracker serve the purpose in extracting features from the raw data to implement a hand gesture recognition system. However, Skeleton tracker tracks 15 skeletal points in the human body and that leads to very intensive computation. Due to processing limitations of NAO, we chose to use Gesture tracker as it tracks only hand joints. Following sections describe internal working HRI module.
 
-\input{chapter/figures/hri-flow}
 
-\subsubsection{UDP Server}
-HRI module has to process the raw information from the depth camera and it has to send it to Brain module for the purpose of gesture recognition. As show in the architecture diagram \ref{fg:hri:architecture}, Brain module must be connected via Wireless Local Area Network (WLAN). WLAN at 2.4GHz readily is available on NAO and lead us to a solution, where we have to choose an UDP protocol to transmit the processed data from depth camera. UDP was chosen over other protocols because depth camera produces 30 depth images per second and transferring such a large amount of data using conventional communication technologies such as TCP will be create much overhead and delay in the communication.
 
-Due to asynchronous requirement of the server, Boost Asio library is used to implement UDP server. Boost.Asio is a cross-platform C++ library for network and low-level I/O programming that provides developers with a consistent asynchronous model using a modern C++ approach.
 
-UDP Server is basically an asynchronous programs that creates an UDP socket and listens to an port on the local machine. In this case, we have created a common configuration file that contains port numbers for each module in this project. Therefore, this server listens to the 5005 on NAO and waiting for the clients to connect. 
 
-Once the client is connected, it stores the endpoint details of the client such as IP address and the port number of the UDP client (Brain module), so that it can communicate with the Brain module whenever there is some data to be transmitted. Asynchronous functionality Boost.Asio calls the callback handler only when there is communication with the clients and waits in the thread for the next communication.
 
-\subsubsection{Gesture Tracker} \label{sec:hri:ges}
-Gesture tracker is a component of HRI module that makes use of NiTE framework to localize the hand of user in the field of view and track the hand position till the hand leaves the field of view (FOV) or hand is touching another object or hidden by an object. 
 
-It uses HandTracker class of NiTE framework and it needs to go through following steps before it can track a hand. Section \ref{sec:nite} discusses extensively about the functionalities of NiTE framework.
 
-\begin{itemize}
-	\item NiTE framework must be initialized using nite::initialize() function.
-	\item Depth camera must be connected and nite::HandTracker must be created using OpenNI compatible  device id. If not, default depth camera will be selected.
-	\item NiTE Focus Gestures such as Wave or Click detection must be initiated in order to localize the hand at first.
-	\item nite::HandTrackerFrameRef must be read continuously for a new gesture.
-	\item If Wave or Click gesture is detected, then hand tracking will be started using the position of hand that triggered the gesture.
-\end{itemize}
-
-Once the hand is been tracked, the hand will be added an id and it will be added to HandTrackerFrameRef. NiTE framework allow users to add many number of hands and it will be tracked till there is enough computation power and hands are not overlapping. HandTrackerFrameRef contains the array of all active hands and every hand is an object of nite::HandData. It contains the position of the hand in 3 dimensional float stored in a class called Point3f.
-
-Unlike nite::UserTracker, HandTracker class can return only the hand position in the space and it can not specify whether it is a left or right hand. It is very necessary information for hand gesture training and classification because confused hand names will lead to a false model of the hand gesture and ultimately resulting in a bad performance. Hence, we have implemented a simple logic with the help of an assumption that user will gesticulate the focus gesture (Wave or Click) only in the order of right hand first and left hand second. 
-
-Four integer variables leftHand, rightHand, lastLostHand and handsSize are used to find whether tracked or hand is left or right. The logic behind is that when handsSize and lastLostHand is zero and a new hand is found, that is considered as right hand and its nite::HandData::HandId is stored in the variable rightHand. Respectively, the next hand is stored as leftHand and handsSize counter is increased. If a hand is lost or not tracking, then lastLostHand will be updated with the id of the hand that was lost. When there is a new hand and handsSize and lastLostHand are not zero, then new handId will be set to leftHand or rightHand based on lastLostHand variable.
-
-However, functionalities gesture tracker are not only  to track hand, but also send these information to Brain module via UDP. Therefore, C++  nite::HandData objects must be serialized before transmitted over the network. Therefore, we chose JSON serialization and send them across the network as strings as shown in \ref{code:hand:data}
-
-\begin{lstlisting}
-	{
-		"RIGHT": ["275.456", "339.026", "1841.850"], 
-		"LEFT": ["-456.289", "353.880", "1761.360"]
-	}
-\end{lstlisting}
-\label{code:hand:data}
-
-Furthermore, HRI module send informations such as detected focus gesture and info messages to Brain module as shown in \ref{code:hand:info} to be displayed on the control center dashboard. Info messages helps us to know the status of computationally intensive hand tracking algorithm which is the core component of HRI module. 
-
-\begin{lstlisting}
-{"GESTURE":"WAVE"}
-{"GESTURE":"CLICK"}
-{"INFO": "Found new hand with id 1"}
-{"INFO": "LEFT Hand is lost"}
-{"INFO": "RIGHT Hand is lost"}
-{"INFO": "Both hands are lost"}
-{"INFO": "LEFT Hand is at FOV"}
-\end{lstlisting}
-\label{code:hand:info}
-
-\subsubsection{Skeleton Tracker}
-Skeleton Tracker is a component of HRI module that is more complex and computational intensive, since it uses nite::UserTracker to track 15 bone joints of human body. Like Gesture Tracker in the section \ref{sec:hri:ges}, this component has to follow few procedure before tracking and it starts with an UDP server to unicast joint positions to Brain module.
- 
- \begin{itemize}
- 	\item NiTE framework must be initialized using nite::initialize() function.
- 	\item Depth camera must be connected and nite::UserTracker must be created using OpenNI compatible  device id. If not, default depth camera will be selected.
- 	\item Pose in front the camera as shown in the figure \ref{fg:ni:skeleton} to let the algorithm calibrate the body position. 
- 	\item nite::UserTrackerFrameRef must be read continuously for a new user and if a new user is found, skeleton tracking will be started.
- \end{itemize}
- 
- \input{chapter/figures/ni-skeleton}
- 
- Unlike nite::HandTracker, UserTracker class of NiTE uses complex algorithms to keep tracking the skeleton even when the user poses in many ways. Therefore, it needs the data provided by NiTE framework which contain 1 million training samples. In addition, UserTracker can return 15 skeletal joints position and orientation and they are labeled by the joint name. This feature helps us to avoid the implementation to find the hand name. Moreover, details of joint orientations offer us a chance to calculate positions not only in Cartesian coordinates, but also in spherical coordinates system which is essential for many complex hand gesture recognition solutions. Furthermore, SkeletonJoint class indicates how sure the NiTE skeleton algorithm is about the position data stored about the joint. The value is between 0 and 1, with increasing value indicating increasing confidence. Section \ref{sec:nite} discusses extensively about the algorithm of NiTE.
- 
- Finally, Skeleton tracker serializes the C++ nite::UserData objects to JSON in strings  as shown in \ref{code:skeleton:data} in order to asynchronously transfer to the client for further gesture recognition procedures.
- 
- \begin{lstlisting}
-	{
-		"HEAD": ["-274.5578", "583.2249", "1933.924"],
-		"NECK": ["-286.0945", "471.8282", "1996.656"],
-		"LEFT_SHOULDER": ["-399.2939", "453.2498", "1975.477"],
-		"RIGHT_SHOULDER": ["-172.895", "490.4066", "2017.835"],
-		"LEFT_ELBOW": ["-673.5372", "389.9277", "1973.389"],
-		"RIGHT_ELBOW": ["77.3149", "437.1607", "2201.007"],
-		"LEFT_HAND": ["-950.7228", "362.1895", "1930.967"],
-		"RIGHT_HAND": ["351.137", "509.7826", "2453.827"],
-		"TORSO": ["-258.3584", "272.1229", "2023.593"],
-		"LEFT_HIP": ["-321.3845", "57.52153", "2033.549"],
-		"RIGHT_HIP": ["-139.8603", "87.31343", "2067.511"],
-		"LEFT_KNEE": ["-313.5818", "-344.5291", "2039.209"],
-		"RIGHT_KNEE": ["-129.7786", "-280.5863", "2110.95"],
-		"LEFT_FOOT": ["-341.4384", "-665.9058", "2189.055"],
-		"RIGHT_FOOT": ["-172.1151", "-559.3973", "2262.547"]
-	}
- \end{lstlisting}
- \label{code:skeleton:data}
- 
-\subsection{Brain Module} Brain module is the core functional part of this thesis. It is named as Brain since it refers to the anatomical brain that plays the vital role of the human life in learning, classifying, predicting and decision making. 
-
-Brain module is composed of 3 components which are UDP Client, Brain (Gesture Recognition Pipeline) and WebSocket Server. Flowchart \ref{fg:brain:flow} shows the data flow of this module where the user is asked to select Prediction or Training of Hand Viewer mode, when the program is started. It creates a thread and runs a loop on the main thread depending on the selection: 
-
-\begin{itemize}
-	\item UDP Client thread - Asynchronously receiving data from HRI module and thread is always running.
-	\item Prediction or Training of Hand Viewer on main program thread -  Loop in the main thread run always and check if the Brain module is in prediction or training mode. If loop is interrupted, then the thread is exited and finally program is closed.	
-\end{itemize}
-
-\input{chapter/figures/brain-flow}
-
-\subsubsection{UDP Client}
-Brain module receives processed information such as joint positions, detection of focus gestures and info messages from the HRI module as UDP stream of JSON strings via WLAN. Like the UDP Server built inside HRI module, this is also an asynchronous socket that starts at port 5006 and connects to the server by resolving the serverHostName and port number from the common configuration file. Once it is connected, it receives the data from HRI module, when it is started tracking a hand or skeleton and asynchronously calls the callback handler.
-
-Since data is transmitted as JSON strings, it has to be parsed and relevant informations must be extracted. For this purpose RapidJSON parser is used. Data flow of Brain module is mainly handled in the callback handler of UDP client because it acts as a source of input. Whenever there is a new data arrived, this asynchronous callback handler is called and it does the following tasks as shown in the flowchart \ref{fg:brain:flow} :
-
-\begin{itemize}
-	\item Extract only newly received data from the buffer by trimming the JSON
-	\item Parse the trimmed JSON to populate hand data vectors. 
-	\item If focus gesture or info messages or only one hand data is received, send it via WebSocket to the clients
-	\item Check if the module is Prediction or Training or Hand Viewer mode
-	\item In the prediction mode :
-		\begin{itemize}
-		\item If the positions of both hands are received, predict the class label
-		\item Add predicted class label and maximum likelihood to the sample, and send it via WebSocket
-		\item If there is a class label not than 0, then send the respective gesture name via WebSocket
-		\end{itemize}
-	\item If it is in the training mode and both hands are received, then add them to the training data
-	\item If it is in the hand viewer mode, just forward all the data to the clients via WebSocket
-\end{itemize} 
-
-\subsubsection{Brain}
-This is the core component of Brain module that plays a vital role in training, classifying and predicting the hand gestures. As described in the section \ref{sec:grt}, this component is based on the gesture recognition pipeline provided by Gesture Recognition Toolkit (GRT).
-
-Flowchart \ref{fg:brain:flow} shows various tasks involved in training and predicting phase of this module. However, GRT pipeline must be configured and customized in order to be a productive gesture recognition system.
-
-\paragraph*{Classifier} Adaptive Naive Bayes Classifier (ANBC) is chosen to be used in this thesis as described in the section \ref{sec:anbc}. Training data for the same gesture will vary in range from person to person and position to position. Therefore the classifier is enabled for Min-Max scaling that is basically a normalization by rescaling the values between 0 to 1.  This is done by calling enableScaling(true) function of the classifier.
-
-\paragraph*{Null Rejection} Enabling the scaling with ANBC will classify every input samples to belong to any of the class and thereby, do not have the ability to detect non-gestures. In order to avoid this catastrophe GRT offers Null Rejection features to the algorithms, by this function enableNullRejection(true) and also provides a function to set how big the rejection region should be, by setNullRejectionCoeff(1).
-
-\paragraph*{Post Processing} As discussed in the section \ref{sec:grt}, prediction output must be post processed in order to avoid false gesture spikes. Therefore, class label filter is added to the pipeline by with this function ClassLabelFilter(30,60). Minimum count is set to 30 with the buffer size of 60 for the reason that the user must gesticulate for minimum of one second and depth camera produces 30 frames per second. Additionally  ClassLabelChangeFilter() is added so that there is only one output of the predicted class label, when there is a change in the gesture and all other time it outputs 0, that is reserved for non-gesture.
-
-\paragraph*{Training Data} We used ClassificationData data structure of GRT to collect training data of static gestures. It must be initialized with number of dimensions the samples will be. In our thesis we modeled hand gestures with two hand positions in 3 dimensional Cartesian coordinates, therefore training data has 6 dimensions.
-As described in the section \ref{sec:grt}, GRT enables us to execute various operations on the training data such as recording, labeling, partitioning and testing.  
-
-\paragraph*{Training} When Brain is set to training mode, it starts the TrainingDataRecordingTimer. We have configured 20 seconds recording time and 15 seconds preparation time. Preparation time helps the trainer to go in front of depth camera and stay in the pose of the gesture that is going to be recorded. Furthermore, It initializes the Class Label to 1 and it will be increased by one for other classes. Class Label can not be assigned to 0 because GRT reserves it for non-gestures. If positions of left and right hand are received from the HRI module, Brain starts to add the samples with the chosen Class Label to the training data till the timer is in recording mode and simultaneously it sends to received samples via WebSocket to the clients to visualize. When the recording timer is stopped, Brain requests the trainer to choose any of the following options :
-
-\begin{itemize}
-	\item Train the same class again - New samples will be added to the training data for same Class Label.
-	\item Train the next class - Class Label is increased by one and new samples are added.
-	\item Stop training and go to prediction mode - Saves the training data to a file named as hri-training-dataset.txt and trains the pipeline and goes into prediction mode
-\end{itemize}
-
-\paragraph*{Prediction} When Brain is set to prediction mode, first thing it does, is loading the training labeled classification data and train the pipeline to create models for each gesture. Second step is to look for any specific pipeline configuration such as classifier and pre/post processing modules. Such configurations can also be loaded into pipeline as GRT pipeline files. This feature of GRT offers us an opportunity to run the gesture recognition application using dynamic configurations. Once Brain starts to receive input samples via UDP, it feeds it to the pipeline to predict. Finally, the prediction results such as predicted class label, maximum likelihood, class distances and weights can returned by the pipeline. Flexible GRT pipeline provides many more features such as post-processed and unprocessed prediction results. Therefore, the prediction results for every input sample can be obtained. The post-processed result will allow Brain to send the detected gesture only once, even if the user is continuously gesticulating the same gesture.  
-
-\subsubsection{WebSocket Server}
-WebSocket class is developed using websocketpp C++ library that basically uses BOOST libraries. It is a simple implementation of WebSocket server that listens to the port number 5008. The port number can be configured dynamically by loading the common configuration file. WebSocket class is initialized by UDP Client class and keeps the server running in a separate thread. Once clients such as CC module and Command module are connected, it stores the endpoint connection handlers of them for later communication. 
-
-\subsection{Control Center (CC) Module} Control Center plays an important role in this thesis. It is the eye that visualizes the internal status of the modules. It was first built in order to visually render the skeletal points of the human body that is been tracked by NiTE. Later it became one place to interact with the whole system. 
-
-CC is developed in Javascript with the help of WebGL renderer and jQuery. Everyday cloud computing is pushing computer applications to the Internet, which allows application software to be operated using internet-enabled devices. Due to this reason browser based cross-compatible applications are getting popular and that leads to the huge involvement of development in Javascript. Therefore, we chose a cross-compatible platform that work out of the box than implementing the same in C++ using OpenGL.
-
-\paragraph*{Javascript} It is a dynamic programming language whose implementations allow client-side scripts to interact with the user, control the browser, communicate asynchronously, and alter the document content that is displayed. However, It is also used in server-side network programming with runtime environments such as Node.js, game development and the creation of desktop and mobile applications.
-
-\paragraph*{ThreeJS} It is a lightweight 3D library with a very low level of complexity, written purely in Javascript that can render 3D objects in various renderer such as canvas, svg, CSS3D and WebGL. In this thesis, we have chosen WebGL renderer to implement the Control Center since it is faster than others in rendering tracked skeletal points at 30 frames per second.
-
-\paragraph*{WebSocket Client} CC receives the data from Brain modules via WebSocket. The client uses the native Javascript WebSocket implementation that is supported by many latest browsers. It connects to the WebSocket server that is listening on the port 5008. When the client receives the data, it updates the data buffer asynchronously.
-
-\paragraph*{Architecture} Control Center is implemented in MV* (Model View) design pattern that is quite popular among Javascript developers. Since the requirement of this module needs many libraries, a dependency injection library called RequireJS is used to load all the libraries when the application is opened in the browser.  
-
-\paragraph*{Libraries} Along with ThreeJS, libraries such as jQuery, underscore, TrackBallControl and datGUI are used in this module. jQuery is most common library for Document Object Model (DOM) manipulation in the browser. Operations on arrays and objects are made easier with the help of underscore. TrackBallControl allows to do manipulations such as rotate, revolve and transform the objects which rendered in WebGL. datGUI is a lightweight simple library to create GUI elements to build a dashboard in few lines of code.
-
-\paragraph*{Model and View} To avoid complexity this Javascript application does not have any sophisticated model. It simply uses an array named skeletonBuffer that holds the JSON data received via WebSocket. All these actions are carried out in the store of the application. View does large part of the work for CC. At first it initializes the DOM and add GUI elements to it. Then ThreeJS scene is created with WebGL renderer and adds a perspective camera, a plane geometry as a base and a triangle to show origin of the sensor. By default CC is in hand tracking mode and it creates two spheres to visualize the position of left and right hand. In skeleton tracking mode it creates 15 spheres two show all the skeletal points that are being tracked by NiTE. Control Center offers us to replay the positions of joints by storing them to a file and selecting Hand Tracker From Data option in the GUI. View automatically iterates through all the objects in the array and renders them at 60 fps. 
-
-Figure shows how Control Center looks. UI element at left bottom in the console box that shows all the receiving data via WebSocket. 
-
-\subsection{Command Module} 
-
-\subsection{Development Environment} 
-
-\subsection{Build and Deploy}
-
-\section{Gesture Recognition}
-Above sections described the necessary tools that are implemented to execute a real time hand gesture recognition system. In this thesis we have decided to train the system with static gestures. However, the system can be easily extended to recognize temporal gestures with the flexibility of Gesture Recognition Toolkit (GRT). Initially a set of simple gestures are chosen and the training data is collected for all those gestures.
-
-\subsection{Hand Gestures Modeling}
-In this thesis we have modeled five static hand gestures involving both the hands of the user. These are communicative hand gestures and they symbolize few referential action. Apart from Sign Language used by people with speech disability, various hand gestures are being used by humans in their day to day living. Figure \ref{fg:ges:signal} shows the hand signals used by different personnels in wide variety of application.
-
-\input{chapter/figures/ges-signal}
-
-This thesis focuses on hand gesture recognition to felicitate Human-Robot interactions. One greater application using hand gestures for robots is commanding the robot to move to another position. Additionally it could translate the gestures to spoken words to help people with speech disability.   
-
-\input{chapter/figures/ges-hands}
-
-Therefore, we have chosen five simple static gestures as shown in the figure \ref{fg:ges:hands} which are conceptualized by the traffic police hand signals. All the gestures are modeled to the direction of the user and they will be understood as mirrored gestures. For example, left side of the user will be right side to the robot that is facing the user. Additionally our system makes use of two dynamic gestures of NiTE which are used as focus gestures to gain control or start hand tracking.
-
-\paragraph*{Turn Left} It is gesticulated as shown in the figure \ref{fg:ges:2} by holding the right hand up and left hand wide open. It refers to an action that turn to left and stay in position. 
-
-\paragraph*{Turn Right} It is gesticulated as shown in the figure \ref{fg:ges:3} by holding the left hand up and right hand wide open. It refers to an action that turn to right and stay in position. 
-
-\paragraph*{Move Left} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the right hand down and left hand wide open. It refers to an action that turn to left and keep moving in the forward direction.
-
-\paragraph*{Move Right} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the left hand down and right hand wide open. It refers to an action that turn to right and keep moving in the forward direction.
-
-\paragraph*{Walk} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the left and right hand up. It refers to an action that keep moving in the forward direction.
-
-\paragraph*{Wave} It is gesticulated by holding a hand up and move it several times from left to right and back. This gesture is executed to initiate hand tracking, if no hands are tracked or tracked hand is been lost.
-
-\paragraph*{Click} It is gesticulated by holding a hand up, push the hand towards the sensor then immediately pull the hand backwards. 
-
-\subsection{Training}
-Our gesture recognition pipeline is configured to have 15 seconds preparation time and 20 seconds recording time with 6 dimensional input of both left and right hands at positions x, y and z in the Cartesian coordinates. Depth camera is at the origin of the coordinate system as shown in the figure \ref{fg:xtion:origin}.
-
-\input{chapter/figures/xtion-origin}
-
-Brain is set to training mode and CC is started to visualize the hand positions in order to align the trainer during the preparation time. Each gesture is isolated in time and gesticulated for 20 seconds. Samples are added to the training dataset and when the timer stopped the recording, Brain asked the trainer to train the same class again or another. Every gesture was assigned a class label from 1 to 5 and the mapping of class label to hand gesture is stored in a configuration file named signs.json. 
-
-\paragraph*{Range Training} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture was gesticulated in 4 different positions as shown in the plot \ref{pl:ges:pos} and in all possible combinations that hands are kept wider or narrower as shown in the plots \ref{fg:ges:plot}. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. ANBC is an iterative learning algorithm that improves the classification accuracy with increase in positive training data. 
-
-\input{chapter/figures/ges-plot}
-
-\paragraph*{Training Data} Once all the gestures are recorded, they replayed using CC to find out, if there is any false samples are added to the training data. Such false data leads to an incorrect model that will ultimately affect the prediction performance. Such samples are removed from the training data and a final dataset with all 5 classes are stored as hri-training-dataset.txt. Additionally, some test data for each gesture is recorded in order to evaluation the accuracy of the recognition system. Furthermore, a set of non-gesture dataset was recorded in order to test the Null Rejection accuracy of the classifier. 
-
-\subsection{Prediction} After successfully collecting the training data for all the gestures, Brain is set to prediction mode where the pipeline is trained. HRI module starts to track the user's hand, Brain predicts a gesture when both the hands are present in the input sample. Figure \ref{fg:cc:ges:1} shows Control Center where prediction output for every sample with maximum likelihood is displayed all the time. The predicted gesture is triggered only after it was gesticulated for more than one second.
-
-\input{chapter/figures/cc-ges-1}
-
-\section{Human-Robot Interaction}
-
-\subsection{Gesture-to-Speech Translation}
-
-\subsection{Gesture-to-Gesture Translation}
-
-\subsection{Gesture-to-Motion Translation}
 
 
