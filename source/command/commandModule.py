@@ -1,27 +1,24 @@
 __author__ = 'Aravinth Panchadcharam'
 __email__ = "me@aravinth.info"
+__project__ = 'Gesture Recognition For Human-Robot Interaction'
 __date__ = '09/06/15'
 
 import logging
 import sys
 import json
 import websocket
-import time
-from naoqi import ALProxy
 from naoMotion import NaoMotion
 
 
-class BrainProxy():
+class CommandModule():
     def __init__(self):
         self.init_logger()
         self.read_config()
-        self.log.info("Brain Proxy started")
+        self.log.info("Command module started")
         self.host_name = str(self.config['serverHostName'])
-        # self.host_name = "nao2.local"
         self.naoqi_port = int(self.config['naoQiPort'])
 
         self.naoMotion = NaoMotion(self.host_name, self.naoqi_port)
-        self.ttsProxy = ALProxy("ALTextToSpeech", self.host_name, self.naoqi_port)
 
         websocket.enableTrace(False)
         self.ws_uri = "ws://localhost:" + str(self.config['websocketPort'])
@@ -32,34 +29,33 @@ class BrainProxy():
         self.ws.on_open = self.on_open
         self.ws.run_forever()
 
-    def on_message(self, ws, message):
+    # When message received, command Nao Action
+    def on_message(self, message):
         self.log.info("Received : " + message)
         sign = str(json.loads(message)['GESTURE'])
-        self.ttsProxy.say(sign)
-        # time.sleep(3)
-        self.log.info("Message sent to Al-TTS")
-        # self.naoMotion.handGesture(data)
-        self.naoMotion.walk(sign)
+        self.naoMotion.gesture_to_speech(sign)
+        self.naoMotion.gesture_to_motion(sign)
 
-
-    def on_error(self, ws, error):
+    def on_error(self, error):
         print error
 
-    def on_close(self, ws):
+    def on_close(self):
         self.log.info("Connection closed")
 
-    def on_open(self, ws):
+    def on_open(self):
         self.ws.send("AL")
         self.log.info("Connected to Brain")
 
+    # Read the common config file
     def read_config(self):
         with open('../config/hri.json') as config_file:
             self.config = json.load(config_file)
         self.log.info("Config file parsed")
 
+    # Initiate the logger with basic config
     def init_logger(self):
         # logging.basicConfig()
-        self.log = logging.getLogger('brain')
+        self.log = logging.getLogger('command')
         self.log.setLevel(logging.INFO)
         format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
         ch = logging.StreamHandler(sys.stdout)
@@ -68,5 +64,4 @@ class BrainProxy():
 
 
 if __name__ == "__main__":
-    BrainProxy()
-
+    CommandModule()
