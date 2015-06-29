@@ -1,3 +1,20 @@
-\subsection{Development Environment} 
+\subsection{Toolchain} During the implementation of this thesis, many tools are used for various purposes. Every module in this thesis uses different programming language, therefore, different toolchains are used. Following sections talk about the tools that are used to develop, build, deploy and document this thesis. 
 
-\subsection{Build and Deploy}
+\subsubsection{Develop}
+\paragraph*{Xcode} Core functionalities of this thesis are developed in C++ on Mac OSX. Therefore, Xcode is used to develop HRI and Brain module. Xcode is an IDE containing a suite of software development tools developed by Apple for developing software for OS X and iOS.
+
+\paragraph*{WebStorm} Control Center module is developed in Javascript with the help of a popular IDE for Web development called as WebStorm. It is a commercial IDE for JavaScript, CSS and HTML built on JetBrains IntelliJ IDEA platform.
+
+\paragraph*{PyCharm} Command module is developed in Python using an IDE name as PyCharm. It is implemented by a company called JetBrains and it provides code analysis, a graphical debugger, an integrated unit tester and supports web development with Django.
+
+\subsubsection{Build}
+\paragraph*{Javascript and Python} They are traditionally implemented as interpreted languages and therefore they do not need any special compilers to build them. Control Center module needs just a latest browser with WebSocket and WebGL support to run the Javascript code. Python binary is available is most modern operating systems and we used Python version 2.7.6 to run Command module. 
+
+\paragraph*{C++} The code that was implemented in C++ used 2 different compilers to build it, because the development is done on 64-bit Mac operating system and target system is a 32-bit Gentoo Linux operating system. 
+
+\paragraph*{\indent Clang and Xcode} Development code was built using Clang with LLVM libc++ Standard library. Clang is a compiler developed by Apple for C, C++, Objective-C and Objective-C++ programming languages. Build settings such as header, library search paths, macros, environment variables and linking are configured using Xcode. 
+
+\paragraph*{\indent GCC and Cmake} Production code was built using GNU Compiler Collection (GCC) with libstdc++ GNU++11 Standard library. It is a compiler system produced by the GNU Project supporting various programming languages such as C, C++, Objective-C, Objective-C++, Fortran, Java, Ada, and Go.  Build settings such as header, library search paths, macros, environment variables and linking are configured using Cmake. CMake is cross-platform free and open-source software for managing the build process of software using a compiler-independent method.
+
+\paragraph*{Virtual NAO OS} Aldebaran provides an image of the NAO OS to use the robotic system virtual. 
+

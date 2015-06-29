@@ -59,6 +59,10 @@ class NaoMotion():
         self.motionProxy.setAngles(self.head_joints, self.head_angles, 0.1)
         time.sleep(2)
 
+    # Set the robot to sleep
+    def sleep_robot(self):
+        self.motionProxy.rest()
+
     # Motion based on given Gesture
     def gesture_to_motion(self, sign):
         if sign == "Walk":
@@ -217,7 +221,9 @@ if __name__ == "__main__":
     # naoMotion = NaoMotion(localhost, localPort)
     naoMotion = NaoMotion(remoteNao, remotePort)
 
-    sign = "Walk"
-    naoMotion.gesture_to_speech(sign)
-    naoMotion.gesture_to_motion(sign)
-    naoMotion.gesture_to_gesture(sign)
+    # sign = "Move Left"
+    # naoMotion.gesture_to_speech(sign)
+    # naoMotion.gesture_to_motion(sign)
+    # naoMotion.gesture_to_gesture(sign)
+
+    naoMotion.sleep_robot()
