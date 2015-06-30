@@ -16,7 +16,7 @@ numberOfDataSets = size(dataSets,2);
 % position 1.
 for i = 1:numberOfDataSets
     dataSetFilePath = strcat(file_path, dataSets{i});
-    selectedDataSet = csvread(dataSetFilePath,0,1);
+    selectedDataSet = csvread(dataSetFilePath,1,1);
     
     lX = selectedDataSet(1:550,1);
     lY = selectedDataSet(1:550,2);   
@@ -53,7 +53,7 @@ end
 % Plot x,z axis at position 1
 i = 1;
 dataSetFilePath = strcat(file_path, dataSets{i});
-selectedDataSet = csvread(dataSetFilePath,0,1);
+selectedDataSet = csvread(dataSetFilePath,1,1);
 
 lX = selectedDataSet(:,1);    
 lZ = selectedDataSet(:,3);    

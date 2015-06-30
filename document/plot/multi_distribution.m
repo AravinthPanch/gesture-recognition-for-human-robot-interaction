@@ -17,7 +17,7 @@ numberOfDataSets = size(dataSets,2);
 a = 500;
 for i = 1:numberOfDataSets
     dataSetFilePath = strcat(file_path, dataSets{i});
-    selectedDataSet = csvread(dataSetFilePath,0,1);
+    selectedDataSet = csvread(dataSetFilePath,1,1);
     
     lX = selectedDataSet(:,1);
     lY = selectedDataSet(:,2);
