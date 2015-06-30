@@ -21,7 +21,8 @@ int main(){
                 printf ("Gesture Type %d \n", gestures[i].getType());
 
                 nite::HandId newId;
-                handTracker.startHandTracking(gestures[i].getCurrentPosition(), &newId);
+                handTracker.startHandTracking(
+                    gestures[i].getCurrentPosition(), &newId);
             }
         }
         

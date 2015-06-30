@@ -1,5 +1,5 @@
 # On OpenNAO/NAO OS, execute the following to apply the patch
-cd /source/human-robot-interaction
+cd ~/hri/source/human-robot-interaction
 sudo cp lib/libstdc++.so.6.0.16 /usr/lib
 sudo rm libstdc++.so
 sudo ln -s libstdc++.so.6.0.16 libstdc++.so

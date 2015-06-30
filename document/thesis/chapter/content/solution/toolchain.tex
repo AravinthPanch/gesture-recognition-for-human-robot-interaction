@@ -1,3 +1,4 @@
+\clearpage
 \section{Toolchain} During the implementation of this thesis, many tools are used for various purposes. Every module in this thesis uses different programming language, therefore, different toolchains are used. Following sections talk about the tools that are used to develop, build, deploy and document this thesis work. 
 
 \subsection{Develop}
@@ -14,9 +15,13 @@
 
 \paragraph*{\indent Clang and Xcode} Development code was built using Clang with LLVM libc++ Standard library. Clang is a compiler developed by Apple for C, C++, Objective-C and Objective-C++ programming languages. Build settings such as header, library search paths, macros, environment variables and linking are configured using Xcode. 
 
-\paragraph*{\indent GCC and Cmake} Production code was built using GNU Compiler Collection (GCC) with libstdc++ GNU++11 Standard library. It is a compiler system produced by the GNU Project supporting various programming languages such as C, C++, Objective-C, Objective-C++, Fortran, Java, Ada, and Go.  Build settings such as header, library search paths, macros, environment variables and linking are configured using Cmake. CMake is cross-platform free and open-source software for managing the build process of software using a compiler-independent method. The HRI module code was copied to OpenNAO and built using GCC and then copied to real NAO. 
+\paragraph*{\indent GCC and Cmake} Production code was built using GNU Compiler Collection (GCC) with libstdc++ GNU++11 Standard library. It is a compiler system produced by the GNU Project supporting various programming languages such as C, C++, Objective-C, Objective-C++, Fortran, Java, Ada, and Go.  Build settings such as header, library search paths, macros, environment variables and linking are configured using Cmake. CMake is cross-platform free and open-source software for managing the build process of software using a compiler-independent method. 
 
-\subsection{Patch}
+The repository is cloned on OpenNAO and then HRI module was built as shown in \ref{code:build} and then the executable is copied to NAO OS. However, a patch as described in the section \ref{sec:patch} must be applied on OpenNAO and NAO OS in order to build the sources.
+
+\lstinputlisting[language=python]{code/build.sh} \label{code:build}
+
+\subsection{Patch} \label{sec:patch}
 \paragraph*{OpenNAO / NAO OS} Aldebaran provides an image of the NAOs operating system named as OpenNAO to use the robotic system virtually and it can run in a virtual machine in any host. OpenNAO is 32-bit Gentoo Linux modified by Aldebaran for Intel Atom Processor with i686 Architecture. 
 
 \paragraph*{Emerge} Emerge is the package manager for Gentoo Linux and Portage is the package tree.  Aldebaran forces users not to update Emerge to avoid conflict with Aldebaran modules. Portage tree used with NAO OS was last updated on 11 Jan 2012. 
@@ -26,8 +31,6 @@
 This issue was solved by finding higher version of libstdc++ from debian repository for 32-bit architecture and copying that to /usr/lib folder on OpenNAO/NAO OS and linking current libstdc++ to the copied version. Repository of our thesis contains the required version of libstdc++. Following shell commands show how it must be patched on OpenNAO or NAO OS to run HRI module without any errors.
 
 \lstinputlisting[language=python]{code/gcc-patch.sh}
-
-\subsection{Deploy}
 
 \subsection{Version Control} Proposal to final results of a project goes through many iterations or modification of the source files. Such changes are intentional and sometimes they are accidental. Therefore, source files of this thesis are stored and tracked using a version control system called Git. Git is a version control is a system that records changes to a file or set of files over time. To avoid accidental lose of source files, free git online service such as GitHub allows us to store them in a remote repository that can be cloned from anywhere via Internet. \url{https://github.com/AravinthPanch/gesture-recognition-for-human-robot-interaction} is the link to the online repository that contains all the informations regarding this thesis.
 
