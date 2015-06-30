@@ -12,7 +12,7 @@ var classLabel = 5;
 
 var csv = require('fast-csv'),
 	fs = require('fs'),
-	data = require('../../data/test/' + classLabel + '.js');
+	data = require('../../../../data/test/json/' + classLabel + '.js');
 
 var csvStream = csv.createWriteStream({headers: true}),
 	writableStream = fs.createWriteStream(classLabel + ".csv");

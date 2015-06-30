@@ -5,7 +5,7 @@
 clc();
 clear();
 
-file_path = '../../source/human-robot-interaction/data/test/';
+file_path = '../../data/train/csv/';
 dataSets = {'1.csv','2.csv','3.csv','4.csv','5.csv'};
 dataSetsNames = {'Walk Gesture','Turn Right Gesture','Turn Left Gesture','Move Right Gesture','Move Left Gesture'};
 plotFileNames = {'test-walk','test-turn-right','test-turn-left','test-move-right','test-move-left'};

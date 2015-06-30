@@ -12,12 +12,26 @@ var osc = require('node-osc');
 
 var client = new osc.Client('127.0.0.1', 5000);
 
-var data = [-452.148,389.755,1847.94,456.911,390.352,1869.7];
+var classLabel = 2;
+
+var data = require('../../../../data/test/json/' + classLabel + '.js');
+
+var i = 0;
 
 setInterval(function () {
-	client.send('/Data', data, function () {
-		console.log("Sent")
-	});
-}, 5000);
+
+	if ('RIGHT' in data.handData[i] && 'LEFT' in data.handData[i]) {
+		var left = data.handData[i].LEFT.map(Number);
+		var right = data.handData[i].RIGHT.map(Number);
+		var output = left.concat(right);
+
+		client.send('/Data', output, function () {
+			console.log(output)
+		});
+	}
+
+	i++;
+
+}, 30);
 
 

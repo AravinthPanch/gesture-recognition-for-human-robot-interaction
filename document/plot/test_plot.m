@@ -1,7 +1,7 @@
 clc()
 clear()
 
-file_path = '../../source/human-robot-interaction/data/test/';
+file_path = '../../data/train/csv/';
 file_name = strcat( file_path, '0.csv');
 data = csvread(file_name,1,1);
 lX = data(:,1);

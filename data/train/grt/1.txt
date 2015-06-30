@@ -1,6 +1,6 @@
 GRT_LABELLED_CLASSIFICATION_DATA_FILE_V1.0
-DatasetName: both-hand-static-gesture-1
-InfoText: Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info>
+DatasetName: walk-gesture-train
+InfoText: Gesture Recognition For Human-Robot Interaction by Aravinth Panchadcharam <me@aravinth.info> 
 NumDimensions: 6
 TotalNumExamples: 2400
 NumberOfClasses: 1
