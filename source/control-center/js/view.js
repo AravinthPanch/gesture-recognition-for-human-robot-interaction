@@ -438,14 +438,10 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 	}
 
 
-	var i = handData.length;
+	var i = 0;
 
 	function renderHandFromData() {
-		i--;
-		if (i >= 0) {
-
-			console.log(i)
-
+		if (i <= handData.length) {
 			var timeOut = 1000;
 			if ('GESTURE' in handData[i]) {
 				if (handData[i].GESTURE != "WAVE") {
@@ -453,9 +449,9 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 				}
 
 				$('#gBox').text(handData[i].GESTURE);
-				var timer = setTimeout(function () {
-					$('#gBox').text("")
-				}, timeOut);
+				//var timer = setTimeout(function () {
+				//	$('#gBox').text("")
+				//}, timeOut);
 			}
 
 			if ('INFO' in handData[i]) {
@@ -498,6 +494,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 			}
 		}
 
+		i++;
 		app.renderer.render(app.scene, app.camera);
 	}
 

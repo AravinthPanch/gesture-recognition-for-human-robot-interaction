@@ -5,7 +5,7 @@
 clc();
 clear();
 
-
+file_path = '../../source/human-robot-interaction/data/train/csv/';
 dataSets = {'1.csv','2.csv','3.csv','4.csv','5.csv'};
 dataSetsNames = {'Walk Gesture','Turn Right Gesture','Turn Left Gesture','Move Right Gesture','Move Left Gesture'};
 plotFileNames = {'plot-ges-1','plot-ges-2','plot-ges-3','plot-ges-4','plot-ges-5'};
@@ -16,7 +16,8 @@ numberOfDataSets = size(dataSets,2);
 % position 1.
 a = 500;
 for i = 1:numberOfDataSets
-    selectedDataSet = csvread(dataSets{i},0,1);
+    dataSetFilePath = strcat(file_path, dataSets{i});
+    selectedDataSet = csvread(dataSetFilePath,0,1);
     
     lX = selectedDataSet(:,1);
     lY = selectedDataSet(:,2);
