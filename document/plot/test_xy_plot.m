@@ -47,6 +47,6 @@ for i = 1:numberOfDataSets
     title(dataSetsNames{i})
     
     % Save the plots to file
-    saveas(h, plotFileNames{i} ,'png')
+    saveas(h, plotFileNames{i} ,'jpg')
 end
 

@@ -44,11 +44,14 @@ for i = 1:numberOfDataSets
     hold on;
     h = scatter3(mean(rZ), mean(rX),mean(rY), a, c , '>' , 'filled');
     
-    title('Mean')
+    title('Mean values of hand positions for each gesture')
     xlabel('Z [mm]');
     ylabel('X [mm]');
     zlabel('Y [mm]');
     legend('Walk Left Hand','Walk Right Hand','Sensor','Turn Right Left Hand','Turn Right Right Hand','Turn Left Left Hand','Turn Left Right Hand','Move Right Left Hand','Move Right Right Hand','Move Left Left Hand','Move Left Right Hand')
     view(-80,10);
+    
+    set(gcf,'units','points','position',[100,100,800,500])       
 end
+
 

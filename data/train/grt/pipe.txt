@@ -1,0 +1,106 @@
+GRT_PIPELINE_FILE_V1.0
+PipelineMode: CLASSIFICATION_MODE
+NumPreprocessingModules: 0
+NumFeatureExtractionModules: 0
+NumPostprocessingModules: 0
+Trained: 1
+PreProcessingModuleDatatypes:
+FeatureExtractionModuleDatatypes:
+ClassificationModuleDatatype:	ANBC
+PostProcessingModuleDatatypes:
+GRT_ANBC_MODEL_FILE_V2.0
+Trained: 1
+UseScaling: 1
+NumInputDimensions: 6
+NumOutputDimensions: 0
+NumTrainingIterationsToConverge: 0
+MinNumEpochs: 0
+MaxNumEpochs: 100
+ValidationSetSize: 20
+LearningRate: 0.1
+MinChange: 1e-05
+UseValidationSet: 0
+RandomiseTrainingOrder: 1
+UseNullRejection: 1
+ClassifierMode: 0
+NullRejectionCoeff: 1
+NumClasses: 5
+NullRejectionThresholds:  2.417 3.83069 3.53892 3.45142 3.70472
+ClassLabels:  1 2 3 4 5
+Ranges: 
+-949.532	-17.4535
+-598.238	636.283
+-330.703	2668.16
+-330.703	853.287
+-862.075	707.269
+-330.703	2688.34
+*************_MODEL_*************
+Model_ID: 1
+N: 6
+ClassLabel: 1
+Threshold: 2.417
+Gamma: 1
+TrainingMu: 3.89693
+TrainingSigma: 1.47993
+Mu:
+	0.545932	0.756644	0.762027	0.566332	0.763714	0.778894
+Sigma:
+	0.260871	0.115666	0.0791111	0.225357	0.0916288	0.0828735
+Weights:
+	1	1	1	1	1	1
+*************_MODEL_*************
+Model_ID: 2
+N: 6
+ClassLabel: 2
+Threshold: 3.83069
+Gamma: 1
+TrainingMu: 5.5597
+TrainingSigma: 1.72902
+Mu:
+	0.482255	0.725107	0.779633	0.746649	0.5112	0.789948
+Sigma:
+	0.189427	0.085703	0.0754619	0.149411	0.0528089	0.0801924
+Weights:
+	1	1	1	1	1	1
+*************_MODEL_*************
+Model_ID: 3
+N: 6
+ClassLabel: 3
+Threshold: 3.53892
+Gamma: 1
+TrainingMu: 5.13413
+TrainingSigma: 1.59521
+Mu:
+	0.35508	0.418156	0.777907	0.66766	0.804336	0.801429
+Sigma:
+	0.177844	0.0724213	0.0879399	0.141384	0.079206	0.0934902
+Weights:
+	1	1	1	1	1	1
+*************_MODEL_*************
+Model_ID: 4
+N: 6
+ClassLabel: 4
+Threshold: 3.45142
+Gamma: 1
+TrainingMu: 5.5097
+TrainingSigma: 2.05827
+Mu:
+	0.583203	0.129605	0.72776	0.787357	0.571705	0.792019
+Sigma:
+	0.181749	0.0598026	0.0761349	0.159117	0.0698111	0.0886436
+Weights:
+	1	1	1	1	1	1
+*************_MODEL_*************
+Model_ID: 5
+N: 6
+ClassLabel: 5
+Threshold: 3.70472
+Gamma: 1
+TrainingMu: 5.7105
+TrainingSigma: 2.00577
+Mu:
+	0.293944	0.515887	0.788069	0.575627	0.237012	0.721951
+Sigma:
+	0.127911	0.102167	0.0882306	0.113514	0.0614622	0.0828542
+Weights:
+	1	1	1	1	1	1

@@ -1,0 +1,14 @@
+\begin{table}
+	[h]
+	\centering
+	\pgfplotstabletypeset [ col sep=comma, every head row/.style={before row=\hline,after row=\hline}, every last row/.style={after row=\hline}, ] {../../data/results/mean.csv}
+	
+	\caption{Normalized mean values of 3 dimensions of left and right hand} \label{tb:ev:mean} 
+\end{table}
+
+\begin{table}
+	[h]
+	\centering
+	\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=3}
+	\pgfplotstabletypeset [ col sep=comma, every head row/.style={before row=\hline,after row=\hline}, every last row/.style={after row=\hline}, ] {../../data/results/sd.csv} \caption{Standard deviations of 3 dimensions of left and right hand} \label{tb:ev:sd} 
+\end{table}

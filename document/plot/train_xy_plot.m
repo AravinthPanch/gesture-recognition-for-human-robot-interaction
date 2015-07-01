@@ -47,7 +47,7 @@ for i = 1:numberOfDataSets
     title(dataSetsNames{i})
 
 % Save the plots to file
-    saveas(h, plotFileNames{i} ,'png')
+    saveas(h, plotFileNames{i} ,'jpg')
 end
 
 % Plot x,z axis at position 1
@@ -80,4 +80,4 @@ ylabel('Z in [mm]');
 title('Training data of Walk Gesture at 4 different position')
 
 % Save the plots to file
-saveas(h, 'train-walk-all' ,'png')
+saveas(h, 'train-walk-all' ,'jpg')

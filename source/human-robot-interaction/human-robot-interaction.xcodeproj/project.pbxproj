@@ -14,6 +14,7 @@
 		CE2C413B1A488EFE008E743E /* udp_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE2C41381A488EFE008E743E /* udp_server.cpp */; };
 		CE3EC0AF1B2448B200F9A377 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE3EC0AD1B2448B200F9A377 /* test.cpp */; };
 		CE3EC0B21B24693700F9A377 /* signs.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE3EC0B11B24693400F9A377 /* signs.json */; };
+		CE485CCC1B43453B00774D84 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE485CCB1B43453B00774D84 /* main.cpp */; };
 		CE4AC8DF1A5032EE001B33CF /* gesture_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */; };
 		CE4AC8E41A506EF6001B33CF /* udp_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E21A506EF6001B33CF /* udp_client.cpp */; };
 		CE4AC8E71A51752B001B33CF /* skeleton_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */; };
@@ -90,7 +91,6 @@
 		CEDFA82B1AA0942E006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA82A1AA0942E006B1C0D /* main.cpp */; };
 		CEDFA8381AA094E8006B1C0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA8371AA094E8006B1C0D /* main.cpp */; };
 		CEDFA9741AA0A50A006B1C0D /* anbc-training-data.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEDFA9721AA0A4CC006B1C0D /* anbc-training-data.txt */; };
-		CEDFA9811AA0B0DE006B1C0D /* classification_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA9801AA0B0DE006B1C0D /* classification_data.cpp */; };
 		CEDFA98D1AA0B215006B1C0D /* libgrt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFA9701AA0A422006B1C0D /* libgrt.dylib */; };
 		CEDFA9901AA0B736006B1C0D /* libgrt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFA9701AA0A422006B1C0D /* libgrt.dylib */; };
 		CEDFA9921AA0B7A3006B1C0D /* ada-boost-training-data.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEDFA9911AA0B796006B1C0D /* ada-boost-training-data.txt */; };
@@ -318,6 +318,7 @@
 		CE3EC0AD1B2448B200F9A377 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = src/brain/test.cpp; sourceTree = SOURCE_ROOT; };
 		CE3EC0AE1B2448B200F9A377 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test.h; path = src/brain/test.h; sourceTree = SOURCE_ROOT; };
 		CE3EC0B11B24693400F9A377 /* signs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = signs.json; path = ../config/signs.json; sourceTree = "<group>"; };
+		CE485CCB1B43453B00774D84 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/grt-test/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8DD1A5032EE001B33CF /* gesture_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gesture_tracker.cpp; path = "src/human-robot-interaction/gesture_tracker.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8DE1A5032EE001B33CF /* gesture_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gesture_tracker.h; path = "src/human-robot-interaction/gesture_tracker.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E21A506EF6001B33CF /* udp_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_client.cpp; path = "src/human-robot-interaction/udp_client.cpp"; sourceTree = SOURCE_ROOT; };
@@ -881,7 +882,6 @@
 		CEDFA9701AA0A422006B1C0D /* libgrt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgrt.dylib; path = lib/GRT/libgrt.dylib; sourceTree = "<group>"; };
 		CEDFA9721AA0A4CC006B1C0D /* anbc-training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "anbc-training-data.txt"; path = "data/anbc-training-data.txt"; sourceTree = "<group>"; };
 		CEDFA9791AA0B095006B1C0D /* grt-test-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-test-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEDFA9801AA0B0DE006B1C0D /* classification_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = classification_data.cpp; path = "src/grt-test/classification_data.cpp"; sourceTree = SOURCE_ROOT; };
 		CEDFA9911AA0B796006B1C0D /* ada-boost-training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "ada-boost-training-data.txt"; path = "data/ada-boost-training-data.txt"; sourceTree = "<group>"; };
 		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
@@ -1122,6 +1122,7 @@
 			children = (
 				CEE283AF1A48C2E300131564 /* human-robot-interaction */,
 				CE85062B1AA7440B0094FBCB /* brain */,
+				CEDFA97A1AA0B095006B1C0D /* grt-test */,
 				CECCD97C1B262F6E00DF0F64 /* al-proxy */,
 				CEF78A761B1DAE5600FE79D4 /* helper */,
 				CE62E0CF1B1C4A3A002D16CB /* websocketpp */,
@@ -1130,7 +1131,6 @@
 				CE62E0B11B1C4188002D16CB /* boost-multicast-tx */,
 				CE62E0BC1B1C4198002D16CB /* boost-multicast-rx */,
 				CE8506631AA85E170094FBCB /* rapidjson-test */,
-				CEDFA97A1AA0B095006B1C0D /* grt-test */,
 				CEDFA8311AA094AE006B1C0D /* grt-anbc */,
 				CEDFA8241AA093F6006B1C0D /* grt-ada-boost */,
 				CEAA7CAE1A724F6E00C7EF67 /* nite-hand-tracker */,
@@ -2771,7 +2771,7 @@
 		CEDFA97A1AA0B095006B1C0D /* grt-test */ = {
 			isa = PBXGroup;
 			children = (
-				CEDFA9801AA0B0DE006B1C0D /* classification_data.cpp */,
+				CE485CCB1B43453B00774D84 /* main.cpp */,
 			);
 			name = "grt-test";
 			path = "../grt-test";
@@ -3475,7 +3475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDFA9811AA0B0DE006B1C0D /* classification_data.cpp in Sources */,
+				CE485CCC1B43453B00774D84 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
