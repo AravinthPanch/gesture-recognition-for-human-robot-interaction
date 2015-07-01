@@ -6,11 +6,11 @@ clc()
 clear()
 
 file_path = '../../data/results/';
-dataSets = {'accuracy-anbc.csv','accuracy-svm.csv','accuracy-mindist.csv'};
+dataSets = {'accuracy-anbc.csv','accuracy-svm.csv','accuracy-mindist-4.csv'};
 plotFileNames = {'test-accuracy-anbc','test-accuracy-svm','test-accuracy-mindist'};
 titleName = {'Adaptive Naive Bayes Classifier (ANBC)', 'Support Vector Machine (SVM)', 'Minimum Distance (MinDist)'};
 
-for i = 2:2
+for i = 1:3
     dataSetFilePath = strcat(file_path, dataSets{i});
     data = csvread(dataSetFilePath,1,0);
     

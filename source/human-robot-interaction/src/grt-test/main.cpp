@@ -93,9 +93,9 @@ void accuracy_rejection_data(){
     svm.enableNullRejection(true);
     
     MinDist minDist;
-    minDist.setNumClusters(1);
-    svm.enableScaling(true);
-    svm.enableNullRejection(true);
+    minDist.setNumClusters(4);
+    minDist.enableScaling(true);
+    minDist.enableNullRejection(true);
     
     ofstream outputFileStream("accuracy-mindist.csv");
     outputFileStream << "classLabel,nullRejectionCoeff,accuracy, \n";
