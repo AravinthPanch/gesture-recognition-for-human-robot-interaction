@@ -17,10 +17,11 @@ During the training phase, first all the input samples are normalized using Min-
 \section{Classification and Prediction}
 Our gesture recognition pipeline is trained with 11918 input samples of 6 dimensional vector for 5 classes. Class 1,2,3,4,5 are mapped to Walk, Turn Right, Turn Left, Move Right, Move Left gestures respectively. We have carried out experiments to evaluate the classification, prediction and post processing efficiency of our system. Graph \ref{ev:test:prediction} show change is positions of left and hand in Cartesian coordinates while test data was recorded and corresponding prediction for every input sample.
 
-Test data consists of 1400 samples which are recorded under supervised arrangement. Input vectors that is not containing left and right hand are removed from the test data. Furthermore, input vectors which were recorded when the hand is at the field of view of the camera are also excluded. A program was implemented with GRT to read all the test data and execute prediction on every input sample and then results are stored to CSV file. Finally results are plotted using MATALAB.
+Test data consists of 1400 samples which are recorded under supervised arrangement. Input vectors that is not containing left and right hand are removed from the test data. Furthermore, input vectors which were recorded when the hand is at the field of view of the camera are also excluded. A program was implemented with GRT to read all the test data and execute prediction on every input sample and then results are stored to CSV file. Finally results are plotted using MATLAB.
 
 Prediction results shown in the graph \ref{ev:test:prediction} frequently falls down to Class Label 0 that is reserved for non-gestures. Non-gestures are detected with the help of Null Rejection thresholds. Therefore, this prediction is based on normalized classification data for Adaptive Naive Bayes classifier with Null rejection coefficient of 1.0.
 
 \input{chapter/figures/ev-test-all}
 
-\section{Accuracy Vs Null Rejection}
+\section{Prediction Accuracy Vs Null Rejection Accuracy}
+

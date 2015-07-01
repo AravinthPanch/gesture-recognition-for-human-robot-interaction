@@ -8,7 +8,7 @@
  */
 
 
-var classLabel = 5;
+var classLabel = 3;
 
 var csv = require('fast-csv'),
 	fs = require('fs'),
