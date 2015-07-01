@@ -14,7 +14,7 @@ int main()
     ClassificationData testData;
     
     string file_path = "../../../data/";
-    string class_name = "2";
+    string class_name = "5";
     
     if( !trainingData.loadDatasetFromFile(file_path +  "train/grt/" + class_name + ".txt") ){
         std::cout <<"Failed to load training data!\n";
@@ -48,7 +48,7 @@ int main()
     // Evaluation
     double accuracy = 0;
     
-    outputFileStream << "actualClass,predictedClass,maximumLikelihood \n";
+    outputFileStream << "actualClass,predictedClass,maximumLikelihood,lZ,lY,lZ,rZ,rY,rZ \n";
     
     for(UINT i=0; i<testData.getNumSamples(); i++){
         
@@ -62,7 +62,8 @@ int main()
         UINT predictedClassLabel = pipeline.getPredictedClassLabel();
         double maximumLikelihood = pipeline.getMaximumLikelihood();
         
-        outputFileStream << actualClassLabel << "," << predictedClassLabel << "," << maximumLikelihood << "\n";
+        outputFileStream << actualClassLabel << "," << predictedClassLabel << "," << maximumLikelihood << ","
+        << inputVector[0] << "," << inputVector[1] << ","  << inputVector[2] << ","  << inputVector[3] << ","  << inputVector[4] << ","  << inputVector[5] << "\n";
         
         if( actualClassLabel == predictedClassLabel) accuracy++;
         
