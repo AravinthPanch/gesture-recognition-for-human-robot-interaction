@@ -23,6 +23,13 @@ Prediction results shown in the graph \ref{ev:test:prediction} frequently falls 
 
 \input{chapter/figures/ev-test-all}
 
-\section{Prediction Accuracy Vs Null Rejection Accuracy}
+\section{Prediction Accuracy Vs Null Rejection Accuracy} \label{sec:ev:accuracy}
+Classifiers of GRT offers various customization that could produce different results for the same test data. Accuracy of a gesture recognition system does not depend only on th precise predictions of trained gestures,  but also differentiating them from unintended hand gestures. Graph \ref{ev:accuracy:anbc} shows the prediction and null rejection accuracies of Adaptive Naive Bayes Classifier (ANBC). Graph shows the accuracies of 5 trained gestures and a non-gesture. Non-Gesture data was recorded with both the hands are pointing downwards. GRT allows us to set null rejection coefficient for the classifier and therefore, graph contains the dataset of accuracies with null rejection coefficients range from 0 to 10.
 
 \input{chapter/figures/ev-accuracy}
+
+Graph \ref{ev:accuracy:anbc} shows that increase in null rejection coefficient causes an increase in the accuracy of trained gestures, however, causes a decrease in the accuracy of non-gesture. Therefore, it is optimal to use a null rejection coefficient of 2.0 with ANBC.
+
+Graph \ref{ev:accuracy:svm} shows prediction results of Support Vector Machine classifier with RBF Kernel. It is apparent that accuracy of trained gestures are consistently above 95 percent. However, null rejection accuracy is constantly lesser than 10 percent, thus, denoting that SVM is not useful in our case, because the robot should not execute any unintended commands.
+
+Graph \ref{ev:accuracy:mindist} shows some interesting results of Minimum Distance classifier with 4 clusters. Graph shows that prediction results are unpredictable as there is increase in null rejection coefficient. However, with coefficient of around 6.3, MinDist shows compromising accuracy above 90 percent for trained gesture and non-gesture. This shows that MinDist is a better alternative to ANBC. 
