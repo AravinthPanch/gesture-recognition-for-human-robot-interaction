@@ -53,7 +53,7 @@ After predicted the probability of a pixel belonging to a body part, the body pa
 
 \input{chapter/figures/ni-pose}
 
-\paragraph*{Joints Proposal} Figure \ref{fg:ni:pose} shows example inferences. Synthetic (top row); real (middle); failure modes (bottom). Left column: ground truth for a neutral pose as a reference. In each example we see the depth image, the inferred most likely body part labels, and the joint proposals show as front, right, and top views (overlaid on a depth point cloud). Only the most confident proposal for each joint above a fixed, shared threshold is shown.
+\paragraph*{Joints Proposal} Figure \ref{fg:ni:pose} shows example inferences of synthetic and real datasets. In each example we see the depth image, the inferred most likely body part labels, and the joint proposals show as front, right, and top views (overlaid on a depth point cloud). Only the most confident proposal for each joint above a fixed, shared threshold is shown.
 
 \paragraph*{Skeletal points} Finally NiTE API returns positions and orientations of the skeleton joints as shown in the figure \ref{fg:ni:joints}. As well as it returns the lengths of the body segments such as the distance between returned elbow and shoulder. Joint positions and orientations are given in the real world coordinate system. The origin of the system is at the sensor. +X points to the right of the, +Y points up, and +Z points in the direction of increasing depth. 
 
