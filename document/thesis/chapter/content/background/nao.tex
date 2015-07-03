@@ -1,18 +1,18 @@
-\section{NAO - The Humanoid Robot} NAO is an autonomous programmable humanoid robot invented by Aldebaran Robotics. NAO Academics Edition was developed for universities and laboratories for research and educational purposes. Follow subsections discuss briefly about the specifications of NAO as described by Aldebaran Robotics.
+\section{NAO - The Humanoid Robot} NAO is an autonomous programmable humanoid robot invented by Aldebaran Robotics. NAO Academics Edition is developed for universities and laboratories for research and educational purposes. Follow subsections discuss briefly about the specifications of NAO as described by Aldebaran Robotics \cite{8}.
 
 \input{chapter/tables/nao-spec}
 
-\subsection{Body} NAO has a body with 25 degrees of freedom (DOF) whose key elements are electric motors and actuators as show in the figure \ref{fg:nao:body}. It has 48.6-watt-hour battery that provides NAO with 1.5 or more hours of autonomy, depending on usage. Additional specifications of NAO are shown in the table \ref{tb:nao:spec}. 
+\subsection{Body} NAO has a body with 25 degrees of freedom (DOF) whose key elements are electric motors and actuators as show in the figure \ref{fg:nao:body}. It has 48.6-watt-hour battery that provides 1.5 or more hours of autonomy, depending on the usage. Additional specifications of robot are shown in the table \ref{tb:nao:spec}. 
 
 \input{chapter/figures/nao-body}
 
-\subsection{Motion} NAOs walking algorithm uses a simple dynamic model (linear inverse pendulum) and quadratic programming. It is stabilized using feedback from joint sensors. This makes the walking robust and resistant to small disturbances, and torso oscillations in the frontal and lateral planes are absorbed. It can walk on a variety of floor surfaces, such as carpeted, tiled, and wooden floors. 
+\subsection{Motion} NAOs walking algorithm uses a simple dynamic model (linear inverse pendulum) and quadratic programming. It is stabilized using feedback from the joint sensors. This makes the walking robust and resistant to small disturbances, and torso oscillations in the frontal and lateral planes are absorbed. It can walk on a variety of floor surfaces, such as carpeted, tiled, and wooden floors. 
 
-NAOs motion module is based on generalized inverse kinematics, which handles Cartesian coordinates, joint control, balance, redundancy, and task priority. This means that when asking it to extend its arm, it bends over because its arms and leg joints are taken into account.
+NAOs motion module is based on generalized inverse kinematics, which handles locomotion, joint control, balance, redundancy, and task priority. This means that when asking it to extend its arm, it bends over because its arms and leg joints are taken into account.
 
 \input{chapter/figures/nao-motion}
 
-In this thesis, we used locomotion and stiffness control of Motion API to move NAO to a position in the two dimensional space. Robot Posture API was also used to make the robot go to the predefined posture such as Stand, Sit and Crouch as shown in the figure \ref{fg:nao:motion}. Python code \ref{code:nao:motion} shows how the robot can be moved to another position at the given normalized velocity using Motion API. 
+In this thesis, we attempt to use the locomotion and stiffness control of Motion API to move NAO to a position in the two dimensional space. Robot Posture API will also be used to make the robot go to the predefined posture such as Stand, Sit and Crouch as shown in the figure \ref{fg:nao:motion}. Python code \ref{code:nao:motion} shows how the robot can be moved to another position at the given normalized velocity using Motion API. 
 
 \lstinputlisting[language=python]{code/nao-motion.py} \label{code:nao:motion}
 
@@ -20,27 +20,26 @@ In this thesis, we used locomotion and stiffness control of Motion API to move N
 
 \input{chapter/figures/nao-audio} 
 
-In this thesis, we used Text-To-Speech API of NAO to say some words loud to communicate with the user.Python code \ref{code:nao:audio} shows how NAO can say words given as strings.
+In this thesis, we aim to use Text-To-Speech API of NAO to say the detected gesture loud to communicate with the user. Python code \ref{code:nao:audio} shows how NAO can say words given as strings.
 
 \lstinputlisting[language=python]{code/nao-audio.py} \label{code:nao:audio}
 
 \input{chapter/figures/nao-vision}
 
-\subsection{Vision} \label{sec:nao:vision}
-Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. A detailed understanding of these environments is required to navigate through them. High-level information about the environment could be provided by a computer vision system that is acting as a vision sensor.
+\subsection{Vision} \label{sec:nao:vision} Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. High-level information about the environment could be provided by a computer vision system that is acting as a vision of the robot.
 
- Two identical video RGB cameras are located in the forehead of NAO as shown in the figure \ref{fg:nao:vision}. They provide up to 1280x960 resolution at 30 frames per second. NAO contains a set of algorithms for detecting and recognizing faces and shapes.
+Two identical video RGB cameras are located in the forehead of NAO as shown in the figure \ref{fg:nao:vision}. They provide up to 1280x960 resolution at 30 frames per second. Aldebaran provides a set of algorithms for detecting and recognizing faces and shapes.
 
-\paragraph*{Depth Image} Skeletal points based gesture recognition needs three dimensional data of the human skeletal joints. However, sensors integrated with NAO could not provide precise three dimensional data to the sophisticated algorithms to track human skeletal joints. 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{12}. Therefore, we used Asus Xtion PRO LIVE as an external camera to support the skeletal points tracking system of NAO. 
+\paragraph*{Depth Image} Skeletal points based gesture recognition needs three dimensional data of the human skeleton. However, sensors integrated with NAO could not provide precise three dimensional data to the sophisticated algorithms to track human skeletal joints. 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{9}. Therefore, we seek to utilize Asus Xtion PRO LIVE as an external camera to support the skeletal points tracking system of NAO. 
 
 \input{chapter/figures/xtion}
 
-\paragraph*{Asus Xtion} Figure \ref{fg:xtion} shows Asus Xtion PRO LIVE that uses infrared sensors, adaptive depth detection technology, color image sensing and audio stream to capture a 3D image of the user in real-time. It uses its infrared emitters to project speckle patterns on the object and uses a structured light technique to compute the depth of the image. Once the depth image is computed, it is mapped onto the RGB image as shown in the figure \ref{fg:xtion:depth}. Lighter color denote that a pixel is closer to the camera and darker color denotes that a pixel is far from the camera.
+\paragraph*{Asus Xtion} Figure \ref{fg:xtion} shows Asus Xtion PRO LIVE that uses infrared sensors, adaptive depth detection technology, color image sensing and audio stream to capture a 3D image of the user in real-time. It uses infrared emitters to project speckle patterns on the object and uses a structured light technique to compute the depth of the image. Once the depth image is computed, it is mapped onto the RGB image as shown in the figure \ref{fg:xtion:depth}. Lighter color denote that a pixel is closer to the camera and darker color denotes that a pixel is far from the camera.
 
 \input{chapter/figures/xtion-depth}
 
-\subsection{Computing} NAO is equipped with Intel ATOM 1.6 GHz CPU in the head that runs a 32 bit Gentoo Linux to support Aldebarans proprietary middleware (NAOqi). NAOqi SDK is the programming framework used to program Aldebaran robots. This framework allows homogeneous communication between different modules such as motion, audio, video. NAOqi executable which runs on the robot is a broker. The broker provides lookup services so that any module in the tree or across the network can find any method that has been advertised.
+\subsection{Computing} NAO is equipped with Intel ATOM 1.6 GHz CPU in the head that runs a 32 bit Gentoo Linux to support Aldebarans proprietary middleware (NAOqi). NAOqi SDK is the programming framework used to program Aldebaran robots \cite{8}. This framework allows homogeneous communication between different modules such as motion, audio and video. NAOqi executable that runs on the robot is a broker. The broker provides lookup services so that any module in the tree or across the network can find any method that has been advertised.
 
 \input{chapter/figures/nao-proxy}
 
-Computational limitations of NAOs CPU hinders us to build a real time gesture recognition based on human skeletal joints. Therefore, we used an off-board computer to execute the gesture recognition program and communicated with NAO via NAOqi proxies. 
+Computational limitations of NAOs CPU hinders us to build a real time gesture recognition based on human skeletal joints. Thus, we aim to use an off-board computer to execute the gesture recognition program and communicated with NAO via NAOqi proxies. 
