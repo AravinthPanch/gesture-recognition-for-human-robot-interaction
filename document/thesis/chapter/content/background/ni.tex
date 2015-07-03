@@ -11,6 +11,7 @@ C++ code \ref{code:ni:device} shows how a depth camera such as Asus Xtion Pro ca
 Figure \ref{fg:ni:arch} displays a layered view of producing, acquiring and processing depth data, up to the level of the application that utilizes it to form a natural- interaction based module. 
 
 \input{chapter/figures/ni-arch}
+
 \begin{itemize}
 	\item The lower layer is the PrimeSensor device, which is the physical acquisition layer, resulting in raw sensory data from a stream of depth images. 
 	\item The next Cshaped layer is executed on the host PC represents OpenNI. OpenNI provides communication interfaces that interact with both the sensor's driver and the middleware components, which analyze the data from the sensor. 
@@ -26,7 +27,7 @@ Figure \ref{fg:ni:arch} displays a layered view of producing, acquiring and proc
 	\item Full body tracking based on the scene segmentation output. Users bodies are tracked to output the current user pose a set of locations of body joints. 
 \end{itemize}
 
-NiTE uses machine learning algorithms to recognize anatomical landmarks and pose of human body \cite{}. Figure \ref{fg:ni:alg} shows how NiTE tracks human skeleton from a single input depth image and a per-pixel body part distribution is inferred. Colors indicate the most likely part labels at each pixel and correspond to the joint proposals. Local modes of this signal are estimated to give high-quality proposals for the 3D locations of body joints, even for multiple users.
+NiTE uses machine learning algorithms to recognize anatomical landmarks and pose of human body. Figure \ref{fg:ni:alg} shows how NiTE tracks human skeleton from a single input depth image and a per-pixel body part distribution is inferred. Colors indicate the most likely part labels at each pixel and correspond to the joint proposals. Local modes of this signal are estimated to give high-quality proposals for the 3D locations of body joints, even for multiple users.
 
 \input{chapter/figures/ni-alg}
 
