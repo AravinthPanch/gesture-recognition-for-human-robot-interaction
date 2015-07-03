@@ -3,22 +3,20 @@
 	\begin{minipage}
 		{1 
 		\textwidth} \centering 
-		\includegraphics[height=75mm]{figures/result/usr-move-right.jpg} \caption*{} 
+		\includegraphics[height=95mm]{figures/result/usr-move-right.jpg} \caption*{} 
 	\end{minipage}
 	\begin{minipage}
 		{1 
-		\textwidth} 
-		\includegraphics[height=42mm]{figures/result/nao-gm-move-right.jpg} 
+		\textwidth} \hspace{-5 mm} 
+		\includegraphics[width=160mm]{figures/result/nao-gm-move-right.jpg} 
 	\end{minipage}
-	\caption{Gesture-To-Motion Result of Move Right} \label{res:gm:move:right} 
+	\caption{NAO recognizes Move Right gesture and executes a predefined Gesture-To-Motion task.} \label{res:gm:move:right} 
+\end{figure}
+\begin{figure}
+	[h] \hspace{-15 mm} \centering 
+	\includegraphics[width=155mm]{figures/result/test-move-right.jpg} \caption{Our system is capable of real time prediction by processing 30 samples per second. However, the detected hand gesture is triggered only when it is gesticulated for 1 second because of the post-processing by Class Label Filter module. The graph shows 60 samples of correctly recognized Move Right gesture. } \label{res:pl:move:right} 
 \end{figure}
 \begin{figure}
 	[h] \centering 
-	\includegraphics[height=110mm]{figures/result/test-move-right.jpg} \caption{60 samples (2 Seconds) of correctly recognized Move Right gesture}
-	\label{res:pl:move:right}  
-\end{figure}
-\begin{figure}
-	[h] \centering 
-	\includegraphics[height=70mm]{figures/result/cc-move-right.jpg} \caption{Control Center is showing the prediction results of Move Right gesture}
-	\label{res:cc:move:right} 
+	\includegraphics[height=70mm]{figures/result/cc-move-right.jpg} \caption{Control Center displays the recognized Move Right gesture in real time with the positions of left and right hand in 3 dimensional space.} \label{res:cc:move:right} 
 \end{figure}
