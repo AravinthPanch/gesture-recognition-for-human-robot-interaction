@@ -1,12 +1,10 @@
-\section{Gesture Recognition}
-Above sections described the necessary tools that are implemented to execute a real time hand gesture recognition system. In this thesis we have decided to train the system with static gestures. However, the system can be easily extended to recognize temporal gestures with the flexibility of Gesture Recognition Toolkit (GRT). Initially a set of simple gestures are chosen and the training data is collected for all those gestures.
+\section{Gesture Recognition} Above sections described the necessary tools that are implemented to execute a real time hand gesture recognition system. In this thesis, we have decided to train the system with static gestures. However, the system can be easily extended to recognize temporal gestures with the flexibility of Gesture Recognition Toolkit (GRT). Initially a set of simple gestures are chosen and the training data is collected for all those gestures.
 
-\subsection{Hand Gestures Modeling}
-In this thesis we have modeled five static hand gestures involving both the hands of the user. These are communicative hand gestures and they symbolize few referential action. Apart from Sign Language used by people with speech disability, various hand gestures are being used by humans in their day to day living. Figure \ref{fg:ges:signal} shows the hand signals used by different personnels in wide variety of application.
+\subsection{Hand Gestures Modeling} In this thesis, we have modeled five static hand gestures involving both the hands of the user. These are communicative hand gestures and they symbolize few referential action. Apart from Sign Language used by people with speech disability, various hand gestures are being used by humans in their day to day living. Figure \ref{fg:ges:signal} shows the hand signals used by different personnels in wide variety of application.
 
 \input{chapter/figures/ges-signal}
 
-This thesis focuses on hand gesture recognition to felicitate Human-Robot interactions. One greater application using hand gestures for robots is commanding the robot to move to another position. Additionally it could translate the gestures to spoken words to help people with speech disability.   
+This thesis focuses on hand gesture recognition to felicitate Human-Robot interactions. One greater application using hand gestures for robots is commanding the robot to move to another position. Additionally it could translate the gestures to spoken words to help people with speech disability. 
 
 \input{chapter/figures/ges-hands}
 
@@ -26,23 +24,22 @@ Therefore, we have chosen five simple static gestures as shown in the figure \re
 
 \paragraph*{Click} It is gesticulated by holding a hand up, push the hand towards the sensor then immediately pull the hand backwards. 
 
-\subsection{Training} 
-Our gesture recognition pipeline is configured to have 15 seconds preparation time and 20 seconds recording time with 6 dimensional input of both left and right hands at positions x, y and z in the Cartesian coordinates. Depth camera is at the origin of the coordinate system as shown in the figure \ref{fg:xtion:origin}.
+\subsection{Training} Our gesture recognition pipeline is configured to have 15 seconds preparation time and 20 seconds recording time with 6 dimensional input of both left and right hands at positions x, y and z in the Cartesian coordinates. Depth camera is at the origin of the coordinate system as shown in the figure \ref{fg:xtion:origin}.
 
 \input{chapter/figures/xtion-origin}
 
-Brain is set to training mode and CC is started to visualize the hand positions in order to align the trainer during the preparation time. Each gesture is isolated in time and gesticulated for 20 seconds. Samples are added to the training dataset and when the timer stopped the recording, Brain asked the trainer to train the same class again or another. Every gesture was assigned a class label from 1 to 5 and the mapping of class label to hand gesture is stored in a configuration file named signs.json. 
+Brain is set to training mode and CC is started to visualize the hand positions in order to align the trainer during the preparation time. Each gesture is isolated in time and gesticulated for 20 seconds. Samples are added to the training dataset and when the timer stopped the recording, Brain asked the trainer to train the same class again or another. Every gesture is assigned a class label from 1 to 5 and the mapping of class label to hand gesture is stored in a configuration file named \textit{signs.json}. 
 
 \input{chapter/figures/ges-distance}
 
-\paragraph*{Minimum and Maximum Distance Training} \label{sec:range:train} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture was gesticulated in 4 different positions as shown in the plot \ref{fg:ges:pos} and in all possible combinations that hands are kept wider or narrower as shown in the plots \ref{pl:ges:pos}. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. 
+\paragraph*{Minimum and Maximum Distance Training} \label{sec:range:train} If the gestures are gesticulated with only one person at a static position in space in front of the camera, then the recognition algorithm would not recognize the same gesture gesticulated by another person or the same person in different position. In order to scale the range of recognition, every gesture is gesticulated in 4 different positions as shown in the plot \ref{fg:ges:pos} and in all possible combinations that hands are kept wider or narrower as shown in the plots \ref{pl:ges:pos}. Therefore, each gesture in the training data is recorded in 4 positions with each for 20 seconds at 30 samples per second created 2400 samples per gesture. 
 
 ANBC is an iterative learning algorithm that improves the classification accuracy with increase in positive training data. Plot \ref{fg:ges:pos} shows that the trained data makes our gesture recognition system to detect gestures at the minimum distance from 1700 mm to the maximum distance 2500 mm away from the sensor and 800 mm left or right to the sensor. If the user leaves this field of view, the hand tracking algorithm will lose the hand or gesture will fall in the Null Rejection region of the classifier.
 
 \input{chapter/figures/ges-plot}
 
-\paragraph*{Training Data} Once all the gestures are recorded, they replayed using CC to find out, if there is any false samples are added to the training data. Such false data leads to an incorrect model that will ultimately affect the prediction performance. Such samples are removed from the training data and a final dataset with all 5 classes are stored as hri-training-dataset.txt. Additionally, some test data for each gesture is recorded in order to evaluation the accuracy of the recognition system. Furthermore, a set of non-gesture dataset was recorded in order to test the Null Rejection accuracy of the classifier. 
+\paragraph*{Training Data} Once all the gestures are recorded, they replayed using CC to find out, if there is any false samples are added to the training data. Such false data leads to an incorrect model that will ultimately affect the prediction performance. Such samples are removed from the training data and a final dataset with all 5 classes are stored as \textit{hri-training-dataset.txt}. Additionally, some test data for each gesture is recorded in order to evaluate the accuracy of the recognition system. Furthermore, a set of non-gesture dataset is recorded to test the Null Rejection accuracy of the classifier. 
 
-\subsection{Prediction} After successfully collecting the training data for all the gestures, Brain is set to prediction mode where the pipeline is trained. HRI module starts to track the user's hand, Brain predicts a gesture when both the hands are present in the input sample. Figure \ref{fg:cc:walk} shows Control Center where prediction output for every sample with maximum likelihood is displayed all the time. The predicted gesture is triggered only after it was gesticulated for more than one second.
+\subsection{Prediction} After successfully collecting the training data for all the gestures, Brain is set to prediction mode where the pipeline is trained. HRI module starts to track the user's hand, Brain predicts a gesture when both the hands are present in the input sample. Figure \ref{fg:cc:walk} shows Control Center where prediction output for every sample with maximum likelihood is displayed all the time. The predicted gesture is triggered only after it is gesticulated for more than one second.
 
-\input{chapter/figures/cc-walk}
+\input{chapter/figures/cc-walk} 

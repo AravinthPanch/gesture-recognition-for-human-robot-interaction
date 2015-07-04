@@ -1,43 +1,38 @@
-\chapter{Results} \label{ch:result}
-During the training sessions, we have recorded five static gestures in 4 different positions in front of the robot. NAO was equipped with Asus Xtion and set in "Stand" posture. Head pitch of NAO was set to -18 degrees to look at the upper body of the user 1800 mm away from the sensor. First 3 positions of training was recorded at 1800 mm distance from the sensor in z axis and + /- 800 mm in x axis. Last training position was recorded at 2200 mm distance. Therefore, training data was recorded for 80 seconds of each gesture.
+\chapter{Results} \label{ch:result} During the training sessions, we have recorded five static gestures in 4 different positions in front of the robot. NAO is equipped with Asus Xtion and set in "Stand" posture. Head pitch of NAO is set to -18 degrees to look at the upper body of the user 1800 mm away from the sensor. First 3 positions of training are recorded at 1800 mm distance from the sensor in z axis and + /- 800 mm in x axis. Last training position is recorded at 2200 mm distance. Therefore, training data is recorded for 80 seconds of each gesture.
 
-In this chapter, we present the results of real time hand gesture recognition for Human-robot interaction based on skeletal points tracking using depth camera. Training data for 5 classes with 11918 samples of 6 dimensional vector were trained with Adaptive Naive Bayes Classifier (ANBC). Min-Max scaling and Null Rejection with coefficient of 2.0 were enabled. Following sections illustrates the results of end-to-end interaction with robot using five gestures named as  Walk, Turn Right, Turn Left, Move Right, Move Left gestures which are mapped to class labels 1,2,3,4,5 respectively.
+In this chapter, we present the results of real time hand gesture recognition for Human-robot interaction based on skeletal points tracking using depth camera. Training data for 5 classes with 11918 samples of 6 dimensional vector are trained with Adaptive Naive Bayes Classifier (ANBC). Min-Max scaling and Null Rejection with coefficient of 2.0 are enabled. Following sections illustrates the results of end-to-end interaction with robot using five gestures named as Walk, Turn Right, Turn Left, Move Right, Move Left gestures which are mapped to class labels 1,2,3,4,5 respectively.
 
-\clearpage
-\section{Gesture-To-Motion}
+\clearpage 
+\section{Gesture-To-Motion} 
 \subsection{Walk} Figure \ref{res:gm:walk} shows that NAO is looking at the user to detect any possible gestures. When it recognized Walk gesture, Command module commands the robot to walk in forward direction for five seconds, thereby, completing a Gesture-To-Motion translation.
 
 \input{chapter/figures/res-walk}
 
 Graph \ref{res:pl:walk} shows the positions of left and right hand in x and y coordinates from the origin of the sensor. It is plotted using 60 input samples of Walk gesture. Figure \ref{res:cc:walk} shows the dashboard of Control Center that displays the prediction results. 
 
-\clearpage
-\subsection{Turn Right}
- Figure \ref{res:gm:turn:right} shows that NAO received the input samples of left and right hand, and it recognized Turn Right gesture. The user commands NAO to turn at his right direction, thus, NAO turns at the mirrored direction (Left) for 5 seconds and stops to look for further gestures.
+\clearpage 
+\subsection{Turn Right} Figure \ref{res:gm:turn:right} shows that NAO received the input samples of left and right hand, and it recognized Turn Right gesture. The user commands NAO to turn at his right direction, thus, NAO turns at the mirrored direction (Left) for 5 seconds and stops to look for further gestures.
 
 \input{chapter/figures/res-turn-right}
 
 Graph \ref{res:pl:turn:right} shows the positions of left and right hand in x and y coordinates from the origin of the sensor. It is plotted using 60 input samples of Turn Right gesture. Figure \ref{res:cc:turn:right} shows the dashboard of Control Center that displays the prediction results. 
 
-\clearpage
-\subsection{Turn Left}
- Figure \ref{res:gm:turn:left} shows that NAO received the input samples of left and right hand, and it recognized Turn Left gesture. The user commands NAO to turn at his left direction, thus, NAO turns at the mirrored direction (Right) for 5 seconds and stops to look for further gestures.
- 
+\clearpage 
+\subsection{Turn Left} Figure \ref{res:gm:turn:left} shows that NAO received the input samples of left and right hand, and it recognized Turn Left gesture. The user commands NAO to turn at his left direction, thus, NAO turns at the mirrored direction (Right) for 5 seconds and stops to look for further gestures.
+
 \input{chapter/figures/res-turn-left}
 
 Graph \ref{res:pl:turn:left} shows the positions of left and right hand in x and y coordinates from the origin of the sensor. It is plotted using 60 input samples of Turn Left gesture. Figure \ref{res:cc:turn:left} shows the dashboard of Control Center that displays the prediction results. 
 
-\clearpage
-\subsection{Move Right} 
-Figure \ref{res:gm:move:right} shows that NAO recognizes Move Right gesture as soon as the user gesticulated it using both the tracked hands. Like other gestures, this is also perceived by NAO to move in the mirrored direction of the user. Hence, NAO turns left for 3 seconds and move in forward direction for 5 seconds.
+\clearpage 
+\subsection{Move Right} Figure \ref{res:gm:move:right} shows that NAO recognizes Move Right gesture as soon as the user gesticulated it using both the tracked hands. Like other gestures, this is also perceived by NAO to move in the mirrored direction of the user. Hence, NAO turns left for 3 seconds and move in forward direction for 5 seconds.
 
 \input{chapter/figures/res-move-right}
 
 Graph \ref{res:pl:move:right} shows the positions of left and right hand in x and y coordinates from the origin of the sensor. It is plotted using 60 input samples of Move Right gesture. Figure \ref{res:cc:move:right} shows the dashboard of Control Center that displays the prediction results. 
 
-\clearpage
-\subsection{Move Left}
-Figure \ref{res:gm:move:left} shows that NAO recognizes Move Left gesture as soon as the user gesticulated it using both the tracked hands. Like other gestures, this is also perceived by NAO to move in the mirrored direction of the user. Hence, NAO turns right for 3 seconds and move in forward direction for 5 seconds.
+\clearpage 
+\subsection{Move Left} Figure \ref{res:gm:move:left} shows that NAO recognizes Move Left gesture as soon as the user gesticulated it using both the tracked hands. Like other gestures, this is also perceived by NAO to move in the mirrored direction of the user. Hence, NAO turns right for 3 seconds and move in forward direction for 5 seconds.
 
 \input{chapter/figures/res-move-left}
 
@@ -45,7 +40,4 @@ Graph \ref{res:pl:move:left} shows the positions of left and right hand in x and
 
 \clearpage
 
-\section{Gesture-To-Gesture}
-Figure \ref{res:gg} shows how human hand gestures are translated to robotic hand gestures. When a gesture is detected, the Command module sets the predefined angles to the shoulder and elbow joints of both the hands of NAO to perform Gesture-To-Gesture translation. 
-\input{chapter/figures/res-gg}
-
+\section{Gesture-To-Gesture} Figure \ref{res:gg} shows how human hand gestures are translated to robotic hand gestures. When a gesture is detected, the Command module sets the predefined angles to the shoulder and elbow joints of both the hands of NAO to perform Gesture-To-Gesture translation. \input{chapter/figures/res-gg}
