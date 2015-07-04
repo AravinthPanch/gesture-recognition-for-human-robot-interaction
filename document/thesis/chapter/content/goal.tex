@@ -1,15 +1,15 @@
 \chapter{Goal} As described earlier, HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides the ease and naturalness with which the user can interact with robots. Our goal in this thesis to implement a system that should be integrated into NAO to recognize hand gestures. 
 
-Existing stereo cameras of NAO are greatly limited by the quality of the input image. Variations in lighting and background clutters would only worsen the problem. On the other hand, depth-based approaches are able to provide satisfactory results for hand gesture recognition even with poor indoor lighting and cluttered background condition. Therefore, we have chosen Asus Xtion which has sensors that capture both RGB and depth data. Asus Xtion is an OpenNI compatible device, thus, we have chosen a NiTE middleware for the purpose of tracking the human skeletal points. 
+Existing stereo cameras of NAO are greatly limited by the quality of the input image. Variations in lighting and background clutters would only worsen the problem \cite{17}. On the other hand, depth-based approaches are able to provide satisfactory results for hand gesture recognition even with poor indoor lighting and cluttered background condition \cite{18}. Therefore, we have chosen Asus Xtion which has sensors that capture both RGB and depth data. Asus Xtion is an OpenNI compatible device, thus, we have chosen a NiTE middleware for the purpose of tracking the human skeletal points. 
 
-We have chosen Gesture Recognition Toolkit (GRT) to train and predict the 3D skeletal modeled gestures with feature-based statistical learning algorithm. Adaptive Naive Bayes Classifier (ANBC) is the supervised machine learning algorithm which is chosen for the purpose of classifying and predicting the gestures in real time.
+We have chosen Gesture Recognition Toolkit (GRT) to train and predict the 3D skeletal modeled gestures with feature based statistical learning algorithm. Adaptive Naive Bayes Classifier (ANBC) is the supervised machine learning algorithm which is chosen for the purpose of classifying and predicting the hand gestures in real time.
 
-Furthermore, all these interactions must be displayed to visually understand the status of the system. Finally, recognized hand gestures must be translated to robotic actions as following.
+Furthermore, all these interactions must be displayed to visually understand the status of the system. Finally, recognized hand gestures must be translated to robotic actions as following :
 
 \begin{itemize}	
 	\item \textbf{Gesture-to-Speech}: This action should translate the recognized gestures and it should be spoken out loud using the integrated loudspeaker.
 	
-	\item \textbf{Gesture-to-Motion}: This action should move the robot from one position to another in the 2 dimensional space. Therefore each gesture should be assigned to a locomotion task.
+	\item \textbf{Gesture-to-Motion}: This action should move the robot from one position to another in the 2 dimensional space. Therefore, each gesture should be assigned to a locomotion task.
 	
 	\item \textbf{Gesture-to-Gesture}: This action should translate the human hand gesture to a robotic hand gesture by imitating hand gestures of the user. 
 \end{itemize}

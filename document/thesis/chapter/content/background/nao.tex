@@ -30,7 +30,7 @@ In this thesis, we aim to use Text-To-Speech API of NAO to say the detected gest
 
 Two identical video RGB cameras are located in the forehead of NAO as shown in the figure \ref{fg:nao:vision}. They provide up to 1280x960 resolution at 30 frames per second. Aldebaran provides a set of algorithms for detecting and recognizing faces and shapes.
 
-\paragraph*{Depth Image} Skeletal points based gesture recognition needs three dimensional data of the human skeleton. However, sensors integrated with NAO could not provide precise three dimensional data to the sophisticated algorithms to track human skeletal joints. 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{9}. Therefore, we seek to utilize Asus Xtion PRO LIVE as an external camera to support the skeletal points tracking system of NAO. 
+\paragraph*{Depth Image} Skeletal points based gesture recognition needs three dimensional data of the human skeleton. However, sensors integrated with NAO could not provide precise three dimensional data to the sophisticated algorithms to track human skeletal joints \cite{17}. 3D cameras such as Microsoft Kinect and Asus Xtion are used not only for gaming but also for analyzing 3D data, including algorithms for feature selection, scene analysis, motion tracking, skeletal tracking and gesture recognition \cite{9} \cite{18}. Therefore, we seek to utilize Asus Xtion PRO LIVE as an external camera to support the skeletal points tracking system of NAO. 
 
 \input{chapter/figures/xtion}
 
@@ -42,4 +42,4 @@ Two identical video RGB cameras are located in the forehead of NAO as shown in t
 
 \input{chapter/figures/nao-proxy}
 
-Computational limitations of NAOs CPU hinders us to build a real time gesture recognition based on human skeletal joints. Thus, we aim to use an off-board computer to execute the gesture recognition program and communicated with NAO via NAOqi proxies. 
+Computational limitations \cite{17} of NAO CPU hinders us to build a real time gesture recognition based on human skeletal joints. Thus, we aim to use an off-board computer to execute the gesture recognition program and communicated with NAO via NAOqi proxies. 
