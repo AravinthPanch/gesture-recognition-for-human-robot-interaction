@@ -1,42 +1,29 @@
-\chapter{Solution} \label{ch:solution}
-To build an effective and easy to use hand gesture recognition system for NAO, various tools and technologies were studied during this thesis. Figure \ref{fg:hri:components} shows the individual components which are essential parts of this thesis in implementing the goal. The main challenge is to find a solution that can integrate all these components into a robust system. However, due to the computational and compatibility limitations of NAO, we have faced problems in implementing few contemplated solutions which are described in the next section. Finally, the successful solution in achieving the goal will be discussed in the following sections.
+\chapter{Solution} \label{ch:solution} To build an effective and easy to use hand gesture recognition system for NAO, various tools and technologies are studied during this thesis. Figure \ref{fg:hri:components} shows the individual components which are essential parts of this thesis in implementing the goal. The main challenge is to find a solution that can integrate all these components into a robust system. However, due to the computational and compatibility limitations of NAO \cite{17}, we have faced problems in implementing few contemplated solutions which are described in the next section. Finally, the successful solution in achieving the goal will be discussed in the following sections.
 
 \input{chapter/figures/hri-components}
 
 \section{Experimental Designs} 
-\subsection{Everything On-Board} First experiment design was conceived in a way that depth camera, skeletal joint tracking, gesture recognition infrastructure and robot motion will be embedded into the on-board computer of NAO. However, gesture recognition infrastructure is composed of computationally intensive machine learning processes and along with skeletal joint tracking by NiTE had pushed NAO to 100 $ \% $ CPU load consistently.
+\subsection{Everything On-Board} First experiment design is conceived in a way that depth camera, skeletal joint tracking, gesture recognition infrastructure and robot motion will be embedded into the on-board computer of NAO. However, gesture recognition infrastructure is composed of computationally intensive machine learning processes and along with skeletal joint tracking by NiTE had pushed NAO to full CPU load consistently \cite{17}.
 
-\subsection{Extending NAO with Single Board Computer} In order to escape the computational limitation of NAO, another experimental design was contemplated, that the robot will be extended as shown in the figure \ref{fg:nao:bag} with a powerful Single Board Computer such as pcDuino or RaspberryPi. However, Asus Xtions higher power consumption of 2.5 Watts with weight of 250 grams, pcDuinos power consumption of 2A at 5VDC with weight of 100 grams and additional weight by 3D printed mounts, heat sinks and wires will make NAO to be heavier and ultimately result in poor motion performances and higher power consumption. 
+\subsection{Extending NAO with Single Board Computer} In order to escape the computational limitation of NAO, another experimental design was contemplated that the robot will be extended as shown in the figure \ref{fg:nao:bag} with a powerful Single Board Computer such as pcDuino or RaspberryPi. However, Asus Xtions higher power consumption of 2.5 Watts with weight of 250 grams, pcDuinos power consumption of 2A at 5VDC with weight of 100 grams and additional weight by 3D printed mounts, heat sinks and wires will make NAO to be heavier and ultimately result in poor motion performances and higher power consumption. 
 
 \input{chapter/figures/nao-bag}
 
-\subsection{Everything Off-Board} This experimental design pushes all the components to an off-board computer that could be a PC connected with depth camera at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WLAN. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design will suit for other applications such as indoor navigation and localization of NAO.
+\subsection{Everything Off-Board} This experimental design pushes all the components to an off-board computer that could be a PC connected with depth camera at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WLAN. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design will suit for other applications such as indoor navigation and localization of NAO \cite{20}.
 
-\section{Implementation} \label{sec:sol:impl} After analyzing the disadvantages of other experimental designs, the final design was chosen to build an efficient real-time hand gesture recognition for human-robot interaction using skeletal points. Figure \ref{fg:hri:architecture} shows the architecture of the solution that was implemented during this thesis by grouping many components into 4 different modules which serve various purposes. Each module is implemented in different environment as shown in the figure and they communicate with one another to complete the data flow. All these modules uses a common configuration file that contains information such as port number, host name and log path.
+\section{Implementation} \label{sec:sol:impl} After analyzing the disadvantages of other experimental designs, the final design was chosen to build an efficient real-time hand gesture recognition for human-robot interaction using skeletal points. Figure \ref{fg:hri:architecture} shows the architecture of the solution that was implemented during this thesis by grouping many components into 4 different modules which serve several purposes. Each module is implemented in different environment as shown in the figure and they communicate with one another to complete the data flow. All these modules use a common configuration file named as \textit{hri.json} that contains information such as port number, host name and log path.
 
 \input{chapter/figures/hri-architecture}
 
 % Subsections of implmentation
 \input{chapter/content/solution/hri}
-\input{chapter/content/solution/brain} 
-\input{chapter/content/solution/cc}
-\input{chapter/content/solution/command}
-\input{chapter/content/solution/head-mount}
 
-% Sections
-\input{chapter/content/solution/gesture-recognition}
-\input{chapter/content/solution/robot-interaction}
-\input{chapter/content/solution/toolchain}
-
-
-
-
-
-
-
-
-
-
-
-
-
+%\input{chapter/content/solution/brain} 
+%\input{chapter/content/solution/cc}
+%\input{chapter/content/solution/command}
+%\input{chapter/content/solution/head-mount}
+%
+%% Sections
+%\input{chapter/content/solution/gesture-recognition}
+%\input{chapter/content/solution/robot-interaction}
+%\input{chapter/content/solution/toolchain}
