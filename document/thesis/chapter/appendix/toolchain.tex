@@ -1,13 +1,13 @@
-\section{Toolchain} During the implementation of this thesis, many tools are used for various purposes. Every module in this thesis uses different programming language, therefore, different toolchains are used. Following sections talk about the tools that are used to develop, build, deploy and document this thesis work. 
+\chapter*{Toolchain} During the implementation of this thesis, many tools are used for various purposes. Every module in this thesis uses different programming language, therefore, different toolchains are used. Following sections talk about the tools that are used to develop, build, deploy and document this thesis work. 
 
-\subsection{Develop} 
+\section*{Develop} 
 \paragraph*{Xcode} Core functionalities of this thesis are developed in C++ on Mac OSX. Therefore, Xcode is used to develop HRI and Brain module. Xcode is an IDE containing a suite of software development tools developed by Apple for developing software for OS X and iOS.
 
 \paragraph*{WebStorm} Control Center module is developed in Javascript with the help of a popular IDE for Web development called as WebStorm. It is a commercial IDE for JavaScript, CSS and HTML built on JetBrains IntelliJ IDEA platform.
 
 \paragraph*{PyCharm} Command module is developed in Python using an IDE name as PyCharm. It is implemented by a company called JetBrains and it provides code analysis, a graphical debugger, an integrated unit tester and supports web development with Django.
 
-\subsection{Build} 
+\section*{Build} 
 \paragraph*{Javascript and Python} They are traditionally implemented as interpreted languages and therefore they do not need any special compilers to build them. Control Center module needs just a latest browser with WebSocket and WebGL support to run the Javascript code. Python binary is available is most modern operating systems and we used Python version 2.7.6 to run Command module. 
 
 \paragraph*{C++} The code that is implemented in C++ used 2 different compilers to build it, because the development is done on 64-bit Mac operating system and target system is a 32-bit Gentoo Linux operating system. 
@@ -20,7 +20,7 @@ The repository is cloned on OpenNAO and then HRI module is built as shown in \re
 
 \lstinputlisting[language=python]{code/build.sh} \label{code:build}
 
-\subsection{Patch} \label{sec:patch} 
+\section*{Patch} \label{sec:patch} 
 \paragraph*{OpenNAO / NAO OS} Aldebaran provides an image of the NAOs operating system named as OpenNAO to use the robotic system virtually and it can run in a virtual machine in any host. OpenNAO is 32-bit Gentoo Linux modified by Aldebaran for Intel Atom Processor with i686 Architecture. 
 
 \paragraph*{Emerge} Emerge is the package manager for Gentoo Linux and Portage is the package tree. Aldebaran forces users not to update Emerge to avoid conflict with Aldebaran modules. Portage tree used with NAO OS is last updated on 11 Jan 2012. 
@@ -31,8 +31,8 @@ This issue is solved by finding higher version of libstdc++ from debian reposito
 
 \lstinputlisting[language=python]{code/gcc-patch.sh}
 
-\subsection{Version Control} The Proposal till the final results of a project goes through many iterations or modification of the source files. Such changes are intentional and sometimes they are accidental. Therefore, source files of this thesis are stored and tracked using a version control system called Git. Git is a version control is a system that records changes to a file or set of files over time. To avoid accidental lose of source files, free git online service such as GitHub allows us to store them in a remote repository that can be cloned from anywhere via Internet. \url{https://github.com/AravinthPanch/gesture-recognition-for-human-robot-interaction} is the link to the online repository that contains all the informations regarding this thesis.
+\section*{Version Control} The Proposal till the final results of a project goes through many iterations or modification of the source files. Such changes are intentional and sometimes they are accidental. Therefore, source files of this thesis are stored and tracked using a version control system called Git. Git is a version control is a system that records changes to a file or set of files over time. To avoid accidental lose of source files, free git online service such as GitHub allows us to store them in a remote repository that can be cloned from anywhere via Internet. \url{https://github.com/AravinthPanch/gesture-recognition-for-human-robot-interaction} is the link to the online repository that contains all the informations regarding this thesis.
 
-\subsection{Data Analysis} During this thesis work, significant amount of datasets are collected. These data consist of training and test data of full body skeletal points / hand joints which are recorded to train and test the hand gesture recognition system. This information mus be analyzed and studied for the purpose of statistically understand this system. Additionally, these data must be plotted as shown in the graph \ref{pl:ges:pos} and hence, MATLAB is used. MATLAB is a multi-paradigm numerical computing environment developed by MathWorks to do matrix manipulations, plotting of functions and data and implementation of algorithms. 
+\section*{Data Analysis} During this thesis work, significant amount of datasets are collected. These data consist of training and test data of full body skeletal points / hand joints which are recorded to train and test the hand gesture recognition system. This information mus be analyzed and studied for the purpose of statistically understand this system. Additionally, these data must be plotted as shown in the graph \ref{pl:ges:pos} and hence, MATLAB is used. MATLAB is a multi-paradigm numerical computing environment developed by MathWorks to do matrix manipulations, plotting of functions and data and implementation of algorithms. 
 
-\subsection{Documentation} Proper documentation is a crucial part of any research work. Therefore, we have used LaTeX to document this thesis. LaTeX is a high-quality typesetting system that includes features designed for the production of technical and scientific documentation. TeXstudio on Mac OSX is the editor that is used to compose and manage the LaTeX documents of this. LaTeX source files can be found inside the document folder of the git repository of this thesis.
+\section*{Documentation} Proper documentation is a crucial part of any research work. Therefore, we have used LaTeX to document this thesis. LaTeX is a high-quality typesetting system that includes features designed for the production of technical and scientific documentation. TeXstudio on Mac OSX is the editor that is used to compose and manage the LaTeX documents of this. LaTeX source files can be found inside the document folder of the git repository of this thesis.

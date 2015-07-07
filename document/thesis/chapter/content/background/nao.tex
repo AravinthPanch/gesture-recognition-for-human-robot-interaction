@@ -12,17 +12,13 @@ NAOs motion module is based on generalized inverse kinematics, which handles loc
 
 \input{chapter/figures/nao-motion}
 
-In this thesis, we attempt to use the locomotion and stiffness control of Motion API to move NAO to a position in the two dimensional space. Robot Posture API will also be used to make the robot go to the predefined posture such as Stand, Sit and Crouch as shown in the figure \ref{fg:nao:motion}. Python code \ref{code:nao:motion} shows how the robot can be moved to another position at the given normalized velocity using Motion API. 
-
-\lstinputlisting[language=python]{code/nao-motion.py} \label{code:nao:motion}
+In this thesis, we attempt to use the locomotion and stiffness control of Motion API to move NAO to a position in the two dimensional space. Robot Posture API will also be used to make the robot go to the predefined posture such as Stand, Sit and Crouch as shown in the figure \ref{fg:nao:motion}.
 
 \subsection{Audio} NAO uses four directional microphones to detect sounds and equipped with a stereo broadcast system made up of 2 loudspeakers in its ears as shown in the figure \ref{fg:nao:audio}. NAOs voice recognition and text-to-speech capabilities allow it to communicate in 19 languages. 
 
 \input{chapter/figures/nao-audio} 
 
-In this thesis, we aim to use Text-To-Speech API of NAO to say the detected gesture loud to communicate with the user. Python code \ref{code:nao:audio} shows how NAO can say words given as strings.
-
-\lstinputlisting[language=python]{code/nao-audio.py} \label{code:nao:audio}
+In this thesis, we aim to use Text-To-Speech API of NAO to say the detected gesture loud to communicate with the user.
 
 \input{chapter/figures/nao-vision}
 
