@@ -1,10 +1,21 @@
-\chapter{Conclusion and Future work} During this thesis, we have proposed a promising system to recognize hand gestures based on skeletal points tracking using depth camera. This system is built for the purpose of human-robot interaction (HRI) with the humanoid robot named as NAO. We have validated this approach by training the system with five static gestures and we have obtained good results. 
+\chapter{Conclusion and Future work} During this thesis, we have proposed a promising system to recognize hand gestures based on skeletal points tracking using depth camera. This system is built for the purpose of human-robot interaction (HRI) with the humanoid robot named as NAO. We have validated this approach by training the system with five static gestures and obtained results as shown in the section \ref{ch:result}.
 
-We have partitioned our goal into 4 modules and reached the goal by implementing them in a decoupled environment, and finally, integrated all of them into one system. We believe that the proposed approach is sufficiently robust and flexible to deal with static hand gestures. 
+We have partitioned our goal into 4 modules and reached the goal by implementing them in a decoupled environment, and finally, integrated all of them into one system. We have shown that proposed approach is sufficiently robust and flexible to deal with static hand gestures. 
 
 Human-Robot Interaction (HRI) module deals with integrating the depth camera into the robot and processing the depth information to track the skeletal points of the user, and finally send them via network to the Brain module. Brain module supports the core functionalities of this system by receiving the skeletal point information of the user, and recording them as training data in the training mode or computing the prediction results in the prediction mode. Control Center (CC) module plays vital role in visualizing these interactions, therefore, it is considered as the eye of the system. Finally, Command module comprehends the predicted gesture and translating them to a robotic Motion or Speech or Gesture itself.
 
-Finally, we have carried out several experiments and provided the results which illustrate the robustness of the system. Furthermore, we have done evaluations on the test data and plotted them on graph to visually understand the performance of the system. Moreover, we have proposed alternatives to improve the efficiency and the effectiveness of our system. For instance, the gesture recognizing performance can be then improved incrementally by learning from on-line training feature of Adaptive Naive Bayes classifier and Minimum Distance classifier as a better alternative for prediction of static gestures.
+Finally, we have carried out several experiments and provided the results which illustrate the robustness of the system. Furthermore, we have done evaluations on the test data and plotted them on graph to visually understand the performance of the system. 
+
+\section{Discussion} 
+We have faced issues in implementing few contemplated solutions due to various limitations. Following section discusses about few experimental designs which are conceived during thesis.
+
+\subsection{Everything On-Board} First experiment design is conceived in a way that depth camera, skeletal joint tracking, gesture recognition infrastructure and robot motion will be embedded into the on-board computer of NAO. However, gesture recognition infrastructure is composed of computationally intensive machine learning processes and along with skeletal joint tracking by NiTE had pushed NAO to full CPU load consistently \cite{17}.
+
+\subsection{Extending NAO with Single Board Computer} In order to escape the computational limitation of NAO, another experimental design is contemplated that the robot will be extended as shown in the figure \ref{fg:nao:bag} with a powerful Single Board Computer such as pcDuino or RaspberryPi. However, Asus Xtions higher power consumption of 2.5 Watts with weight of 250 grams, pcDuinos power consumption of 2A at 5VDC with weight of 100 grams and additional weight by 3D printed mounts, heat sinks and wires will make NAO to be heavier and ultimately result in poor motion performances and higher power consumption. 
+
+\input{chapter/figures/nao-bag}
+
+\subsection{Everything Off-Board} This experimental design pushes all the components to an off-board computer that could be a PC connected with depth camera at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WLAN. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design will suit for other applications such as indoor navigation and localization of NAO \cite{20}.
 
 \section{Future Work} The proposed design for gesture recognition based on skeletal points tracking using depth camera can be improved in several ways. In this section, we overview the future work by discussing the limitations of the proposed methods and proposing the alternatives.
 \begin{itemize}
@@ -18,3 +29,5 @@ Finally, we have carried out several experiments and provided the results which 
 	
 	\item \textbf{Temporal Gestures} : During this thesis, we have trained our system to recognize only static gestures which imply an action such as traffic police signals. However, human natural interaction is comprised of many more sophisticated dynamic gestures. Therefore, we propose to extend this system with Dynamic Time Warping classifier of GRT with Time-Series-Classification data to recognize temporal gestures. 
 \end{itemize}
+
+

@@ -27,9 +27,9 @@ NiTE uses machine learning algorithms to recognize anatomical landmarks and pose
 
 \input{chapter/figures/ni-alg}
 
-\paragraph*{Training} In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representation is covered with several localized body part labels as show in the figure \ref{fg:ni:train}. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
+\paragraph*{Training} In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representation is covered with several localized body part labels. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
 
-\input{chapter/figures/ni-train}
+%\input{chapter/figures/ni-train}
 
 \paragraph*{Feature Labeling} Features are located in depth image as shown in the figure \ref{fg:ni:label} and labeled. The yellow crosses indicates the pixel x being classified. The red circles indicate the offset pixel. In figure \ref{fg:ni:label} (a), the two example features $\theta_1, \theta_2$ give a large depth difference response. On the other hand in (b), the same two features at new image locations give a much smaller response.
 
