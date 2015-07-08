@@ -13,7 +13,7 @@ Figure \ref{fg:ni:arch} displays a layered view of producing, acquiring and proc
 	\item The next C shaped layer is executed on the host PC represents OpenNI. OpenNI provides communication interfaces that interact with both the sensors driver and the middleware components, which analyze the data from the sensor. 
 	\item The sensor data acquisition is a simple acquisition API, enabling the host to operate the sensor. This module is OpenNI compliant interfaces that conforms to OpenNI API standard. 
 	\item The NiTE Algorithms layer is the computer vision middleware and is also plugged into OpenNI. It processes the depth images produced by the PrimeSensor. 
-	\item The NiTE Controls layer is an applicative layer that provides application framework for gesture identification and gesture-based UI controls, on top of the data that was processed by NiTE Algorithms. 
+	\item The NiTE Controls layer is an applicative layer that provides application framework for gesture identification and gesture-based UI controls, on top of the data that is processed by NiTE Algorithms. 
 \end{itemize}
 
 \subsubsection{Skeletal Points Tracking Algorithm} The lower layer of NiTE middleware that performs the groundwork of processing the stream of raw depth images. This layer utilizes computer vision algorithms to perform the following: 
@@ -27,7 +27,7 @@ NiTE uses machine learning algorithms to recognize anatomical landmarks and pose
 
 \input{chapter/figures/ni-alg}
 
-\paragraph*{Training} In order to train the system, large collection of synthetic and real representations of human body were recorded and labeled. Each body representation is covered with several localized body part labels. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
+\paragraph*{Training} In order to train the system, large collection of synthetic and real representations of human body are recorded and labeled. Each body representation is covered with several localized body part labels. Some of these parts are defined to directly localize particular skeletal joints of interest, while others fill the gaps or could be used in combination to predict other joints.
 
 %\input{chapter/figures/ni-train}
 
@@ -43,7 +43,7 @@ NiTE uses machine learning algorithms to recognize anatomical landmarks and pose
 
 \input{chapter/equations/ni-decision-forest}
 
-Each tree is trained on a different set of randomly synthesized images. A random subset of 2000 example pixels from each image is chosen to ensure a roughly even distribution across body parts. Training phase was conducted in distributed manner by training 3 trees from 1 million images on 1000 core cluster \cite{13}.
+Each tree is trained on a different set of randomly synthesized images. A random subset of 2000 example pixels from each image is chosen to ensure a roughly even distribution across body parts. Training phase is conducted in distributed manner by training 3 trees from 1 million images on 1000 core cluster \cite{13}.
 
 After predicting the probability of a pixel belonging to a body part, the body parts are recognized and reliable proposals for the positions of 3D skeletal joints are generated. These proposals are the final output of the algorithm and used by a tracking algorithm to self initialize and recover from failure.
 
@@ -57,7 +57,7 @@ After predicting the probability of a pixel belonging to a body part, the body p
 
 \input{chapter/figures/ni-hand}
 
-\paragraph*{Hand Tracker} Even though NiTE framework can recognize full human body, in this thesis we attempt to use only hand recognition and tracking due to the computational limitation of NAO described in the chapter \ref{ch:solution}. To start tracking a hand, a focus gesture must be gesticulated. There are two supported focus gestures: CLICK and WAVE. In the CLICK gesture, the user should hold the hand up and push it towards the sensor, then immediately pull the hand backwards. In the WAVE gesture, the user should hold the hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand was touching another object or closer to another body part. Figure \ref{fg:ni:hand} shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
+\paragraph*{Hand Tracker} Even though NiTE framework can recognize full human body, in this thesis we attempt to use only hand recognition and tracking due to the computational limitation of NAO described in the chapter \ref{ch:solution}. To start tracking a hand, a focus gesture must be gesticulated. There are two supported focus gestures: CLICK and WAVE. In the CLICK gesture, the user should hold the hand up and push it towards the sensor, then immediately pull the hand backwards. In the WAVE gesture, the user should hold the hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand is touching another object or closer to another body part. Figure \ref{fg:ni:hand} shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
 
 \paragraph*{Focus gestures} Focus gestures of NiTE is can be detected even during hand tracking session. NiTE gestures are derived from a stream of hand points thats records how a hand moves through space over time. Each hand point is at the center of the hand in real-world 3D coordinate measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. NiTE recommends users to follow these suggestions to gain maximum efficiency from its API for Hand tracking.
 \begin{itemize}
