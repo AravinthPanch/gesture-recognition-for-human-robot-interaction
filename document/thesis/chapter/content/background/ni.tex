@@ -55,9 +55,9 @@ After predicting the probability of a pixel belonging to a body part, the body p
 
 \input{chapter/figures/ni-joints}
 
-\input{chapter/figures/ni-hand}
-
 \paragraph*{Hand Tracker} Even though NiTE framework can recognize full human body, in this thesis we attempt to use only hand recognition and tracking due to the computational limitation of NAO described in the chapter \ref{ch:solution}. To start tracking a hand, a focus gesture must be gesticulated. There are two supported focus gestures: CLICK and WAVE. In the CLICK gesture, the user should hold the hand up and push it towards the sensor, then immediately pull the hand backwards. In the WAVE gesture, the user should hold the hand up and move it several times from left to right and back. Once hand is been found and it will be tracked till the hand leaves the field of view of the camera or hand point is lost due to various factors such as hand is touching another object or closer to another body part. Figure \ref{fg:ni:hand} shows how hand points are tracked using NiTE and trail of the hand positions in real world coordinates are mapped on to the depth image.
+
+\input{chapter/figures/ni-hand}
 
 \paragraph*{Focus gestures} Focus gestures of NiTE is can be detected even during hand tracking session. NiTE gestures are derived from a stream of hand points thats records how a hand moves through space over time. Each hand point is at the center of the hand in real-world 3D coordinate measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. NiTE recommends users to follow these suggestions to gain maximum efficiency from its API for Hand tracking.
 \begin{itemize}
@@ -68,3 +68,4 @@ After predicting the probability of a pixel belonging to a body part, the body p
 	\item CLICK should be long enough at least 20 cm and performed towards the sensor. 
 	\item If you have difficulty in gaining focus, try to stand closer to the sensor (around 2m) and make sure that your hand is inside the field of view. 
 \end{itemize}
+
