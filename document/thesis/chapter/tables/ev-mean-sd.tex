@@ -9,3 +9,53 @@
 	\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=3}
 	\pgfplotstabletypeset [ col sep=comma, every head row/.style={before row=\hline,after row=\hline}, every last row/.style={after row=\hline}, ] {../../data/results/sd.csv} \caption{Standard deviations of 3 dimensions of left and right hand} \label{tb:ev:sd} 
 \end{table}
+
+\begin{table}
+	\centering
+		\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=3}
+	\pgfplotstabletypeset [ 
+	col sep=comma, 
+	every head row/.style={before row=\hline,after row=\hline},
+	every last row/.style={after row=\hline},
+	create on use/newcol/.style={
+		create col/set list={Precision,Recall,F-measure}
+	},
+	columns/newcol/.style={string type},
+	columns={newcol,0,1,2,3,4},
+	display columns/0/.style={column name={}},
+	display columns/1/.style={column name={Class 1}},
+	display columns/2/.style={column name={Class 2}},
+	display columns/3/.style={column name={Class 3}},
+	display columns/4/.style={column name={Class 4}},
+	display columns/5/.style={column name={Class 5}},
+	] 
+	{../../data/results/subset-test/anbc2-precision-recall-fmeasure.csv}
+	\caption{Precision, Recall and F-Measure calculated by validating 10\% of training dataset. ANBC Classifier trained with Null Rejection coefficient 2.0} \label{tb:ev:confusion} 
+\end{table}
+
+
+\begin{table}
+	\centering
+	\pgfkeys{/pgf/number format/.cd,fixed,fixed zerofill,precision=3}
+	\pgfplotstabletypeset [ 
+	col sep=comma, 
+	every head row/.style={before row=\hline,after row=\hline},
+	every last row/.style={after row=\hline},
+	create on use/newcol/.style={
+		create col/set list={Non-gesture,Class 1,Class 2,Class 3,Class 4,Class 5}
+	},
+	columns/newcol/.style={string type},
+	columns={newcol,0,1,2,3,4,5},
+	display columns/0/.style={column name={}},
+	display columns/1/.style={column name={Non-Gesture}},
+	display columns/2/.style={column name={Class 1}},
+	display columns/3/.style={column name={Class 2}},
+	display columns/4/.style={column name={Class 3}},
+	display columns/5/.style={column name={Class 4}},
+	display columns/6/.style={column name={Class 5}},				
+	] 
+	{../../data/results/subset-test/anbc2-confusion.csv}
+	\caption{Confusion Matrix calculated by validating 10\% of training dataset. ANBC Classifier trained with Null Rejection coefficient 2.0} \label{tb:ev:confusion} 
+\end{table}
+
+
