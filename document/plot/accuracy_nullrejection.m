@@ -5,31 +5,35 @@
 clc()
 clear()
 
-file_path = '../../data/results/';
-dataSets = {'accuracy-anbc.csv','accuracy-svm.csv','accuracy-mindist-4.csv'};
-plotFileNames = {'test-accuracy-anbc','test-accuracy-svm','test-accuracy-mindist'};
-titleName = {'Adaptive Naive Bayes Classifier (ANBC)', 'Support Vector Machine (SVM)', 'Minimum Distance (MinDist)'};
+file_path = '../../data/results/validation-subset/';
+dataSets = {'anbc-recall-nr-0-10.csv','mindist-recall-nr-0-10.csv'};
+plotFileNames = {'test-accuracy-anbc','test-accuracy-mindist'};
+titleName = {'Adaptive Naive Bayes Classifier (ANBC)','Minimum Distance (MinDist)'};
+numberOfDataSets = size(dataSets,2);
 
-for i = 1:3
+for i = 1:numberOfDataSets
     dataSetFilePath = strcat(file_path, dataSets{i});
     data = csvread(dataSetFilePath,1,0);
     
-    label = arrayfun(@(x) data(data(:,1) == x, :), unique(data(:,1)), 'uniformoutput', false);
+    class0 = data(:,2)*100;
+    class1 = data(:,3)*100;
+    class2 = data(:,4)*100;
+    class3 = data(:,5)*100;
+    class4 = data(:,6)*100;
+    class5 = data(:,7)*100;
+    nr = data(:,1);
     
-    iterations = size(label{1},1);
-    x = data(1:iterations,2);
-    
-    plot(x,label{1}(:,3), 'red', 'LineWidth', 1.5);
+    plot(nr, class0, 'red', 'LineWidth', 1.5);
     hold on;
-    plot(x,label{2}(:,3), 'blue','LineWidth', 1.5);
+    plot(nr, class1, 'blue','LineWidth', 1.5);
     hold on;
-    plot(x,label{3}(:,3), 'green','LineWidth', 1.5);
+    plot(nr, class2, 'green','LineWidth', 1.5);
     hold on;
-    plot(x,label{4}(:,3), 'magenta','LineWidth', 1.5);
+    plot(nr, class3, 'magenta','LineWidth', 1.5);
     hold on;
-    plot(x,label{5}(:,3), 'black','LineWidth', 1.5);
+    plot(nr, class4, 'black','LineWidth', 1.5);
     hold on;
-    plot(x,label{6}(:,3), 'yellow','LineWidth', 1.5);
+    plot(nr, class5, 'yellow','LineWidth', 1.5);
     hold off;
     
     set(gca,'YLim', [0 105]);
