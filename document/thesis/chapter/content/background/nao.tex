@@ -1,11 +1,11 @@
-\section{NAO - The Humanoid Robot} NAO is an autonomous programmable humanoid robot invented by Aldebaran Robotics. NAO Academics Edition is developed for universities and laboratories for research and educational purposes. Follow subsections discuss briefly about the specifications of NAO as described by Aldebaran Robotics \cite{8}.
+\section{NAO - The Humanoid Robot} NAO is an autonomous programmable humanoid robot invented by Aldebaran Robotics. NAO Academics Edition is developed for universities and laboratories for research and educational purposes. Follow subsections briefly discuss the specifications of NAO as described by Aldebaran Robotics \cite{8}.
 
 \input{chapter/figures/nao-body}
 \input{chapter/tables/nao-spec}
 
 \subsection{Body} NAO has a body with 25 degrees of freedom (DOF) whose key elements are electric motors and actuators as show in the figure \ref{fg:nao:body}. It has 48.6-watt-hour battery that provides 1.5 or more hours of autonomy, depending on the usage. Additional specifications of robot are shown in the table \ref{tb:nao:spec}. 
 
-\subsection{Motion} NAOs walking algorithm uses a simple dynamic model (linear inverse pendulum) and quadratic programming. It is stabilized using feedback from the joint sensors. This makes the walking robust and resistant to small disturbances, and torso oscillations in the frontal and lateral planes are absorbed. It can walk on a variety of floor surfaces, such as carpeted, tiled, and wooden floors. 
+\subsection{Motion} NAOs walking algorithm uses a simple dynamic model (linear inverse pendulum) \cite{8}. It is stabilized using feedback from the joint sensors. This makes the walking robust and resistant to small disturbances, and torso oscillations in the frontal and lateral planes are absorbed. It can walk on a variety of floor surfaces, such as carpeted, tiled, and wooden floors. 
 
 NAOs motion module is based on generalized inverse kinematics, which handles locomotion, joint control, balance, redundancy, and task priority. This means that when asking it to extend its arm, it bends over because its arms and leg joints are taken into account.
 
@@ -17,7 +17,7 @@ In this thesis, we attempt to use the locomotion and stiffness control of Motion
 
 \input{chapter/figures/nao-audio} 
 
-In this thesis, we aim to use Text-To-Speech API of NAO to say the detected gesture loud to communicate with the user.
+In this thesis, we aim to use Text-To-Speech API of NAO to say the detected gesture out loud.
 
 \subsection{Vision} \label{sec:nao:vision} Proper vision is the utmost importance for the function of any vision based autonomous robot. Areas of artificial intelligence deal with autonomous planning or deliberation for robotic systems to navigate through an environment. High-level information about the environment could be provided by a computer vision system that is acting as a vision of the robot.
 

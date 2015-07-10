@@ -13,7 +13,7 @@ Figure \ref{fg:ni:arch} displays a layered view of producing, acquiring and proc
 	\item The next C shaped layer is executed on the host PC represents OpenNI. OpenNI provides communication interfaces that interact with both the sensors driver and the middleware components, which analyze the data from the sensor. 
 	\item The sensor data acquisition is a simple acquisition API, enabling the host to operate the sensor. This module is OpenNI compliant interfaces that conforms to OpenNI API standard. 
 	\item The NiTE Algorithms layer is the computer vision middleware and is also plugged into OpenNI. It processes the depth images produced by the PrimeSensor. 
-	\item The NiTE Controls layer is an applicative layer that provides application framework for gesture identification and gesture-based UI controls, on top of the data that is processed by NiTE Algorithms. 
+	\item The NiTE Controls layer is an application layer that provides application framework for gesture identification and gesture-based UI controls, on top of the data that is processed by NiTE Algorithms. 
 \end{itemize}
 
 \subsubsection{Skeletal Points Tracking Algorithm} The lower layer of NiTE middleware that performs the groundwork of processing the stream of raw depth images. This layer utilizes computer vision algorithms to perform the following: 
@@ -31,7 +31,7 @@ NiTE uses machine learning algorithms to recognize anatomical landmarks and pose
 
 %\input{chapter/figures/ni-train}
 
-\paragraph*{Feature Labeling} Features are located in depth image as shown in the figure \ref{fg:ni:label} and labeled. The yellow crosses indicates the pixel x being classified. The red circles indicate the offset pixel. In figure \ref{fg:ni:label} (a), the two example features $\theta_1, \theta_2$ give a large depth difference response. On the other hand in (b), the same two features at new image locations give a much smaller response.
+\paragraph*{Feature Labeling} Features are located in depth image as shown in the figure \ref{fg:ni:label} and labeled. The yellow crosses indicate the pixel x being classified. The red circles indicate the offset pixel. In figure \ref{fg:ni:label} (a), the two example features $\theta_1, \theta_2$ give a large depth difference response. On the other hand in (b), the same two features at new image locations give a much smaller response.
 
 \input{chapter/figures/ni-label}
 
@@ -43,7 +43,7 @@ NiTE uses machine learning algorithms to recognize anatomical landmarks and pose
 
 \input{chapter/equations/ni-decision-forest}
 
-Each tree is trained on a different set of randomly synthesized images. A random subset of 2000 example pixels from each image is chosen to ensure a roughly even distribution across body parts. Training phase is conducted in distributed manner by training 3 trees from 1 million images on 1000 core cluster \cite{13}.
+Each tree is trained on a different set of randomly synthesized images. A random subset of 2000 example pixels from each image is chosen to ensure an even distribution across body parts. Training phase is conducted in distributed manner by training 3 trees from 1 million images on 1000 core clusters \cite{13}.
 
 After predicting the probability of a pixel belonging to a body part, the body parts are recognized and reliable proposals for the positions of 3D skeletal joints are generated. These proposals are the final output of the algorithm and used by a tracking algorithm to self initialize and recover from failure.
 
@@ -61,11 +61,11 @@ After predicting the probability of a pixel belonging to a body part, the body p
 
 \paragraph*{Focus gestures} Focus gestures of NiTE is can be detected even during hand tracking session. NiTE gestures are derived from a stream of hand points thats records how a hand moves through space over time. Each hand point is at the center of the hand in real-world 3D coordinate measured in millimeters. Gesture detectors are sometimes called point listeners (or point controls) since they analyze the points stream looking for a gesture. NiTE recommends users to follow these suggestions to gain maximum efficiency from its API for Hand tracking.
 \begin{itemize}
-	\item Try to keep the hand that performs the gesture at a distance from your body. 
-	\item Your palm should be open, fingers pointing up and face the sensor. 
+	\item The hand that performs the gesture must be kept away from the body of the user. 
+	\item Palm should be open, fingers pointing up and face the sensor. 
 	\item The movement should not be too slow or too fast. 
 	\item WAVE should consist of at least 5 horizontal movements left-right or right-left. 
-	\item CLICK should be long enough at least 20 cm and performed towards the sensor. 
-	\item If you have difficulty in gaining focus, try to stand closer to the sensor (around 2m) and make sure that your hand is inside the field of view. 
+	\item CLICK should be at least 20 cm long enough and performed towards the sensor. 
+	\item If there is a difficulty in gaining focus, the user must stand closer to the sensor around at 2m.
 \end{itemize}
 

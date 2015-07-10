@@ -1,16 +1,16 @@
-\chapter*{Toolchain} During the implementation of this thesis, many tools are used for various purposes. Every module in this thesis uses different programming language, therefore, different toolchains are used. Following sections talk about the tools that are used to develop, build, deploy and document this thesis work. 
+\chapter{Toolchain} During the implementation of this thesis, many tools are used for various purposes. Every module in this thesis uses different programming language, therefore, different toolchains are used. Following sections talk about the tools that are used to develop, build, deploy and document this thesis work. 
 
 \section*{Develop} 
-\paragraph*{Xcode} Core functionalities of this thesis are developed in C++ on Mac OSX. Therefore, Xcode is used to develop HRI and Brain module. Xcode is an IDE containing a suite of software development tools developed by Apple for developing software for OS X and iOS.
+\paragraph*{Xcode} Core functionalities of this thesis are developed in C++ on Mac OSX. Therefore, Xcode was used to develop HRI and Brain module. Xcode is an IDE containing a suite of software development tools developed by Apple for developing software for OS X and iOS.
 
-\paragraph*{WebStorm} Control Center module is developed in Javascript with the help of a popular IDE for Web development called as WebStorm. It is a commercial IDE for JavaScript, CSS and HTML built on JetBrains IntelliJ IDEA platform.
+\paragraph*{WebStorm} Control Center module was developed in Javascript with the help of a popular IDE for Web development called as WebStorm. It is a commercial IDE for JavaScript, CSS and HTML built on JetBrains IntelliJ IDEA platform.
 
-\paragraph*{PyCharm} Command module is developed in Python using an IDE name as PyCharm. It is implemented by a company called JetBrains and it provides code analysis, a graphical debugger, an integrated unit tester and supports web development with Django.
+\paragraph*{PyCharm} Command module was developed in Python using an IDE name as PyCharm. It is implemented by a company called JetBrains and it provides code analysis, a graphical debugger, an integrated unit tester and supports web development with Django.
 
 \section*{Build} 
 \paragraph*{Javascript and Python} They are traditionally implemented as interpreted languages and therefore they do not need any special compilers to build them. Control Center module needs just a latest browser with WebSocket and WebGL support to run the Javascript code. Python binary is available is most modern operating systems and we used Python version 2.7.6 to run Command module. 
 
-\paragraph*{C++} The code that is implemented in C++ used 2 different compilers to build it, because the development is done on 64-bit Mac operating system and target system is a 32-bit Gentoo Linux operating system. 
+\paragraph*{C++} The code that was implemented in C++ used 2 different compilers to build it, because the development was done on 64-bit Mac operating system and target system is a 32-bit Gentoo Linux operating system. 
 
 \paragraph*{\indent Clang and Xcode} Development code is built using Clang with LLVM libc++ Standard library. Clang is a compiler developed by Apple for C, C++, Objective-C and Objective-C++ programming languages. Build settings such as header, library search paths, macros, environment variables and linking are configured using Xcode. 
 
@@ -25,14 +25,12 @@ The repository is cloned on OpenNAO and then HRI module is built as shown in \re
 
 \paragraph*{Emerge} Emerge is the package manager for Gentoo Linux and Portage is the package tree. Aldebaran forces users not to update Emerge to avoid conflict with Aldebaran modules. Portage tree used with NAO OS is last updated on 11 Jan 2012. 
 
-\paragraph*{GCC 4.5.3} Due to outdated packages on OpenNAO, GCC version is 4.5.3 and C++ library version is libstdc++.so.6.0.14. NiTE middleware library (libNiTE2.so) is built by PrimeSense using higher version of GCC (higher than GLIBCXX\_3.4.14 or libstdc++.so.6.0.14). Therefore, building HRI module on OpenNAO will throw an error while linking libNiTE2.so, \textit{/usr/lib/libstdc++.so.6: version GLIBCXX\_3.4.15 not found}
+\paragraph*{GCC 4.5.3} Due to outdated packages on OpenNAO, GCC version is 4.5.3 and C++ library version is libstdc++.so.6.0.14. NiTE middleware library (libNiTE2.so) was built by PrimeSense using higher version of GCC (higher than GLIBCXX\_3.4.14 or libstdc++.so.6.0.14). Therefore, building HRI module on OpenNAO will throw an error while linking libNiTE2.so, \textit{/usr/lib/libstdc++.so.6: version GLIBCXX\_3.4.15 not found}
 
-This issue is solved by finding higher version of libstdc++ from debian repository for 32-bit architecture and copying that to \textit{/usr/lib} folder on OpenNAO/NAO OS and linking current libstdc++ to the copied version. Repository of our thesis contains the required version of libstdc++. Following shell commands show how it must be patched on OpenNAO or NAO OS to run HRI module without any errors.
+This issue was solved by finding higher version of libstdc++ from debian repository for 32-bit architecture and copying that to \textit{/usr/lib} folder on OpenNAO/NAO OS and linking current libstdc++ to the copied version. Repository of our thesis contains the required version of libstdc++. Following shell commands show how it must be patched on OpenNAO or NAO OS to run HRI module without any errors.
 
 \lstinputlisting[language=python]{code/gcc-patch.sh}
 
 \section*{Version Control} The Proposal till the final results of a project goes through many iterations or modification of the source files. Such changes are intentional and sometimes they are accidental. Therefore, source files of this thesis are stored and tracked using a version control system called Git. Git is a version control is a system that records changes to a file or set of files over time. To avoid accidental lose of source files, free git online service such as GitHub allows us to store them in a remote repository that can be cloned from anywhere via Internet. \url{https://github.com/AravinthPanch/gesture-recognition-for-human-robot-interaction} is the link to the online repository that contains all the informations regarding this thesis.
 
-\section*{Data Analysis} During this thesis work, significant amount of datasets are collected. These data consist of training and test data of full body skeletal points / hand joints which are recorded to train and test the hand gesture recognition system. This information mus be analyzed and studied for the purpose of statistically understand this system. Additionally, these data must be plotted as shown in the graph \ref{pl:ges:pos} and hence, MATLAB is used. MATLAB is a multi-paradigm numerical computing environment developed by MathWorks to do matrix manipulations, plotting of functions and data and implementation of algorithms. 
-
-\section*{Documentation} Proper documentation is a crucial part of any research work. Therefore, we have used LaTeX to document this thesis. LaTeX is a high-quality typesetting system that includes features designed for the production of technical and scientific documentation. TeXstudio on Mac OSX is the editor that is used to compose and manage the LaTeX documents of this. LaTeX source files can be found inside the document folder of the git repository of this thesis.
+\section*{Data Analysis} During this thesis work, significant amount (8 MB) of datasets are collected. The datasets contain training data of gestures, prediction results, validation datasets which are recorded to train, test and evaluate the hand gesture recognition system. This information must be analyzed and studied statistically. Hence,  MATLAB was used to plot the data as shown in the graph \ref{pl:ges:pos}, 

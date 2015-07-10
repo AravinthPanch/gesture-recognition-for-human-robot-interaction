@@ -4,15 +4,11 @@
 
 \subsection{Gesture-to-Motion} This thesis is initially conceived as a hand gesture translator just to say the recognized gestures loud. To make this system more useful, Gesture-to-Motion feature is added to the Command module. This functionality helps us to move the robot from one position to another in 2 dimensional space. Therefore each gesture is assigned a locomotion task as follows:
 
-\paragraph*{Walk} This gesture commands the robot to walk in forward direction at a normalized maximum velocity (1.0) with the step frequency of 0.5. Robot walks approximately for 5 seconds and waits for the next command.
+\paragraph*{Walk} This gesture commands the robot to walk in forward direction with the given step frequency of 0.5. Robot walks approximately for 5 seconds and waits for the next command.
 
-\paragraph*{Turn Left} This gesture commands the robot to rotate itself around z-axis in the left direction at a normalized maximum velocity (1.0) with the step frequency of 0.5. Robot walks approximately for 3 seconds and waits for the next command.
+\paragraph*{Turn Left, Turn Right} This gesture commands the robot to rotate itself around z-axis in the left/right direction for 3 seconds.
 
-\paragraph*{Turn Right} This gesture commands the robot to rotate itself around z-axis in the right direction at a normalized maximum velocity (1.0) with the step frequency of 0.5. Robot walks approximately for 3 seconds and waits for the next command.
-
-\paragraph*{Move Left} This gestures combines Walk and Turn Left by commanding the robot to rotate itself around z-axis in the left direction for 3 seconds and walk forward for 5 seconds and waits for the next command.
-
-\paragraph*{Move Right} This gestures combines Walk and Turn Right by commanding the robot to rotate itself around z-axis in the right direction for 3 seconds and walk forward for 5 seconds and waits for the next command.
+\paragraph*{Move Left, Move Right} This gestures combines Walk and Turn by commanding the robot to rotate itself around z-axis in the left/right direction for 3 seconds and walk forward for 5 seconds.
 
 \paragraph*{Click} This gesture is used to gain the control of the robot, when the robot lost its balance and is fallen down. When this gesture is executed, robot wakes up from the sleeping mode and sets itself to the standing position.
 
