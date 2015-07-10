@@ -16,6 +16,7 @@ class CommandModule():
         self.read_config()
         self.log.info("Command module started")
         self.host_name = str(self.config['serverHostName'])
+        # self.host_name = "nao2.local"
         self.naoqi_port = int(self.config['naoQiPort'])
 
         self.naoMotion = NaoMotion(self.host_name, self.naoqi_port)
@@ -30,19 +31,25 @@ class CommandModule():
         self.ws.run_forever()
 
     # When message received, command Nao Action
-    def on_message(self, message):
+    def on_message(self, ws, message):
         self.log.info("Received : " + message)
-        sign = str(json.loads(message)['GESTURE'])
-        self.naoMotion.gesture_to_speech(sign)
-        self.naoMotion.gesture_to_motion(sign)
+        sign = ""
+        msg = json.loads(message)
+        if "INFO" in msg:
+            info = str(msg['INFO'])
+            self.naoMotion.gesture_to_speech(info)
+        elif "GESTURE" in msg:
+            sign = str(msg['GESTURE'])
+            self.naoMotion.gesture_to_speech(sign)
+            self.naoMotion.gesture_to_motion(sign)
 
-    def on_error(self, error):
+    def on_error(self, ws, error):
         print error
 
-    def on_close(self):
+    def on_close(self, ws):
         self.log.info("Connection closed")
 
-    def on_open(self):
+    def on_open(self, ws):
         self.ws.send("AL")
         self.log.info("Connected to Brain")
 
@@ -54,7 +61,7 @@ class CommandModule():
 
     # Initiate the logger with basic config
     def init_logger(self):
-        # logging.basicConfig()
+        logging.basicConfig()
         self.log = logging.getLogger('command')
         self.log.setLevel(logging.INFO)
         format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")

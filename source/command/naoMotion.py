@@ -65,7 +65,7 @@ class NaoMotion():
 
     # Motion based on given Gesture
     def gesture_to_motion(self, sign):
-        if sign == "Walk":
+        if sign == "WALK":
             self.reset_head()
             self.forward_direction = 1.0
             self.sideward_diretion = 0.0
@@ -166,7 +166,7 @@ class NaoMotion():
 
     # Hand gesture based on gesture
     def gesture_to_gesture(self, sign):
-        if sign == "Walk":
+        if sign == "WALK":
             self.hand_angles = [1.061486005783081, -1.2839999198913574, -1.2256240844726562, -0.2546858787536621,
                                 -1.1029877662658691,
                                 -1.2486340999603271, 1.2241740226745605, 0.26534008979797363]
@@ -196,20 +196,7 @@ class NaoMotion():
 
     # Hand gesture based on gesture
     def gesture_to_speech(self, sign):
-        if sign == "Walk":
-            self.ttsProxy.say(sign)
-
-        elif sign == "Turn Right":
-            self.ttsProxy.say(sign)
-
-        elif sign == "Turn Left":
-            self.ttsProxy.say(sign)
-
-        elif sign == "Move Right":
-            self.ttsProxy.say(sign)
-
-        elif sign == "Move Left":
-            self.ttsProxy.say(sign)
+        self.ttsProxy.say(sign)
 
 
 if __name__ == "__main__":
@@ -221,8 +208,8 @@ if __name__ == "__main__":
     # naoMotion = NaoMotion(localhost, localPort)
     naoMotion = NaoMotion(remoteNao, remotePort)
 
-    # sign = "Move Left"
-    # naoMotion.gesture_to_speech(sign)
+    sign = "Both hands are lost"
+    naoMotion.gesture_to_speech(sign)
     # naoMotion.gesture_to_motion(sign)
     # naoMotion.gesture_to_gesture(sign)
 

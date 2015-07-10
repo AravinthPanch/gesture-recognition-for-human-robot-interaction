@@ -139,6 +139,11 @@ vector<vector<double>> udp_client::getHandData(const char* json){
         ws_socket.send(gestureBuffer.str().c_str(), true, 2);
     }
     
+    if(document.HasMember("INFO")){
+        std::stringstream gestureBuffer;
+        gestureBuffer << "{\"INFO\":\"" << document["INFO"].GetString() << "\"}";
+        ws_socket.send(gestureBuffer.str().c_str(), true, 2);
+    }
     
     return handVector;
 }

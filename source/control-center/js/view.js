@@ -181,7 +181,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		handFolder.add(guiParams, 'LeftY').listen();
 		handFolder.add(guiParams, 'LeftZ').listen();
 
-		handFolder.open();
+		//handFolder.open();
 
 		// Based on the tracker selected, draw the joints after clearing the scene
 		trackerSelection.onChange(function (value) {
