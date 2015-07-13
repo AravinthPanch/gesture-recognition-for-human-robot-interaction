@@ -218,8 +218,8 @@ void brain::train(vector< double > rightHand, vector< double > leftHand, websock
  *
  */
 vector<double> brain::predict(vector< double > rightHand, vector< double > leftHand){
-    BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
-    BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
+//    BOOST_LOG_TRIVIAL(info) << "RIGHT :" << rightHand[0] <<", " << rightHand[1] <<", " << rightHand[2] ;
+//    BOOST_LOG_TRIVIAL(info) << "LEFT : " << leftHand[0] <<", " << leftHand[1] <<", " << leftHand[2] ;
     
     vector<double> inputVector(SAMPLE_DIMENSION);
     inputVector[3] = rightHand[0];

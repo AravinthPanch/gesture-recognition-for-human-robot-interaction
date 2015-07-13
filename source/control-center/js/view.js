@@ -164,14 +164,14 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		predictionFolder.add(guiParams, 'MaximumLikelihood').listen();
 		predictionFolder.add(guiParams, 'Gesture').listen();
 
-		//predictionFolder.open();
+		predictionFolder.open();
 
 		var cameraFolder = datGUI.addFolder("WebGL Camera Data");
 		cameraFolder.add(guiParams, 'cameraX').listen();
 		cameraFolder.add(guiParams, 'cameraY').listen();
 		cameraFolder.add(guiParams, 'cameraZ').listen();
 
-		//cameraFolder.open();
+		cameraFolder.open();
 
 		var handFolder = datGUI.addFolder("Hand Data");
 		handFolder.add(guiParams, 'RightX').listen();
@@ -181,7 +181,7 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		handFolder.add(guiParams, 'LeftY').listen();
 		handFolder.add(guiParams, 'LeftZ').listen();
 
-		//handFolder.open();
+		handFolder.open();
 
 		// Based on the tracker selected, draw the joints after clearing the scene
 		trackerSelection.onChange(function (value) {
@@ -444,14 +444,17 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 		if (i <= handData.length) {
 			var timeOut = 1000;
 			if ('GESTURE' in handData[i]) {
+				guiParams.Gesture = handData[i].GESTURE;
+
 				if (handData[i].GESTURE != "WAVE") {
 					timeOut = 2000;
 				}
 
 				$('#gBox').text(handData[i].GESTURE);
-				//var timer = setTimeout(function () {
-				//	$('#gBox').text("")
-				//}, timeOut);
+				var timer = setTimeout(function () {
+					$('#gBox').text("");
+					guiParams.Gesture = "";
+				}, timeOut);
 			}
 
 			if ('INFO' in handData[i]) {
@@ -500,33 +503,36 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 
 
 	function animate() {
-		//setTimeout(function () {
-		//	requestAnimationFrame(animate);
-		//
-		//}, 1000 / 30);
+		setTimeout(function () {
+			requestAnimationFrame(animate);
 
-		requestAnimationFrame(animate);
-		app.controls.update();
+			app.controls.update();
 
-		guiParams.cameraX = app.camera.position.x;
-		guiParams.cameraY = app.camera.position.y;
-		guiParams.cameraZ = app.camera.position.z;
+			guiParams.cameraX = app.camera.position.x;
+			guiParams.cameraY = app.camera.position.y;
+			guiParams.cameraZ = app.camera.position.z;
 
 
-		switch (renderStatus) {
-			case 1:
-				renderHand();
-				break;
-			case 2:
-				renderSkeleton();
-				break;
-			case 3:
-				renderHandFromData();
-				break;
-			case 4:
-				renderSkeletonFromData();
-				break;
-		}
+			switch (renderStatus) {
+				case 1:
+					renderHand();
+					break;
+				case 2:
+					renderSkeleton();
+					break;
+				case 3:
+					renderHandFromData();
+					break;
+				case 4:
+					renderSkeletonFromData();
+					break;
+			}
+
+
+		}, 1000 / 50);
+
+		//requestAnimationFrame(animate);
+
 
 	}
 

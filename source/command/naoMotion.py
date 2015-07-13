@@ -13,6 +13,8 @@ class NaoMotion():
         self.postureProxy = ALProxy("ALRobotPosture", host_name, port)
         self.ttsProxy = ALProxy("ALTextToSpeech", host_name, port)
 
+        # self.disable_smart_stiffness()
+
         # Head Motion
         self.head_joints = ["HeadPitch", "HeadYaw"]
         self.head_angles = []
@@ -30,7 +32,7 @@ class NaoMotion():
         self.forward_direction = 0
         self.sideward_diretion = 0
         self.rotation = 0
-        self.step_frequency = 0.5
+        self.step_frequency = 1.0
         self.walk_duration = 5
         self.turn_duration = 4
 
@@ -41,7 +43,8 @@ class NaoMotion():
     def wake_up(self):
         if self.motionProxy.robotIsWakeUp() is False:
             self.motionProxy.wakeUp()
-            self.postureProxy.goToPosture("Stand", 0.5)
+            # time.sleep(3)
+            # self.postureProxy.goToPosture("Stand", 0.5)
             time.sleep(3)
             self.set_head()
         else:
@@ -63,9 +66,15 @@ class NaoMotion():
     def sleep_robot(self):
         self.motionProxy.rest()
 
+    def get_smart_stiffness(self):
+        print self.motionProxy.getSmartStiffnessEnabled()
+
+    def disable_smart_stiffness(self):
+        self.motionProxy.setSmartStiffnessEnabled(False)
+
     # Motion based on given Gesture
     def gesture_to_motion(self, sign):
-        if sign == "WALK":
+        if sign == "Walk":
             self.reset_head()
             self.forward_direction = 1.0
             self.sideward_diretion = 0.0
@@ -166,19 +175,19 @@ class NaoMotion():
 
     # Hand gesture based on gesture
     def gesture_to_gesture(self, sign):
-        if sign == "WALK":
+        if sign == "Walk":
             self.hand_angles = [1.061486005783081, -1.2839999198913574, -1.2256240844726562, -0.2546858787536621,
                                 -1.1029877662658691,
                                 -1.2486340999603271, 1.2241740226745605, 0.26534008979797363]
             self.motionProxy.setAngles(self.hand_joints, self.hand_angles, self.hand_speed)
 
-        elif sign == "Turn Right":
+        elif sign == "Turn Left":
             self.hand_angles = [1.061486005783081, -1.5417118072509766, -1.0031940937042236, -0.02151799201965332,
                                 -1.1137261390686035,
                                 0.24088001251220703, 0.05066394805908203, 0.19477605819702148]
             self.motionProxy.setAngles(self.hand_joints, self.hand_angles, self.hand_speed)
 
-        elif sign == "Turn Left":
+        elif sign == "Turn Right":
             self.hand_angles = [1.1443220376968384, -0.127363920211792, -0.10120201110839844, -0.02151799201965332,
                                 -1.1029877662658691,
                                 -1.2486340999603271, 1.2241740226745605, 0.26534008979797363]
@@ -202,15 +211,26 @@ class NaoMotion():
 if __name__ == "__main__":
     # Test
     localhost = "127.0.0.1"
-    localPort = 52102
+    localPort = 54351
     remoteNao = "nao2.local"
     remotePort = 9559
     # naoMotion = NaoMotion(localhost, localPort)
     naoMotion = NaoMotion(remoteNao, remotePort)
 
-    sign = "Both hands are lost"
+    # naoMotion.get_smart_stiffness()
+
+    sign = "Walk"
+    # sign = "Turn Right"
+    # sign = "Turn Left"
+    # sign = "Move Right"
+    # sign = "Move Left"
+
+
+
     naoMotion.gesture_to_speech(sign)
-    # naoMotion.gesture_to_motion(sign)
+    naoMotion.gesture_to_motion(sign)
     # naoMotion.gesture_to_gesture(sign)
 
-    naoMotion.sleep_robot()
+    # naoMotion.reset_head()
+
+    # naoMotion.sleep_robot()

@@ -33,15 +33,16 @@ class CommandModule():
     # When message received, command Nao Action
     def on_message(self, ws, message):
         self.log.info("Received : " + message)
-        sign = ""
         msg = json.loads(message)
         if "INFO" in msg:
-            info = str(msg['INFO'])
-            self.naoMotion.gesture_to_speech(info)
+            if "FOV" not in msg['INFO']:
+                info = str(msg['INFO'])
+                self.naoMotion.gesture_to_speech(info)
         elif "GESTURE" in msg:
             sign = str(msg['GESTURE'])
             self.naoMotion.gesture_to_speech(sign)
-            self.naoMotion.gesture_to_motion(sign)
+            # self.naoMotion.gesture_to_motion(sign)
+            self.naoMotion.gesture_to_gesture(sign)
 
     def on_error(self, ws, error):
         print error

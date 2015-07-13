@@ -108,6 +108,7 @@ void websocket_server::send(const char* parsedData, bool isLogged, int client){
         
         if(isLogged){
             BOOST_LOG_TRIVIAL(debug) << "Sent : " << parsedData;
+//            std::cout << parsedData << std::endl;
         }
     }
 }
