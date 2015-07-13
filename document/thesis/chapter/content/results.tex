@@ -2,7 +2,7 @@
 
 In this chapter, we present the results of real time hand gesture recognition for Human-robot interaction based on skeletal points tracking using depth camera. Training data for 5 classes with 11918 samples of 6 dimensional vector are trained with Adaptive Naive Bayes Classifier (ANBC). Min-Max scaling and Null Rejection with coefficient of 2.0 are enabled. Following sections illustrates the results of end-to-end interaction with robot using five gestures named as Walk, Turn Right, Turn Left, Move Right, Move Left gestures which are represented by the class labels 1,2,3,4,5 respectively.
 
-\clearpage 
+
 \section{Gesture-To-Motion} 
 \subsection{Walk} Figure \ref{res:gm:walk} shows that NAO is looking at the user to detect any possible gestures. When it recognized Walk gesture, Command module commands the robot to walk in forward direction for five seconds, thereby, completing a Gesture-To-Motion translation.
 
@@ -44,30 +44,24 @@ Figure \ref{res:pl:move:left} shows the positions of left and right hand in x an
 
 \input{chapter/figures/res-gg}
 
-\section{Evaluation} We have used a machine learning toolkit named as GRT to recognize hand gestures using skeletal points tracking algorithm and Adaptive Naive Bayes classifier (ANBC) for classification and prediction. 
+\section{Evaluation} In this section, we present the experiments carried out to evaluate and validate our system to recognize hand gestures using skeletal points. The goal is to demonstrate the effectiveness of the classifier and to evaluate its potential for real time prediction. In the classification phase, input samples are normalized using Min-Max Scaling and Null Rejection is enabled to detect non-gestures. Therefore, the evaluation demonstrates the prediction accuracy of ANBC with various null rejection coefficient and the comparison it with other supervised learning classifier such as Minimum Distance (MinDist).
 
-The classifier is based on a statistical model of x,y,z coordinate positions of static hand gestures and provides a likelihood measure for recognized gesture. Furthermore, the gesture recognition pipeline uses two post processing modules such as Class Label Filter and Class Label Change Filter to exclude lower frequent spikes in the prediction results and trigger an output only when there is a change in prediction.
+\input{chapter/tables/ev-mean-sd}
 
-In this section, we present the experiments carried out to evaluate and validate our system to recognize hand gestures using skeletal points. The goal is to demonstrate the effectiveness of the classifier and to evaluate its potential for real time prediction. In the classification phase, input samples are normalized using Min-Max Scaling and Null Rejection is enabled to detect non-gestures. Therefore, the evaluation demonstrates the prediction accuracy of ANBC with various null rejection coefficient and the comparison it with other supervised learning classifier such as Minimum Distance (MinDist).
+\subsection{Mean and Standard Deviation} During the training phase, first all the input samples are normalized with the range from 0 to 1 and then GRT computes mean $\mu$ and standard deviation $\sigma$ to create a model for each class. During the prediction phase, it basically computes the maximum a posterior probability of an input vector belonging to any of the trained class. Figure \ref{fg:ev:mean} shows the mean positions of left and right hand for every gesture. Table \ref{tb:ev:mean} and \ref{tb:ev:sd} show mean and standard deviations of the labeled training data of all the five classes. 
 
-\subsection{Mean and Standard Deviation} ANBC is a supervised learning algorithm that can be used to classify any type of N-dimensional signal. It fundamentally works by fitting an N-dimensional Gaussian distribution to each class when it is trained.
-
-During the training phase, first all the input samples are normalized using Min-Max Scaling with the range from 0 to 1 and then GRT computes mean $\mu$ and standard deviation $\sigma$ to create a model for each class. During the prediction phase, it basically computes the maximum a posterior probability of an input vector belonging to any of the trained class. Figure \ref{fg:ev:mean} shows the mean positions of left and right hand for every gesture. Table \ref{tb:ev:mean} and \ref{tb:ev:sd} show mean and standard deviations of the labeled training data of all the five classes. 
+\input{chapter/figures/ev-all-ges-mean} 
 
 \subsection{Classification and Prediction} Our gesture recognition pipeline is trained with 11918 input samples of 6 dimensional vector for 5 classes. Classes are labeled as 1,2,3,4,5 and they represent Walk, Turn Right, Turn Left, Move Right, Move Left gestures respectively. Class label 0 is reserved for non-gesture by GRT. We have carried out experiments to evaluate the classification, prediction and post processing efficiency of our system. Figure \ref{ev:test:prediction} show change is positions of left and hand in Cartesian coordinates while test data is recorded and corresponding prediction for every input sample.
 
-
 Test dataset is a 10\% of training dataset and it is chosen randomly from class. Test dataset is validated against the remaining training dataset, therefore, Precision, Recall, F-Measure and Confusion Matrix are computed. Table \ref{tb:ev:metrics} and \ref{tb:ev:confusion} show the results of prediction using ANBC with null rejection coefficient 2.0. Figure \ref{ev:test:prediction} shows the plot of normalized distances of x,y,z axes of both hands from the test data and their prediction in real time.
 
-\subsection{Prediction Accuracy Vs Null Rejection Accuracy} \label{sec:ev:accuracy} Classifiers of GRT offers various customization that could produce different results for the same test data. Accuracy of a gesture recognition system does not depend only on th precise predictions of trained gestures, but also differentiating them from unintended hand gestures. Figure \ref{ev:accuracy:anbc} shows the prediction and null rejection accuracies of Adaptive Naive Bayes Classifier (ANBC). Figure shows the accuracies of 5 trained gestures and a non-gesture. Non-Gesture data is recorded with both the hands are pointing downwards. GRT allows us to set null rejection coefficient for the classifier and therefore, figure \ref{ev:accuracy:anbc} shows accuracies of class labels with null rejection coefficients range from 0 to 10.
+\subsection{Prediction Accuracy Vs Null Rejection Accuracy} \label{sec:ev:accuracy} Classifiers of GRT offers various customization that could produce different results for the same test data. Accuracy of a gesture recognition system does not depend only on th precise predictions of trained gestures, but also differentiating them from unintended hand gestures. GRT allows us to set null rejection coefficient for the classifier. Evaluation results are obtained by computing accuracies of 5 trained gestures using ANBC with varying null rejection coefficient from 0 to 10.
 
 Figure \ref{ev:accuracy:anbc} shows that increase in null rejection coefficient causes an increase in the accuracy of trained gestures, however, causes a decrease in the accuracy of non-gesture. Therefore, it is optimal to use a null rejection coefficient of 2.0 with ANBC.
 
 Figure \ref{ev:accuracy:mindist} shows some interesting results of Minimum Distance classifier with 4 clusters. Figure shows that prediction results are unpredictable as there is increase in null rejection coefficient. However, it produces accuracy above 95\% with null rejection coefficient from 2.0 till 4.0. This shows that MinDist could be a better alternative to ANBC. 
 
-\clearpage
-\input{chapter/tables/ev-mean-sd}
-\input{chapter/figures/ev-all-ges-mean} 
 \input{chapter/figures/ev-test-all} 
 \input{chapter/figures/ev-accuracy}
 

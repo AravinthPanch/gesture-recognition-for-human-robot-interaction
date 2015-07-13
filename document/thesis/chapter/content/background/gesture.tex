@@ -8,13 +8,13 @@ Even though such hand gloves are used in highly specialized domain such as simul
 
 \input{chapter/figures/ges-model}
 
-Appearance based models do not use the spatial representation of the body, because they derive the parameters directly from the images or videos using a template database. Volumetric approaches have been heavily used in computer animation industry and for computer vision purposes. The models are generally created of complicated 3D surfaces. The drawback of this method is that is very computational intensive. 
+Appearance based models do not use the spatial representation of the body, because they derive the parameters directly from the images or videos using a template database \cite{2}. Volumetric approaches have been heavily used in computer animation industry and for computer vision purposes. The models are generally created of complicated 3D surfaces. The drawback of this method is that is very computational intensive. 
 
 Instead of using intensive processing of 3D hand models and dealing with a lot of parameters, one can just use a simplified version that analyses the joint angle parameters along with segment length. This is known as a skeletal representation of the body, where a virtual skeleton of the person is computed and parts of the body are mapped to certain segments \cite{2}. The analysis here is done using the position and orientation of these segments or the relation between each one of them.
 
 In this thesis, we focus on skeletal based modeling, that is faster because the classifier has to focus only on the significant parts of the body.
 
-\subsection{Gestural Taxonomy} Several taxonomies have been suggested that deal with psychological aspects of gestures \cite{2}. All hand/arm movements are first classified into two major classes as shown in the figure \ref{fg:ges:tax}.
+\subsection{Gestural Taxonomy} Several taxonomies have been suggested that deal with psychological aspects of gestures \cite{2}. All hand/arm movements are first classified into two major classes Gestures and Unintentional movements as shown in the figure \ref{fg:ges:tax}.
 
 \input{chapter/figures/ges-tax}
 
@@ -26,7 +26,7 @@ In this thesis, we focus on communicative gestures in the form of symbols. They 
 
 \input{chapter/content/background/ni}
 
-\subsection{Gesture Classification and Prediction} Like most other recognition systems such as speech recognition and biometrics, the tasks of hand gesture recognition involve modeling, feature extraction, training, classification and prediction as shown in the figure \ref{fg:grt:pipeline}. Though the alternatives such as Dynamic Programming (DP) matching algorithms have been attempted, the most successful solutions involve feature-based statistical learning algorithms. Previous sections explained how a hand gesture is modeled, features are extracted from raw depth images, and the following sections discuss how extracted features are trained, classified and predicted.
+\subsection{Gesture Classification and Prediction} Like most other recognition systems such as speech recognition and biometrics, the tasks of hand gesture recognition involve modeling, feature extraction, training, classification and prediction. Though the alternatives such as Dynamic Programming (DP) matching algorithms have been attempted, the most successful solutions involve feature-based statistical learning algorithms \cite{23}. Previous sections explained how a hand gesture is modeled, features are extracted from raw depth images, and the following sections discuss how extracted features are trained, classified and predicted.
 
 In this thesis, we intend to employ a stochastic machine learning technique based on Adaptive Naive Bayes Classifier (ANBC) with the help of Gesture Recognition Toolkit. ANBC is an extension to the well-known Naive Bayes, one of the most commonly used supervised learning algorithms that works very well on both basic and more complex recognition problems.
 

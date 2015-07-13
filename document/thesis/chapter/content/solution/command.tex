@@ -4,20 +4,4 @@ Command module is developed in Python with WebSocket and NAOqi libraries. Python
 
 Command modules initiates the WebSocket Client and it connects to the Brain modules WebSocket Server at a given port number by loading the common configuration file. WebSocket client keeps the main thread run forever and it executes the respective call back handlers. When there is a new message, it calls the \textit{onMessage} handler and parses the received JSON data to a python object. Whenever gesture data is received, it is translated to a robotic speech and motion via NAOqi proxies.
 
-\paragraph*{NAOqi} NAOqi is the main software that runs on the robot and controls it. NAOqi SDK is the programming framework used to program Aldebaran robots. It allows homogeneous communication between different modules such as motion, audio, video. Python implementation of NAOqi is the simplest interface to NAO, since it allows us to run our code both on our computer or directly on the robot without compiling it to any executable. Hence, Python programming language is chosen to build this module. 
-
-\paragraph*{ALProxy} It is an object of NAOqi SDK that gives us access to all the methods or the module that are available in the robot. Via ALProxy, Command module makes use of three Aldebaran modules such as ALMotion, ALRobotPosture and ALTextToSpeech. Once the command module is started, it creates an ALProxy to the IP of NAO that is defined in the common configuration file. Thereafter, each proxy is ready to send the command to the local or the remote NAOqi.
-
-\paragraph*{ALMotion} It provides methods which facilitate making the robot move. It contains four major groups of methods for controlling the following :
-\begin{itemize}
-	\item Joint stiffness (basically motor On-Off) 
-	\item Joint position (interpolation, reactive control) 
-	\item Walk (distance and velocity control, world position and so on) 
-	\item Robot effector in the Cartesian space (inverse kinematics, whole body constraints) 
-\end{itemize}
-
 We have used ALMotions Locomotion Control extensively to move the robot from one position to another based on the recognized hand gesture such as "Turn Left" or "Move Right". Additionally, Gesture-To-Gesture actions where a human hand gesture is translated to the robot hand gesture by using the Joint Control of ALMotion module.
-
-\paragraph*{ALRobotPosture} It allows us to make the robot go to different predefined postures such as Crouch, LyingBack, LyingBelly, Sit, SitRelax, Stand, StandInit, StandZero. A posture for a robot is a unique configuration of its joints and of inertial sensor. Command module uses ALRobotPosture to make the robot stand up by calling\textit{ robotPostureProxy.goToPosture("Stand", 0.5)}. This functionality is the very first interaction with the robot, if the robot is still in sleep mode. 
-
-\paragraph*{ALTextToSpeech} It allows the robot to speak. It sends commands to a text-to-speech engine, and authorizes also voice customization. The result of the synthesis is sent to the robots loudspeakers. 
