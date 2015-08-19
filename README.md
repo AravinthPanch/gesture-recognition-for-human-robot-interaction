@@ -9,26 +9,19 @@ Aravinth Panchadcharam < http://www.aravinth.info >
 Abstract
 --------------------------------------
 <p align="justify">
-Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots
-existed. HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures,
-and facial expressions. The use of hand gestures provides an attractive alternative to complex interfaced devices for HRI.
-In particular, visual interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI.
-This has motivated a very active research concerned with computer vision-based analysis and interpretation of hand gestures.
-Important differences in the gesture interpretation approaches arise depending on whether 3D based model or appearance
-based model of the gesture is used.
+Human-robot interaction (HRI) has been a topic of both science fiction and academic speculation even before any robots existed. HRI research is focusing to build an intuitive and easy communication with the robot through speech, gestures and facial expressions. The use of hand gestures provides a better solution than conventional interfaces. In particular, interpretation of hand gestures can help in achieving the ease and naturalness desired for HRI. This has motivated a very active research concerned with computer vision-based analysis and interpretation of hand gestures.
+<p>
+
+<p align="justify">
+In this thesis, we aim to implement the hand gesture recognition for robots with modeling, training, analyzing and recognizing gestures based on computer vision and machine learning techniques. Gestures are modeled based on skeletal points and the features are extracted using NiTE framework using a depth camera.
+</p> 
+
+<p align="justify">
+In order to recognize gestures, we propose to learn and classify hand gestures with the help of Adaptive Naive Bayes Classifier (ANBC) using Gesture Recognition Toolkit (GRT). Furthermore, we aim to build a dashboard that can visualize the interaction between all essential parts of the system. Finally, we attempt to integrate all these functionalities into a system that interacts with a humanoid robot NAO.
 </p>
 
 <p align="justify">
-In this project, we attempt to implement the hand gesture recognition for robots with modeling, training, analyzing and
-recognizing gestures based on computer vision and machine learning techniques. Additionally, 3D based gesture modeling
-with skeletal points tracking will be used. As a result, on the one side, gestures will be used command the robot to
-execute certain actions and on the other side, gestures will be translated and spoken out by the robot.
-</p>
-
-<p align="justify">
-We further hope to provide a platform to integrate Sign Language Translation to assist people with hearing and speech
-disabilities. However, further implementations and training data are needed to use this platform as a full fledged
-Sign Language Translator.
+As a result, on one hand, gestures will be used command the robot to execute certain actions and on the other hand, gestures will be translated and spoken out by the robot. 
 </p>
 
 ![Architecture](./document/diagram/hri-architecture.png "Architecture")

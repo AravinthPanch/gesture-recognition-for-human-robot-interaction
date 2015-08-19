@@ -503,35 +503,33 @@ define(['jquery', 'three', 'underscore', 'trackBallControl', 'font', 'jqueryUi']
 
 
 	function animate() {
-		setTimeout(function () {
-			requestAnimationFrame(animate);
+		//setTimeout(function () {
+		//	requestAnimationFrame(animate);
+		//}, 1000 / 50);
 
-			app.controls.update();
+		requestAnimationFrame(animate);
+		app.controls.update();
 
-			guiParams.cameraX = app.camera.position.x;
-			guiParams.cameraY = app.camera.position.y;
-			guiParams.cameraZ = app.camera.position.z;
-
-
-			switch (renderStatus) {
-				case 1:
-					renderHand();
-					break;
-				case 2:
-					renderSkeleton();
-					break;
-				case 3:
-					renderHandFromData();
-					break;
-				case 4:
-					renderSkeletonFromData();
-					break;
-			}
+		guiParams.cameraX = app.camera.position.x;
+		guiParams.cameraY = app.camera.position.y;
+		guiParams.cameraZ = app.camera.position.z;
 
 
-		}, 1000 / 50);
+		switch (renderStatus) {
+			case 1:
+				renderHand();
+				break;
+			case 2:
+				renderSkeleton();
+				break;
+			case 3:
+				renderHandFromData();
+				break;
+			case 4:
+				renderSkeletonFromData();
+				break;
+		}
 
-		//requestAnimationFrame(animate);
 
 
 	}
