@@ -1,24 +1,24 @@
 \begin{figure}
 	[h] 
 	\begin{minipage}
-		{1 
-		\textwidth} \centering 
-		\includegraphics[height=95mm]{figures/result/usr-turn-left.jpg} \caption*{} 
+		{0.3 
+		\textwidth} 
+		\includegraphics[height=80mm]{/result/usr-turn-left.jpg} \caption*{(a)} 
 	\end{minipage}
 	\begin{minipage}
-		{1 
-		\textwidth} \hspace{-5 mm} 
-		\includegraphics[width=160mm]{figures/result/nao-gm-turn-left.jpg} 
+		{0.7
+			\textwidth} 
+		\includegraphics[width=110mm]{/result/test-turn-left.png} \caption*{(b)} 
 	\end{minipage}
-	\caption{NAO recognizes Turn Left gesture and executes a predefined Gesture-To-Motion task.} \label{res:gm:turn:left} 
-\end{figure}
-\begin{figure}
-	[h] \hspace{-15 mm} \centering 
-	\includegraphics[width=155mm]{figures/result/test-turn-left.png} \caption{Our system is capable of real time prediction by processing 30 samples per second. However, the detected hand gesture is triggered only when it is gesticulated for 1 second because of the post-processing by Class Label Filter module. The graph shows 60 samples of correctly recognized Turn Left gesture. }\label{res:pl:turn:left} 
-\end{figure}
-\begin{figure}
-	[h] \centering 
-	\includegraphics[height=70mm]{figures/result/cc-turn-left.jpg} \caption{Control Center displays the recognized Turn Left gesture in real time with the positions of left and right hand in 3 dimensional space.}
-	
-	\label{res:cc:turn:left} 
+	\begin{minipage}
+		{0.3
+		\textwidth}
+		\includegraphics[height=100mm]{/result/nao-gm-turn-left.jpg} \caption*{(d)} 
+	\end{minipage}
+	\begin{minipage}
+		{0.7
+			\textwidth}
+		\includegraphics[width=100mm]{/result/cc-turn-left.jpg}	\caption*{(c)} 
+	\end{minipage}
+	\caption{(a) User gesticulating Turn Left gesture. (b) Normalized x,y positions of both hands. (c) CC dashboard shows the prediction results. (d) NAO executes Gesture-To-Motion Task.} \label{res:gm:turn-left} 
 \end{figure}
