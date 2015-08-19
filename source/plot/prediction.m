@@ -88,7 +88,7 @@ for i = 1:numberOfDataSets
         legend('Left X','Left Y','Left Z','Right X','Right Y','Right Z')
         set(gca,'YTick', 0:0.2:1);
         
-        print(axisPlotFileNames{lbl},'-dpng')
+        print(strcat('output/',axisPlotFileNames{lbl}),'-dpng')
         
         
         % Plot predition only
@@ -105,7 +105,7 @@ for i = 1:numberOfDataSets
         xlabel('Validataion Samples');
         ylabel('Class Label');
         
-        print(plotFileNames{lbl},'-dpng')        
+        print(strcat('output/',plotFileNames{lbl}),'-dpng')        
         
     end
     

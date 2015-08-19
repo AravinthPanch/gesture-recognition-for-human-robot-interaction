@@ -46,6 +46,6 @@ for i = 1:numberOfDataSets
     set(gcf, 'Units','point', 'Position',[100 100 1200 500])
     set(gcf, 'PaperPositionMode','auto')
     
-    print(plotFileNames{i},'-dpng')
+    print(strcat('output/',plotFileNames{i}),'-dpng')
     
 end

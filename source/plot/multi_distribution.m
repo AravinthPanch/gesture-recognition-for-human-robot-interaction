@@ -87,7 +87,7 @@ for i = 1:numberOfDataSets
     set(gcf,'units','points','position',[100,100,1200,500]);
     set(gcf, 'PaperPositionMode','auto');
     
-    print('train-all-ges-mean','-dpng');
+    print('output/train-all-ges-mean','-dpng');
 end
 
 
