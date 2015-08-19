@@ -1,6 +1,6 @@
 \subsection{Brain Module} Brain module is the core functional part of this thesis. It is named as Brain since it refers to the anatomical brain that plays the vital role of the human life in learning, classifying, predicting and decision making. 
 
-Brain module is composed of 3 components which are UDP Client, Brain (Gesture Recognition Pipeline) and WebSocket Server. Flowchart \ref{fg:brain:flow} shows the data flow of this module where the user is asked to select Prediction or Training or Hand Viewer mode, when the program is started. It creates a thread and runs a loop on the main thread depending on the selection: 
+Brain module is composed of 3 components which are UDP Client, Brain (Gesture Recognition Pipeline) and WebSocket Server. Figure \ref{fg:brain:flow} shows the data flow of this module where the user is asked to select Prediction or Training or Hand Viewer mode, when the program is started. It creates a thread and runs a loop on the main thread depending on the selection: 
 \begin{itemize}
 	\item UDP Client thread - Asynchronously receiving data from HRI module and thread is always running. 
 	\item Prediction or Training of Hand Viewer on main program thread - Loop in the main thread run always and check if the Brain module is in prediction or training mode. If loop is interrupted, then the thread is exited and finally program is closed. 
@@ -10,7 +10,7 @@ Brain module is composed of 3 components which are UDP Client, Brain (Gesture Re
 
 \subsubsection{UDP Client} Brain module receives processed information such as joint positions, detection of focus gestures and info messages from the HRI module as UDP stream of JSON strings via WLAN. Like the UDP Server built inside HRI module, this is also an asynchronous client that starts at port 5006 and connects to the server by resolving the \textit{serverHostName} and port number from the common configuration file. Once it is connected, it receives the data from HRI module, when it is started tracking a hand or skeleton and asynchronously calls the callback handler.
 
-Since data is transmitted as JSON strings, it has to be parsed and relevant informations must be extracted. For this purpose RapidJSON parser is used. Data flow of Brain module is mainly handled in the callback handler of UDP client because it acts as a source of input. Whenever there is a new data arrived, this asynchronous callback handler is called and it does the following tasks as shown in the flowchart \ref{fg:brain:flow} : 
+Since data is transmitted as JSON strings, it has to be parsed and relevant informations must be extracted. For this purpose RapidJSON parser is used. Data flow of Brain module is mainly handled in the callback handler of UDP client because it acts as a source of input. Whenever there is a new data arrived, this asynchronous callback handler is called and it does the following tasks as shown in the Figure \ref{fg:brain:flow} : 
 \begin{itemize}
 	\item Extract only newly received data from the buffer by trimming the JSON 
 	\item Parse the trimmed JSON to populate hand data vectors. 
@@ -26,11 +26,11 @@ Since data is transmitted as JSON strings, it has to be parsed and relevant info
 	\item If it is in the hand viewer mode, just forward all the data to the clients via WebSocket 
 \end{itemize}
 
-\subsubsection{Brain} This is the core component of Brain module that plays a vital role in training, classifying and predicting the hand gestures. As described in the section \ref{sec:grt}, this component is based on the gesture recognition pipeline provided by Gesture Recognition Toolkit (GRT).
+\subsubsection{Brain} This is the core component of Brain module that plays a vital role in training, classifying and predicting the hand gestures. As described in the section \ref{sec:grt}, this component is based on the gesture recognition pipeline provided by GRT.
 
-Flowchart \ref{fg:brain:flow} shows various tasks involved in training and predicting phase of this module. However, GRT pipeline must be configured and customized in order to be a productive gesture recognition system.
+Figure \ref{fg:brain:flow} shows various tasks involved in training and predicting phase of this module. However, GRT pipeline must be configured and customized in order to be a productive gesture recognition system.
 
-\paragraph*{Classifier} Adaptive Naive Bayes Classifier (ANBC) is used in this thesis as described in the section \ref{sec:anbc}. Training data for the same gesture will vary in range from person to person and position to position. Therefore the classifier is enabled for Min-Max scaling that is basically a normalization by rescaling the values between 0 to 1. This is done by calling \textit{enableScaling(true)} function of the classifier.
+\paragraph*{Classifier} ANBC is used in this thesis as described in the section \ref{sec:anbc}. Training data for the same gesture will vary in range from person to person and position to position. Therefore the classifier is enabled for Min-Max scaling that is basically a normalization by rescaling the values between 0 to 1. This is done by calling \textit{enableScaling(true)} function of the classifier.
 
 \paragraph*{Null Rejection} Enabling the scaling with ANBC will classify every input samples to belong to any of the class and thereby, do not have the ability to detect non-gestures. To avoid this catastrophe GRT offers Null Rejection features to the algorithms, by this function \textit{enableNullRejection(true)} and also provides a function to set how big the rejection region should be, by \textit{setNullRejectionCoeff(1)}.
 

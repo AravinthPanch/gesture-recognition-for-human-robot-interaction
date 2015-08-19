@@ -2,7 +2,7 @@
 
 Boost is a set of libraries for the C++ programming language that provide support for tasks and structures such as linear algebra, pseudo random number generation, multi threading, image processing, regular expressions, and unit testing. It contains over eighty individual libraries.
 
-HRI module is composed of 3 components which are UDP Server, Gesture and Skeleton tracker. Flowchart \ref{fg:hri:flow} shows the data and control flow of this module where the user is asked to select Gesture or Skeleton tracker, when the program is started. It creates 2 threads depending on the selection: 
+HRI module is composed of 3 components which are UDP Server, Gesture and Skeleton tracker. Figure \ref{fg:hri:flow} shows the data and control flow of this module where the user is asked to select Gesture or Skeleton tracker, when the program is started. It creates 2 threads depending on the selection: 
 \begin{itemize}
 	\item UDP Server thread - Asynchronously send data to the client and thread is always running. 
 	\item Gesture or Skeleton tracker thread - A loop in the thread polls for a new frame from the depth camera till some key is pressed. If loop is interrupted, then the thread is exited and finally program is closed. 

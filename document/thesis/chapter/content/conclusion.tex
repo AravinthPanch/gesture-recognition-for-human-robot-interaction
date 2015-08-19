@@ -15,7 +15,9 @@ We have faced issues in implementing few contemplated solutions due to various l
 
 \input{chapter/figures/nao-bag}
 
-\subsection*{Everything Off-Board} This experimental design pushes all the components to an off-board computer that could be a PC connected with depth camera at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WLAN. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design suits applications such as indoor navigation and localization of NAO \cite{20}.
+\subsection*{Everything Off-Board} This experimental design pushes all the components to an off-board computer that could be a PC connected with depth camera at a fixed location. User will gesticulate in front of the camera and all processing will be done on PC. Finally predicted gesture will be transformed into a motion and voice, and it will be sent to NAO via Aldebaran proxies using WLAN. This design completely decouples the robot from other components and degrades the natural interaction between human and the robot. However, this design suits applications for indoor navigation and localization of NAO \cite{20}.
+
+\subsection*{Summary} After analyzing the disadvantages of these experimental designs, the final design that was implemented, integrates depth camera into NAO with on-board skeletal tracking application and off-board gesture recognition algorithm. If the computational limitations of NAO are mitigated, Everything On-Board design would be better solution to make NAO completely autonomous while recognizing the hand gestures. 
 
 \section{Future Work} The proposed design for gesture recognition based on skeletal points tracking using depth camera can be improved in several ways. In this section, we overview the future work by discussing the limitations of the proposed methods and proposing the alternatives.
 \begin{itemize}

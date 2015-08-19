@@ -1,0 +1,102 @@
+% title of the document declared as variable
+\newcommand{\trtitle}{Gesture Recognition for Human-Robot Interaction: An approach based on skeletal points tracking using depth camera}
+
+% pdf as book with twosides printing
+\documentclass[a4paper, 12pt, twoside]{book}
+
+
+% Packages
+\usepackage{amsmath, marvosym} 
+\usepackage{times, url, geometry, amssymb, graphicx, booktabs}
+\usepackage{fancyhdr} 
+\usepackage[colorlinks,pagebackref,pdfpagelabels]{hyperref} 
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage{color}
+\usepackage{subfigure} 
+\usepackage{latexsym}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{pgfplotstable}
+\usepackage{listings}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{bibgerm}
+\usepackage{setspace} 
+
+
+% Font setup
+\newcommand{\changefont}[3]{
+	\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+
+% Language selection 
+\selectlanguage{english}
+
+% Overflow setup ??? 
+\sloppy
+\clubpenalty = 10000 
+\widowpenalty = 10000
+
+% Layout ???
+\geometry{a4paper,body={5.8in,9in}}
+\setlength{\headheight}{15pt}
+
+% Linespacing
+\onehalfspacing
+
+% SubSection numbering
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3} 
+
+% Image path
+\graphicspath{{../../figure/}}
+
+% Page Headers:
+\pagestyle{fancy}
+
+% Bib style
+\bibliographystyle{gerunsrt}
+
+% Color scheme of attached code
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+% Propertied for PDF
+\hypersetup{
+	pdffitwindow=true,
+	pdfmenubar=true,
+	frenchlinks=false,
+	colorlinks=false,
+	bookmarksopen=false,
+	bookmarksnumbered=true,
+	pdfstartview=Fit,
+	pdftitle = {\trtitle},
+	pdfsubject = {\trtitle},
+	pdfauthor = {Aravinth Panchadcharam},
+	pdfkeywords = {Human-Robot Interaction (HRI), NAO, Computer Vision, Depth Camera, Hand Gesture, 3D hand based model, Skeleton tracking, Gesture Recognition, Sign Language Translation, Naive Bayes Classifier, Gesture Recognition Toolkit (GRT)},
+	pdfcreator = {Adobe-Acrobat-Distiller},
+	pdfproducer = {LaTeX using TeXStudio on Mac OSX}
+}
+
+% Hack Solution to resolve binding side margin problem
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar

@@ -1,4 +1,4 @@
-\section{Gesture Recognition} Above sections described the necessary tools that are implemented to execute a real time hand gesture recognition system. In this thesis, we have decided to train the system with static gestures. However, the system can be easily extended to recognize temporal gestures with the flexibility of Gesture Recognition Toolkit (GRT). Initially a set of simple gestures are chosen and the training data is collected for all those gestures.
+\section{Gesture Recognition} Above sections described the necessary tools that are implemented to execute a real time hand gesture recognition system. In this thesis, we have decided to train the system with static gestures. However, the system can be easily extended to recognize temporal gestures with the flexibility of GRT. Initially a set of simple gestures are chosen and the training data is collected for all those gestures.
 
 \subsection{Hand Gestures Modeling} In this thesis, we have modeled five static hand gestures involving both the hands of the user. These are communicative hand gestures and they symbolize few referential action. Apart from Sign Language used by people with speech disability, various hand gestures are being used by humans in their day to day living. Figure \ref{fg:ges:signal} shows the hand signals used by different personnels in wide variety of application.
 
@@ -10,6 +10,8 @@ This thesis focuses on hand gesture recognition to felicitate Human-Robot intera
 
 Therefore, we have chosen five simple static gestures as shown in the figure \ref{fg:ges:hands} which are conceptualized by the traffic police hand signals. All the gestures are modeled to the direction of the user and they will be understood as mirrored gestures. For example, left side of the user will be right side to the robot that is facing the user. Additionally our system makes use of two dynamic gestures of NiTE which are used as focus gestures to gain control or start hand tracking.
 
+\paragraph*{Walk} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the left and right hand up. It refers to an action that keep moving in the forward direction.
+
 \paragraph*{Turn Left} It is gesticulated as shown in the figure \ref{fg:ges:2} by holding the right hand up and left hand wide open. It refers to an action that turn to left and stay in position. 
 
 \paragraph*{Turn Right} It is gesticulated as shown in the figure \ref{fg:ges:3} by holding the left hand up and right hand wide open. It refers to an action that turn to right and stay in position. 
@@ -17,12 +19,6 @@ Therefore, we have chosen five simple static gestures as shown in the figure \re
 \paragraph*{Move Left} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the right hand down and left hand wide open. It refers to an action that turn to left and keep moving in the forward direction.
 
 \paragraph*{Move Right} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the left hand down and right hand wide open. It refers to an action that turn to right and keep moving in the forward direction.
-
-\paragraph*{Walk} It is gesticulated as shown in the figure \ref{fg:ges:4} by holding the left and right hand up. It refers to an action that keep moving in the forward direction.
-
-\paragraph*{Wave} It is gesticulated by holding a hand up and move it several times from left to right and back. This gesture is executed to initiate hand tracking, if no hands are tracked or tracked hand is been lost.
-
-\paragraph*{Click} It is gesticulated by holding a hand up, push the hand towards the sensor then immediately pull the hand backwards. 
 
 \subsection{Training} Our gesture recognition pipeline is configured to have 15 seconds preparation time and 20 seconds recording time with 6 dimensional input of both left and right hands at positions x, y and z in the Cartesian coordinates. Depth camera is at the origin of the coordinate system as shown in the figure \ref{fg:xtion:origin}.
 

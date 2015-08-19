@@ -1,35 +1,29 @@
-\fancyhead[LO]{}
-\fancyhead[RO]{\slshape \rightmark}
-%\chapter*{ }
-%\clearpage
-\newpage
-
 \phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Statement of Authorship}
 \input{chapter/preface/authorship}
-\clearpage
 
 \phantomsection
 \addcontentsline{toc}{chapter}{\numberline{}Abstract} 
 \input{chapter/preface/abstract}
+
+\phantomsection
 \addcontentsline{toc}{chapter}{\numberline{}Acknowledgments}
 \input{chapter/preface/acknowledgment}
-\clearpage
 
 \phantomsection
 \addcontentsline{toc}{chapter}{\numberline{}\contentsname}
 \tableofcontents
-\clearpage
+\cleardoublepage
 
 
-\clearpage
-
-% Merke mir die römische Seitenzahl in 'roemisch'
-\newcounter{roemisch}
-\setcounter{roemisch}{\value{page}}
+% Start numbering from chapter 1
+\newcounter{prefaceCounter}
+\setcounter{prefaceCounter}{\value{page}}
 \pagenumbering{arabic}
 
+
+% Page headers 
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}{}}
-\fancyhead[LO]{}
-\fancyhead[RO]{\slshape \rightmark}
+
 
