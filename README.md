@@ -48,7 +48,7 @@ BACKGROUND
 - NAOqi SDK in C++, Python
 
 <p align="center">
-<img src="./figure/content/nao-body.jpg" alt="NAO"/>
+<img src="./figure/content/nao-body.jpg" alt="NAO" width=50% height=50%/>
 </p>
 
 ### Asus Xtion PRO LIVE - Depth Camera
@@ -62,7 +62,7 @@ BACKGROUND
 - USB powered
 
 <p align="center">
-<img src="./figure/content/xtion.jpg" alt="XTION"/>
+<img src="./figure/content/xtion.jpg" alt="XTION" width=50% height=50%/>
 </p>
 
 ### OpenNI 2 and NiTE 2 - Skeleton Tracking Algorithm
@@ -76,7 +76,7 @@ BACKGROUND
     - C++ Library
 
 <p align="center">
-<img src="./figure/content/ni-skeleton.jpg" alt="NiTE" width=80% height=80%/>
+<img src="./figure/content/ni-skeleton.jpg" alt="NiTE" width=50% height=50%/>
 </p>
 
 
@@ -113,8 +113,8 @@ IMPLEMENTATION
 - 3D printed head mount for NAO to hold Asus Xtion
  
 <p align="center">
-<img src="./figure/content/xtion-mount.jpg" alt="MOUNT" width=50% height=50%/>
-<img src="./figure/content/xtion-mount-3d.jpg" alt="3D PRINT" width=23% height=23%/>
+<img src="./figure/content/xtion-mount.jpg" alt="MOUNT" width=32% height=32%/>
+<img src="./figure/content/xtion-mount-3d.jpg" alt="3D PRINT" width=15% height=15%/>
 </p>
 
 ### HRI Module
@@ -156,9 +156,55 @@ IMPLEMENTATION
 - Can replay from dumped data
 
 <p align="center">
-<img src="./figure/content/cc-hand.jpg" alt="CC" width=50% height=50%/>
+<img src="./figure/content/cc-hand.jpg" alt="CC" width=80% height=80%/>
 </p>
 
+### Command Module
+- Starts WebSocket client to connect to Brain module
+- Uses NAOqi SDK to proxy ALMotion, ALRobotPosture, ALTextToSpeech
+- Receives recognized gestures and info messages from Brain module
+- Commands NAO to do text-to-speech, locomotion and joint control tasks
+- Executes Gesture-to-Speech, Gesture-to-Motion and Gesture-to-Gesture translations
+- Developed in Python using PyCharm on Mac OSX
+- Completes the hand gesture recognition for Human-robot interaction
 
+RESULTS
+--------------------------------------
+<p align="center">
+<img src="./figure/result/usr-walk.jpg" width=20% height=20%/>
+<img src="./figure/result/usr-turn-left.jpg" width=20% height=20%/>
+<img src="./figure/result/usr-move-right.jpg" width=20% height=20%/>
+</p>
+<p align="center">
+<img src="./figure/result/nao-gm-walk.jpg" width=20% height=20%/>
+<img src="./figure/result/nao-gm-turn-left.jpg" width=20% height=20%/>
+<img src="./figure/result/nao-gm-move-right.jpg" width=20% height=20%/>
+</p>
 
+EVALUATION
+--------------------------------------
+### Confusion Matrix - Precision, Recall, F-Measure
+<p align="center">
+<img src="./figure/result/metrics.jpg" width=70% height=70%/>
+</p>
+
+### Classification - Accuracy
+<p align="center">
+<img src="./figure/result/test-accuracy-anbc.png" width=80% height=80%/>
+</p>
+
+### Training Data - Mean Positions 
+<p align="center">
+<img src="./figure/result/train-all-ges-mean.png" width=80% height=80%/>
+</p>
+
+### Training Data - Min-Max Distance
+<p align="center">
+<img src="./figure/result/train-walk-all.jpg" width=70% height=70%/>
+</p>
+
+CONCLUSION & FUTURE WORK
+--------------------------------------
+- Results show that the implementation achieves the goal by building a robust system for NAO to facilitate human-robot interactions based on skeletal points tracking using depth camera.
+- It can be further improved to recognize more static gestures by training more and dynamic gestures by extending it with classifiers such as Dynamic Time Warping or Hidden Markov Model which are readily available in GRT.
 
