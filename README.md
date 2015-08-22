@@ -14,6 +14,11 @@ AUTHOR
 --------------------------------------
 Aravinth Panchadcharam < http://www.aravinth.info >
 
+ACKNOWLEDGEMENTS
+--------------------------------------
+- Dr. Yuan Xu : DAInamite Robocup Team, Distributed Artificial Intelligence Laboratory, Berlin
+- Prof. Dr.-Ing. habil. Dr. h.c. Sahin Albayrak :  Technical University of Berlin 
+
 DESIGN
 --------------------------------------
 Our goal in this project to implement a system that should be integrated into NAO to recognize hand gestures. Existing stereo cameras of NAO are greatly limited by the quality of the input image. Variations in lighting and background clutters would only worsen the problem. On the other hand, depth-based approaches are able to provide satisfactory results for hand gesture recognition even with poor indoor lighting and cluttered background condition. Therefore, we have chosen Asus Xtion which has sensors that capture both RGB and depth data. Asus Xtion is an OpenNI compatible device, thus, we have chosen a NiTE middleware for the purpose of tracking the human skeletal points. 
