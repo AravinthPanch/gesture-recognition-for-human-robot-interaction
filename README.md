@@ -16,7 +16,7 @@ In order to recognize gestures, we propose to learn and classify hand gestures w
 As a result, on one hand, gestures will be used command the robot to execute certain actions and on the other hand, gestures will be translated and spoken out by the robot. 
 </p>
 
-[![VIDEO](./figure/content/video-embed.png)](https://vimeo.com/133496854 "Click to Watch!")
+[![VIDEO](./figure/content/video-embed.jpg)](https://vimeo.com/133496854 "Click to Watch!")
 
 AUTHOR
 --------------------------------------
