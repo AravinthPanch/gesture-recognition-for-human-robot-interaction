@@ -311,7 +311,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-simple-skeleton-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "nite-simple-skeleton-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/nite-simple-skeleton-xcode"; sourceTree = "<absolute>"; };
 		CE2A14231A713E3E002F6C8F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-simple-skeleton/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41381A488EFE008E743E /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/udp-server-async/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CE2C41391A488EFE008E743E /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/udp-server-async/udp_server.h"; sourceTree = SOURCE_ROOT; };
@@ -325,11 +325,11 @@
 		CE4AC8E31A506EF6001B33CF /* udp_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_client.h; path = "src/human-robot-interaction/udp_client.h"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E51A51752B001B33CF /* skeleton_tracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = skeleton_tracker.cpp; path = "src/human-robot-interaction/skeleton_tracker.cpp"; sourceTree = SOURCE_ROOT; };
 		CE4AC8E61A51752B001B33CF /* skeleton_tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = skeleton_tracker.h; path = "src/human-robot-interaction/skeleton_tracker.h"; sourceTree = SOURCE_ROOT; };
-		CE62E0B01B1C4188002D16CB /* boost-multicast-tx-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "boost-multicast-tx-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE62E0BB1B1C4198002D16CB /* boost-multicast-rx-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "boost-multicast-rx-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE62E0B01B1C4188002D16CB /* boost-multicast-tx-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "boost-multicast-tx-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/boost-multicast-tx-xcode"; sourceTree = "<absolute>"; };
+		CE62E0BB1B1C4198002D16CB /* boost-multicast-rx-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "boost-multicast-rx-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/boost-multicast-rx-xcode"; sourceTree = "<absolute>"; };
 		CE62E0C41B1C41FF002D16CB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/boost-multicast-rx/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE62E0C71B1C4207002D16CB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/boost-multicast-tx/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CE62E0CE1B1C4A3A002D16CB /* websocketpp-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "websocketpp-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE62E0CE1B1C4A3A002D16CB /* websocketpp-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "websocketpp-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/websocketpp-xcode"; sourceTree = "<absolute>"; };
 		CE62E0D51B1C4A72002D16CB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/websocketpp/main.cpp; sourceTree = SOURCE_ROOT; };
 		CE62E0DE1B1C4BF5002D16CB /* base64.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = base64.hpp; sourceTree = "<group>"; };
 		CE62E0DF1B1C4BF5002D16CB /* client.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = client.hpp; sourceTree = "<group>"; };
@@ -424,25 +424,25 @@
 		CE62E14D1B1C4BF5002D16CB /* version.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
 		CE62E1551B1C53BD002D16CB /* websocket_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = websocket_server.cpp; path = src/brain/websocket_server.cpp; sourceTree = SOURCE_ROOT; };
 		CE62E1561B1C53BD002D16CB /* websocket_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = websocket_server.h; path = src/brain/websocket_server.h; sourceTree = SOURCE_ROOT; };
-		CE6EA6171B26010E000A0C85 /* websocketpp-client-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "websocketpp-client-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE70B2911A5447E80072BB83 /* nite-user-glut-viewer-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-user-glut-viewer-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE6EA6171B26010E000A0C85 /* websocketpp-client-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "websocketpp-client-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/websocketpp-client-xcode"; sourceTree = "<absolute>"; };
+		CE70B2911A5447E80072BB83 /* nite-user-glut-viewer-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "nite-user-glut-viewer-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/nite-user-glut-viewer-xcode"; sourceTree = "<absolute>"; };
 		CE70B2981A54484B0072BB83 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-user-glut-viewer/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE70B29A1A54484B0072BB83 /* Viewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Viewer.cpp; path = "src/nite-user-glut-viewer/Viewer.cpp"; sourceTree = SOURCE_ROOT; };
 		CE70B29B1A54484B0072BB83 /* Viewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Viewer.h; path = "src/nite-user-glut-viewer/Viewer.h"; sourceTree = SOURCE_ROOT; };
 		CE70B2A01A54488C0072BB83 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		CE70B2A21A5448940072BB83 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-server-async-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE737AE41A407A0E00593328 /* udp-server-async-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "udp-server-async-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/udp-server-async-xcode"; sourceTree = "<absolute>"; };
 		CE737AEC1A407AF100593328 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-server-async/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE737AEF1A40DE0400593328 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_thread-mt.dylib"; sourceTree = "<absolute>"; };
 		CE84E61F1B19CC7700CF11C4 /* NiTE2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NiTE2; path = lib/NiTE2/NiTE2; sourceTree = "<group>"; };
-		CE85062A1AA7440B0094FBCB /* brain-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "brain-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE85062A1AA7440B0094FBCB /* brain-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "brain-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/brain-xcode"; sourceTree = "<absolute>"; };
 		CE8506311AA7447F0094FBCB /* brain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = brain.cpp; path = src/brain/brain.cpp; sourceTree = SOURCE_ROOT; };
 		CE8506321AA7447F0094FBCB /* brain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = brain.h; path = src/brain/brain.h; sourceTree = SOURCE_ROOT; };
 		CE8506341AA744DB0094FBCB /* udp_client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_client.cpp; path = src/brain/udp_client.cpp; sourceTree = SOURCE_ROOT; };
 		CE8506351AA744DB0094FBCB /* udp_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_client.h; path = src/brain/udp_client.h; sourceTree = SOURCE_ROOT; };
 		CE8506371AA745270094FBCB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/brain/main.cpp; sourceTree = SOURCE_ROOT; };
 		CE8506391AA745A00094FBCB /* setup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = setup.h; path = include/setup.h; sourceTree = "<group>"; };
-		CE8506621AA85E170094FBCB /* rapidjson-test-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "rapidjson-test-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE8506621AA85E170094FBCB /* rapidjson-test-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "rapidjson-test-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/rapidjson-test-xcode"; sourceTree = "<absolute>"; };
 		CE8506891AA8604C0094FBCB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/rapidjson-test/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE8507CF1AA866170094FBCB /* AdaBoost.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AdaBoost.cpp; sourceTree = "<group>"; };
 		CE8507D01AA866170094FBCB /* AdaBoost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaBoost.h; sourceTree = "<group>"; };
@@ -746,11 +746,11 @@
 		CE8509601AA8678D0094FBCB /* reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
 		CE8509611AA8678D0094FBCB /* stringbuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stringbuffer.h; sourceTree = "<group>"; };
 		CE8509621AA8678D0094FBCB /* writer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
-		CE85EB4E1A389DFA003F51B3 /* udp-socket-client-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-socket-client-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE85EB4F1A389DFA003F51B3 /* udp-socket-server-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "udp-socket-server-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE85EB501A389DFA003F51B3 /* ni-simple-sensor-read-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ni-simple-sensor-read-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE85EB511A389DFA003F51B3 /* nite-simple-user-read-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-simple-user-read-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE85EB541A389E16003F51B3 /* nite-gesture-wave-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-gesture-wave-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE85EB4E1A389DFA003F51B3 /* udp-socket-client-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "udp-socket-client-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/udp-socket-client-xcode"; sourceTree = "<absolute>"; };
+		CE85EB4F1A389DFA003F51B3 /* udp-socket-server-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "udp-socket-server-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/udp-socket-server-xcode"; sourceTree = "<absolute>"; };
+		CE85EB501A389DFA003F51B3 /* ni-simple-sensor-read-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "ni-simple-sensor-read-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/ni-simple-sensor-read-xcode"; sourceTree = "<absolute>"; };
+		CE85EB511A389DFA003F51B3 /* nite-simple-user-read-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "nite-simple-user-read-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/nite-simple-user-read-xcode"; sourceTree = "<absolute>"; };
+		CE85EB541A389E16003F51B3 /* nite-gesture-wave-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "nite-gesture-wave-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/nite-gesture-wave-xcode"; sourceTree = "<absolute>"; };
 		CE9E41911A384BBF0095F65A /* libNiTE2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libNiTE2.dylib; path = lib/NiTE2/libNiTE2.dylib; sourceTree = "<group>"; };
 		CE9E41941A384BC90095F65A /* libOpenNI2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenNI2.dylib; path = lib/OpenNI2/libOpenNI2.dylib; sourceTree = "<group>"; };
 		CE9E41F51A3864070095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-socket-client/main.cpp"; sourceTree = SOURCE_ROOT; };
@@ -759,12 +759,12 @@
 		CE9E42161A3867560095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-simple-user-read/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E422B1A3868700095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/udp-socket-server/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CE9E42331A386FF10095F65A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-gesture-wave/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "nite-hand-tracker-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "nite-hand-tracker-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/nite-hand-tracker-xcode"; sourceTree = "<absolute>"; };
 		CEAA7CB91A72528900C7EF67 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/nite-hand-tracker/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CECCD9651B26210700DF0F64 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/websocketpp-client/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CECCD96B1B26216E00DF0F64 /* websocketpp_broadcast-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "websocketpp_broadcast-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECCD96B1B26216E00DF0F64 /* websocketpp_broadcast-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "websocketpp_broadcast-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/websocketpp_broadcast-xcode"; sourceTree = "<absolute>"; };
 		CECCD9721B26219500DF0F64 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/websocketpp_broadcast/main.cpp; sourceTree = SOURCE_ROOT; };
-		CECCD97B1B262F6E00DF0F64 /* al-proxy-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "al-proxy-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECCD97B1B262F6E00DF0F64 /* al-proxy-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "al-proxy-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/al-proxy-xcode"; sourceTree = "<absolute>"; };
 		CECCD9821B262FB700DF0F64 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/al-proxy/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CECCD9861B26303900DF0F64 /* almotionproxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = almotionproxy.h; sourceTree = "<group>"; };
 		CECCD9871B26303900DF0F64 /* altexttospeechproxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = altexttospeechproxy.h; sourceTree = "<group>"; };
@@ -875,21 +875,21 @@
 		CECCD9F71B26304500DF0F64 /* librttools.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = librttools.dylib; sourceTree = "<group>"; };
 		CED6EFAD1A9E082800402682 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../../../usr/local/Cellar/boost/1.56.0/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
 		CED6EFB01A9E14F100402682 /* hri.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = hri.json; path = ../config/hri.json; sourceTree = "<group>"; };
-		CEDFA8231AA093F6006B1C0D /* grt-ada-boost-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-ada-boost-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDFA8231AA093F6006B1C0D /* grt-ada-boost-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "grt-ada-boost-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/grt-ada-boost-xcode"; sourceTree = "<absolute>"; };
 		CEDFA82A1AA0942E006B1C0D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/grt-ada-boost/main.cpp"; sourceTree = SOURCE_ROOT; };
-		CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-anbc-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "grt-anbc-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/grt-anbc-xcode"; sourceTree = "<absolute>"; };
 		CEDFA8371AA094E8006B1C0D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/grt-anbc/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEDFA9701AA0A422006B1C0D /* libgrt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgrt.dylib; path = lib/GRT/libgrt.dylib; sourceTree = "<group>"; };
 		CEDFA9721AA0A4CC006B1C0D /* anbc-training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "anbc-training-data.txt"; path = "data/anbc-training-data.txt"; sourceTree = "<group>"; };
-		CEDFA9791AA0B095006B1C0D /* grt-test-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "grt-test-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDFA9791AA0B095006B1C0D /* grt-test-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "grt-test-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/grt-test-xcode"; sourceTree = "<absolute>"; };
 		CEDFA9911AA0B796006B1C0D /* ada-boost-training-data.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "ada-boost-training-data.txt"; path = "data/ada-boost-training-data.txt"; sourceTree = "<group>"; };
-		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "human-robot-interaction-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "human-robot-interaction-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/human-robot-interaction-xcode"; sourceTree = "<absolute>"; };
 		CEE283B51A48C35A00131564 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "src/human-robot-interaction/main.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B61A48C35A00131564 /* udp_server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = udp_server.cpp; path = "src/human-robot-interaction/udp_server.cpp"; sourceTree = SOURCE_ROOT; };
 		CEE283B71A48C35A00131564 /* udp_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = udp_server.h; path = "src/human-robot-interaction/udp_server.h"; sourceTree = SOURCE_ROOT; };
 		CEE283BE1A48C73700131564 /* libboost_log-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_log-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_log-mt.dylib"; sourceTree = "<absolute>"; };
 		CEE283CB1A48CCA000131564 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/usr/local/Cellar/boost/1.56.0/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
-		CEF78A751B1DAE5500FE79D4 /* helper-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "helper-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEF78A751B1DAE5500FE79D4 /* helper-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "helper-xcode"; path = "/Users/aravinth/Google Drive/TUB/Thesis/source/human-robot-interaction/bin/helper-xcode"; sourceTree = "<absolute>"; };
 		CEF78A7C1B1DAE8900FE79D4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/helper/main.cpp; sourceTree = SOURCE_ROOT; };
 		CEF852131A8114A800C3BCBA /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = utils.h; path = include/utils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2444,28 +2444,6 @@
 		CE85EB531A389E0A003F51B3 /* bin */ = {
 			isa = PBXGroup;
 			children = (
-				CECCD97B1B262F6E00DF0F64 /* al-proxy-xcode */,
-				CECCD96B1B26216E00DF0F64 /* websocketpp_broadcast-xcode */,
-				CE6EA6171B26010E000A0C85 /* websocketpp-client-xcode */,
-				CEF78A751B1DAE5500FE79D4 /* helper-xcode */,
-				CE62E0CE1B1C4A3A002D16CB /* websocketpp-xcode */,
-				CE62E0B01B1C4188002D16CB /* boost-multicast-tx-xcode */,
-				CE62E0BB1B1C4198002D16CB /* boost-multicast-rx-xcode */,
-				CE8506621AA85E170094FBCB /* rapidjson-test-xcode */,
-				CE85062A1AA7440B0094FBCB /* brain-xcode */,
-				CEDFA9791AA0B095006B1C0D /* grt-test-xcode */,
-				CEDFA8301AA094AE006B1C0D /* grt-anbc-xcode */,
-				CEDFA8231AA093F6006B1C0D /* grt-ada-boost-xcode */,
-				CEAA7CAD1A724F6E00C7EF67 /* nite-hand-tracker-xcode */,
-				CE2A14191A713D7F002F6C8F /* nite-simple-skeleton-xcode */,
-				CE70B2911A5447E80072BB83 /* nite-user-glut-viewer-xcode */,
-				CEE283AE1A48C2E300131564 /* human-robot-interaction-xcode */,
-				CE737AE41A407A0E00593328 /* udp-server-async-xcode */,
-				CE85EB541A389E16003F51B3 /* nite-gesture-wave-xcode */,
-				CE85EB4E1A389DFA003F51B3 /* udp-socket-client-xcode */,
-				CE85EB4F1A389DFA003F51B3 /* udp-socket-server-xcode */,
-				CE85EB501A389DFA003F51B3 /* ni-simple-sensor-read-xcode */,
-				CE85EB511A389DFA003F51B3 /* nite-simple-user-read-xcode */,
 			);
 			name = bin;
 			sourceTree = "<group>";
@@ -3977,7 +3955,10 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Debug;
@@ -3989,7 +3970,10 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/OpenNI2",
+				);
 				PRODUCT_NAME = "$(HRI_PRODUCT_NAME)";
 			};
 			name = Release;
