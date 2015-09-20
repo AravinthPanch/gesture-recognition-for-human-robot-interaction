@@ -31,14 +31,17 @@ log()
 
 cleanup_hri()
 {
-    log "Cleaning up all the hri files on NAO"
+	log "Cleaning up all the hri files on NAO"
 	ssh $NAO_HOST_ROOT_URL "cd /usr/lib; \
 		rm libstdc++.so libstdc++.so.6; \
 		ln -s libstdc++.so.6.0.14 libstdc++.so; \
 		ln -s libstdc++.so.6.0.14 libstdc++.so.6; \
 		rm libstdc++.so.6.0.16; \
 		rm -r /home/nao/hri; \
-		rm /usr/local/lib/libNiTE2.so"
+		rm /usr/local/lib/libNiTE2.so; \
+		cd /etc/naoqi; \
+		cp autoload.ini.orig autoload.ini; \
+		/etc/init.d/naoqi restart"
 }
 
 apply_patch()
@@ -51,7 +54,14 @@ apply_patch()
 		cd /etc/naoqi; \
 		cp autoload.ini autoload.ini.orig; \
 		cp /home/nao/hri/autoload.ini autoload.ini; \
-		nao restart"
+		/etc/init.d/naoqi restart"
+}
+
+install_brain()
+{
+	log "Installing files to dist/ on local machine"
+	cp "$CONFIG_DIR"/hri.json "$CONFIG_DIR"/signs.json $DIST_DIR
+	cp "$PROJECT_DIR"/data/train/grt/hri-training-dataset.txt $DIST_DIR
 }
 
 update_variable()
@@ -88,19 +98,44 @@ is_host_available()
 }
 
 # Main Routine
+# TODO: Also add scripts to start the setup
 main()
 {
 	log "HRI Installer"
+	log "Choose: 1-> Install on Robot \
+		2-> Install on Localhost \
+		3-> Cleanup on Robot"
 
-	if is_host_available; then
-		log "$NAO_HOST_NAME is available"
- 		install_hri
-# 		cleanup_hri
-	else
-		# Read NAO Hostname and install hri
-		read -p "Enter the hostname of NAO:" NAO_HOST_NAME
-		install_hri
-	fi
+	read ARGUMENT
+	case "$ARGUMENT" in
+		1)
+			if is_host_available; then
+				log "$NAO_HOST_NAME is available"
+				install_hri
+			else
+				read -p "Enter the hostname of NAO:" NAO_HOST_NAME
+				install_hri
+			fi
+			;;
+		2)
+			install_brain
+			;;
+		3)
+			if is_host_available; then
+				log "$NAO_HOST_NAME is available"
+				cleanup_hri
+			else
+				read -p "Enter the hostname of NAO:" NAO_HOST_NAME
+				cleanup_hri
+			fi
+			;;
+		*)
+			log "Choose: 1-> Install on Robot \
+				2-> Install on Localhost \
+				3-> Cleanup on Robot"
+			exit 1
+	esac
+
 }
 
 main
