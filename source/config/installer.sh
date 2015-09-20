@@ -11,6 +11,7 @@
 PROJECT_DIR="$(dirname $0)/../../"
 CONFIG_DIR=$PROJECT_DIR/source/config
 SOURCE_DIR=$PROJECT_DIR/source/human-robot-interaction
+LIB_DIR=$SOURCE_DIR/lib
 DIST_DIR=$SOURCE_DIR/dist
 
 NAO_HOST_NAME="nao5.local"
@@ -37,9 +38,17 @@ update_variable()
 install_hri()
 {
 	update_variable
-	log "Installing files onto $NAO_HOST_NAME"
 	ssh $NAO_HOST_URL "mkdir -p $NAO_HOST_DIR"
-	scp "$DIST_DIR"/human-robot-interaction-gentoo "$CONFIG_DIR"/hri.json $NAO_HOST_SCP_URL
+
+	log "Installing files onto $NAO_HOST_NAME"
+	scp "$DIST_DIR"/human-robot-interaction-gentoo \
+		"$CONFIG_DIR"/hri.json \
+		$NAO_HOST_SCP_URL
+
+    log "Installing libraries onto $NAO_HOST_NAME"
+	scp "$LIB_DIR"/NiTE2/libNiTE2-32.so $NAO_HOST_SCP_URL"libNiTE2.so"
+	scp "$LIB_DIR"/LibStdC++/libstdc++.so.6.0.16 $NAO_HOST_SCP_URL
+
 }
 
 is_host_available()
