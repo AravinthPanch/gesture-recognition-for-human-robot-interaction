@@ -7,6 +7,7 @@
 # Description:
 # - To install required files into NAO to run HRI
 ##############################################################
+
 PROJECT_DIR="$(dirname $0)/../../"
 CONFIG_DIR=$PROJECT_DIR/source/config
 SOURCE_DIR=$PROJECT_DIR/source/human-robot-interaction
@@ -26,12 +27,19 @@ log()
 	printf "%s\n" "$MSG"
 }
 
+update_variable()
+{
+	NAO_HOST_URL="nao@"$NAO_HOST_NAME
+	NAO_HOST_DIR="~/hri/"
+	NAO_HOST_SCP_URL=$NAO_HOST_URL":"$NAO_HOST_DIR
+}
 
 install_hri()
 {
-	log "Installing HRI file onto NAO"
+	update_variable
+	log "Installing files onto $NAO_HOST_NAME"
 	ssh $NAO_HOST_URL "mkdir -p $NAO_HOST_DIR"
-	scp "$DIST_DIR"/human-robot-interaction-gentoo "$DIST_DIR"/hri.json $NAO_HOST_SCP_URL
+	scp "$DIST_DIR"/human-robot-interaction-gentoo "$CONFIG_DIR"/hri.json $NAO_HOST_SCP_URL
 }
 
 is_host_available()
@@ -54,8 +62,7 @@ main()
 		install_hri
 	else
 		# Read NAO dns and install hri
-		log "Enter the hostname of NAO:"
-		read NAO_HOST_NAME
+		read -p "Enter the hostname of NAO:" NAO_HOST_NAME
 		install_hri
 	fi
 }
