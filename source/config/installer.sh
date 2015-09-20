@@ -16,6 +16,7 @@ DIST_DIR=$SOURCE_DIR/dist
 
 NAO_HOST_NAME="nao5.local"
 NAO_HOST_URL="nao@"$NAO_HOST_NAME
+NAO_HOST_ROOT_URL="root@"$NAO_HOST_NAME
 NAO_HOST_DIR="~/hri/"
 NAO_HOST_SCP_URL=$NAO_HOST_URL":"$NAO_HOST_DIR
 
@@ -28,10 +29,29 @@ log()
 	printf "%s\n" "$MSG"
 }
 
+cleanup_hri()
+{
+	ssh $NAO_HOST_ROOT_URL "cd /usr/lib; \
+		rm libstdc++.so libstdc++.so.6; \
+		ln -s libstdc++.so.6.0.14 libstdc++.so; \
+		ln -s libstdc++.so.6.0.14 libstdc++.so.6; \
+		rm libstdc++.so.6.0.16; \
+		rm -r /home/nao/hri; \
+		rm /usr/local/lib/libNiTE2.so"
+}
+
+apply_patch()
+{
+	ssh $NAO_HOST_ROOT_URL "cd /usr/lib; \
+		chmod 755 libstdc++.so.6.0.16
+	rm libstdc++.so libstdc++.so.6; \
+		ln -s libstdc++.so.6.0.16 libstdc++.so; \
+		ln -s libstdc++.so.6.0.16 libstdc++.so.6"
+}
+
 update_variable()
 {
 	NAO_HOST_URL="nao@"$NAO_HOST_NAME
-	NAO_HOST_DIR="~/hri/"
 	NAO_HOST_SCP_URL=$NAO_HOST_URL":"$NAO_HOST_DIR
 }
 
@@ -41,14 +61,15 @@ install_hri()
 	ssh $NAO_HOST_URL "mkdir -p $NAO_HOST_DIR"
 
 	log "Installing files onto $NAO_HOST_NAME"
-	scp "$DIST_DIR"/human-robot-interaction-gentoo \
-		"$CONFIG_DIR"/hri.json \
-		$NAO_HOST_SCP_URL
+	scp "$DIST_DIR"/human-robot-interaction-gentoo $NAO_HOST_SCP_URL/human-robot-interaction
+	scp "$CONFIG_DIR"/hri.json $NAO_HOST_SCP_URL
 
-    log "Installing libraries onto $NAO_HOST_NAME"
-	scp "$LIB_DIR"/NiTE2/libNiTE2-32.so $NAO_HOST_SCP_URL"libNiTE2.so"
-	scp "$LIB_DIR"/LibStdC++/libstdc++.so.6.0.16 $NAO_HOST_SCP_URL
+	log "Installing libraries onto $NAO_HOST_NAME"
+	scp "$LIB_DIR"/NiTE2/libNiTE2-32.so $NAO_HOST_ROOT_URL":/usr/local/lib/libNiTE2.so"
+	scp "$LIB_DIR"/LibStdC++/libstdc++.so.6.0.16 $NAO_HOST_ROOT_URL":/usr/lib/"
 
+	log "Applying GLIBCXX Version Patch"
+	apply_patch
 }
 
 is_host_available()
@@ -70,7 +91,7 @@ main()
 		log "$NAO_HOST_NAME is available"
 		install_hri
 	else
-		# Read NAO dns and install hri
+		# Read NAO Hostname and install hri
 		read -p "Enter the hostname of NAO:" NAO_HOST_NAME
 		install_hri
 	fi
