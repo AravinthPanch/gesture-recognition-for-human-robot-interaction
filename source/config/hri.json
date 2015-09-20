@@ -4,5 +4,5 @@
   "controlCenterPort": 5007,
   "websocketPort": 5008,
   "naoQiPort": 9559,
-  "serverHostName": "nao2.local"
+  "serverHostName": "nao5.local"
 }

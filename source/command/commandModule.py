@@ -16,9 +16,8 @@ class CommandModule():
         self.read_config()
         self.log.info("Command module started")
         self.host_name = str(self.config['serverHostName'])
-        # self.host_name = "nao2.local"
+        self.host_name = "nao5.local"
         self.naoqi_port = int(self.config['naoQiPort'])
-
         self.naoMotion = NaoMotion(self.host_name, self.naoqi_port)
 
         websocket.enableTrace(False)

@@ -31,6 +31,7 @@ log()
 
 cleanup_hri()
 {
+    log "Cleaning up all the hri files on NAO"
 	ssh $NAO_HOST_ROOT_URL "cd /usr/lib; \
 		rm libstdc++.so libstdc++.so.6; \
 		ln -s libstdc++.so.6.0.14 libstdc++.so; \
@@ -43,10 +44,14 @@ cleanup_hri()
 apply_patch()
 {
 	ssh $NAO_HOST_ROOT_URL "cd /usr/lib; \
-		chmod 755 libstdc++.so.6.0.16
-	rm libstdc++.so libstdc++.so.6; \
+		chmod 755 libstdc++.so.6.0.16; \
+		rm libstdc++.so libstdc++.so.6; \
 		ln -s libstdc++.so.6.0.16 libstdc++.so; \
-		ln -s libstdc++.so.6.0.16 libstdc++.so.6"
+		ln -s libstdc++.so.6.0.16 libstdc++.so.6; \
+		cd /etc/naoqi; \
+		cp autoload.ini autoload.ini.orig; \
+		cp /home/nao/hri/autoload.ini autoload.ini; \
+		nao restart"
 }
 
 update_variable()
@@ -62,7 +67,7 @@ install_hri()
 
 	log "Installing files onto $NAO_HOST_NAME"
 	scp "$DIST_DIR"/human-robot-interaction-gentoo $NAO_HOST_SCP_URL/human-robot-interaction
-	scp "$CONFIG_DIR"/hri.json $NAO_HOST_SCP_URL
+	scp "$CONFIG_DIR"/hri.json "$CONFIG_DIR"/autoload.ini $NAO_HOST_SCP_URL
 
 	log "Installing libraries onto $NAO_HOST_NAME"
 	scp "$LIB_DIR"/NiTE2/libNiTE2-32.so $NAO_HOST_ROOT_URL":/usr/local/lib/libNiTE2.so"
@@ -89,7 +94,8 @@ main()
 
 	if is_host_available; then
 		log "$NAO_HOST_NAME is available"
-		install_hri
+ 		install_hri
+# 		cleanup_hri
 	else
 		# Read NAO Hostname and install hri
 		read -p "Enter the hostname of NAO:" NAO_HOST_NAME
