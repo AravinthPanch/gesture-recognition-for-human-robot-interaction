@@ -28,5 +28,5 @@ class RobotAngle():
 
 
 if __name__ == "__main__":
-    robotAngle = RobotAngle("127.0.0.1", 52102)
+    robotAngle = RobotAngle("nao5.local", 9559)
     robotAngle.get_hand_angles()

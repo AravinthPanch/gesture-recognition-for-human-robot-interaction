@@ -16,7 +16,7 @@ class CommandModule():
         self.read_config()
         self.log.info("Command module started")
         self.host_name = str(self.config['serverHostName'])
-        self.host_name = "nao5.local"
+        # self.host_name = "nao5.local"
         self.naoqi_port = int(self.config['naoQiPort'])
         self.naoMotion = NaoMotion(self.host_name, self.naoqi_port)
 
@@ -37,11 +37,21 @@ class CommandModule():
             if "FOV" not in msg['INFO']:
                 info = str(msg['INFO'])
                 self.naoMotion.gesture_to_speech(info)
+
+                if info == "Both hands are lost":
+                    self.naoMotion.reset_hand()
+
         elif "GESTURE" in msg:
             sign = str(msg['GESTURE'])
-            self.naoMotion.gesture_to_speech(sign)
-            # self.naoMotion.gesture_to_motion(sign)
-            self.naoMotion.gesture_to_gesture(sign)
+
+            if sign == "CLICK":
+                sign = "Wake Up"
+                self.naoMotion.gesture_to_speech(sign)
+                self.naoMotion.click_wake_up()
+            else:
+                self.naoMotion.gesture_to_speech(sign)
+                # self.naoMotion.gesture_to_motion(sign)
+                self.naoMotion.gesture_to_gesture(sign)
 
     def on_error(self, ws, error):
         print error
